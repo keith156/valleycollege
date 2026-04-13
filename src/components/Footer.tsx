@@ -10,13 +10,15 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-1">
             <div 
-              className="flex items-center gap-2 mb-6 cursor-pointer select-none"
+              className="flex items-center gap-3 mb-6 cursor-pointer select-none"
               onDoubleClick={() => navigate('/admin')}
               title="Double click for Admin Access"
             >
-              <div className="bg-white text-primary p-2 rounded-lg pointer-events-none">
-                <GraduationCap size={24} />
-              </div>
+              <img 
+                src="/logo.jpeg" 
+                alt="Valley College Logo" 
+                className="h-12 w-auto object-contain rounded-lg bg-white p-1 shadow-sm"
+              />
               <span className="font-bold text-xl tracking-tight pointer-events-none">
                 Valley College
               </span>
