@@ -26,6 +26,8 @@ export default function Academics() {
             alt="Academics at Valley College"
             className="absolute inset-0 w-full h-full object-cover opacity-80"
             referrerPolicy="no-referrer"
+            decoding="async"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
         </div>
@@ -293,7 +295,14 @@ export default function Academics() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="group relative overflow-hidden rounded-[2.5rem] shadow-lg aspect-[4/3]">
-              <img src="/images/IMG_20260401_182741_919.jpg" alt="Sports" className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
+              <img 
+                src="/images/IMG_20260401_182741_919.jpg" 
+                alt="Sports" 
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                referrerPolicy="no-referrer" 
+                loading="lazy"
+                decoding="async"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent" />
               <div className="absolute bottom-0 left-0 w-full p-10">
                 <div className="w-14 h-14 bg-blue-500 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg">
@@ -309,7 +318,14 @@ export default function Academics() {
             </div>
 
             <div className="group relative overflow-hidden rounded-[2.5rem] shadow-lg aspect-[4/3]">
-              <img src="/images/IMG_20260401_182933_170.jpg" alt="Clubs" className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
+              <img 
+                src="/images/IMG_20260401_182933_170.jpg" 
+                alt="Clubs" 
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                referrerPolicy="no-referrer" 
+                loading="lazy"
+                decoding="async"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />
               <div className="absolute bottom-0 left-0 w-full p-10">
                 <div className="w-14 h-14 bg-white text-primary rounded-2xl flex items-center justify-center mb-6 shadow-lg">

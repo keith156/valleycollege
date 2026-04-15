@@ -28,6 +28,8 @@ export default function Alumni() {
             alt="Alumni at Valley College"
             className="absolute inset-0 w-full h-full object-cover opacity-80"
             referrerPolicy="no-referrer"
+            decoding="async"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
         </div>
@@ -65,10 +67,24 @@ export default function Alumni() {
                 <h3 className="text-4xl font-bold text-gray-900 mb-2">10k+</h3>
                 <p className="text-gray-600 font-medium">Global Alumni</p>
               </div>
-              <img src="/images/IMG_20260401_183410_033.jpg" alt="Alumni gathering" className="rounded-3xl w-full h-48 lg:h-64 object-cover shadow-sm" referrerPolicy="no-referrer" />
+              <img 
+                src="/images/IMG_20260401_183410_033.jpg" 
+                alt="Alumni gathering" 
+                className="rounded-3xl w-full h-48 lg:h-64 object-cover shadow-sm" 
+                referrerPolicy="no-referrer" 
+                loading="lazy"
+                decoding="async"
+              />
             </div>
             <div className="space-y-4 lg:space-y-6 pt-8 lg:pt-12">
-              <img src="/images/IMG_20260401_183426_903.jpg" alt="Graduation" className="rounded-3xl w-full h-48 lg:h-64 object-cover shadow-sm" referrerPolicy="no-referrer" />
+              <img 
+                src="/images/IMG_20260401_183426_903.jpg" 
+                alt="Graduation" 
+                className="rounded-3xl w-full h-48 lg:h-64 object-cover shadow-sm" 
+                referrerPolicy="no-referrer" 
+                loading="lazy"
+                decoding="async"
+              />
               <div className="bg-primary rounded-3xl p-8 text-center flex flex-col justify-center aspect-square text-white shadow-lg">
                 <Award className="mx-auto text-blue-300 mb-4" size={40} />
                 <h3 className="text-4xl font-bold text-white mb-2">50+</h3>
@@ -104,6 +120,8 @@ export default function Alumni() {
                     alt={alumni.name} 
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     referrerPolicy="no-referrer"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>

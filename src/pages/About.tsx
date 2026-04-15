@@ -43,6 +43,8 @@ export default function About() {
             alt="About Valley College"
             className="absolute inset-0 w-full h-full object-cover opacity-80"
             referrerPolicy="no-referrer"
+            decoding="async"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/10 to-gray-50" />
         </div>
@@ -164,6 +166,8 @@ export default function About() {
                         alt={milestone.title} 
                         className="w-full h-56 md:h-72 object-cover group-hover:scale-110 transition-transform duration-700"
                         referrerPolicy="no-referrer"
+                        loading="lazy"
+                        decoding="async"
                       />
                     </div>
                   </div>
@@ -185,6 +189,8 @@ export default function About() {
                 alt="Headteacher" 
                 className="absolute inset-0 w-full h-full object-cover"
                 referrerPolicy="no-referrer"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="lg:w-3/5 p-8 lg:p-12 flex flex-col justify-center">
@@ -280,6 +286,8 @@ export default function About() {
                   alt={`Campus Life ${idx + 1}`}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
               </motion.div>

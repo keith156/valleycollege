@@ -111,6 +111,8 @@ export default function Home() {
               transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
               className="absolute inset-0 w-full h-full object-cover scale-105"
               referrerPolicy="no-referrer"
+              decoding="async"
+              fetchPriority="high"
             />
           </AnimatePresence>
           {/* Subtle Dark Overlay for Text Readability */}
@@ -207,6 +209,8 @@ export default function Home() {
                   alt="Ms. Kabezi Doreen - Head Teacher"
                   className="w-full h-full object-cover object-top"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src = "/images/1.jpeg"; // Fallback image just in case
@@ -407,7 +411,14 @@ export default function Home() {
                       {newsItems.map((news, idx) => (
                         <div key={news.id} className="snap-start shrink-0 w-[85%] sm:w-[350px] bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow group">
                           <div className="h-48 bg-gray-200 relative overflow-hidden">
-                            <img src={news.img} alt={news.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
+                            <img 
+                              src={news.img} 
+                              alt={news.title} 
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                              referrerPolicy="no-referrer" 
+                              loading="lazy"
+                              decoding="async"
+                            />
                           </div>
                           <div className="p-6">
                             <div className="flex items-center gap-2 text-sm font-bold text-primary mb-3">

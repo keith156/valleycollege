@@ -17,6 +17,8 @@ export default function Admissions() {
             alt="Admissions at Valley College"
             className="absolute inset-0 w-full h-full object-cover opacity-80"
             referrerPolicy="no-referrer"
+            decoding="async"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
         </div>

@@ -13,6 +13,8 @@ export default function Contact() {
             alt="Contact Valley College"
             className="absolute inset-0 w-full h-full object-cover opacity-80"
             referrerPolicy="no-referrer"
+            decoding="async"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
         </div>
@@ -140,6 +142,8 @@ export default function Contact() {
             alt="Map location" 
             className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-500"
             referrerPolicy="no-referrer"
+            loading="lazy"
+            decoding="async"
           />
         </motion.div>
 
