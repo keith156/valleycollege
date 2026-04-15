@@ -1,13 +1,38 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight as ArrowRightIcon, BookOpen as BookOpenIcon, CheckCircle as CheckCircleIcon, Trophy as TrophyIcon, Users as UsersIcon, Calendar, Image as ImageIcon, Clock } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, animate } from 'motion/react';
 import { Carousel } from '../components/Carousel';
 import { HolographicCard } from '../components/ui/holographic-card';
+import { TextOutline } from '../components/ui/text-outline';
 import React, { useEffect, useState } from 'react';
 import Lenis from '@studio-freight/lenis';
 import { ZoomParallax } from '../components/ui/zoom-parallax';
 import { getEvents, SchoolEvent } from '../lib/events';
 import { getNews, NewsItem } from '../lib/news';
+
+interface CountUpProps {
+  end: number;
+  duration?: number;
+}
+
+const CountUp = ({ end, duration = 2 }: CountUpProps) => {
+  const [displayValue, setDisplayValue] = useState(0);
+  const nodeRef = React.useRef<HTMLSpanElement>(null);
+  const isInView = motion.useInView(nodeRef as React.RefObject<Element>, { once: true });
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(0, end, {
+        duration,
+        ease: "easeOut",
+        onUpdate: (value) => setDisplayValue(Math.round(value)),
+      });
+      return () => controls.stop();
+    }
+  }, [end, duration, isInView]);
+
+  return <span ref={nodeRef}>{displayValue}</span>;
+};
 
 export default function Home() {
   const [termEvents, setTermEvents] = useState<SchoolEvent[]>([]);
@@ -15,11 +40,12 @@ export default function Home() {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
 
   const heroImages = [
-    "/images/IMG_20260401_184319_761.jpg",
-    "/images/IMG_20260401_183339_106.jpg",
-    "/images/IMG_20260401_184701_943.jpg",
-    "/images/8.jpeg",
-    "/images/IMG_20260401_181848_193.jpg"
+    "/heroimages/1.png",
+    "/heroimages/2.png",
+    "/heroimages/3.jpg",
+    "/heroimages/4.png",
+    "/heroimages/5.jpeg",
+    "/heroimages/6.jpg"
   ];
 
   const slideVariants = {
@@ -70,9 +96,9 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative bg-primary text-white overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="w-full h-full bg-gray-900" />
+      <section className="relative h-screen min-h-[700px] flex items-center justify-center text-white overflow-hidden bg-black">
+        {/* Background Layer */}
+        <div className="absolute inset-0 z-0">
           <AnimatePresence initial={false}>
             <motion.img
               key={currentHeroImage}
@@ -82,50 +108,92 @@ export default function Home() {
               initial="initial"
               animate="animate"
               exit="exit"
-              transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
-              className="absolute inset-0 w-full h-full object-cover"
+              transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
+              className="absolute inset-0 w-full h-full object-cover scale-105"
               referrerPolicy="no-referrer"
             />
           </AnimatePresence>
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-transparent" />
+          {/* Subtle Dark Overlay for Text Readability */}
+          <div className="absolute inset-0 bg-black/40" />
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-48">
+        {/* Content Layer */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white pb-16 sm:pb-32">
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl"
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="flex flex-col items-center"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-6 text-white drop-shadow-lg">
-              Welcome to Valley College
-            </h1>
-            <p className="text-xl md:text-2xl text-blue-50 mb-10 font-medium leading-relaxed drop-shadow-md">
-              Empowering minds, building character, and shaping the future leaders of tomorrow.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            {/* Animated Badge */}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="mb-8 px-6 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-xs md:text-sm font-bold tracking-[0.3em] uppercase"
+            >
+              EXCELLENCE • DISCIPLINE • VALUES
+            </motion.div>
+
+            {/* Main Animated Title (SVG Outline) */}
+            <div className="mb-8 w-full max-w-[900px] h-[150px] md:h-[250px] flex items-center justify-center">
+              <TextOutline text="DELIVERANCE" />
+            </div>
+
+            {/* Subtext */}
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2, duration: 1 }}
+              className="text-lg md:text-2xl text-blue-100 max-w-3xl mb-12 font-medium leading-relaxed drop-shadow-md"
+            >
+              Empowering the next generation of leaders through <span className="text-white border-b-2 border-white/30">academic excellence</span>, <span className="text-white border-b-2 border-white/30">unwavering discipline</span>, and <span className="text-white border-b-2 border-white/30">strong core values</span>.
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5, duration: 0.8 }}
+              className="flex flex-col sm:flex-row gap-6"
+            >
               <Link
                 to="/admissions"
-                className="bg-white text-primary hover:bg-gray-100 px-8 py-4 rounded-md font-bold text-lg transition-all text-center shadow-lg hover:shadow-xl hover:-translate-y-1"
+                className="relative group bg-white text-[#001a40] px-10 py-5 rounded-xl font-black text-lg transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_40px_rgba(255,255,255,0.5)] hover:-translate-y-1 overflow-hidden"
               >
-                Apply Now
+                <span className="relative z-10">APPLY FOR 2026</span>
+                <div className="absolute inset-0 bg-blue-100 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" />
               </Link>
               <Link
                 to="/contact"
-                className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-md font-bold text-lg transition-all text-center hover:-translate-y-1"
+                className="bg-transparent border-2 border-white/50 text-white hover:bg-white/10 hover:border-white px-10 py-5 rounded-xl font-black text-lg transition-all backdrop-blur-sm hover:-translate-y-1"
               >
-                Visit School
+                VISIT CAMPUS
               </Link>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Quick Introduction */}
-      <section className="py-24 bg-white overflow-hidden relative z-20">
+      {/* Shared Values Banner Overlay */}
+      <div className="relative z-30 -mt-16 sm:-mt-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto bg-primary shadow-2xl p-8 sm:p-12 text-center">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-lg sm:text-xl md:text-2xl font-black text-white tracking-widest leading-relaxed uppercase"
+          >
+            VALLEY COLLEGE SS IS BUILT ON STRONG FOUNDATION OF ACADEMIC <span className="text-blue-300">EXCELLENCE</span>, <span className="text-blue-300">DISCIPLINE</span>, AND <span className="text-blue-300">VALUES</span> THAT SHAPE FUTURE LEADERS.
+          </motion.h2>
+        </div>
+      </div>
+
+      {/* Message from Our Head Teacher */}
+      <section className="pt-20 pb-24 bg-white overflow-hidden relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Images Side */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            {/* Image Side */}
             <motion.div 
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -133,38 +201,23 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className="relative"
             >
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/5] w-[85%]">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/5] w-[85%] mx-auto lg:mr-auto lg:ml-0">
                 <img
-                  src="/images/1.jpeg"
-                  alt="Students studying"
-                  className="w-full h-full object-cover"
+                  src="/HM valley college.jpg"
+                  alt="Ms. Kabezi Doreen - Head Teacher"
+                  className="w-full h-full object-cover object-top"
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "/images/1.jpeg"; // Fallback image just in case
+                  }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-              </div>
-              
-              <div className="absolute bottom-10 right-0 w-[55%] aspect-square rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
-                <img
-                  src="/images/IMG_20260401_184018_232.jpg"
-                  alt="School classroom"
-                  className="w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-
-              <motion.div 
-                animate={{ y: [0, -10, 0] }}
-                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                className="absolute top-10 -right-4 sm:-right-8 bg-white p-4 sm:p-6 rounded-2xl shadow-xl border border-gray-100 flex items-center gap-4"
-              >
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-50 rounded-full flex items-center justify-center text-primary">
-                  <TrophyIcon size={28} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 text-white drop-shadow-md">
+                  <h3 className="text-2xl sm:text-3xl font-bold font-serif mb-1">Ms. Kabezi Doreen</h3>
+                  <p className="text-blue-200 font-bold tracking-wide uppercase text-sm">Head Teacher</p>
                 </div>
-                <div>
-                  <div className="text-2xl sm:text-3xl font-black text-gray-900">20+</div>
-                  <div className="text-xs sm:text-sm font-bold text-gray-500 uppercase tracking-wider">Years of<br/>Excellence</div>
-                </div>
-              </motion.div>
+              </div>
             </motion.div>
 
             {/* Text Side */}
@@ -174,46 +227,59 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="h-px w-12 bg-primary"></div>
-                <span className="text-primary font-bold uppercase tracking-widest text-sm">About Valley College</span>
-              </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900 leading-tight">
-                A Foundation for <span className="text-primary">Excellence</span>
+                Message from Our <span className="text-primary block mt-2">Head Teacher</span>
               </h2>
-              <div className="space-y-6 text-lg text-gray-600 leading-relaxed mb-10">
-                <p>
-                  Valley College has been a pillar of educational excellence in the region for over two decades. We believe in nurturing not just the intellect, but the character of every student who walks through our doors.
+              <div className="space-y-6 text-lg text-gray-600 leading-relaxed mb-10 relative">
+                <div className="text-primary opacity-10 absolute -top-8 -left-4 text-8xl font-serif leading-none italic pointer-events-none">"</div>
+                <p className="relative z-10 italic">
+                  Welcome to the Valley College SSS website. We thank God for the years of steady growth, achievement, and impact in the field of education.
                 </p>
-                <p>
-                  Our comprehensive curriculum is designed to challenge students, encouraging critical thinking, creativity, and a lifelong love for learning, providing a seamless pathway to higher education.
+                <p className="relative z-10 italic">
+                  Our sincere appreciation goes to our founder, Mzee William Mukaira, and the entire foundation for establishing a school that continues to shape lives and build a strong academic legacy in Bushenyi Municipality, Bushenyi District, Uganda.
                 </p>
-              </div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-                {[
-                  "Holistic Education",
-                  "Strong Moral Values",
-                  "Modern Facilities",
-                  "University Pathway"
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0">
-                      <CheckCircleIcon size={14} />
-                    </div>
-                    <span className="font-bold text-gray-800">{item}</span>
-                  </div>
-                ))}
+                <p className="relative z-10 italic">
+                  Valley College SSS has consistently registered excellent academic performance at both O-Level and A-Level, with many of our students attaining outstanding results. Over the years, our alumni have gone on to excel in reputable universities and have taken up influential roles in various professional fields.
+                </p>
+                <p className="relative z-10 italic">
+                  We remain committed to providing a conducive learning environment, guided by discipline, professionalism, and a strong moral foundation, as we nurture the next generation of leaders.
+                </p>
               </div>
 
               <Link 
                 to="/about" 
                 className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all bg-primary rounded-xl hover:bg-primary/90 hover:shadow-lg hover:-translate-y-1 group"
               >
-                Discover Our History
+                Learn More About Us
                 <ArrowRightIcon size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Stats Counter */}
+      <section className="py-12 bg-gray-50 border-y border-gray-100 relative z-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
+            <div className="py-4 sm:py-0">
+              <div className="text-4xl md:text-5xl font-black text-primary mb-2">
+                <CountUp end={20} />
+              </div>
+              <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Years of Excellence</div>
+            </div>
+            <div className="py-4 sm:py-0">
+              <div className="text-4xl md:text-5xl font-black text-primary mb-2">
+                <CountUp end={27} />
+              </div>
+              <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Subjects Offered</div>
+            </div>
+            <div className="py-4 sm:py-0">
+              <div className="text-4xl md:text-5xl font-black text-primary mb-2">
+                <CountUp end={670} />
+              </div>
+              <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Number of Students</div>
+            </div>
           </div>
         </div>
       </section>

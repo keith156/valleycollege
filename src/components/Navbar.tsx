@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { GraduationCap, Menu, X, Mail, Phone } from 'lucide-react';
+import { GraduationCap, Menu, X, Mail, Phone, MapPin } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '../lib/utils';
 
@@ -19,24 +19,24 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full shadow-sm">
       {/* Top Banner */}
-      <div className="bg-[#001a40] text-white py-3 px-4 sm:px-6 lg:px-8 border-b border-white/10">
-        <div className="max-w-7xl mx-auto flex flex-col items-center gap-1.5 text-xs md:text-sm font-bold tracking-wider">
-          <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-1">
-            <a href="mailto:info@valleycollege.sc.ug" className="hover:text-blue-200 transition-colors">
+      <div className="bg-[#001a40] text-white py-4 px-4 sm:px-6 lg:px-8 border-b border-white/10 overflow-hidden">
+        <div className="max-w-7xl mx-auto flex justify-center items-center">
+          <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-[10px] md:text-xs font-bold tracking-wider">
+            <a href="mailto:info@valleycollege.sc.ug" className="flex items-center gap-1.5 hover:text-blue-200 transition-colors whitespace-nowrap">
+              <Mail size={13} className="text-blue-300" />
               info@valleycollege.sc.ug
             </a>
-            <span className="hidden sm:inline opacity-50">|</span>
-            <span>Plot 131, Block 2, Nyaruzinga Road, Bushenyi</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span>Headteacher:</span>
-            <a href="tel:+256703069869" className="hover:text-blue-200 transition-colors">
-              +256 703069869
-            </a>
-            <span>/</span>
-            <a href="tel:+256772006426" className="hover:text-blue-200 transition-colors">
-              +256 772006426
-            </a>
+            <span className="flex items-center gap-1.5 whitespace-nowrap">
+              <MapPin size={13} className="text-blue-300" />
+              Plot 131, Block 2, Nyaruzinga Road, Bushenyi
+            </span>
+            <div className="flex items-center gap-1.5 whitespace-nowrap">
+              <Phone size={13} className="text-blue-300" />
+              <span className="opacity-80">Headteacher:</span>
+              <a href="tel:+256703069869" className="hover:text-blue-200 transition-colors">+256 703069869</a>
+              <span className="opacity-50">/</span>
+              <a href="tel:+256772006426" className="hover:text-blue-200 transition-colors">+256 772006426</a>
+            </div>
           </div>
         </div>
       </div>
@@ -48,9 +48,9 @@ export function Navbar() {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-4 group">
               <img 
-                src="/logo.jpeg" 
+                src="/logo.png" 
                 alt="Valley College Logo" 
-                className="h-16 w-auto object-contain rounded-md shadow-md border border-[#001a40]/20 group-hover:scale-105 transition-transform"
+                className="h-20 w-auto object-contain group-hover:scale-105 transition-transform"
               />
               <div className="flex flex-col">
                 <span className="font-bold text-xl md:text-2xl text-[#001a40] leading-tight tracking-wide">
