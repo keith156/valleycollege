@@ -1,36 +1,24 @@
-import { Building2, Target, History, Users, BookOpen, Handshake, MapPin, Image as ImageIcon, Compass, Star, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Building2, Target, History, Users, BookOpen, Handshake, MapPin, Image as ImageIcon, Compass, Star, ShieldCheck, ArrowRight, Clock } from 'lucide-react';
 import { motion } from 'motion/react';
+import { ZoomParallax } from '../components/ui/zoom-parallax';
 
-const milestones = [
-  { 
-    year: "2005", 
-    title: "Foundation", 
-    desc: "Inauguration of the main academic block and first student enrollment.",
-    img: "/images/12.jpeg"
-  },
-  { 
-    year: "2010", 
-    title: "Expansion", 
-    desc: "Establishment of the state-of-the-art science laboratories and modern dormitories.",
-    img: "/images/13.jpeg"
-  },
-  { 
-    year: "2015", 
-    title: "Partnership", 
-    desc: "Strategic partnership formed with Valley University of Science and Technology.",
-    img: "/images/14.jpeg"
-  },
-  { 
-    year: "2020", 
-    title: "Excellence", 
-    desc: "Consistent top-tier performance in national UNEB examinations year over year.",
-    img: "/images/15.jpeg"
-  }
+const parallaxImages = [
+  { src: '/images/IMG_20260401_181411_242.jpg', alt: 'School building' },
+  { src: '/images/1.jpeg', alt: 'Students in class' },
+  { src: '/images/3.jpeg', alt: 'Science lab' },
+  { src: '/images/IMG_20260401_183410_033.jpg', alt: 'Sports field' },
+  { src: '/images/5.jpeg', alt: 'Library' },
+  { src: '/images/IMG_20260401_181902_661.jpg', alt: 'Graduation' },
+  { src: '/images/7.jpeg', alt: 'Campus grounds' },
+  { src: '/images/IMG_20260401_183339_106.jpg', alt: 'Art class' },
+  { src: '/images/IMG_20260401_184335_095.jpg', alt: 'Computer lab' },
+  { src: '/images/10.jpeg', alt: 'Cafeteria' },
+  { src: '/images/11.jpeg', alt: 'School event' },
 ];
 
 export default function About() {
   return (
-    <div className="flex flex-col bg-gray-50 pb-20 overflow-hidden">
+    <div className="flex flex-col bg-gray-50 pb-20">
       {/* Hero Section */}
       <div className="relative bg-primary text-white py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0">
@@ -119,88 +107,6 @@ export default function About() {
               </p>
             </div>
           </motion.div>
-        </div>
-
-        {/* Massive Growth Milestones Timeline */}
-        <div className="mb-32">
-          <div className="text-center mb-20">
-            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Our History</span>
-            <h2 className="text-4xl md:text-6xl font-black text-gray-900">Growth Milestones</h2>
-          </div>
-
-          <div className="relative max-w-5xl mx-auto">
-            {/* Center Line */}
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-100 via-primary to-blue-100 -translate-x-1/2 rounded-full" />
-
-            <div className="space-y-24">
-              {milestones.map((milestone, idx) => (
-                <div key={idx} className="relative overflow-hidden md:overflow-visible">
-                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.8 }}
-                    className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-16 ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
-                  >
-                    {/* Timeline Node */}
-                    <div className="absolute left-4 md:left-1/2 w-8 h-8 bg-white border-4 border-primary rounded-full -translate-x-1/2 shadow-[0_0_0_8px_rgba(255,255,255,1)] z-30 flex items-center justify-center">
-                      <div className="w-2 h-2 bg-primary rounded-full" />
-                    </div>
-
-                    {/* Content (Text) */}
-                    <motion.div 
-                      initial={{ opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.5, duration: 0.8 }}
-                      className={`w-full md:w-1/2 pl-12 md:pl-0 ${idx % 2 === 0 ? 'md:text-left' : 'md:text-right'} z-10`}
-                    >
-                      <div className="text-5xl md:text-7xl font-black text-gray-100 mb-2 -mt-6 md:-mt-10 tracking-tighter select-none">
-                        {milestone.year}
-                      </div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{milestone.title}</h3>
-                      <p className="text-lg text-gray-600 leading-relaxed">
-                        {milestone.desc}
-                      </p>
-                    </motion.div>
-
-                    {/* Content (Image) - This slides to reveal */}
-                    <motion.div 
-                      className="w-full md:w-1/2 pl-12 md:pl-0 z-20"
-                      initial={{ 
-                        x: idx % 2 === 0 ? "110%" : "-110%",
-                        opacity: 0,
-                        scale: 1.1
-                      }}
-                      whileInView={{ 
-                        x: 0,
-                        opacity: 1,
-                        scale: 1
-                      }}
-                      viewport={{ once: true, margin: "-100px" }}
-                      transition={{ 
-                        duration: 1.2, 
-                        ease: [0.22, 1, 0.36, 1], // Custom cubic-bezier for a premium slide
-                        opacity: { duration: 0.5 }
-                      }}
-                    >
-                      <div className="rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white group relative">
-                        <img 
-                          src={milestone.img} 
-                          alt={milestone.title} 
-                          className="w-full h-56 md:h-72 object-cover group-hover:scale-110 transition-transform duration-700"
-                          referrerPolicy="no-referrer"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                        <div className="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors" />
-                      </div>
-                    </motion.div>
-                  </motion.div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Leadership Section */}
@@ -320,6 +226,18 @@ export default function About() {
             ))}
           </div>
         </motion.section>
+
+        {/* Zoom Parallax Gallery (Transferred from Home) */}
+        <section className="bg-white text-gray-900 relative mt-24">
+          <div className="relative flex h-[30vh] items-center justify-center overflow-hidden">
+            <div className="text-center z-10">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">Immersive View</h2>
+              <p className="text-xl text-gray-500">Experience our campus environment</p>
+            </div>
+          </div>
+          <ZoomParallax images={parallaxImages} />
+          <div className="h-[20vh] bg-white" />
+        </section>
 
       </div>
     </div>

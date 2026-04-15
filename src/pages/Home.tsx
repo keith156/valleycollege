@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight as ArrowRightIcon, BookOpen as BookOpenIcon, CheckCircle as CheckCircleIcon, Trophy as TrophyIcon, Users as UsersIcon, Calendar, Image as ImageIcon, Clock } from 'lucide-react';
+import { ArrowRight as ArrowRightIcon, BookOpen as BookOpenIcon, CheckCircle as CheckCircleIcon, Trophy as TrophyIcon, Users as UsersIcon, Image as ImageIcon } from 'lucide-react';
 import { motion, AnimatePresence, animate, useInView } from 'motion/react';
 import { Carousel } from '../components/Carousel';
 import { HolographicCard } from '../components/ui/holographic-card';
@@ -7,8 +7,6 @@ import { TextOutline } from '../components/ui/text-outline';
 import React, { useEffect, useState } from 'react';
 import Lenis from '@studio-freight/lenis';
 import { ZoomParallax } from '../components/ui/zoom-parallax';
-import { getEvents, SchoolEvent } from '../lib/events';
-import { getNews, NewsItem } from '../lib/news';
 
 interface CountUpProps {
   end: number;
@@ -35,8 +33,6 @@ const CountUp = ({ end, duration = 2 }: CountUpProps) => {
 };
 
 export default function Home() {
-  const [termEvents, setTermEvents] = useState<SchoolEvent[]>([]);
-  const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
 
   const heroImages = [
@@ -62,9 +58,6 @@ export default function Home() {
   }, [heroImages.length]);
 
   useEffect(() => {
-    setTermEvents(getEvents());
-    setNewsItems(getNews());
-    
     const lenis = new Lenis();
     
     function raf(time: number) {
@@ -91,6 +84,33 @@ export default function Home() {
     { src: '/images/IMG_20260401_184335_095.jpg', alt: 'Computer lab' },
     { src: '/images/10.jpeg', alt: 'Cafeteria' },
     { src: '/images/11.jpeg', alt: 'School event' },
+  ];
+
+  const milestones = [
+    { 
+      year: "2005", 
+      title: "Foundation", 
+      desc: "Inauguration of the main academic block and first student enrollment.",
+      img: "/images/12.jpeg"
+    },
+    { 
+      year: "2010", 
+      title: "Expansion", 
+      desc: "Establishment of the state-of-the-art science laboratories and modern dormitories.",
+      img: "/images/13.jpeg"
+    },
+    { 
+      year: "2015", 
+      title: "Partnership", 
+      desc: "Strategic partnership formed with Valley University of Science and Technology.",
+      img: "/images/14.jpeg"
+    },
+    { 
+      year: "2020", 
+      title: "Excellence", 
+      desc: "Consistent top-tier performance in national UNEB examinations year over year.",
+      img: "/images/15.jpeg"
+    }
   ];
 
   return (
@@ -249,59 +269,136 @@ export default function Home() {
                   We remain committed to providing a conducive learning environment, guided by discipline, professionalism, and a strong moral foundation, as we nurture the next generation of leaders.
                 </p>
               </div>
-
-              <Link 
-                to="/about" 
-                className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all bg-primary rounded-xl hover:bg-primary/90 hover:shadow-lg hover:-translate-y-1 group"
-              >
-                Learn More About Us
-                <ArrowRightIcon size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Link>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Quick Stats Counter */}
-      <section className="py-12 bg-gray-50 border-y border-gray-100 relative z-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
-            <div className="py-4 sm:py-0">
-              <div className="text-4xl md:text-5xl font-black text-primary mb-2">
-                <CountUp end={20} />
-              </div>
-              <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Years of Excellence</div>
-            </div>
-            <div className="py-4 sm:py-0">
-              <div className="text-4xl md:text-5xl font-black text-primary mb-2">
-                <CountUp end={27} />
-              </div>
-              <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Subjects Offered</div>
-            </div>
-            <div className="py-4 sm:py-0">
-              <div className="text-4xl md:text-5xl font-black text-primary mb-2">
-                <CountUp end={670} />
-              </div>
-              <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Number of Students</div>
-            </div>
+      {/* Quick Stats Counter - Premium Redesign */}
+      <section className="py-24 bg-white relative z-20 overflow-hidden">
+        {/* Background Decorative Elements */}
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-50">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-100 rounded-full blur-[120px] mix-blend-multiply animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] mix-blend-multiply animate-pulse" style={{ animationDelay: '2s' }} />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+            {[
+              { end: 20, label: "Years of Excellence", icon: TrophyIcon, color: "from-blue-600 to-indigo-700" },
+              { end: 27, label: "Subjects Offered", icon: BookOpenIcon, color: "from-primary to-blue-600" },
+              { end: 670, label: "Number of Students", icon: UsersIcon, color: "from-blue-800 to-primary" }
+            ].map((stat, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="group relative"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} rounded-3xl blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
+                <div className="relative bg-white p-10 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-gray-100 hover:border-primary/20 transition-all hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] hover:-translate-y-2 flex flex-col items-center text-center">
+                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${stat.color} flex items-center justify-center text-white mb-8 shadow-lg group-hover:scale-110 transition-transform`}>
+                    <stat.icon size={32} />
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="text-6xl lg:text-7xl font-black text-gray-900 mb-2 flex items-center justify-center tracking-tighter">
+                      <CountUp end={stat.end} />
+                      <span className="text-primary text-4xl ml-1">+</span>
+                    </div>
+                    <div className="h-1 w-12 bg-primary/20 mx-auto mb-4 rounded-full group-hover:w-20 transition-all" />
+                    <div className="text-sm font-bold text-gray-400 uppercase tracking-[0.3em]">{stat.label}</div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Zoom Parallax Gallery */}
-      <section className="bg-white text-gray-900 relative">
-        <div className="relative flex h-[50vh] items-center justify-center overflow-hidden">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -top-1/2 left-1/2 h-[120vmin] w-[120vmin] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.05),transparent_50%)] blur-[30px]"
-          />
-          <div className="text-center z-10">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Campus Life</h2>
-            <p className="text-xl text-gray-500">Scroll down to explore</p>
+      {/* Growth Milestones Timeline (Transferred from About) */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Our History</span>
+            <h2 className="text-4xl md:text-6xl font-black text-gray-900">Growth Milestones</h2>
+          </div>
+
+          <div className="relative max-w-5xl mx-auto">
+            {/* Center Line */}
+            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-100 via-primary to-blue-100 -translate-x-1/2 rounded-full" />
+
+            <div className="space-y-24">
+              {milestones.map((milestone, idx) => (
+                <div key={idx} className="relative overflow-hidden md:overflow-visible">
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8 }}
+                    className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-16 ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
+                  >
+                    {/* Timeline Node */}
+                    <div className="absolute left-4 md:left-1/2 w-8 h-8 bg-white border-4 border-primary rounded-full -translate-x-1/2 shadow-[0_0_0_8px_rgba(255,255,255,1)] z-30 flex items-center justify-center">
+                      <div className="w-2 h-2 bg-primary rounded-full" />
+                    </div>
+
+                    {/* Content (Text) */}
+                    <motion.div 
+                      initial={{ opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5, duration: 0.8 }}
+                      className={`w-full md:w-1/2 pl-12 md:pl-0 ${idx % 2 === 0 ? 'md:text-left' : 'md:text-right'} z-10`}
+                    >
+                      <div className="text-5xl md:text-7xl font-black text-gray-100 mb-2 -mt-6 md:-mt-10 tracking-tighter select-none">
+                        {milestone.year}
+                      </div>
+                      <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{milestone.title}</h3>
+                      <p className="text-lg text-gray-600 leading-relaxed">
+                        {milestone.desc}
+                      </p>
+                    </motion.div>
+
+                    {/* Content (Image) - This slides to reveal */}
+                    <motion.div 
+                      className="w-full md:w-1/2 pl-12 md:pl-0 z-20"
+                      initial={{ 
+                        x: idx % 2 === 0 ? "110%" : "-110%",
+                        opacity: 0,
+                        scale: 1.1
+                      }}
+                      whileInView={{ 
+                        x: 0,
+                        opacity: 1,
+                        scale: 1
+                      }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ 
+                        duration: 1.2, 
+                        ease: [0.22, 1, 0.36, 1], // Custom cubic-bezier for a premium slide
+                        opacity: { duration: 0.5 }
+                      }}
+                    >
+                      <div className="rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white group relative">
+                        <img 
+                          src={milestone.img} 
+                          alt={milestone.title} 
+                          className="w-full h-56 md:h-72 object-cover group-hover:scale-110 transition-transform duration-700"
+                          referrerPolicy="no-referrer"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <div className="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors" />
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        <ZoomParallax images={parallaxImages} />
-        <div className="h-[20vh] bg-white" />
       </section>
 
       {/* Key Highlights */}
@@ -341,138 +438,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* School Programs for the Term */}
-      <section className="py-24 bg-white relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.05),transparent_50%)] pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Upcoming Events</span>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">School Programs for the Term</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Stay updated with our key academic and co-curricular activities for this term.</p>
-          </motion.div>
-
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
-              <div className="max-h-[400px] overflow-y-auto p-2 sm:p-4">
-                {termEvents.length === 0 ? (
-                  <div className="text-center p-12 bg-gray-50 rounded-2xl border border-gray-100">
-                    <p className="text-gray-500 text-lg">No programs scheduled for this term yet.</p>
-                  </div>
-                ) : (
-                  <div className="flex flex-col gap-2">
-                    {termEvents.map((event, idx) => (
-                      <motion.div 
-                        key={event.id}
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: idx * 0.05 }}
-                        className="flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100 group"
-                      >
-                        <div className="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
-                          <Clock size={20} />
-                        </div>
-                        <div className="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
-                          <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">{event.title}</h3>
-                          <div className="text-sm font-bold text-primary whitespace-nowrap bg-blue-50/50 px-3 py-1 rounded-full w-fit">{event.date}</div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Latest News & Quick Links */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            
-            <div className="lg:col-span-2">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <h2 className="text-4xl font-bold mb-8 flex items-center gap-3">
-                  Latest News & Updates
-                </h2>
-                <div className="-mx-4 sm:-mx-8">
-                  {newsItems.length > 0 ? (
-                    <Carousel autoPlayInterval={6000}>
-                      {newsItems.map((news, idx) => (
-                        <div key={news.id} className="snap-start shrink-0 w-[85%] sm:w-[350px] bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow group">
-                          <div className="h-48 bg-gray-200 relative overflow-hidden">
-                            <img 
-                              src={news.img} 
-                              alt={news.title} 
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                              referrerPolicy="no-referrer" 
-                              loading="lazy"
-                              decoding="async"
-                            />
-                          </div>
-                          <div className="p-6">
-                            <div className="flex items-center gap-2 text-sm font-bold text-primary mb-3">
-                              <Calendar size={16} />
-                              {news.date}
-                            </div>
-                            <h4 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">{news.title}</h4>
-                            <p className="text-gray-600 text-sm line-clamp-3">{news.excerpt}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </Carousel>
-                  ) : (
-                    <div className="p-8 text-gray-500">No news available.</div>
-                  )}
-                </div>
-              </motion.div>
-            </div>
-
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl font-bold mb-8">Quick Links</h2>
-              <div className="bg-primary text-white rounded-2xl p-8 shadow-xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
-                <ul className="space-y-4 relative z-10">
-                  <li>
-                    <Link to="/admissions" className="flex items-center justify-between p-5 bg-white/10 hover:bg-white/20 rounded-xl transition-all group hover:scale-[1.02]">
-                      <span className="font-bold text-lg">Admissions</span>
-                      <ArrowRightIcon size={24} className="group-hover:translate-x-2 transition-transform" />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/academics" className="flex items-center justify-between p-5 bg-white/10 hover:bg-white/20 rounded-xl transition-all group hover:scale-[1.02]">
-                      <span className="font-bold text-lg">Academics</span>
-                      <ArrowRightIcon size={24} className="group-hover:translate-x-2 transition-transform" />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/contact" className="flex items-center justify-between p-5 bg-white/10 hover:bg-white/20 rounded-xl transition-all group hover:scale-[1.02]">
-                      <span className="font-bold text-lg">Contact Us</span>
-                      <ArrowRightIcon size={24} className="group-hover:translate-x-2 transition-transform" />
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </motion.div>
-
-          </div>
-        </div>
-      </section>
+      {/* Removed School Programs and News Updates from Home */}
 
       {/* Testimonials */}
       <section className="py-24 bg-gray-50 overflow-hidden">

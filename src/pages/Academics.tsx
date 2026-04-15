@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { BookOpen, GraduationCap, Laptop, Activity, Trophy, Beaker, Users, Star, Medal, ChevronDown } from 'lucide-react';
+import { BookOpen, GraduationCap, Laptop, Activity, Trophy, Beaker, Users, Star, Medal, ChevronDown, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { getWallOfFame, WallOfFameYear } from '../lib/wallOfFame';
+import { getEvents, SchoolEvent } from '../lib/events';
 
 export default function Academics() {
   const [expandedYear, setExpandedYear] = useState<string | null>(null);
   const [wallOfFameData, setWallOfFameData] = useState<WallOfFameYear[]>([]);
+  const [termEvents, setTermEvents] = useState<SchoolEvent[]>([]);
 
   useEffect(() => {
     const data = getWallOfFame();
@@ -13,6 +15,7 @@ export default function Academics() {
     if (data.length > 0) {
       setExpandedYear(data[0].year);
     }
+    setTermEvents(getEvents());
   }, []);
 
   return (
@@ -342,6 +345,55 @@ export default function Academics() {
           </div>
         </motion.div>
 
+        {/* School Programs for the Term (Transferred from Home) */}
+        <section className="py-24 bg-white rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden mt-16">
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.05),transparent_50%)] pointer-events-none" />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Upcoming Events</span>
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">School Programs for the Term</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">Stay updated with our key academic and co-curricular activities for this term.</p>
+            </motion.div>
+
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                <div className="max-h-[400px] overflow-y-auto p-2 sm:p-4">
+                  {termEvents.length === 0 ? (
+                    <div className="text-center p-12 bg-gray-50 rounded-2xl border border-gray-100">
+                      <p className="text-gray-500 text-lg">No programs scheduled for this term yet.</p>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col gap-2">
+                      {termEvents.map((event, idx) => (
+                        <motion.div 
+                          key={event.id}
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: idx * 0.05 }}
+                          className="flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100 group"
+                        >
+                          <div className="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
+                            <Clock size={20} />
+                          </div>
+                          <div className="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
+                            <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">{event.title}</h3>
+                            <div className="text-sm font-bold text-primary whitespace-nowrap bg-blue-50/50 px-3 py-1 rounded-full w-fit">{event.date}</div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );
