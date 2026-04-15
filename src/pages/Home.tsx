@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight as ArrowRightIcon, BookOpen as BookOpenIcon, CheckCircle as CheckCircleIcon, Trophy as TrophyIcon, Users as UsersIcon, Calendar, Image as ImageIcon, Clock } from 'lucide-react';
-import { motion, AnimatePresence, animate } from 'motion/react';
+import { motion, AnimatePresence, animate, useInView } from 'motion/react';
 import { Carousel } from '../components/Carousel';
 import { HolographicCard } from '../components/ui/holographic-card';
 import { TextOutline } from '../components/ui/text-outline';
@@ -18,7 +18,7 @@ interface CountUpProps {
 const CountUp = ({ end, duration = 2 }: CountUpProps) => {
   const [displayValue, setDisplayValue] = useState(0);
   const nodeRef = React.useRef<HTMLSpanElement>(null);
-  const isInView = motion.useInView(nodeRef as React.RefObject<Element>, { once: true });
+  const isInView = useInView(nodeRef as React.RefObject<Element>, { once: true });
 
   useEffect(() => {
     if (isInView) {
