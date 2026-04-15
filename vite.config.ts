@@ -16,7 +16,6 @@ export default defineConfig(({mode}) => {
         include: undefined,
         includePublic: true,
         logStats: true,
-        ansi: true,
         png: {
           quality: 80,
         },

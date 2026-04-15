@@ -134,44 +134,70 @@ export default function About() {
 
             <div className="space-y-24">
               {milestones.map((milestone, idx) => (
-                <motion.div 
-                  key={idx} 
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.7, ease: "easeOut" }}
-                  className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-16 ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
-                >
-                  {/* Timeline Node */}
-                  <div className="absolute left-4 md:left-1/2 w-8 h-8 bg-white border-4 border-primary rounded-full -translate-x-1/2 shadow-[0_0_0_8px_rgba(255,255,255,1)] z-10 flex items-center justify-center">
-                    <div className="w-2 h-2 bg-primary rounded-full" />
-                  </div>
-
-                  {/* Content (Text) */}
-                  <div className={`w-full md:w-1/2 pl-12 md:pl-0 ${idx % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
-                    <div className="text-5xl md:text-7xl font-black text-gray-100 mb-2 -mt-6 md:-mt-10 tracking-tighter select-none">
-                      {milestone.year}
+                <div key={idx} className="relative overflow-hidden md:overflow-visible">
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8 }}
+                    className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-16 ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
+                  >
+                    {/* Timeline Node */}
+                    <div className="absolute left-4 md:left-1/2 w-8 h-8 bg-white border-4 border-primary rounded-full -translate-x-1/2 shadow-[0_0_0_8px_rgba(255,255,255,1)] z-30 flex items-center justify-center">
+                      <div className="w-2 h-2 bg-primary rounded-full" />
                     </div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{milestone.title}</h3>
-                    <p className="text-lg text-gray-600 leading-relaxed">
-                      {milestone.desc}
-                    </p>
-                  </div>
 
-                  {/* Content (Image) */}
-                  <div className="w-full md:w-1/2 pl-12 md:pl-0">
-                    <div className="rounded-[2rem] overflow-hidden shadow-xl border-8 border-white group">
-                      <img 
-                        src={milestone.img} 
-                        alt={milestone.title} 
-                        className="w-full h-56 md:h-72 object-cover group-hover:scale-110 transition-transform duration-700"
-                        referrerPolicy="no-referrer"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
-                  </div>
-                </motion.div>
+                    {/* Content (Text) */}
+                    <motion.div 
+                      initial={{ opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5, duration: 0.8 }}
+                      className={`w-full md:w-1/2 pl-12 md:pl-0 ${idx % 2 === 0 ? 'md:text-left' : 'md:text-right'} z-10`}
+                    >
+                      <div className="text-5xl md:text-7xl font-black text-gray-100 mb-2 -mt-6 md:-mt-10 tracking-tighter select-none">
+                        {milestone.year}
+                      </div>
+                      <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{milestone.title}</h3>
+                      <p className="text-lg text-gray-600 leading-relaxed">
+                        {milestone.desc}
+                      </p>
+                    </motion.div>
+
+                    {/* Content (Image) - This slides to reveal */}
+                    <motion.div 
+                      className="w-full md:w-1/2 pl-12 md:pl-0 z-20"
+                      initial={{ 
+                        x: idx % 2 === 0 ? "110%" : "-110%",
+                        opacity: 0,
+                        scale: 1.1
+                      }}
+                      whileInView={{ 
+                        x: 0,
+                        opacity: 1,
+                        scale: 1
+                      }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ 
+                        duration: 1.2, 
+                        ease: [0.22, 1, 0.36, 1], // Custom cubic-bezier for a premium slide
+                        opacity: { duration: 0.5 }
+                      }}
+                    >
+                      <div className="rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white group relative">
+                        <img 
+                          src={milestone.img} 
+                          alt={milestone.title} 
+                          className="w-full h-56 md:h-72 object-cover group-hover:scale-110 transition-transform duration-700"
+                          referrerPolicy="no-referrer"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <div className="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors" />
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                </div>
               ))}
             </div>
           </div>
