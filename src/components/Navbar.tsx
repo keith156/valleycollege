@@ -1,41 +1,97 @@
 import { Link, useLocation } from 'react-router-dom';
-import { GraduationCap, Menu, X, Mail, Phone, MapPin } from 'lucide-react';
-import { useState } from 'react';
+import { Menu, X, Mail, Phone, MapPin, ChevronDown } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { cn } from '../lib/utils';
+import { motion, AnimatePresence } from 'motion/react';
 
 const NAV_LINKS = [
   { name: 'HOME', path: '/' },
   { name: 'ABOUT', path: '/about' },
-  { name: 'ACADEMICS', path: '/academics' },
-  { name: 'ADMISSIONS', path: '/admissions' },
-  { name: 'ALUMNI', path: '/alumni' },
+  { 
+    name: 'ACADEMICS', 
+    path: '/academics',
+    subLinks: [
+      { name: 'Curriculum', path: '/academics#curriculum' },
+      { name: 'Subjects Offered', path: '/academics#subjects' },
+      { name: 'Co-curricular Activities', path: '/academics#activities' },
+      { name: 'Wall of Fame', path: '/academics#fame' },
+      { name: 'School Calendar', path: '/academics#calendar' },
+    ]
+  },
+  { 
+    name: 'ADMISSIONS', 
+    path: '/admissions',
+    subLinks: [
+      { name: 'Application Documents', path: '/admissions#documents' },
+      { name: 'Admission Requirements', path: '/admissions#requirements' },
+      { name: 'Application Process', path: '/admissions#process' },
+    ]
+  },
+  { 
+    name: 'ALUMNI', 
+    path: '/alumni',
+    subLinks: [
+      { name: 'Alumni Spotlight', path: '/alumni#spotlight' },
+      { name: 'Alumni Giveback Project', path: '/alumni#giveback' },
+      { name: 'Alumni College League', path: '/alumni#league' },
+      { name: 'Alumni Gallery', path: '/alumni#gallery' },
+    ]
+  },
   { name: 'CONTACT', path: '/contact' },
 ];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const location = useLocation();
 
+  // Handle hash scrolling
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        // Wait a bit for page to render fully if navigating from another page
+        setTimeout(() => {
+          const offset = 160; // Offset for sticky header
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = element.getBoundingClientRect().top;
+          const elementPosition = elementRect - bodyRect;
+          const offsetPosition = elementPosition - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }, 100);
+      }
+    } else if (location.pathname !== lastPathname.current) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    lastPathname.current = location.pathname;
+  }, [location]);
+
+  const lastPathname = useRef(location.pathname);
+
   return (
-    <header className="sticky top-0 z-50 w-full shadow-sm">
+    <header className="sticky top-0 z-50 w-full shadow-sm font-sans">
       {/* Top Banner */}
-      <div className="bg-[#001a40] text-white py-4 px-4 sm:px-6 lg:px-8 border-b border-white/10 overflow-hidden">
+      <div className="bg-[#001a40] text-white py-1.5 px-4 sm:px-6 lg:px-8 border-b border-white/10 overflow-hidden text-center">
         <div className="max-w-7xl mx-auto flex justify-center items-center">
-          <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-[10px] md:text-xs font-bold tracking-wider">
+          <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-[10px] md:text-[11px] font-bold tracking-wider uppercase">
             <a href="mailto:info@valleycollege.sc.ug" className="flex items-center gap-1.5 hover:text-blue-200 transition-colors whitespace-nowrap">
-              <Mail size={13} className="text-blue-300" />
+              <Mail size={12} className="text-blue-300" />
               info@valleycollege.sc.ug
             </a>
             <span className="flex items-center gap-1.5 whitespace-nowrap">
-              <MapPin size={13} className="text-blue-300" />
-              Plot 131, Block 2, Nyaruzinga Road, Bushenyi
+              <MapPin size={12} className="text-blue-300" />
+              Bushenyi, Uganda
             </span>
             <div className="flex items-center gap-1.5 whitespace-nowrap">
-              <Phone size={13} className="text-blue-300" />
-              <span className="opacity-80">Headteacher:</span>
+              <Phone size={12} className="text-blue-300" />
               <a href="tel:+256703069869" className="hover:text-blue-200 transition-colors">+256 703069869</a>
-              <span className="opacity-50">/</span>
-              <a href="tel:+256772006426" className="hover:text-blue-200 transition-colors">+256 772006426</a>
             </div>
           </div>
         </div>
@@ -44,43 +100,83 @@ export function Navbar() {
       {/* Main Navbar */}
       <div className="bg-[#b0c4de] w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-24">
+          <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-4 group">
               <img 
                 src="/logo.png" 
                 alt="Valley College Logo" 
-                className="h-20 w-auto object-contain group-hover:scale-105 transition-transform"
+                className="h-16 w-auto object-contain group-hover:scale-105 transition-transform"
               />
               <div className="flex flex-col">
-                <span className="font-bold text-xl md:text-2xl text-[#001a40] leading-tight tracking-wide">
+                <span className="font-extrabold text-xl md:text-2xl text-[#001a40] leading-tight tracking-tighter">
                   VALLEY COLLEGE
                 </span>
-                <span className="font-bold text-lg md:text-xl text-[#001a40] leading-tight tracking-wide">
-                  SECONDARY SCHOOL
+                <span className="font-bold text-sm md:text-base text-[#001a40]/80 leading-tight tracking-widest uppercase">
+                  Secondary School
                 </span>
               </div>
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-4 lg:gap-6">
+            <nav className="hidden md:flex items-center gap-1 lg:gap-2">
               {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  className={cn(
-                    "text-xs lg:text-sm font-bold tracking-widest transition-all hover:text-[#001a40] py-2 px-1 border-b-2",
-                    location.pathname === link.path 
-                      ? "text-[#001a40] border-[#001a40]" 
-                      : "text-[#001a40]/70 border-transparent hover:border-[#001a40]/30"
-                  )}
+                <div 
+                  key={link.name} 
+                  className="relative group"
+                  onMouseEnter={() => setActiveDropdown(link.name)}
+                  onMouseLeave={() => setActiveDropdown(null)}
                 >
-                  {link.name}
-                </Link>
+                  <Link
+                    to={link.path}
+                    className={cn(
+                      "flex items-center gap-1 text-xs lg:text-[13px] font-black tracking-widest transition-all hover:text-[#001a40] py-4 px-3 rounded-lg uppercase",
+                      location.pathname === link.path 
+                        ? "text-[#001a40] bg-white/40 shadow-sm" 
+                        : "text-[#001a40]/70 hover:bg-white/20"
+                    )}
+                  >
+                    {link.name}
+                    {link.subLinks && (
+                      <ChevronDown 
+                        size={14} 
+                        className={cn(
+                          "transition-transform duration-300",
+                          activeDropdown === link.name ? "rotate-180" : ""
+                        )}
+                      />
+                    )}
+                  </Link>
+
+                  {/* Dropdown Menu */}
+                  <AnimatePresence>
+                    {link.subLinks && activeDropdown === link.name && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        className="absolute left-0 top-full pt-2 w-64 z-[60]"
+                      >
+                        <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden py-3">
+                          {link.subLinks.map((sub) => (
+                            <Link
+                              key={sub.name}
+                              to={sub.path}
+                              className="block px-6 py-3 text-[13px] font-bold text-gray-700 hover:text-white hover:bg-[#001a40] transition-colors"
+                            >
+                              {sub.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               ))}
               <Link
-                to="/admissions"
-                className="bg-[#001a40] hover:bg-[#002a60] text-white px-5 py-2.5 rounded font-bold text-xs tracking-widest transition-all shadow-md active:scale-95 ml-2"
+                to="/admissions#process"
+                className="bg-[#001a40] hover:bg-[#002a60] text-white px-6 py-3 rounded-xl font-black text-xs tracking-widest transition-all shadow-lg active:scale-95 ml-4 uppercase"
               >
                 APPLY NOW
               </Link>
@@ -88,7 +184,7 @@ export function Navbar() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 text-[#001a40] hover:bg-white/20 rounded-lg transition-colors"
+              className="md:hidden p-3 text-[#001a40] bg-white/20 rounded-xl transition-colors active:scale-90"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >
@@ -99,36 +195,82 @@ export function Navbar() {
       </div>
 
       {/* Mobile Navigation */}
-      {isOpen && (
-        <div className="md:hidden bg-[#b0c4de] border-t border-[#001a40]/10">
-          <div className="px-4 pt-2 pb-6 space-y-1">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className={cn(
-                  "block px-3 py-3 rounded-md text-base font-bold transition-colors",
-                  location.pathname === link.path
-                    ? "bg-[#001a40] text-white"
-                    : "text-[#001a40] hover:bg-white/20"
-                )}
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
-            <div className="pt-4 px-3">
-              <Link
-                to="/admissions"
-                className="block w-full text-center bg-[#001a40] hover:bg-[#002a60] text-white px-6 py-3 rounded-md font-bold transition-all shadow-md"
-                onClick={() => setIsOpen(false)}
-              >
-                APPLY NOW
-              </Link>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-[#b0c4de] border-t border-[#001a40]/10 overflow-hidden"
+          >
+            <div className="px-4 py-6 space-y-2">
+              {NAV_LINKS.map((link) => (
+                <div key={link.name} className="flex flex-col">
+                  <div className="flex items-center justify-between">
+                    <Link
+                      to={link.path}
+                      className={cn(
+                        "flex-1 px-4 py-4 rounded-xl text-sm font-black tracking-widest transition-colors uppercase",
+                        location.pathname === link.path
+                          ? "bg-[#001a40] text-white shadow-md"
+                          : "text-[#001a40] hover:bg-white/30"
+                      )}
+                      onClick={() => !link.subLinks && setIsOpen(false)}
+                    >
+                      {link.name}
+                    </Link>
+                    {link.subLinks && (
+                      <button 
+                        onClick={() => setMobileExpanded(mobileExpanded === link.name ? null : link.name)}
+                        className="p-4 text-[#001a40]"
+                      >
+                        <ChevronDown 
+                          size={20} 
+                          className={cn("transition-transform", mobileExpanded === link.name ? "rotate-180" : "")} 
+                        />
+                      </button>
+                    )}
+                  </div>
+                  
+                  {/* Mobile Sublinks */}
+                  {link.subLinks && (
+                    <AnimatePresence>
+                      {mobileExpanded === link.name && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="pl-8 flex flex-col gap-1 mt-1 pb-2 border-l-2 border-[#001a40]/20 ml-6"
+                        >
+                          {link.subLinks.map((sub) => (
+                            <Link
+                              key={sub.name}
+                              to={sub.path}
+                              className="px-4 py-3 text-xs font-bold text-[#001a40]/80 hover:text-[#001a40] transition-colors"
+                              onClick={() => setIsOpen(false)}
+                            >
+                              {sub.name}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  )}
+                </div>
+              ))}
+              <div className="pt-6">
+                <Link
+                  to="/admissions#process"
+                  className="block w-full text-center bg-[#001a40] text-white px-8 py-5 rounded-2xl font-black tracking-widest transition-all shadow-xl active:scale-95 uppercase"
+                  onClick={() => setIsOpen(false)}
+                >
+                  APPLY NOW
+                </Link>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

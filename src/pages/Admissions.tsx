@@ -9,7 +9,7 @@ export default function Admissions() {
   return (
     <div className="flex flex-col bg-gray-50 pb-20">
       {/* Page Header */}
-      <div className="relative bg-primary text-white py-24 lg:py-32 overflow-hidden">
+      <div className="relative bg-primary text-white py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
           <div className="w-full h-full bg-gray-900" />
           <img
@@ -24,8 +24,8 @@ export default function Admissions() {
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-md">Admissions</h1>
-            <p className="text-xl text-blue-100 max-w-2xl mx-auto drop-shadow-sm">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-md">Admissions</h1>
+            <p className="text-lg lg:text-xl text-blue-100 max-w-2xl mx-auto drop-shadow-sm">
               Join the Valley College community. Choose the application method that works best for you.
             </p>
           </motion.div>
@@ -35,16 +35,16 @@ export default function Admissions() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
         
         {/* Prominent Downloads Section */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white p-8 lg:p-12 rounded-[2rem] shadow-lg border border-gray-100 mb-20 relative overflow-hidden">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white p-6 md:p-10 lg:p-12 rounded-[2rem] shadow-lg border border-gray-100 mb-16 md:mb-20 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
           
           <div className="relative z-10">
             <div className="text-center mb-10">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 text-primary mb-4 shadow-sm border border-blue-100">
-                <Download size={32} />
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-blue-50 text-primary mb-4 shadow-sm border border-blue-100">
+                <Download size={28} />
               </div>
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">Application Documents</h2>
-              <p className="text-gray-600 text-lg max-w-2xl mx-auto">Download the essential resources you need to complete your application and understand our school policies.</p>
+              <h2 id="documents" className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-gray-900">Application Documents</h2>
+              <p className="text-gray-600 text-base lg:text-lg max-w-2xl mx-auto">Download the essential resources you need to complete your application and understand our school policies.</p>
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -103,22 +103,22 @@ export default function Admissions() {
             {/* Application Process Toggle */}
             <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white p-8 lg:p-10 rounded-3xl shadow-sm border border-gray-100">
               <div className="text-center mb-10">
-                <h2 className="text-3xl font-bold mb-4">How to Apply</h2>
-                <p className="text-gray-600 text-lg">Select your preferred method of application below.</p>
+                <h2 id="process" className="text-2xl lg:text-3xl font-bold mb-4">How to Apply</h2>
+                <p className="text-gray-600 text-base lg:text-lg">Select your preferred method of application below.</p>
               </div>
 
               <div className="flex p-1 bg-gray-100 rounded-2xl mb-10">
                 <button 
                   onClick={() => setApplyMethod('offline')}
-                  className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-lg transition-all ${applyMethod === 'offline' ? 'bg-white text-primary shadow-sm' : 'text-gray-500 hover:text-gray-900'}`}
+                  className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-base lg:text-lg transition-all ${applyMethod === 'offline' ? 'bg-white text-primary shadow-sm' : 'text-gray-500 hover:text-gray-900'}`}
                 >
-                  <Printer size={24} /> Offline Application
+                  <Printer size={20} /> Offline Application
                 </button>
                 <button 
                   onClick={() => setApplyMethod('online')}
-                  className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-lg transition-all ${applyMethod === 'online' ? 'bg-white text-primary shadow-sm' : 'text-gray-500 hover:text-gray-900'}`}
+                  className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-base lg:text-lg transition-all ${applyMethod === 'online' ? 'bg-white text-primary shadow-sm' : 'text-gray-500 hover:text-gray-900'}`}
                 >
-                  <Monitor size={24} /> Online Application
+                  <Monitor size={20} /> Online Application
                 </button>
               </div>
 
@@ -131,7 +131,7 @@ export default function Admissions() {
                     exit={{ opacity: 0, y: -10 }}
                     className="space-y-8"
                   >
-                    <p className="text-gray-600 text-lg">
+                    <p className="text-gray-600 text-base lg:text-lg">
                       Prefer to submit a physical application? Follow these steps to secure a place for your child.
                     </p>
                     <div className="space-y-6">
@@ -146,8 +146,8 @@ export default function Admissions() {
                             {item.step}
                           </div>
                           <div className="pt-1">
-                            <h4 className="font-bold text-gray-900 text-xl mb-2">{item.title}</h4>
-                            <p className="text-gray-600 text-lg">{item.desc}</p>
+                            <h4 className="font-bold text-gray-900 text-lg lg:text-xl mb-2">{item.title}</h4>
+                            <p className="text-gray-600 text-base lg:text-lg">{item.desc}</p>
                           </div>
                         </div>
                       ))}
@@ -162,8 +162,8 @@ export default function Admissions() {
                     className="space-y-6"
                   >
                     <div className="bg-blue-50 p-6 rounded-2xl border border-blue-100 mb-8">
-                      <h3 className="font-bold text-primary text-xl mb-2">Online Admission Form</h3>
-                      <p className="text-gray-700">Fill out the form below to submit your application directly to our admissions office. We will review it and get back to you shortly.</p>
+                      <h3 className="font-bold text-primary text-lg lg:text-xl mb-2">Online Admission Form</h3>
+                      <p className="text-gray-700 text-sm lg:text-base">Fill out the form below to submit your application directly to our admissions office. We will review it and get back to you shortly.</p>
                     </div>
                     
                     <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
@@ -217,12 +217,12 @@ export default function Admissions() {
               
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-10">
-                  <div className="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center shrink-0 border border-blue-100">
-                    <CheckCircle2 size={32} />
+                  <div className="w-14 h-14 bg-blue-50 text-primary rounded-2xl flex items-center justify-center shrink-0 border border-blue-100">
+                    <CheckCircle2 size={28} />
                   </div>
                   <div>
-                    <h2 className="text-3xl font-bold text-gray-900">Admission Requirements</h2>
-                    <p className="text-gray-600 mt-1">Ensure you have the following documents ready.</p>
+                    <h2 id="requirements" className="text-2xl lg:text-3xl font-bold text-gray-900">Admission Requirements</h2>
+                    <p className="text-gray-600 text-sm lg:text-base mt-1">Ensure you have the following documents ready.</p>
                   </div>
                 </div>
 

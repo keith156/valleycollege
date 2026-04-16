@@ -8,12 +8,29 @@
 }
 
 @layer base {
+  html {
+    @apply antialiased scroll-smooth;
+    font-size: 16px;
+    
+    /* Responsive root scaling */
+    @media (min-width: 1024px) and (max-width: 1440px) {
+      font-size: 14px;
+    }
+    @media (min-width: 1441px) and (max-width: 1680px) {
+      font-size: 15px;
+    }
+  }
+
   body {
     @apply font-sans text-gray-700 bg-gray-50;
   }
   
   h1, h2, h3, h4, h5, h6 {
     @apply text-primary font-bold;
+  }
+
+  [id] {
+    scroll-margin-top: 180px;
   }
 }
 

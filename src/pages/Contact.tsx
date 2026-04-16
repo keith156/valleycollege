@@ -5,7 +5,7 @@ export default function Contact() {
   return (
     <div className="flex flex-col bg-gray-50 pb-20">
       {/* Page Header */}
-      <div className="relative bg-primary text-white py-24 lg:py-32 overflow-hidden">
+      <div className="relative bg-primary text-white py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
           <div className="w-full h-full bg-gray-900" />
           <img
@@ -20,8 +20,8 @@ export default function Contact() {
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-md">Contact Us</h1>
-            <p className="text-xl text-blue-100 max-w-2xl mx-auto drop-shadow-sm">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-md">Contact Us</h1>
+            <p className="text-lg lg:text-xl text-blue-100 max-w-2xl mx-auto drop-shadow-sm">
               We'd love to hear from you. Get in touch with Valley College.
             </p>
           </motion.div>
@@ -34,51 +34,51 @@ export default function Contact() {
           {/* Contact Information */}
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-8">
             <div>
-              <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
-              <p className="text-gray-600 text-lg leading-relaxed">
+              <h2 className="text-2xl lg:text-3xl font-bold mb-6">Get in Touch</h2>
+              <p className="text-gray-600 text-base lg:text-lg leading-relaxed">
                 Whether you have a question about admissions, academics, or anything else, our team is ready to answer all your questions.
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center mb-6">
-                  <MapPin size={24} />
+              <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <div className="w-10 h-10 bg-blue-50 text-primary rounded-xl flex items-center justify-center mb-6">
+                  <MapPin size={20} />
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2 text-lg">Our Location</h3>
+                <h3 className="font-bold text-gray-900 mb-2 text-base lg:text-lg">Our Location</h3>
                 <p className="text-gray-600">
                   Bushenyi District,<br />
                   Western Uganda
                 </p>
               </div>
 
-              <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center mb-6">
-                  <Phone size={24} />
+              <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <div className="w-10 h-10 bg-blue-50 text-primary rounded-xl flex items-center justify-center mb-6">
+                  <Phone size={20} />
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2 text-lg">Phone Numbers</h3>
+                <h3 className="font-bold text-gray-900 mb-2 text-base lg:text-lg">Phone Numbers</h3>
                 <p className="text-gray-600">
                   +256 (0) 123 456 789<br />
                   +256 (0) 987 654 321
                 </p>
               </div>
 
-              <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center mb-6">
-                  <Mail size={24} />
+              <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <div className="w-10 h-10 bg-blue-50 text-primary rounded-xl flex items-center justify-center mb-6">
+                  <Mail size={20} />
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2 text-lg">Email Address</h3>
+                <h3 className="font-bold text-gray-900 mb-2 text-base lg:text-lg">Email Address</h3>
                 <p className="text-gray-600">
                   info@valleycollege.edu.ug<br />
                   admissions@valleycollege.edu.ug
                 </p>
               </div>
 
-              <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center mb-6">
-                  <Clock size={24} />
+              <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <div className="w-10 h-10 bg-blue-50 text-primary rounded-xl flex items-center justify-center mb-6">
+                  <Clock size={20} />
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2 text-lg">Office Hours</h3>
+                <h3 className="font-bold text-gray-900 mb-2 text-base lg:text-lg">Office Hours</h3>
                 <p className="text-gray-600">
                   Mon - Fri: 8:00 AM - 5:00 PM<br />
                   Sat: 9:00 AM - 1:00 PM
@@ -88,8 +88,8 @@ export default function Contact() {
           </motion.div>
 
           {/* Contact Form */}
-          <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white p-10 lg:p-12 rounded-3xl shadow-xl border border-gray-100">
-            <h2 className="text-3xl font-bold mb-8">Send us a Message</h2>
+          <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white p-8 lg:p-10 rounded-3xl shadow-xl border border-gray-100">
+            <h2 className="text-2xl lg:text-3xl font-bold mb-8">Send us a Message</h2>
             <form className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>

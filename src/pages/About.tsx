@@ -20,7 +20,7 @@ export default function About() {
   return (
     <div className="flex flex-col bg-gray-50 pb-20">
       {/* Hero Section */}
-      <div className="relative bg-primary text-white py-24 lg:py-32 overflow-hidden">
+      <div className="relative bg-primary text-white py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
           <div className="w-full h-full bg-gray-900" />
           <motion.img
@@ -41,11 +41,11 @@ export default function About() {
             <span className="inline-block py-1 px-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-blue-100 text-sm font-bold tracking-widest uppercase mb-6">
               Our Story
             </span>
-            <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight drop-shadow-lg">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight drop-shadow-lg leading-tight">
               A Legacy of <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">Excellence</span>
             </h1>
-            <p className="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto drop-shadow-md font-medium leading-relaxed">
+            <p className="text-base md:text-lg lg:text-xl text-blue-100 max-w-3xl mx-auto drop-shadow-md font-medium leading-relaxed">
               Discover our history, our values, and what makes our institution a beacon of educational transformation.
             </p>
           </motion.div>
@@ -59,12 +59,12 @@ export default function About() {
           {/* Vision */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-            className="md:col-span-2 bg-white p-8 lg:p-10 rounded-[2rem] shadow-xl border border-gray-100 relative overflow-hidden group"
+            className="md:col-span-2 bg-white p-6 lg:p-8 rounded-[2rem] shadow-xl border border-gray-100 relative overflow-hidden group"
           >
             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-blue-100 transition-colors duration-700" />
             <Compass className="text-primary mb-6 relative z-10" size={48} />
-            <h2 className="text-3xl font-bold mb-4 relative z-10">Our Vision</h2>
-            <p className="text-gray-600 leading-relaxed text-xl relative z-10">
+            <h2 className="text-2xl lg:text-3xl font-bold mb-4 relative z-10">Our Vision</h2>
+            <p className="text-gray-600 leading-relaxed text-lg lg:text-xl relative z-10">
               To be a leading center of academic excellence and moral uprightness, producing well-rounded citizens capable of transforming society. We envision a future where every Valley College graduate is a leader in their chosen field, driven by integrity and a passion for continuous improvement.
             </p>
           </motion.div>
@@ -75,19 +75,19 @@ export default function About() {
             className="bg-primary text-white p-8 lg:p-10 rounded-[2rem] shadow-xl relative overflow-hidden"
           >
             <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-blue-900 to-transparent" />
-            <h2 className="text-3xl font-bold mb-8 relative z-10">Core Values</h2>
+            <h2 className="text-2xl lg:text-3xl font-bold mb-8 relative z-10">Core Values</h2>
             <ul className="space-y-6 relative z-10">
               <li className="flex items-center gap-4">
-                <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm"><ShieldCheck size={24} className="text-blue-200" /></div>
-                <span className="font-bold text-xl tracking-wide text-white">Discipline</span>
+                <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm"><ShieldCheck size={20} className="text-blue-200" /></div>
+                <span className="font-bold text-lg lg:text-xl tracking-wide text-white">Discipline</span>
               </li>
               <li className="flex items-center gap-4">
-                <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm"><Star size={24} className="text-blue-200" /></div>
-                <span className="font-bold text-xl tracking-wide text-white">Excellence</span>
+                <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm"><Star size={20} className="text-blue-200" /></div>
+                <span className="font-bold text-lg lg:text-xl tracking-wide text-white">Excellence</span>
               </li>
               <li className="flex items-center gap-4">
-                <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm"><Handshake size={24} className="text-blue-200" /></div>
-                <span className="font-bold text-xl tracking-wide text-white">Integrity</span>
+                <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm"><Handshake size={20} className="text-blue-200" /></div>
+                <span className="font-bold text-lg lg:text-xl tracking-wide text-white">Integrity</span>
               </li>
             </ul>
           </motion.div>
@@ -101,8 +101,8 @@ export default function About() {
               <Target className="text-primary" size={64} />
             </div>
             <div>
-              <h2 className="text-3xl font-bold mb-4">Our Mission</h2>
-              <p className="text-gray-600 leading-relaxed text-xl">
+              <h2 className="text-2xl lg:text-3xl font-bold mb-4">Our Mission</h2>
+              <p className="text-gray-600 leading-relaxed text-lg lg:text-xl">
                 To provide quality, affordable, and holistic education that equips students with practical skills, discipline, and a foundation for lifelong learning. We are committed to fostering an environment where students are encouraged to explore, innovate, and excel both academically and personally.
               </p>
             </div>
@@ -126,10 +126,10 @@ export default function About() {
               />
             </div>
             <div className="lg:w-3/5 p-8 lg:p-12 flex flex-col justify-center">
-              <Users className="text-primary mb-6" size={40} />
-              <h2 className="text-4xl font-bold mb-2">Mr. John Doe</h2>
-              <p className="text-primary font-bold mb-8 text-xl tracking-wide uppercase">Headteacher / Director</p>
-              <blockquote className="text-2xl text-gray-700 leading-relaxed italic mb-8 border-l-4 border-primary pl-6">
+              <Users className="text-primary mb-6" size={32} />
+              <h2 className="text-3xl lg:text-4xl font-bold mb-2">Mr. John Doe</h2>
+              <p className="text-primary font-bold mb-8 text-lg lg:text-xl tracking-wide uppercase">Headteacher / Director</p>
+              <blockquote className="text-xl md:text-2xl text-gray-700 leading-relaxed italic mb-8 border-l-4 border-primary pl-6">
                 "Our philosophy centers on holistic education, student empowerment, and creating an environment where every child feels valued and inspired to achieve their best."
               </blockquote>
               <p className="text-lg text-gray-600 leading-relaxed mb-8">
@@ -190,9 +190,9 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           className="mb-16"
         >
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Campus Life Gallery</h2>
-            <p className="text-xl text-gray-600">A glimpse into the vibrant life at Valley College</p>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Campus Life Gallery</h2>
+            <p className="text-lg lg:text-xl text-gray-600">A glimpse into the vibrant life at Valley College</p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {[

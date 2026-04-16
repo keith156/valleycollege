@@ -140,7 +140,7 @@ export default function Home() {
         </div>
         
         {/* Content Layer */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white pb-16 sm:pb-32">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white pb-8 sm:pb-32">
           <motion.div 
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -167,7 +167,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2, duration: 1 }}
-              className="text-lg md:text-2xl text-blue-100 max-w-3xl mb-12 font-medium leading-relaxed drop-shadow-md"
+              className="text-base md:text-xl lg:text-2xl text-blue-100 max-w-3xl mb-12 font-medium leading-relaxed drop-shadow-md px-4"
             >
               Empowering the next generation of leaders through <span className="text-white border-b-2 border-white/30">academic excellence</span>, <span className="text-white border-b-2 border-white/30">unwavering discipline</span>, and <span className="text-white border-b-2 border-white/30">strong core values</span>.
             </motion.p>
@@ -181,14 +181,14 @@ export default function Home() {
             >
               <Link
                 to="/admissions"
-                className="relative group bg-white text-[#001a40] px-10 py-5 rounded-xl font-black text-lg transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_40px_rgba(255,255,255,0.5)] hover:-translate-y-1 overflow-hidden"
+                className="relative group bg-white text-[#001a40] px-8 py-4 md:px-10 md:py-5 rounded-xl font-black text-base md:text-lg transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_40px_rgba(255,255,255,0.5)] hover:-translate-y-1 overflow-hidden"
               >
                 <span className="relative z-10">APPLY FOR 2026</span>
                 <div className="absolute inset-0 bg-blue-100 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" />
               </Link>
               <Link
                 to="/contact"
-                className="bg-transparent border-2 border-white/50 text-white hover:bg-white/10 hover:border-white px-10 py-5 rounded-xl font-black text-lg transition-all backdrop-blur-sm hover:-translate-y-1"
+                className="bg-transparent border-2 border-white/50 text-white hover:bg-white/10 hover:border-white px-8 py-4 md:px-10 md:py-5 rounded-xl font-black text-base md:text-lg transition-all backdrop-blur-sm hover:-translate-y-1"
               >
                 VISIT CAMPUS
               </Link>
@@ -212,7 +212,7 @@ export default function Home() {
       </div>
 
       {/* Message from Our Head Teacher */}
-      <section className="pt-20 pb-24 bg-white overflow-hidden relative z-20">
+      <section className="pt-20 pb-6 bg-white overflow-hidden relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             {/* Image Side */}
@@ -251,10 +251,10 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900 leading-tight">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 text-gray-900 leading-tight">
                 Message from Our <span className="text-primary block mt-2">Head Teacher</span>
               </h2>
-              <div className="space-y-6 text-lg text-gray-600 leading-relaxed mb-10 relative">
+              <div className="space-y-6 text-base md:text-lg text-gray-600 leading-relaxed mb-10 relative">
                 <div className="text-primary opacity-10 absolute -top-8 -left-4 text-8xl font-serif leading-none italic pointer-events-none">"</div>
                 <p className="relative z-10 italic">
                   Welcome to the Valley College SSS website. We thank God for the years of steady growth, achievement, and impact in the field of education.
@@ -275,19 +275,13 @@ export default function Home() {
       </section>
 
       {/* Quick Stats Counter - Premium Redesign */}
-      <section className="py-24 bg-white relative z-20 overflow-hidden">
-        {/* Background Decorative Elements */}
-        <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-50">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-100 rounded-full blur-[120px] mix-blend-multiply animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] mix-blend-multiply animate-pulse" style={{ animationDelay: '2s' }} />
-        </div>
-
+      <section className="py-4 bg-white relative z-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 sm:px-0">
             {[
-              { end: 20, label: "Years of Excellence", icon: TrophyIcon, color: "from-blue-600 to-indigo-700" },
-              { end: 27, label: "Subjects Offered", icon: BookOpenIcon, color: "from-primary to-blue-600" },
-              { end: 670, label: "Number of Students", icon: UsersIcon, color: "from-blue-800 to-primary" }
+              { end: 20, label: "Years of Excellence", icon: TrophyIcon, img: "/images/IMG_20260401_181902_661.jpg" },
+              { end: 27, label: "Subjects Offered", icon: BookOpenIcon, img: "/images/5.jpeg" },
+              { end: 670, label: "Number of Students", icon: UsersIcon, img: "/images/1.jpeg" }
             ].map((stat, idx) => (
               <motion.div 
                 key={idx}
@@ -295,20 +289,27 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="group relative"
+                className="relative group h-[300px] sm:h-[350px] overflow-hidden rounded-[2.5rem] shadow-2xl"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} rounded-3xl blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
-                <div className="relative bg-white p-10 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-gray-100 hover:border-primary/20 transition-all hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] hover:-translate-y-2 flex flex-col items-center text-center">
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${stat.color} flex items-center justify-center text-white mb-8 shadow-lg group-hover:scale-110 transition-transform`}>
-                    <stat.icon size={32} />
-                  </div>
-                  <div className="flex flex-col">
-                    <div className="text-6xl lg:text-7xl font-black text-gray-900 mb-2 flex items-center justify-center tracking-tighter">
-                      <CountUp end={stat.end} />
-                      <span className="text-primary text-4xl ml-1">+</span>
+                {/* Background Image */}
+                <img 
+                  src={stat.img} 
+                  alt={stat.label} 
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
+
+                {/* Glassmorphic Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center p-6">
+                  <div className="w-full max-w-[280px] bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 flex flex-col items-center text-center shadow-2xl">
+                    <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center text-white mb-6 border border-white/20">
+                      <stat.icon size={28} />
                     </div>
-                    <div className="h-1 w-12 bg-primary/20 mx-auto mb-4 rounded-full group-hover:w-20 transition-all" />
-                    <div className="text-sm font-bold text-gray-400 uppercase tracking-[0.3em]">{stat.label}</div>
+                    <div className="text-4xl lg:text-5xl xl:text-6xl font-black text-white mb-2 tracking-tighter drop-shadow-lg">
+                      <CountUp end={stat.end} />
+                      <span className="text-blue-300 text-3xl ml-1">+</span>
+                    </div>
+                    <div className="text-xs font-black text-blue-100 uppercase tracking-[0.3em]">{stat.label}</div>
                   </div>
                 </div>
               </motion.div>
@@ -318,11 +319,11 @@ export default function Home() {
       </section>
 
       {/* Growth Milestones Timeline (Transferred from About) */}
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section className="pt-6 pb-24 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
+          <div className="text-center mb-16 md:mb-20">
             <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Our History</span>
-            <h2 className="text-4xl md:text-6xl font-black text-gray-900">Growth Milestones</h2>
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-gray-900">Growth Milestones</h2>
           </div>
 
           <div className="relative max-w-5xl mx-auto">
@@ -352,7 +353,7 @@ export default function Home() {
                       transition={{ delay: 0.5, duration: 0.8 }}
                       className={`w-full md:w-1/2 pl-12 md:pl-0 ${idx % 2 === 0 ? 'md:text-left' : 'md:text-right'} z-10`}
                     >
-                      <div className="text-5xl md:text-7xl font-black text-gray-100 mb-2 -mt-6 md:-mt-10 tracking-tighter select-none">
+                      <div className="text-4xl md:text-6xl lg:text-8xl font-black text-primary/10 mb-2 -mt-6 md:-mt-14 tracking-tighter select-none drop-shadow-sm">
                         {milestone.year}
                       </div>
                       <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{milestone.title}</h3>

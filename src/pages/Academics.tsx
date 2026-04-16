@@ -21,7 +21,7 @@ export default function Academics() {
   return (
     <div className="flex flex-col bg-gray-50 pb-20">
       {/* Page Header */}
-      <div className="relative bg-primary text-white py-24 lg:py-32 overflow-hidden">
+      <div className="relative bg-primary text-white py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
           <div className="w-full h-full bg-gray-900" />
           <img
@@ -36,8 +36,8 @@ export default function Academics() {
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-md">Academics</h1>
-            <p className="text-xl text-blue-100 max-w-2xl mx-auto drop-shadow-sm">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-md">Academics</h1>
+            <p className="text-lg lg:text-xl text-blue-100 max-w-2xl mx-auto drop-shadow-sm">
               A rigorous curriculum designed to foster critical thinking, creativity, and lifelong learning.
             </p>
           </motion.div>
@@ -51,12 +51,12 @@ export default function Academics() {
           {/* Curriculum */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="lg:col-span-3 bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden relative group">
             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-blue-100 transition-colors duration-700" />
-            <div className="p-10 lg:p-12 relative z-10">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-blue-50 text-primary mb-8 shadow-sm border border-blue-100">
-                <BookOpen size={32} />
+            <div className="p-6 md:p-10 lg:p-12 relative z-10">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-50 text-primary mb-8 shadow-sm border border-blue-100">
+                <BookOpen size={28} />
               </div>
-              <h2 className="text-4xl font-bold mb-6 text-gray-900">Our Curriculum</h2>
-              <p className="text-gray-600 leading-relaxed mb-8 text-xl">
+              <h2 id="curriculum" className="text-3xl lg:text-4xl font-bold mb-6 text-gray-900">Our Curriculum</h2>
+              <p className="text-gray-600 leading-relaxed mb-8 text-lg lg:text-xl">
                 We strictly follow the <strong>Uganda National Curriculum</strong> for both O-Level and A-Level, ensuring our students are well-prepared for national examinations and future academic pursuits.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -82,12 +82,12 @@ export default function Academics() {
           {/* Academic Performance */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="lg:col-span-2 bg-primary text-white rounded-[2.5rem] shadow-xl relative overflow-hidden flex flex-col justify-center">
             <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-blue-900 to-transparent" />
-            <div className="p-10 lg:p-12 relative z-10">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 text-blue-200 mb-8 backdrop-blur-sm border border-white/20">
-                <GraduationCap size={32} />
+            <div className="p-6 md:p-10 lg:p-12 relative z-10">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/10 text-blue-200 mb-8 backdrop-blur-sm border border-white/20">
+                <GraduationCap size={28} />
               </div>
-              <h2 className="text-4xl font-bold text-white mb-4">Academic Excellence</h2>
-              <p className="text-blue-100 leading-relaxed mb-10 text-lg">
+              <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">Academic Excellence</h2>
+              <p className="text-blue-100 leading-relaxed mb-10 text-base lg:text-lg">
                 A proud tradition of top-tier performance in national UNEB examinations.
               </p>
               
@@ -128,11 +128,11 @@ export default function Academics() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-32 max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center gap-3 bg-green-100 text-green-800 px-6 py-2 rounded-full mb-4">
-              <Star size={24} className="fill-green-600 text-green-600" />
-              <h2 className="text-3xl font-bold">UACE Wall of Fame</h2>
-              <Star size={24} className="fill-green-600 text-green-600" />
+              <Star size={20} className="fill-green-600 text-green-600" />
+              <h2 id="fame" className="text-2xl md:text-3xl font-bold">UACE Wall of Fame</h2>
+              <Star size={20} className="fill-green-600 text-green-600" />
             </div>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">Celebrating our top performing students in the Uganda Advanced Certificate of Education (UACE) examinations over the years.</p>
+            <p className="text-gray-600 text-base lg:text-lg max-w-2xl mx-auto">Celebrating our top performing students in the Uganda Advanced Certificate of Education (UACE) examinations over the years.</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
@@ -190,8 +190,8 @@ export default function Academics() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-32">
           <div className="text-center mb-16">
             <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Departments</span>
-            <h2 className="text-4xl md:text-5xl font-black mb-6 text-gray-900">Subjects Offered</h2>
-            <p className="text-gray-600 text-xl max-w-3xl mx-auto">We offer a comprehensive range of subjects at both Ordinary and Advanced levels, catering to diverse student interests and career aspirations.</p>
+            <h2 id="subjects" className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-gray-900">Subjects Offered</h2>
+            <p className="text-gray-600 text-lg lg:text-xl max-w-3xl mx-auto">We offer a comprehensive range of subjects at both Ordinary and Advanced levels, catering to diverse student interests and career aspirations.</p>
           </div>
           
           <div className="space-y-16">
@@ -292,8 +292,8 @@ export default function Academics() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
           <div className="text-center mb-12">
             <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Beyond The Classroom</span>
-            <h2 className="text-4xl md:text-5xl font-black mb-6 text-gray-900">Co-curricular Activities</h2>
-            <p className="text-gray-600 text-xl max-w-3xl mx-auto">Education goes beyond the classroom. We encourage all students to participate in sports and clubs to develop leadership skills, teamwork, and physical well-being.</p>
+            <h2 id="activities" className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-gray-900">Co-curricular Activities</h2>
+            <p className="text-gray-600 text-lg lg:text-xl max-w-3xl mx-auto">Education goes beyond the classroom. We encourage all students to participate in sports and clubs to develop leadership skills, teamwork, and physical well-being.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -308,10 +308,10 @@ export default function Academics() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent" />
               <div className="absolute bottom-0 left-0 w-full p-10">
-                <div className="w-14 h-14 bg-blue-500 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg">
-                  <Trophy size={28} />
+                <div className="w-12 h-12 bg-blue-500 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                  <Trophy size={24} />
                 </div>
-                <h3 className="text-3xl font-bold text-white mb-4">Sports & Athletics</h3>
+                <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">Sports & Athletics</h3>
                 <div className="flex flex-wrap gap-3">
                   {["Football", "Netball", "Volleyball", "Athletics"].map(sport => (
                     <span key={sport} className="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-medium border border-white/10">{sport}</span>
@@ -331,10 +331,10 @@ export default function Academics() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />
               <div className="absolute bottom-0 left-0 w-full p-10">
-                <div className="w-14 h-14 bg-white text-primary rounded-2xl flex items-center justify-center mb-6 shadow-lg">
-                  <Users size={28} />
+                <div className="w-12 h-12 bg-white text-primary rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                  <Users size={24} />
                 </div>
-                <h3 className="text-3xl font-bold text-white mb-4">Clubs & Societies</h3>
+                <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">Clubs & Societies</h3>
                 <div className="flex flex-wrap gap-3">
                   {["Debate Club", "Science Club", "ICT & Innovation", "Writers' Club"].map(club => (
                     <span key={club} className="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-medium border border-white/10">{club}</span>
@@ -346,7 +346,7 @@ export default function Academics() {
         </motion.div>
 
         {/* School Programs for the Term (Transferred from Home) */}
-        <section className="py-24 bg-white rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden mt-16">
+        <section className="py-16 lg:py-24 bg-white rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden mt-16">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.05),transparent_50%)] pointer-events-none" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div 
@@ -356,8 +356,8 @@ export default function Academics() {
               className="text-center mb-16"
             >
               <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Upcoming Events</span>
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">School Programs for the Term</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">Stay updated with our key academic and co-curricular activities for this term.</p>
+              <h2 id="calendar" className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">School Programs for the Term</h2>
+              <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto">Stay updated with our key academic and co-curricular activities for this term.</p>
             </motion.div>
 
             <div className="max-w-4xl mx-auto">
