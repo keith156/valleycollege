@@ -100,19 +100,19 @@ export function Navbar() {
       {/* Main Navbar */}
       <div className="bg-[#b0c4de] w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
+          <div className="flex justify-between items-center h-24 md:h-28">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-4 group">
+            <Link to="/" className="flex items-center gap-4 md:gap-6 group">
               <img 
                 src="/logo.png" 
                 alt="Valley College Logo" 
-                className="h-16 w-auto object-contain group-hover:scale-105 transition-transform"
+                className="h-16 md:h-20 w-auto object-contain group-hover:scale-105 transition-transform"
               />
-              <div className="flex flex-col">
-                <span className="font-extrabold text-xl md:text-2xl text-[#001a40] leading-tight tracking-tighter">
+              <div className="flex flex-col justify-center">
+                <span className="font-extrabold text-xl md:text-3xl text-[#001a40] leading-none tracking-tighter mb-1">
                   VALLEY COLLEGE
                 </span>
-                <span className="font-bold text-sm md:text-base text-[#001a40]/80 leading-tight tracking-widest uppercase">
+                <span className="font-bold text-xs md:text-sm text-[#001a40]/80 leading-tight tracking-widest uppercase">
                   Secondary School
                 </span>
               </div>
@@ -130,7 +130,7 @@ export function Navbar() {
                   <Link
                     to={link.path}
                     className={cn(
-                      "flex items-center gap-1 text-xs lg:text-[13px] font-black tracking-widest transition-all hover:text-[#001a40] py-4 px-3 rounded-lg uppercase",
+                      "flex items-center gap-1 text-[13px] lg:text-sm font-black tracking-widest transition-all hover:text-[#001a40] py-4 px-4 rounded-xl uppercase",
                       location.pathname === link.path 
                         ? "text-[#001a40] bg-white/40 shadow-sm" 
                         : "text-[#001a40]/70 hover:bg-white/20"
@@ -176,7 +176,7 @@ export function Navbar() {
               ))}
               <Link
                 to="/admissions#process"
-                className="bg-[#001a40] hover:bg-[#002a60] text-white px-6 py-3 rounded-xl font-black text-xs tracking-widest transition-all shadow-lg active:scale-95 ml-4 uppercase"
+                className="bg-[#001a40] hover:bg-[#002a60] text-white px-8 py-3.5 rounded-xl font-black text-sm tracking-widest transition-all shadow-lg active:scale-95 ml-6 uppercase"
               >
                 APPLY NOW
               </Link>

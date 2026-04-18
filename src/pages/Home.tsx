@@ -5,7 +5,6 @@ import { Carousel } from '../components/Carousel';
 import { HolographicCard } from '../components/ui/holographic-card';
 import { TextOutline } from '../components/ui/text-outline';
 import React, { useEffect, useState } from 'react';
-import Lenis from '@studio-freight/lenis';
 import { ZoomParallax } from '../components/ui/zoom-parallax';
 
 interface CountUpProps {
@@ -57,20 +56,7 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [heroImages.length]);
 
-  useEffect(() => {
-    const lenis = new Lenis();
-    
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
 
-    requestAnimationFrame(raf);
-    
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
 
   const parallaxImages = [
     { src: '/images/IMG_20260401_181411_242.jpg', alt: 'School building' },
@@ -223,11 +209,11 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className="relative"
             >
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/5] w-[85%] mx-auto lg:mr-auto lg:ml-0">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl w-[85%] mx-auto lg:mr-auto lg:ml-0">
                 <img
                   src="/HM valley college.jpg"
                   alt="Ms. Kabezi Doreen - Head Teacher"
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-auto object-cover"
                   referrerPolicy="no-referrer"
                   loading="lazy"
                   decoding="async"
@@ -236,10 +222,10 @@ export default function Home() {
                     target.src = "/images/1.jpeg"; // Fallback image just in case
                   }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <div className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 text-white drop-shadow-md">
-                  <h3 className="text-2xl sm:text-3xl font-bold font-serif mb-1">Ms. Kabezi Doreen</h3>
-                  <p className="text-blue-200 font-bold tracking-wide uppercase text-sm">Head Teacher</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 text-white drop-shadow-lg">
+                  <h3 className="text-2xl sm:text-3xl font-bold font-serif mb-1 text-white">Ms. Kabezi Doreen</h3>
+                  <p className="text-blue-300 font-bold tracking-wide uppercase text-sm">Head Teacher</p>
                 </div>
               </div>
             </motion.div>
@@ -289,7 +275,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="relative group h-[300px] sm:h-[350px] overflow-hidden rounded-[2.5rem] shadow-2xl"
+                className="relative group h-[400px] sm:h-[450px] overflow-hidden rounded-[2.5rem] shadow-2xl"
               >
                 {/* Background Image */}
                 <img 
@@ -300,8 +286,8 @@ export default function Home() {
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
 
                 {/* Glassmorphic Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center p-6">
-                  <div className="w-full max-w-[280px] bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 flex flex-col items-center text-center shadow-2xl">
+                <div className="absolute inset-0 flex items-end justify-center p-6 pb-8">
+                  <div className="w-full max-w-[280px] bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 flex flex-col items-center text-center shadow-2xl">
                     <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center text-white mb-6 border border-white/20">
                       <stat.icon size={28} />
                     </div>
@@ -377,9 +363,9 @@ export default function Home() {
                       }}
                       viewport={{ once: true, margin: "-100px" }}
                       transition={{ 
-                        duration: 1.2, 
+                        duration: 2.5, 
                         ease: [0.22, 1, 0.36, 1], // Custom cubic-bezier for a premium slide
-                        opacity: { duration: 0.5 }
+                        opacity: { duration: 0.8 }
                       }}
                     >
                       <div className="rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white group relative">
@@ -409,10 +395,10 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-16 max-w-3xl mx-auto"
           >
             <h2 className="text-4xl font-bold mb-4">Why Choose Valley College?</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">We provide a holistic educational experience designed to nurture every aspect of student development.</p>
+            <p className="text-xl text-gray-600 text-balance">We provide a holistic educational experience designed to nurture every aspect of student development.</p>
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -442,7 +428,7 @@ export default function Home() {
       {/* Removed School Programs and News Updates from Home */}
 
       {/* Testimonials */}
-      <section className="py-24 bg-gray-50 overflow-hidden">
+      <section className="pt-8 pb-24 bg-gray-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}

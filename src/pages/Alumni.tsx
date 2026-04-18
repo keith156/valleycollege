@@ -17,7 +17,7 @@ const successfulAlumni = [
 ];
 
 const galleryImages = [
-  "VACO-4.png", "VACO-5.jpg", "VACO-6.jpg", "VACO-7.jpg", "VACO-8.jpg", "VACO-9.jpg",
+  "VACO-4.png", "VACO-5.jpg", "VACO-6.jpg", "VACO-7.jpg", "VACO-9.jpg",
   "VACO-10.jpg", "VACO-11.jpg", "VACO-12.jpg", "VACO-13.jpg", "VACO-14.jpg", "VACO-15.jpg",
   "VACO-16.jpg -FORMER HM.jpg", "VACO-17.jpg", "VACO-18.jpg", "VACO-19.jpg", "VACO-20.jpg",
   "VACO-21.jpg", "VACO-22.jpg", "VACO-23.jpg", "VACO-24.jpg",
@@ -32,19 +32,20 @@ export default function Alumni() {
         <div className="absolute inset-0">
           <div className="w-full h-full bg-gray-900" />
           <img
-            src="/images/IMG_20260401_183339_106.jpg"
+            src="/alumni gallery/VACO-11.jpg"
             alt="Alumni at Valley College"
             className="absolute inset-0 w-full h-full object-cover opacity-80"
             referrerPolicy="no-referrer"
             decoding="async"
             fetchPriority="high"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
+          <div className="absolute inset-0 bg-gray-900/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary from-10% via-primary/80 via-50% to-transparent" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-md">Alumni Network</h1>
-            <p className="text-lg lg:text-xl text-blue-100 max-w-2xl mx-auto drop-shadow-sm">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-md">Alumni Network</h1>
+            <p className="text-lg lg:text-xl text-white drop-shadow-sm">
               Connecting past students, celebrating success, and building a lifelong community.
             </p>
           </motion.div>
@@ -76,7 +77,7 @@ export default function Alumni() {
                 <p className="text-gray-600 text-sm lg:text-base font-medium">Global Alumni</p>
               </div>
               <img 
-                src="/images/IMG_20260401_183410_033.jpg" 
+                src="/alumni gallery/VACO-14.jpg" 
                 alt="Alumni gathering" 
                 className="rounded-3xl w-full h-48 lg:h-64 object-cover shadow-sm" 
                 referrerPolicy="no-referrer" 
@@ -86,7 +87,7 @@ export default function Alumni() {
             </div>
             <div className="space-y-4 lg:space-y-6 pt-8 lg:pt-12">
               <img 
-                src="/images/IMG_20260401_183426_903.jpg" 
+                src="/alumni gallery/VACO-15.jpg" 
                 alt="Graduation" 
                 className="rounded-3xl w-full h-48 lg:h-64 object-cover shadow-sm" 
                 referrerPolicy="no-referrer" 
@@ -287,16 +288,26 @@ export default function Alumni() {
             <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto">Capturing memories and milestones of our alumni community through the years.</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-            {galleryImages.map((image, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: (idx % 8) * 0.05 }}
-                className="group relative aspect-[4/3] rounded-[2rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 bg-gray-200"
-              >
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 auto-rows-[250px] md:auto-rows-[300px]">
+            {galleryImages.map((image, idx) => {
+              const isLarge = idx % 7 === 0;
+              const isTall = idx % 5 === 0 && !isLarge;
+              const isWide = idx % 6 === 0 && !isLarge && !isTall;
+              
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: (idx % 8) * 0.05 }}
+                  className={`group relative rounded-[2rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 bg-gray-200 ${
+                    isLarge ? 'md:col-span-2 md:row-span-2' : 
+                    isTall ? 'md:row-span-2' : 
+                    isWide ? 'md:col-span-2' : 
+                    'col-span-1 row-span-1'
+                  }`}
+                >
                 <img
                   src={`/alumni gallery/${image}`}
                   alt={`Alumni memory ${idx + 1}`}
@@ -306,13 +317,9 @@ export default function Alumni() {
                   decoding="async"
                 />
                 <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                <div className="absolute bottom-6 left-6 right-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                  <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-black text-primary uppercase tracking-wider text-center shadow-lg">
-                    Valley College Memory
-                  </div>
-                </div>
               </motion.div>
-            ))}
+              );
+            })}
           </div>
         </motion.section>
 

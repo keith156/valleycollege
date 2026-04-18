@@ -34,18 +34,19 @@ export default function About() {
             decoding="async"
             fetchPriority="high"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/10 to-gray-50" />
+          <div className="absolute inset-0 bg-gray-900/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary from-10% via-primary/80 via-50% to-transparent" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }}>
-            <span className="inline-block py-1 px-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-blue-100 text-sm font-bold tracking-widest uppercase mb-6">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left z-10">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} className="max-w-3xl">
+            <span className="inline-block py-1 px-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-bold tracking-widest uppercase mb-6">
               Our Story
             </span>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight drop-shadow-lg leading-tight">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight drop-shadow-lg leading-tight">
               A Legacy of <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">Excellence</span>
             </h1>
-            <p className="text-base md:text-lg lg:text-xl text-blue-100 max-w-3xl mx-auto drop-shadow-md font-medium leading-relaxed">
+            <p className="text-base md:text-lg lg:text-xl text-white drop-shadow-md font-medium leading-relaxed">
               Discover our history, our values, and what makes our institution a beacon of educational transformation.
             </p>
           </motion.div>
@@ -75,8 +76,11 @@ export default function About() {
             className="bg-primary text-white p-8 lg:p-10 rounded-[2rem] shadow-xl relative overflow-hidden"
           >
             <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-blue-900 to-transparent" />
-            <h2 className="text-2xl lg:text-3xl font-bold mb-8 relative z-10">Core Values</h2>
-            <ul className="space-y-6 relative z-10">
+            <div className="relative z-10 mb-8">
+              <h2 className="text-2xl lg:text-3xl font-bold text-white">Core Values</h2>
+              <div className="w-12 h-1 bg-blue-400 mt-4 rounded-full"></div>
+            </div>
+            <ul className="space-y-6 relative z-10 mt-6">
               <li className="flex items-center gap-4">
                 <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm"><ShieldCheck size={20} className="text-blue-200" /></div>
                 <span className="font-bold text-lg lg:text-xl tracking-wide text-white">Discipline</span>
@@ -109,39 +113,86 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Leadership Section */}
+        {/* Governance Structure Section */}
         <motion.section 
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="bg-white rounded-[3rem] shadow-xl border border-gray-100 overflow-hidden mb-32"
+          className="mb-32"
         >
-          <div className="flex flex-col lg:flex-row">
-            <div className="lg:w-2/5 relative h-80 lg:h-auto">
-              <img 
-                src="/images/IMG_20260401_182109_855.jpg" 
-                alt="Headteacher" 
-                className="absolute inset-0 w-full h-full object-cover"
-                referrerPolicy="no-referrer"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div className="lg:w-3/5 p-8 lg:p-12 flex flex-col justify-center">
-              <Users className="text-primary mb-6" size={32} />
-              <h2 className="text-3xl lg:text-4xl font-bold mb-2">Mr. John Doe</h2>
-              <p className="text-primary font-bold mb-8 text-lg lg:text-xl tracking-wide uppercase">Headteacher / Director</p>
-              <blockquote className="text-xl md:text-2xl text-gray-700 leading-relaxed italic mb-8 border-l-4 border-primary pl-6">
-                "Our philosophy centers on holistic education, student empowerment, and creating an environment where every child feels valued and inspired to achieve their best."
-              </blockquote>
-              <p className="text-lg text-gray-600 leading-relaxed mb-8">
-                With over two decades of experience in educational leadership, Mr. Doe has been instrumental in driving Valley College towards academic excellence. Under his guidance, the school has expanded its facilities, forged key partnerships, and consistently ranked among the top institutions in the region.
-              </p>
-              <div className="pt-8 border-t border-gray-100">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Board of Directors</h3>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  Our board comprises distinguished professionals, community leaders, and educators dedicated to the strategic growth and governance of the institution. They work tirelessly to ensure we remain true to our founding principles.
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Governance Structure</h2>
+            <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto">Our institution is guided by visionary leadership committed to excellence in education.</p>
+          </div>
+
+          <div className="flex flex-col gap-8 items-center">
+            {/* Mukaira Foundation */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              className="bg-primary text-white p-8 md:p-10 rounded-[2rem] shadow-xl w-full max-w-3xl text-center relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+              <Building2 className="mx-auto mb-4 text-blue-200" size={40} />
+              <h3 className="text-xl font-bold text-blue-200 mb-2 tracking-widest uppercase">Founding Body</h3>
+              <h2 className="text-3xl md:text-4xl font-black text-white mb-4">Mukaira Foundation Ltd</h2>
+              <p className="text-blue-100 text-lg">The foundational pillar providing strategic direction and resources to ensure Valley College remains a beacon of excellence.</p>
+            </motion.div>
+
+            {/* Down Arrow */}
+            <div className="w-1 h-8 bg-gray-300 rounded-full" />
+
+            {/* Board of Governors */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+              className="bg-white p-8 md:p-10 rounded-[2rem] shadow-xl border border-gray-100 w-full max-w-4xl"
+            >
+              <div className="text-center mb-8">
+                <Users className="mx-auto mb-4 text-primary" size={40} />
+                <h2 className="text-2xl md:text-3xl font-bold">Board of Governors</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100 text-center">
+                  <p className="text-sm font-bold text-primary uppercase tracking-wider mb-2">Chairman</p>
+                  <h4 className="text-xl font-bold text-gray-900">Dr. Emmanuel K.</h4>
+                </div>
+                <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100 text-center">
+                  <p className="text-sm font-bold text-primary uppercase tracking-wider mb-2">Vice Chairperson</p>
+                  <h4 className="text-xl font-bold text-gray-900">Mrs. Sarah N.</h4>
+                </div>
+                <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100 text-center md:col-span-2 max-w-lg mx-auto w-full">
+                  <p className="text-sm font-bold text-primary uppercase tracking-wider mb-2">Board Members</p>
+                  <p className="text-lg font-medium text-gray-700">Mr. Michael B. &bull; Dr. Grace A. &bull; Mr. David O.</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Down Arrow */}
+            <div className="w-1 h-8 bg-gray-300 rounded-full" />
+
+            {/* Headteacher */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+              className="bg-white rounded-[2rem] shadow-xl border border-gray-100 overflow-hidden w-full max-w-4xl flex flex-col md:flex-row"
+            >
+              <div className="md:w-2/5 relative h-80 md:h-auto bg-gray-100">
+                <img 
+                  src="/HM valley college.jpg" 
+                  alt="Headteacher" 
+                  className="absolute inset-0 w-full h-full object-contain"
+                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div className="md:w-3/5 p-8 md:p-10 flex flex-col justify-center">
+                <p className="text-sm font-bold text-primary uppercase tracking-wider mb-2">Headteacher</p>
+                <h3 className="text-2xl md:text-3xl font-bold mb-4">Ms. Kabezi Doreen</h3>
+                <blockquote className="text-lg text-gray-700 leading-relaxed italic border-l-4 border-primary pl-4 mb-6">
+                  "Our philosophy centers on holistic education, student empowerment, and creating an environment where every child feels valued and inspired to achieve their best."
+                </blockquote>
+                <p className="text-gray-600 leading-relaxed">
+                  With extensive experience in educational leadership, Ms. Kabezi Doreen drives Valley College towards academic excellence. Under her guidance, the school consistently ranks among the top institutions in the region.
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </motion.section>
 

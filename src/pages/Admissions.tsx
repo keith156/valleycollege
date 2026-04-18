@@ -20,12 +20,13 @@ export default function Admissions() {
             decoding="async"
             fetchPriority="high"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
+          <div className="absolute inset-0 bg-gray-900/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary from-10% via-primary/80 via-50% to-transparent" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-md">Admissions</h1>
-            <p className="text-lg lg:text-xl text-blue-100 max-w-2xl mx-auto drop-shadow-sm">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-md">Admissions</h1>
+            <p className="text-lg lg:text-xl text-white drop-shadow-sm">
               Join the Valley College community. Choose the application method that works best for you.
             </p>
           </motion.div>
