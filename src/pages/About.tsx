@@ -1,4 +1,4 @@
-import { Building2, Target, History, Users, BookOpen, Handshake, MapPin, Image as ImageIcon, Compass, Star, ShieldCheck, ArrowRight, Clock } from 'lucide-react';
+import { Building2, Target, History, Users, BookOpen, Handshake, MapPin, Image as ImageIcon, Compass, Star, ShieldCheck, ArrowRight, Clock, User, GraduationCap, ClipboardList } from 'lucide-react';
 import { motion } from 'motion/react';
 import { ZoomParallax } from '../components/ui/zoom-parallax';
 
@@ -14,6 +14,97 @@ const parallaxImages = [
   { src: '/images/IMG_20260401_184335_095.jpg', alt: 'Computer lab' },
   { src: '/images/10.jpeg', alt: 'Cafeteria' },
   { src: '/images/11.jpeg', alt: 'School event' },
+];
+
+const governanceData = [
+  {
+    title: "Mukaira Foundation",
+    desc: "Provides overall ownership and strategic direction of the school, ensuring its vision, values, and long-term sustainability are upheld.",
+    pillClass: "bg-[#1a2860] border-[#2d3e80]",
+    dotColor: "#2d3e80",
+    lineColor: "#27a648",
+    svg: (
+      <svg className="w-9 h-9 mb-1 fill-white" viewBox="0 0 40 40">
+        <rect x="4" y="18" width="32" height="18" rx="2"/>
+        <rect x="10" y="8" width="20" height="12" rx="2"/>
+        <rect x="16" y="2" width="8" height="8" rx="1"/>
+        <rect x="8" y="22" width="4" height="8"/>
+        <rect x="18" y="22" width="4" height="8"/>
+        <rect x="28" y="22" width="4" height="8"/>
+      </svg>
+    )
+  },
+  {
+    title: "School Director",
+    desc: "Oversees the general management of the school, implements policies from the foundation, and ensures smooth coordination between governance and operations.",
+    pillClass: "bg-[#1e8a3c] border-[#27a648]",
+    dotColor: "#27a648",
+    lineColor: "#2580e0",
+    svg: (
+      <svg className="w-9 h-9 mb-1 fill-white" viewBox="0 0 40 40">
+        <circle cx="20" cy="12" r="7"/>
+        <path d="M6 34c0-7.7 6.3-14 14-14s14 6.3 14 14H6z"/>
+      </svg>
+    )
+  },
+  {
+    title: "Board of Governors",
+    desc: "Offers policy guidance, oversight, and accountability, ensuring the school maintains high standards in academics, discipline, and administration.",
+    pillClass: "bg-[#1a6ac7] border-[#2580e0]",
+    dotColor: "#2580e0",
+    lineColor: "#7050b8",
+    svg: (
+      <svg className="w-9 h-9 mb-1 fill-white" viewBox="0 0 40 40">
+        <circle cx="12" cy="13" r="5"/>
+        <circle cx="28" cy="13" r="5"/>
+        <circle cx="20" cy="11" r="6"/>
+        <path d="M2 32c0-5.5 4.5-10 10-10h1c1.2 0 2.3.2 3.4.6"/>
+        <path d="M38 32c0-5.5-4.5-10-10-10h-1a10 10 0 00-3.4.6"/>
+        <path d="M10 32c0-5.5 4.5-10 10-10s10 4.5 10 10H10z"/>
+      </svg>
+    )
+  },
+  {
+    title: "Head Teacher",
+    desc: "Leads the day-to-day academic and administrative functions of the school, supervising staff and ensuring effective teaching, learning, and student welfare.",
+    pillClass: "bg-[#5c3d9e] border-[#7050b8]",
+    dotColor: "#7050b8",
+    lineColor: "#f07020",
+    svg: (
+      <svg className="w-9 h-9 mb-1 fill-white" viewBox="0 0 40 40">
+        <rect x="5" y="8" width="14" height="20" rx="2"/>
+        <rect x="21" y="8" width="14" height="20" rx="2"/>
+        <path d="M5 28h30v3H5z"/>
+        <line x1="8" y1="13" x2="16" y2="13" stroke="#5c3d9e" strokeWidth="1.5"/>
+        <line x1="8" y1="17" x2="16" y2="17" stroke="#5c3d9e" strokeWidth="1.5"/>
+        <line x1="8" y1="21" x2="16" y2="21" stroke="#5c3d9e" strokeWidth="1.5"/>
+        <line x1="23" y1="13" x2="31" y2="13" stroke="#5c3d9e" strokeWidth="1.5"/>
+        <line x1="23" y1="17" x2="31" y2="17" stroke="#5c3d9e" strokeWidth="1.5"/>
+        <line x1="23" y1="21" x2="31" y2="21" stroke="#5c3d9e" strokeWidth="1.5"/>
+      </svg>
+    )
+  },
+  {
+    title: "Administrators",
+    desc: "Handle daily operational tasks including admissions, finance, records, and support services to ensure the efficient and smooth running of the school.",
+    pillClass: "bg-[#e06010] border-[#f07020]",
+    dotColor: "#f07020",
+    lineColor: "transparent",
+    svg: (
+      <svg className="w-9 h-9 mb-1 fill-white" viewBox="0 0 40 40">
+        <rect x="12" y="2" width="16" height="5" rx="2"/>
+        <rect x="8" y="5" width="24" height="33" rx="2"/>
+        <rect x="12" y="11" width="16" height="2.5" rx="1" fill="#e06010"/>
+        <rect x="12" y="16" width="16" height="2.5" rx="1" fill="#e06010"/>
+        <rect x="12" y="21" width="16" height="2.5" rx="1" fill="#e06010"/>
+        <rect x="12" y="26" width="10" height="2.5" rx="1" fill="#e06010"/>
+        <circle cx="11" cy="12.25" r="1.5" fill="white"/>
+        <circle cx="11" cy="17.25" r="1.5" fill="white"/>
+        <circle cx="11" cy="22.25" r="1.5" fill="white"/>
+        <circle cx="11" cy="27.25" r="1.5" fill="white"/>
+      </svg>
+    )
+  }
 ];
 
 export default function About() {
@@ -113,96 +204,79 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Governance Structure Section */}
-        <motion.section 
-          initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="mb-32"
-        >
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Governance Structure</h2>
-            <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto">Our institution is guided by visionary leadership committed to excellence in education.</p>
+        {/* New Governance Structure Section */}
+        <section id="governance" className="mb-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16 md:mb-24">
+            <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight">Governance Structure</h2>
+            <div className="h-2 w-24 bg-primary mx-auto rounded-full" />
           </div>
 
-          <div className="flex flex-col gap-8 items-center">
-            {/* Mukaira Foundation */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              className="bg-primary text-white p-8 md:p-10 rounded-[2rem] shadow-xl w-full max-w-3xl text-center relative overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-              <Building2 className="mx-auto mb-4 text-blue-200" size={40} />
-              <h3 className="text-xl font-bold text-blue-200 mb-2 tracking-widest uppercase">Founding Body</h3>
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-4">Mukaira Foundation Ltd</h2>
-              <p className="text-blue-100 text-lg">The foundational pillar providing strategic direction and resources to ensure Valley College remains a beacon of excellence.</p>
-            </motion.div>
+          <div className="flex flex-col items-center py-10 px-0 md:px-8 max-w-[900px] mx-auto overflow-hidden">
+            {governanceData.map((item, idx) => (
+              <div key={idx} className="w-full flex flex-col items-center">
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="flex flex-row items-center w-full gap-4 md:gap-12"
+                >
+                  {/* Left Column: Pill (Side-by-side on all screens) */}
+                  <div className="flex-none w-[140px] sm:w-[200px] md:w-[310px] flex flex-col items-center">
+                    <div className={`w-full rounded-[2rem] md:rounded-[3rem] flex flex-col items-center justify-center p-3 md:p-8 shadow-xl min-h-[70px] md:min-h-[110px] border-2 md:border-4 ${item.pillClass} group hover:scale-105 transition-transform duration-500`}>
+                      <div className="group-hover:scale-110 transition-transform duration-500 scale-75 md:scale-100">
+                        {item.svg}
+                      </div>
+                      <div className="text-white text-[10px] sm:text-xs md:text-lg font-black tracking-widest text-center uppercase leading-tight mt-1">
+                        {item.title}
+                      </div>
+                    </div>
+                  </div>
 
-            {/* Down Arrow */}
-            <div className="w-1 h-8 bg-gray-300 rounded-full" />
+                  {/* Right Column: Description (Horizontal) */}
+                  <div className="flex-1 text-[12px] sm:text-sm md:text-lg leading-relaxed text-gray-700 text-left py-2">
+                    {item.desc}
+                  </div>
+                </motion.div>
 
-            {/* Board of Governors */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-              className="bg-white p-8 md:p-10 rounded-[2rem] shadow-xl border border-gray-100 w-full max-w-4xl"
-            >
-              <div className="text-center mb-8">
-                <Users className="mx-auto mb-4 text-primary" size={40} />
-                <h2 className="text-2xl md:text-3xl font-bold">Board of Governors</h2>
+                {/* Connector Logic */}
+                {idx < governanceData.length - 1 && (
+                  <div className="w-full h-8 md:h-16 flex items-stretch">
+                    <div className="flex-none w-[140px] sm:w-[200px] md:w-[310px] flex justify-center">
+                      <div className="flex flex-col items-center w-1 relative">
+                        <div 
+                          className="w-3 h-3 md:w-5 md:h-5 rounded-full border-[2.5px] md:border-[4px] border-solid bg-white absolute top-0 -translate-y-1/2 z-20" 
+                          style={{ borderColor: item.dotColor }} 
+                        />
+                        <div 
+                          className="w-[2.5px] md:w-[4px] h-full" 
+                          style={{ backgroundColor: item.lineColor }} 
+                        />
+                        <div 
+                          className="w-3 h-3 md:w-5 md:h-5 rounded-full border-[2.5px] md:border-[4px] border-solid bg-white absolute bottom-0 translate-y-1/2 z-20" 
+                          style={{ borderColor: governanceData[idx+1].dotColor }} 
+                        />
+                      </div>
+                    </div>
+                    <div className="flex-1" />
+                  </div>
+                )}
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100 text-center">
-                  <p className="text-sm font-bold text-primary uppercase tracking-wider mb-2">Chairman</p>
-                  <h4 className="text-xl font-bold text-gray-900">Dr. Emmanuel K.</h4>
-                </div>
-                <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100 text-center">
-                  <p className="text-sm font-bold text-primary uppercase tracking-wider mb-2">Vice Chairperson</p>
-                  <h4 className="text-xl font-bold text-gray-900">Mrs. Sarah N.</h4>
-                </div>
-                <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100 text-center md:col-span-2 max-w-lg mx-auto w-full">
-                  <p className="text-sm font-bold text-primary uppercase tracking-wider mb-2">Board Members</p>
-                  <p className="text-lg font-medium text-gray-700">Mr. Michael B. &bull; Dr. Grace A. &bull; Mr. David O.</p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Down Arrow */}
-            <div className="w-1 h-8 bg-gray-300 rounded-full" />
-
-            {/* Headteacher */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-              className="bg-white rounded-[2rem] shadow-xl border border-gray-100 overflow-hidden w-full max-w-4xl flex flex-col md:flex-row"
-            >
-              <div className="md:w-2/5 relative h-80 md:h-auto bg-gray-100">
-                <img 
-                  src="/HM valley college.jpg" 
-                  alt="Headteacher" 
-                  className="absolute inset-0 w-full h-full object-contain"
-                  referrerPolicy="no-referrer"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div className="md:w-3/5 p-8 md:p-10 flex flex-col justify-center">
-                <p className="text-sm font-bold text-primary uppercase tracking-wider mb-2">Headteacher</p>
-                <h3 className="text-2xl md:text-3xl font-bold mb-4">Ms. Kabezi Doreen</h3>
-                <blockquote className="text-lg text-gray-700 leading-relaxed italic border-l-4 border-primary pl-4 mb-6">
-                  "Our philosophy centers on holistic education, student empowerment, and creating an environment where every child feels valued and inspired to achieve their best."
-                </blockquote>
-                <p className="text-gray-600 leading-relaxed">
-                  With extensive experience in educational leadership, Ms. Kabezi Doreen drives Valley College towards academic excellence. Under her guidance, the school consistently ranks among the top institutions in the region.
-                </p>
-              </div>
-            </motion.div>
+            ))}
           </div>
-        </motion.section>
+        </section>
 
         {/* Facilities & Overview Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-32">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white p-8 rounded-[2rem] shadow-lg border border-gray-100">
             <MapPin className="text-primary mb-6" size={40} />
             <h3 className="text-2xl font-bold mb-4">Location & Ownership</h3>
-            <p className="text-lg text-gray-600 mb-4">Located in the serene environment of <strong className="text-gray-900">Bushenyi District, Uganda</strong>.</p>
-            <p className="text-lg text-gray-600">Proudly owned and operated by the <strong className="text-gray-900">Mukaira Foundation Ltd</strong>.</p>
+            <p className="text-lg text-gray-600 mb-6 leading-relaxed">Located in the serene and academic-friendly environment of <strong className="text-gray-900">Bushenyi District</strong>, our campus provides the perfect atmosphere for focused learning.</p>
+            <ul className="space-y-3 text-gray-600 mb-6">
+              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-primary rounded-full" /> Bushenyi Municipality, Western Uganda</li>
+              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-primary rounded-full" /> Easy access via Mbarara-Kasese Highway</li>
+              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-primary rounded-full" /> Proudly owned by Mukaira Foundation Ltd</li>
+            </ul>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-white p-8 rounded-[2rem] shadow-lg border border-gray-100">
@@ -233,64 +307,86 @@ export default function About() {
                 <span>Access to shared advanced facilities and resources</span>
               </li>
             </ul>
+            <a 
+              href="https://vust.ac.ug/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all group"
+            >
+              Visit University Website 
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            </a>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Campus Life Section (Full Width) */}
+      <div className="w-full bg-white pb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-3 block">Perspective</span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-4">Campus Life</h2>
+            <div className="h-1.5 w-20 bg-primary mx-auto rounded-full" />
           </motion.div>
         </div>
 
-        {/* Campus Life Gallery */}
+        {/* Zoom Parallax Gallery (Full Width) */}
+        <section className="bg-white text-gray-900 relative">
+          <ZoomParallax images={parallaxImages} />
+        </section>
+
+        {/* Campus Life Gallery (Continuous) */}
         <motion.section 
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="mb-16"
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+          className="pb-32 px-4 md:px-8"
         >
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Campus Life Gallery</h2>
-            <p className="text-lg lg:text-xl text-gray-600">A glimpse into the vibrant life at Valley College</p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 auto-rows-[250px] md:auto-rows-[300px] max-w-[1600px] mx-auto">
             {[
-              "1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", 
-              "6.jpeg", "7.jpeg", "8.jpeg", "9.jpeg", "10.jpeg", 
-              "11.jpeg", "12.jpeg", "13.jpeg", "14.jpeg", "15.jpeg", 
+              "IMG_20260401_181411_242.jpg", 
+              "2.jpeg", "4.jpeg", "6.jpeg", "8.jpeg", "9.jpeg", 
+              "12.jpeg", "13.jpeg", "14.jpeg", "15.jpeg", 
               "16.jpeg", "17.jpeg", "18.jpeg", "19.jpeg", "20.jpeg", 
-              "21.jpeg", "23.jpeg", "24.jpeg", "IMG_20260401_181411_242.jpg", 
-              "IMG_20260401_183339_106.jpg", "IMG_20260401_184319_761.jpg", 
-              "IMG_20260401_184701_943.jpg", "IMG_20260401_181848_193.jpg", 
-              "IMG_20260401_181902_661.jpg", "IMG_20260401_184018_232.jpg"
-            ].map((img, idx) => (
+              "21.jpeg", "23.jpeg", "24.jpeg", 
+              "IMG_20260401_184319_761.jpg", "IMG_20260401_184701_943.jpg", 
+              "IMG_20260401_181848_193.jpg", "IMG_20260401_184018_232.jpg"
+            ].map((img, idx) => {
+              const isLarge = idx % 7 === 0;
+              const isTall = idx % 5 === 0 && !isLarge;
+              const isWide = idx % 6 === 0 && !isLarge && !isTall;
+              
+              return (
               <motion.div 
                 key={idx}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 }}
-                className="aspect-square rounded-2xl overflow-hidden bg-gray-200 relative group shadow-sm border border-gray-100"
+                transition={{ delay: (idx % 8) * 0.05 }}
+                className={`group relative rounded-[2rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 bg-gray-200 ${
+                  isLarge ? 'md:col-span-2 md:row-span-2' : 
+                  isTall ? 'md:row-span-2' : 
+                  isWide ? 'md:col-span-2' : 
+                  'col-span-1 row-span-1'
+                }`}
               >
                 <img 
                   src={`/images/${img}`} 
                   alt={`Campus Life ${idx + 1}`}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   referrerPolicy="no-referrer"
                   loading="lazy"
                   decoding="async"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
+                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               </motion.div>
-            ))}
+            );
+          })}
           </div>
         </motion.section>
-
-        {/* Zoom Parallax Gallery (Transferred from Home) */}
-        <section className="bg-white text-gray-900 relative mt-24">
-          <div className="relative flex h-[30vh] items-center justify-center overflow-hidden">
-            <div className="text-center z-10">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">Immersive View</h2>
-              <p className="text-xl text-gray-500">Experience our campus environment</p>
-            </div>
-          </div>
-          <ZoomParallax images={parallaxImages} />
-          <div className="h-[20vh] bg-white" />
-        </section>
-
+        </div>
       </div>
-    </div>
-  );
+    );
 }

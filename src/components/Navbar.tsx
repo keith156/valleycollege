@@ -79,7 +79,7 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full shadow-sm font-sans">
       {/* Top Banner */}
       <div className="bg-[#001a40] text-white py-1.5 px-4 sm:px-6 lg:px-8 border-b border-white/10 overflow-hidden text-center">
-        <div className="max-w-7xl mx-auto flex justify-center items-center">
+        <div className="max-w-[1440px] mx-auto flex justify-center items-center">
           <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-[10px] md:text-[11px] font-bold tracking-wider uppercase">
             <a href="mailto:info@valleycollege.sc.ug" className="flex items-center gap-1.5 hover:text-blue-200 transition-colors whitespace-nowrap">
               <Mail size={12} className="text-blue-300" />
@@ -99,7 +99,7 @@ export function Navbar() {
 
       {/* Main Navbar */}
       <div className="bg-[#b0c4de] w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12">
           <div className="flex justify-between items-center h-24 md:h-28">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-4 md:gap-6 group">

@@ -74,9 +74,9 @@ export default function Home() {
 
   const milestones = [
     { 
-      year: "2005", 
+      year: "1997", 
       title: "Foundation", 
-      desc: "Inauguration of the main academic block and first student enrollment.",
+      desc: "This photo captures the first cohort of students of Valley College Secondary School—the pioneers who laid the foundation of excellence. Admitted in 1997, when the school opened with about 48 A-Level students, they embraced the vision of a young institution with determination, discipline, and resilience, setting the standards that continue to define the school today.",
       img: "/images/12.jpeg"
     },
     { 
@@ -209,11 +209,11 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className="relative"
             >
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl w-[85%] mx-auto lg:mr-auto lg:ml-0">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl w-full lg:mr-auto lg:ml-0 h-[400px] md:h-[500px] lg:h-[600px]">
                 <img
                   src="/HM valley college.jpg"
                   alt="Ms. Kabezi Doreen - Head Teacher"
-                  className="w-full h-auto object-cover"
+                  className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                   loading="lazy"
                   decoding="async"
@@ -265,9 +265,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 sm:px-0">
             {[
-              { end: 20, label: "Years of Excellence", icon: TrophyIcon, img: "/images/IMG_20260401_181902_661.jpg" },
-              { end: 27, label: "Subjects Offered", icon: BookOpenIcon, img: "/images/5.jpeg" },
-              { end: 670, label: "Number of Students", icon: UsersIcon, img: "/images/1.jpeg" }
+              { end: 29, label: "Years of Excellence", icon: TrophyIcon, img: "/images/IMG_20260401_184109_022.jpg" },
+              { end: 27, label: "Subjects Offered", icon: BookOpenIcon, img: "/images/3.jpeg" },
+              { end: 650, label: "Number of Students", icon: UsersIcon, img: "/images/10.jpeg" }
             ].map((stat, idx) => (
               <motion.div 
                 key={idx}
@@ -322,7 +322,7 @@ export default function Home() {
                   <motion.div 
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, margin: "-100px" }}
+                    viewport={{ once: false, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
                     className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-16 ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
                   >
@@ -335,11 +335,11 @@ export default function Home() {
                     <motion.div 
                       initial={{ opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
+                      viewport={{ once: false }}
                       transition={{ delay: 0.5, duration: 0.8 }}
                       className={`w-full md:w-1/2 pl-12 md:pl-0 ${idx % 2 === 0 ? 'md:text-left' : 'md:text-right'} z-10`}
                     >
-                      <div className="text-4xl md:text-6xl lg:text-8xl font-black text-primary/10 mb-2 -mt-6 md:-mt-14 tracking-tighter select-none drop-shadow-sm">
+                      <div className="text-4xl md:text-6xl lg:text-8xl font-black text-primary mb-2 -mt-6 md:-mt-14 tracking-tighter select-none drop-shadow-sm opacity-20">
                         {milestone.year}
                       </div>
                       <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{milestone.title}</h3>
@@ -361,7 +361,7 @@ export default function Home() {
                         opacity: 1,
                         scale: 1
                       }}
-                      viewport={{ once: true, margin: "-100px" }}
+                      viewport={{ once: false, margin: "-100px" }}
                       transition={{ 
                         duration: 2.5, 
                         ease: [0.22, 1, 0.36, 1], // Custom cubic-bezier for a premium slide
@@ -395,10 +395,10 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16 max-w-3xl mx-auto"
+            className="text-center mb-16 max-w-5xl mx-auto"
           >
             <h2 className="text-4xl font-bold mb-4">Why Choose Valley College?</h2>
-            <p className="text-xl text-gray-600 text-balance">We provide a holistic educational experience designed to nurture every aspect of student development.</p>
+            <p className="text-xl text-gray-600 max-w-none">We provide a holistic educational experience designed to nurture every aspect of student development.</p>
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

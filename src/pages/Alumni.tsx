@@ -1,5 +1,6 @@
-import { Users, Briefcase, GraduationCap, HeartHandshake, MessageCircle, ExternalLink, Globe, Award, Image as ImageIcon, Trophy } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Users, Briefcase, GraduationCap, HeartHandshake, MessageCircle, ExternalLink, Globe, Award, Image as ImageIcon, Trophy, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { useState, useCallback, useEffect } from 'react';
 
 const successfulAlumni = [
   { name: "Dr. Emmanuel K.", role: "Medical Officer, Mulago Hospital", img: "/images/16.jpeg" },
@@ -17,14 +18,60 @@ const successfulAlumni = [
 ];
 
 const galleryImages = [
-  "VACO-4.png", "VACO-5.jpg", "VACO-6.jpg", "VACO-7.jpg", "VACO-9.jpg",
-  "VACO-10.jpg", "VACO-11.jpg", "VACO-12.jpg", "VACO-13.jpg", "VACO-14.jpg", "VACO-15.jpg",
+  "VACO-9.jpg", "VACO-10.jpg", "VACO-11.jpg", "VACO-12.jpg", "VACO-13.jpg", "VACO-14.jpg", "VACO-15.jpg",
   "VACO-16.jpg -FORMER HM.jpg", "VACO-17.jpg", "VACO-18.jpg", "VACO-19.jpg", "VACO-20.jpg",
   "VACO-21.jpg", "VACO-22.jpg", "VACO-23.jpg", "VACO-24.jpg",
-  "FCocDmcWUA4QFd2.jpg", "FCocfTQWQAMUN01.jpg"
+  "FCocfTQWQAMUN01.jpg"
 ];
 
 export default function Alumni() {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  const gridImages = galleryImages.slice(0, 13);
+  const scrollImages = galleryImages.slice(13);
+
+  const handleNext = useCallback(() => {
+    if (selectedIndex === null) return;
+    setSelectedIndex((prev) => (prev! + 1) % galleryImages.length);
+  }, [selectedIndex]);
+
+  const handlePrev = useCallback(() => {
+    if (selectedIndex === null) return;
+    setSelectedIndex((prev) => (prev! - 1 + galleryImages.length) % galleryImages.length);
+  }, [selectedIndex]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedIndex === null) return;
+      if (e.key === 'ArrowRight') handleNext();
+      if (e.key === 'ArrowLeft') handlePrev();
+      if (e.key === 'Escape') setSelectedIndex(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedIndex, handleNext, handlePrev]);
+
+  // Layout helper to map image to specific grid class from mockup
+  const getGridClass = (idx: number) => {
+    switch (idx) {
+      case 0: return 'md:col-span-2 md:row-span-2'; // Top-left large
+      case 1: 
+      case 2: 
+      case 3: 
+      case 4: return 'md:col-span-1 md:row-span-1'; // Top-right smalls
+      case 5: 
+      case 6: return 'md:col-span-1 md:row-span-1'; // Mid-left smalls
+      case 7: return 'md:col-span-3 md:row-span-2'; // Mid-right wide
+      case 8: return 'md:col-span-2 md:row-span-2'; // Bot-left large
+      case 9:
+      case 10:
+      case 11:
+      case 12: return 'md:col-span-1 md:row-span-1'; // Bot-right smalls
+      default: return 'col-span-1 row-span-1';
+    }
+  };
+
   return (
     <div className="flex flex-col bg-gray-50 pb-20">
       {/* Page Header */}
@@ -186,14 +233,10 @@ export default function Alumni() {
                       Whether it's the high-stakes football tournaments or the regular networking mixers, the league ensures that the Valley College legacy continues to thrive across generations. Join a team today and keep the blue and white flag flying high!
                     </p>
                   </div>
-
-                  <div className="flex flex-wrap gap-4">
-                    <button className="bg-primary text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-900 transition-all shadow-lg hover:shadow-primary/30 flex items-center gap-2 group">
+                  <div className="flex flex-col gap-6">
+                    <button className="bg-primary text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-900 transition-all shadow-lg hover:shadow-primary/30 flex items-center gap-2 group w-fit">
                       Register Your Team
                       <ExternalLink size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    </button>
-                    <button className="bg-white text-gray-700 border-2 border-gray-100 px-8 py-4 rounded-2xl font-bold hover:border-primary hover:text-primary transition-all">
-                      View Fixtures
                     </button>
                   </div>
                 </div>
@@ -212,6 +255,27 @@ export default function Alumni() {
                 <div className="absolute inset-0 bg-gradient-to-l from-black/20 to-transparent pointer-events-none" />
               </div>
             </div>
+          </motion.div>
+
+          {/* League Gallery - Below Bento Div */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-wrap justify-center gap-4 px-4 mt-8"
+          >
+            {[
+              "FCocDmcWUA4QFd2.jpg", "VACO-4.png", "VACO-5.jpg", 
+              "VACO-6.jpg", "VACO-7.jpg", "VACO-12.jpg"
+            ].map((img, i) => (
+              <div key={i} className="w-20 h-20 sm:w-28 sm:h-28 rounded-2xl overflow-hidden shadow-md border-2 border-white hover:scale-105 transition-transform shrink-0">
+                <img 
+                  src={`/alumni gallery/${img}`} 
+                  alt={`League image ${i+1}`} 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
           </motion.div>
         </section>
 
@@ -288,40 +352,122 @@ export default function Alumni() {
             <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto">Capturing memories and milestones of our alumni community through the years.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 auto-rows-[250px] md:auto-rows-[300px]">
-            {galleryImages.map((image, idx) => {
-              const isLarge = idx % 7 === 0;
-              const isTall = idx % 5 === 0 && !isLarge;
-              const isWide = idx % 6 === 0 && !isLarge && !isTall;
-              
-              return (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: (idx % 8) * 0.05 }}
-                  className={`group relative rounded-[2rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 bg-gray-200 ${
-                    isLarge ? 'md:col-span-2 md:row-span-2' : 
-                    isTall ? 'md:row-span-2' : 
-                    isWide ? 'md:col-span-2' : 
-                    'col-span-1 row-span-1'
-                  }`}
-                >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 auto-rows-[150px] md:auto-rows-[250px] mb-20">
+            {gridImages.map((image, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: (idx % 4) * 0.1 }}
+                onClick={() => setSelectedIndex(idx)}
+                className={`group relative rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 bg-gray-200 cursor-pointer ${getGridClass(idx)}`}
+              >
                 <img
                   src={`/alumni gallery/${image}`}
                   alt={`Alumni memory ${idx + 1}`}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   referrerPolicy="no-referrer"
                   loading="lazy"
-                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               </motion.div>
-              );
-            })}
+            ))}
+          </div>
+
+          {/* Continuous Auto-Scroll Section */}
+          <div className="relative mt-20 overflow-hidden py-10 bg-gray-50/50 rounded-[3rem] border border-gray-100">
+            <div className="flex whitespace-nowrap overflow-hidden">
+              <motion.div 
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+                className="flex gap-6 px-3"
+              >
+                {[...scrollImages, ...scrollImages].map((image, idx) => {
+                  const originalIdx = 13 + (idx % scrollImages.length);
+                  return (
+                    <div 
+                      key={idx}
+                      onClick={() => setSelectedIndex(originalIdx)}
+                      className="w-40 h-40 md:w-56 md:h-56 rounded-2xl overflow-hidden shadow-lg border-4 border-white shrink-0 cursor-pointer transition-transform hover:scale-105"
+                    >
+                      <img 
+                        src={`/alumni gallery/${image}`} 
+                        alt={`Scroll image ${idx}`} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  );
+                })}
+              </motion.div>
+            </div>
+            
+            {/* Fade effect edges */}
+            <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10" />
+            <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10" />
           </div>
         </motion.section>
+
+        {/* Lightbox Modal */}
+        <AnimatePresence mode="wait">
+          {selectedIndex !== null && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-md flex items-center justify-center p-4 md:p-10"
+            >
+              {/* Backdrop Click */}
+              <div 
+                className="absolute inset-0 cursor-zoom-out" 
+                onClick={() => setSelectedIndex(null)} 
+              />
+
+              {/* Close Button */}
+              <button 
+                onClick={() => setSelectedIndex(null)}
+                className="absolute top-6 right-6 p-4 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[110]"
+              >
+                <X size={32} />
+              </button>
+
+              {/* Navigation Arrows */}
+              <button 
+                onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+                className="absolute left-6 top-1/2 -translate-y-1/2 p-4 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[110] hidden md:block"
+              >
+                <ChevronLeft size={48} />
+              </button>
+              
+              <button 
+                onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                className="absolute right-6 top-1/2 -translate-y-1/2 p-4 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[110] hidden md:block"
+              >
+                <ChevronRight size={48} />
+              </button>
+              
+              {/* Image Container */}
+              <motion.div 
+                key={selectedIndex}
+                initial={{ scale: 0.9, opacity: 0, x: 20 }}
+                animate={{ scale: 1, opacity: 1, x: 0 }}
+                exit={{ scale: 1.1, opacity: 0, x: -20 }}
+                className="relative max-w-6xl w-full h-[80vh] flex items-center justify-center z-[105] pointer-events-none"
+              >
+                <img 
+                  src={`/alumni gallery/${galleryImages[selectedIndex]}`} 
+                  alt="Full preview" 
+                  className="max-w-full max-h-full object-contain rounded-xl shadow-2xl pointer-events-auto"
+                />
+              </motion.div>
+
+              {/* Mobile Swipe / Tap Hint */}
+              <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 text-sm md:hidden">
+                Tap edges to navigate
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       </div>
     </div>
