@@ -265,8 +265,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 sm:px-0">
             {[
-              { end: 29, label: "Years of Excellence", icon: TrophyIcon, img: "/images/IMG_20260401_184109_022.jpg" },
-              { end: 27, label: "Subjects Offered", icon: BookOpenIcon, img: "/images/3.jpeg" },
+              { end: 29, label: "Years of Excellence", icon: TrophyIcon, img: "/images/counter (2).jpeg" },
+              { end: 27, label: "Subjects Offered", icon: BookOpenIcon, img: "/images/counter (1).jpeg" },
               { end: 650, label: "Number of Students", icon: UsersIcon, img: "/images/10.jpeg" }
             ].map((stat, idx) => (
               <motion.div 
@@ -312,7 +312,7 @@ export default function Home() {
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-gray-900">Growth Milestones</h2>
           </div>
 
-          <div className="relative max-w-5xl mx-auto">
+          <div className="relative max-w-7xl mx-auto">
             {/* Center Line */}
             <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-100 via-primary to-blue-100 -translate-x-1/2 rounded-full" />
 
@@ -339,7 +339,7 @@ export default function Home() {
                       transition={{ delay: 0.5, duration: 0.8 }}
                       className={`w-full md:w-1/2 pl-12 md:pl-0 ${idx % 2 === 0 ? 'md:text-left' : 'md:text-right'} z-10`}
                     >
-                      <div className="text-4xl md:text-6xl lg:text-8xl font-black text-primary mb-2 -mt-6 md:-mt-14 tracking-tighter select-none drop-shadow-sm opacity-20">
+                      <div className="text-4xl md:text-6xl lg:text-8xl font-black text-primary mb-2 mt-0 md:-mt-14 tracking-tighter select-none drop-shadow-sm opacity-20">
                         {milestone.year}
                       </div>
                       <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{milestone.title}</h3>

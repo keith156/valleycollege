@@ -205,13 +205,13 @@ export default function About() {
         </div>
 
         {/* New Governance Structure Section */}
-        <section id="governance" className="mb-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 md:mb-24">
+        <section id="governance" className="mb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10 md:mb-16">
             <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight">Governance Structure</h2>
             <div className="h-2 w-24 bg-primary mx-auto rounded-full" />
           </div>
 
-          <div className="flex flex-col items-center py-10 px-0 md:px-8 max-w-[900px] mx-auto overflow-hidden">
+          <div className="flex flex-col items-center py-6 px-0 md:px-8 max-w-7xl mx-auto overflow-hidden">
             {governanceData.map((item, idx) => (
               <div key={idx} className="w-full flex flex-col items-center">
                 <motion.div 

@@ -18,8 +18,8 @@ const successfulAlumni = [
 ];
 
 const galleryImages = [
-  "VACO-9.jpg", "VACO-10.jpg", "VACO-11.jpg", "VACO-12.jpg", "VACO-13.jpg", "VACO-14.jpg", "VACO-15.jpg",
-  "VACO-16.jpg -FORMER HM.jpg", "VACO-17.jpg", "VACO-18.jpg", "VACO-19.jpg", "VACO-20.jpg",
+  "VACO-9.jpg", "VACO-10.jpg", "VACO-11.jpg", "VACO-12.jpg", "VACO-13.jpg", 
+  "VACO-17.jpg", "VACO-18.jpg", "VACO-19.jpg", "VACO-20.jpg",
   "VACO-21.jpg", "VACO-22.jpg", "VACO-23.jpg", "VACO-24.jpg",
   "FCocfTQWQAMUN01.jpg"
 ];
@@ -27,8 +27,8 @@ const galleryImages = [
 export default function Alumni() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const gridImages = galleryImages.slice(0, 13);
-  const scrollImages = galleryImages.slice(13);
+  const gridImages = galleryImages.slice(0, 7);
+  const scrollImages = galleryImages;
 
   const handleNext = useCallback(() => {
     if (selectedIndex === null) return;
@@ -52,25 +52,21 @@ export default function Alumni() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedIndex, handleNext, handlePrev]);
 
-  // Layout helper to map image to specific grid class from mockup
-  const getGridClass = (idx: number) => {
+  // Layout helper for the featured bento cluster (7 images)
+  const getBentoClass = (idx: number) => {
     switch (idx) {
-      case 0: return 'md:col-span-2 md:row-span-2'; // Top-left large
-      case 1: 
-      case 2: 
-      case 3: 
-      case 4: return 'md:col-span-1 md:row-span-1'; // Top-right smalls
-      case 5: 
-      case 6: return 'md:col-span-1 md:row-span-1'; // Mid-left smalls
-      case 7: return 'md:col-span-3 md:row-span-2'; // Mid-right wide
-      case 8: return 'md:col-span-2 md:row-span-2'; // Bot-left large
-      case 9:
-      case 10:
-      case 11:
-      case 12: return 'md:col-span-1 md:row-span-1'; // Bot-right smalls
+      case 0: return 'md:col-span-2 md:row-span-2'; // Large
+      case 1: return 'md:col-span-1 md:row-span-1'; // Small
+      case 2: return 'md:col-span-1 md:row-span-1'; // Small
+      case 3: return 'md:col-span-2 md:row-span-1'; // Wide
+      case 4: return 'md:col-span-1 md:row-span-1'; // Small
+      case 5: return 'md:col-span-1 md:row-span-1'; // Small
+      case 6: return 'md:col-span-2 md:row-span-1'; // Wide
       default: return 'col-span-1 row-span-1';
     }
   };
+
+
 
   return (
     <div className="flex flex-col bg-gray-50 pb-20">
@@ -256,31 +252,10 @@ export default function Alumni() {
               </div>
             </div>
           </motion.div>
-
-          {/* League Gallery - Below Bento Div */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-wrap justify-center gap-4 px-4 mt-8"
-          >
-            {[
-              "FCocDmcWUA4QFd2.jpg", "VACO-4.png", "VACO-5.jpg", 
-              "VACO-6.jpg", "VACO-7.jpg", "VACO-12.jpg"
-            ].map((img, i) => (
-              <div key={i} className="w-20 h-20 sm:w-28 sm:h-28 rounded-2xl overflow-hidden shadow-md border-2 border-white hover:scale-105 transition-transform shrink-0">
-                <img 
-                  src={`/alumni gallery/${img}`} 
-                  alt={`League image ${i+1}`} 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </motion.div>
         </section>
 
         {/* Funding Project - Centered & Prominent */}
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-5xl mx-auto mb-32">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-7xl mx-auto mb-32">
           <div className="bg-white p-10 lg:p-16 rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden">
             {/* Decorative Background Elements */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
@@ -361,7 +336,7 @@ export default function Alumni() {
                 viewport={{ once: true }}
                 transition={{ delay: (idx % 4) * 0.1 }}
                 onClick={() => setSelectedIndex(idx)}
-                className={`group relative rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 bg-gray-200 cursor-pointer ${getGridClass(idx)}`}
+                className={`group relative rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 bg-gray-50 cursor-pointer ${getBentoClass(idx)}`}
               >
                 <img
                   src={`/alumni gallery/${image}`}
@@ -384,7 +359,7 @@ export default function Alumni() {
                 className="flex gap-6 px-3"
               >
                 {[...scrollImages, ...scrollImages].map((image, idx) => {
-                  const originalIdx = 13 + (idx % scrollImages.length);
+                  const originalIdx = idx % scrollImages.length;
                   return (
                     <div 
                       key={idx}
