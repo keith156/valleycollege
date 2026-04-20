@@ -16,11 +16,15 @@ interface AlumnusData {
 // Convert Google Drive share link → embeddable URLs
 // Returns { primary, fallback } — both tried in the img tag
 function getDriveImageUrls(driveLink: string): { primary: string; fallback: string } {
+  if (!driveLink) return { primary: '', fallback: '' };
+  
+  // Supported patterns: /d/ID, id=ID, open?id=ID
   const patterns = [
     /\/file\/d\/([a-zA-Z0-9_-]+)/,
     /id=([a-zA-Z0-9_-]+)/,
     /\/d\/([a-zA-Z0-9_-]+)/,
   ];
+  
   for (const pattern of patterns) {
     const match = driveLink.match(pattern);
     if (match) {
@@ -31,6 +35,8 @@ function getDriveImageUrls(driveLink: string): { primary: string; fallback: stri
       };
     }
   }
+  
+  // Not a Drive link (or already converted) — use original
   return { primary: driveLink, fallback: '' };
 }
 
@@ -102,15 +108,18 @@ export default function Alumni() {
     setAlumniLoading(true);
     const stored = getSpotlight();
     if (stored.length > 0) {
-      // Admin has managed data — use it directly, no fetch needed
-      setAlumni(stored.map(s => ({
-        name: s.name,
-        period: s.period,
-        profession: s.profession,
-        workStation: s.workStation,
-        imageUrl: s.imageUrl,
-        imageFallback: '',
-      })));
+      // Admin has managed data — use it directly, but re-process images for fallbacks
+      setAlumni(stored.map(s => {
+        const { primary, fallback } = getDriveImageUrls(s.imageUrl);
+        return {
+          name: s.name,
+          period: s.period,
+          profession: s.profession,
+          workStation: s.workStation,
+          imageUrl: primary,
+          imageFallback: fallback,
+        };
+      }));
       setAlumniLoading(false);
     } else {
       // No admin data — fall back to live Google Sheets

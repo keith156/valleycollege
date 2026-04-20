@@ -238,23 +238,18 @@ export default function Admin() {
       const workIdx = col('work') !== -1 ? col('work') : col('station');
       const imgIdx = col('image') !== -1 ? col('image') : col('profile');
 
-      const getDriveUrl = (link: string) => {
-        const m = link.match(/id=([a-zA-Z0-9_-]+)/) || link.match(/\/d\/([a-zA-Z0-9_-]+)/);
-        return m ? `https://lh3.googleusercontent.com/d/${m[1]}` : link;
-      };
-
       const imported: SpotlightAlumnus[] = lines.slice(1).map((line, i) => {
         const c = parseCsvLine(line);
-        const driveLink = c[imgIdx] || '';
+        const driveLink = (c[imgIdx] || '').trim();
         return {
           id: `sheet_${i}_${Date.now()}`,
-          name: c[nameIdx] || '',
-          period: c[periodIdx] || '',
-          profession: c[profIdx] || '',
-          workStation: c[workIdx] || '',
-          imageUrl: driveLink ? getDriveUrl(driveLink) : '',
+          name: (c[nameIdx] || '').trim(),
+          period: (c[periodIdx] || '').trim(),
+          profession: (c[profIdx] || '').trim(),
+          workStation: (c[workIdx] || '').trim(),
+          imageUrl: driveLink,
         };
-      }).filter(a => a.name.trim().length > 0);
+      }).filter(a => a.name.length > 0);
 
       // Merge: keep existing edits, add new sheet entries that aren't already saved
       const existing = getSpotlight();
