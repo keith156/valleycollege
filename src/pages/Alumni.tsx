@@ -1,90 +1,9 @@
-import { Users, GraduationCap, HeartHandshake, MessageCircle, ExternalLink, Globe, Award, Image as ImageIcon, Trophy, X, ChevronLeft, ChevronRight, Briefcase, MapPin, Calendar, Loader2 } from 'lucide-react';
+import { Users, GraduationCap, HeartHandshake, MessageCircle, ExternalLink, Globe, Award, Image as ImageIcon, Trophy, X, ChevronLeft, ChevronRight, Briefcase, MapPin, Calendar } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { useState, useCallback, useEffect, useRef } from 'react';
-import { getSpotlight } from '../lib/spotlight';
+import { useState, useCallback, useEffect } from 'react';
+import { getSpotlight, SpotlightAlumnus } from '../lib/spotlight';
 
-// --- Types ---
-interface AlumnusData {
-  name: string;
-  period: string;
-  profession: string;
-  workStation: string;
-  imageUrl: string;
-  imageFallback: string;
-}
-
-// Convert Google Drive share link → embeddable URLs
-// Returns { primary, fallback } — both tried in the img tag
-function getDriveImageUrls(driveLink: string): { primary: string; fallback: string } {
-  if (!driveLink) return { primary: '', fallback: '' };
-  
-  // Supported patterns: /d/ID, id=ID, open?id=ID
-  const patterns = [
-    /\/file\/d\/([a-zA-Z0-9_-]+)/,
-    /id=([a-zA-Z0-9_-]+)/,
-    /\/d\/([a-zA-Z0-9_-]+)/,
-  ];
-  
-  for (const pattern of patterns) {
-    const match = driveLink.match(pattern);
-    if (match) {
-      const id = match[1];
-      return {
-        primary:  `https://lh3.googleusercontent.com/d/${id}`,
-        fallback: `https://drive.google.com/uc?export=view&id=${id}`,
-      };
-    }
-  }
-  
-  // Not a Drive link (or already converted) — use original
-  return { primary: driveLink, fallback: '' };
-}
-
-
-// Parse CSV text into structured data
-function parseLine(line: string): string[] {
-  const cols: string[] = [];
-  let current = '';
-  let inQuotes = false;
-  for (const char of line) {
-    if (char === '"') { inQuotes = !inQuotes; }
-    else if (char === ',' && !inQuotes) { cols.push(current.trim()); current = ''; }
-    else { current += char; }
-  }
-  cols.push(current.trim());
-  return cols;
-}
-
-function parseCSV(csv: string): AlumnusData[] {
-  const lines = csv.trim().split('\n');
-  if (lines.length < 2) return [];
-
-  // Build a header-name → index map (strip quotes, lowercase, trim)
-  const headers = parseLine(lines[0]).map(h => h.toLowerCase().replace(/[^a-z ]/g, '').trim());
-  const idx = (keyword: string) => headers.findIndex(h => h.includes(keyword));
-
-  const nameIdx       = idx('name');
-  const periodIdx     = idx('period');
-  const professionIdx = idx('profession');
-  const workIdx       = idx('work') !== -1 ? idx('work') : idx('station');
-  const imageIdx      = idx('image') !== -1 ? idx('image') : idx('profile');
-
-  return lines.slice(1).map(line => {
-    const cols = parseLine(line);
-    const driveUrl = cols[imageIdx] || '';
-    const { primary, fallback } = driveUrl ? getDriveImageUrls(driveUrl) : { primary: '', fallback: '' };
-    return {
-      name:          cols[nameIdx]       || '',
-      period:        cols[periodIdx]     || '',
-      profession:    cols[professionIdx] || '',
-      workStation:   cols[workIdx]       || '',
-      imageUrl:      primary,
-      imageFallback: fallback,
-    };
-  }).filter(a => a.name && a.name.length > 0);
-}
-
-const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1NC3QF6GOPnp84WOV_cAMqI3wxKbx_bkpjsASYx01Bz8/export?format=csv';
+const CARDS_PER_PAGE = 3;
 
 const galleryImages = [
   "VACO-9.jpg", "VACO-10.jpg", "VACO-11.jpg", "VACO-12.jpg", "VACO-13.jpg", 
@@ -95,59 +14,19 @@ const galleryImages = [
 
 export default function Alumni() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [alumni, setAlumni] = useState<AlumnusData[]>([]);
-  const [alumniLoading, setAlumniLoading] = useState(true);
-  const [alumniError, setAlumniError] = useState(false);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const animRef = useRef<number | null>(null);
-  const posRef = useRef(0);
-  const isPausedRef = useRef(false);
+  const [spotlightPage, setSpotlightPage] = useState(0);
+  const alumni: SpotlightAlumnus[] = getSpotlight();
 
-  // Load alumni: localStorage (admin-managed) takes priority over Google Sheets
-  useEffect(() => {
-    setAlumniLoading(true);
-    const stored = getSpotlight();
-    if (stored.length > 0) {
-      // Admin has managed data — use it directly, but re-process images for fallbacks
-      setAlumni(stored.map(s => {
-        const { primary, fallback } = getDriveImageUrls(s.imageUrl);
-        return {
-          name: s.name,
-          period: s.period,
-          profession: s.profession,
-          workStation: s.workStation,
-          imageUrl: primary,
-          imageFallback: fallback,
-        };
-      }));
-      setAlumniLoading(false);
-    } else {
-      // No admin data — fall back to live Google Sheets
-      fetch(SHEET_CSV_URL)
-        .then(res => { if (!res.ok) throw new Error('Network error'); return res.text(); })
-        .then(text => { setAlumni(parseCSV(text)); setAlumniLoading(false); })
-        .catch(() => { setAlumniError(true); setAlumniLoading(false); });
-    }
-  }, []);
+  const totalPages = Math.ceil(alumni.length / CARDS_PER_PAGE);
+  const visibleAlumni = alumni.slice(spotlightPage * CARDS_PER_PAGE, (spotlightPage + 1) * CARDS_PER_PAGE);
 
-  // Smooth CSS-based auto-scroll animation via requestAnimationFrame
-  useEffect(() => {
-    if (!trackRef.current || alumni.length === 0) return;
-    const track = trackRef.current;
-    const speed = 0.5; // px per frame
-    const animate = () => {
-      if (!isPausedRef.current) {
-        posRef.current += speed;
-        // Reset when we've scrolled through exactly half the duplicated list
-        const halfWidth = track.scrollWidth / 2;
-        if (posRef.current >= halfWidth) posRef.current = 0;
-        track.style.transform = `translateX(-${posRef.current}px)`;
-      }
-      animRef.current = requestAnimationFrame(animate);
-    };
-    animRef.current = requestAnimationFrame(animate);
-    return () => { if (animRef.current) cancelAnimationFrame(animRef.current); };
-  }, [alumni]);
+  const handleSpotlightPrev = useCallback(() => {
+    setSpotlightPage(p => (p - 1 + totalPages) % totalPages);
+  }, [totalPages]);
+
+  const handleSpotlightNext = useCallback(() => {
+    setSpotlightPage(p => (p + 1) % totalPages);
+  }, [totalPages]);
 
   const gridImages = galleryImages.slice(0, 7);
   const scrollImages = galleryImages;
@@ -267,11 +146,11 @@ export default function Alumni() {
           </motion.div>
         </div>
 
-        {/* Alumni Spotlight - Live Auto-Scrolling from Google Sheets */}
+        {/* Alumni Spotlight — Paginated Cards with Arrows */}
         <motion.div id="spotlight" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-32">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-primary font-bold mb-4 text-sm">
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" /> Live from Alumni Network
+              <GraduationCap size={16} /> Alumni Network
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center justify-center gap-3">
               <GraduationCap className="text-primary" size={32} /> Alumni Spotlight
@@ -279,42 +158,41 @@ export default function Alumni() {
             <p className="text-gray-600 text-base lg:text-lg max-w-2xl mx-auto">Meet our outstanding alumni making significant contributions across the globe.</p>
           </div>
 
-          {/* Loading State */}
-          {alumniLoading && (
-            <div className="flex items-center justify-center py-24 gap-3 text-primary">
-              <Loader2 size={32} className="animate-spin" />
-              <span className="text-lg font-medium">Loading alumni data…</span>
-            </div>
-          )}
+          {/* Cards + Navigation */}
+          {alumni.length > 0 && (
+            <div className="relative">
+              {/* Left Arrow */}
+              <button
+                onClick={handleSpotlightPrev}
+                className="absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 bg-white shadow-xl border border-gray-200 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all hover:scale-110 hover:shadow-2xl"
+                aria-label="Previous alumni"
+              >
+                <ChevronLeft size={28} />
+              </button>
 
-          {/* Error State */}
-          {alumniError && !alumniLoading && (
-            <div className="text-center py-16 text-gray-500">
-              <p className="text-lg">Could not load alumni data. Please check your connection.</p>
-            </div>
-          )}
+              {/* Right Arrow */}
+              <button
+                onClick={handleSpotlightNext}
+                className="absolute -right-2 md:-right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 bg-white shadow-xl border border-gray-200 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all hover:scale-110 hover:shadow-2xl"
+                aria-label="Next alumni"
+              >
+                <ChevronRight size={28} />
+              </button>
 
-          {/* Horizontal Auto-Scroll Strip */}
-          {!alumniLoading && !alumniError && alumni.length > 0 && (
-            <div
-              className="relative overflow-hidden"
-              onMouseEnter={() => { isPausedRef.current = true; }}
-              onMouseLeave={() => { isPausedRef.current = false; }}
-            >
-              {/* Fade edges */}
-              <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
-              <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
-
-              {/* Scrolling track — duplicated list for seamless loop */}
-              <div className="overflow-hidden py-4">
-                <div ref={trackRef} className="flex gap-6 w-max">
-                  {[...alumni, ...alumni].map((person, idx) => (
-                    <div
-                      key={idx}
-                      className="group flex-none w-64 sm:w-72 bg-white rounded-[2rem] shadow-md border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col"
+              {/* Cards Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 px-6 md:px-8">
+                <AnimatePresence mode="wait">
+                  {visibleAlumni.map((person) => (
+                    <motion.div
+                      key={person.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.4 }}
+                      className="group bg-white rounded-[2rem] shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col"
                     >
                       {/* Photo */}
-                      <div className="w-full h-52 relative overflow-hidden bg-gray-100 shrink-0">
+                      <div className="w-full h-72 md:h-80 relative overflow-hidden bg-gray-100 shrink-0">
                         {person.imageUrl ? (
                           <img
                             src={person.imageUrl}
@@ -324,16 +202,10 @@ export default function Alumni() {
                             decoding="async"
                             onError={(e) => {
                               const target = e.currentTarget;
-                              // Try fallback URL first
-                              if (target.src !== person.imageFallback && person.imageFallback) {
-                                target.src = person.imageFallback;
-                              } else {
-                                // Both failed — show avatar placeholder
-                                target.style.display = 'none';
-                                const parent = target.parentElement;
-                                if (parent) {
-                                  parent.innerHTML = `<div class="w-full h-full flex flex-col items-center justify-center bg-blue-50 gap-2"><svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='none' stroke='#001a40' stroke-width='1.5'><circle cx='12' cy='8' r='4'/><path d='M4 20c0-4 3.6-7 8-7s8 3 8 7'/></svg></div>`;
-                                }
+                              target.style.display = 'none';
+                              const parent = target.parentElement;
+                              if (parent) {
+                                parent.innerHTML = `<div class="w-full h-full flex flex-col items-center justify-center bg-blue-50 gap-2"><svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='none' stroke='#001a40' stroke-width='1.5'><circle cx='12' cy='8' r='4'/><path d='M4 20c0-4 3.6-7 8-7s8 3 8 7'/></svg></div>`;
                               }
                             }}
                           />
@@ -344,28 +216,40 @@ export default function Alumni() {
                         )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                         {/* Period Badge */}
-                        <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/50 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
-                          <Calendar size={10} /> {person.period}
+                        <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-black/50 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full">
+                          <Calendar size={12} /> {person.period}
                         </div>
                       </div>
 
                       {/* Info */}
-                      <div className="p-5 flex flex-col gap-2 grow">
-                        <h3 className="text-base font-black text-gray-900 leading-tight line-clamp-1 group-hover:text-primary transition-colors">
+                      <div className="p-6 flex flex-col gap-3 grow">
+                        <h3 className="text-lg font-black text-gray-900 leading-tight line-clamp-1 group-hover:text-primary transition-colors">
                           {person.name}
                         </h3>
                         <div className="flex items-start gap-2 text-primary">
-                          <Briefcase size={13} className="shrink-0 mt-0.5" />
-                          <span className="text-xs font-semibold leading-snug line-clamp-2">{person.profession}</span>
+                          <Briefcase size={15} className="shrink-0 mt-0.5" />
+                          <span className="text-sm font-semibold leading-snug line-clamp-2">{person.profession}</span>
                         </div>
                         <div className="flex items-start gap-2 text-gray-500">
-                          <MapPin size={13} className="shrink-0 mt-0.5" />
-                          <span className="text-xs leading-snug line-clamp-2">{person.workStation}</span>
+                          <MapPin size={15} className="shrink-0 mt-0.5" />
+                          <span className="text-sm leading-snug line-clamp-2">{person.workStation}</span>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
-                </div>
+                </AnimatePresence>
+              </div>
+
+              {/* Page Indicators */}
+              <div className="flex items-center justify-center gap-2 mt-8">
+                {Array.from({ length: totalPages }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSpotlightPage(i)}
+                    className={`h-2.5 rounded-full transition-all duration-300 ${i === spotlightPage ? 'w-8 bg-primary' : 'w-2.5 bg-gray-300 hover:bg-gray-400'}`}
+                    aria-label={`Go to page ${i + 1}`}
+                  />
+                ))}
               </div>
             </div>
           )}

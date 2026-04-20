@@ -1,27 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { SchoolEvent, getEvents, saveEvents } from '../lib/events';
 import { NewsItem, getNews, saveNews } from '../lib/news';
 import { WallOfFameYear, getWallOfFame, saveWallOfFame, StudentRecord } from '../lib/wallOfFame';
-import { SpotlightAlumnus, getSpotlight, saveSpotlight } from '../lib/spotlight';
-import { Trash2, Edit2, Plus, LogOut, Calendar, Newspaper, Award, X, Users, Upload, Link, Loader2, RefreshCw, CheckCircle2, AlertCircle } from 'lucide-react';
-
-const EMPTY_SPOTLIGHT: Omit<SpotlightAlumnus, 'id'> = { name: '', period: '', profession: '', workStation: '', imageUrl: '' };
+import { Trash2, Edit2, Plus, LogOut, Calendar, Newspaper, Award, X } from 'lucide-react';
 
 export default function Admin() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [tab, setTab] = useState<'events' | 'news' | 'wof' | 'spotlight'>('events');
-  
-  // Spotlight State
-  const [spotlight, setSpotlight] = useState<SpotlightAlumnus[]>([]);
-  const [editingSpotId, setEditingSpotId] = useState<string | null>(null);
-  const [spotForm, setSpotForm] = useState<Omit<SpotlightAlumnus, 'id'>>(EMPTY_SPOTLIGHT);
-  const [imageMode, setImageMode] = useState<'url' | 'upload'>('url');
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [importLoading, setImportLoading] = useState(false);
-  const [importMsg, setImportMsg] = useState<{ type: 'ok' | 'err'; text: string } | null>(null);
+  const [tab, setTab] = useState<'events' | 'news' | 'wof'>('events');
   
   // Events State
   const [events, setEvents] = useState<SchoolEvent[]>([]);
@@ -43,7 +31,6 @@ export default function Admin() {
       setEvents(getEvents());
       setNews(getNews());
       setWof(getWallOfFame());
-      setSpotlight(getSpotlight());
     }
   }, [isLoggedIn]);
 
@@ -151,121 +138,6 @@ export default function Admin() {
     setWofForm({ ...wofForm, students: newStudents });
   };
 
-  // --- SPOTLIGHT CRUD ---
-  const handleSaveSpot = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!spotForm.name.trim()) return;
-    
-    const targetId = editingSpotId || Date.now().toString();
-    const finalSpot = { id: targetId, ...spotForm };
-    
-    let updated: SpotlightAlumnus[];
-    if (editingSpotId) {
-      updated = spotlight.map(s => s.id === editingSpotId ? finalSpot : s);
-    } else {
-      updated = [finalSpot, ...spotlight];
-    }
-    setSpotlight(updated);
-    saveSpotlight(updated);
-    
-    setSpotForm(EMPTY_SPOTLIGHT);
-    setEditingSpotId(null);
-    setImageMode('url');
-  };
-
-  const handleDeleteSpot = (id: string) => {
-    if (window.confirm('Delete this alumnus from the spotlight?')) {
-      const updated = spotlight.filter(s => s.id !== id);
-      setSpotlight(updated);
-      saveSpotlight(updated);
-    }
-  };
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      const img = new Image();
-      img.onload = () => {
-        // Compress: max 500px on longest side, JPEG 0.82 quality
-        const MAX = 500;
-        const scale = Math.min(1, MAX / Math.max(img.width, img.height));
-        const w = Math.round(img.width * scale);
-        const h = Math.round(img.height * scale);
-        const canvas = document.createElement('canvas');
-        canvas.width = w;
-        canvas.height = h;
-        const ctx = canvas.getContext('2d')!;
-        ctx.drawImage(img, 0, 0, w, h);
-        const compressed = canvas.toDataURL('image/jpeg', 0.82);
-        setSpotForm(f => ({ ...f, imageUrl: compressed }));
-      };
-      img.src = ev.target?.result as string;
-    };
-    reader.readAsDataURL(file);
-    // Reset input so the same file can be re-selected if needed
-    e.target.value = '';
-  };
-
-
-  // Parse CSV line respecting quoted fields
-  const parseCsvLine = (line: string): string[] => {
-    const cols: string[] = [];
-    let cur = '', inQ = false;
-    for (const ch of line) {
-      if (ch === '"') inQ = !inQ;
-      else if (ch === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
-      else cur += ch;
-    }
-    cols.push(cur.trim());
-    return cols;
-  };
-
-  const handleImportFromSheets = async () => {
-    setImportLoading(true);
-    setImportMsg(null);
-    try {
-      const CSV_URL = 'https://docs.google.com/spreadsheets/d/1NC3QF6GOPnp84WOV_cAMqI3wxKbx_bkpjsASYx01Bz8/export?format=csv';
-      const res = await fetch(CSV_URL);
-      if (!res.ok) throw new Error('Fetch failed');
-      const csv = await res.text();
-      const lines = csv.trim().split('\n');
-      if (lines.length < 2) throw new Error('No data');
-      const headers = parseCsvLine(lines[0]).map(h => h.toLowerCase().replace(/[^a-z ]/g, '').trim());
-      const col = (kw: string) => headers.findIndex(h => h.includes(kw));
-      const nameIdx = col('name'), periodIdx = col('period'), profIdx = col('profession');
-      const workIdx = col('work') !== -1 ? col('work') : col('station');
-      const imgIdx = col('image') !== -1 ? col('image') : col('profile');
-
-      const imported: SpotlightAlumnus[] = lines.slice(1).map((line, i) => {
-        const c = parseCsvLine(line);
-        const driveLink = (c[imgIdx] || '').trim();
-        return {
-          id: `sheet_${i}_${Date.now()}`,
-          name: (c[nameIdx] || '').trim(),
-          period: (c[periodIdx] || '').trim(),
-          profession: (c[profIdx] || '').trim(),
-          workStation: (c[workIdx] || '').trim(),
-          imageUrl: driveLink,
-        };
-      }).filter(a => a.name.length > 0);
-
-      // Merge: keep existing edits, add new sheet entries that aren't already saved
-      const existing = getSpotlight();
-      const existingNames = new Set(existing.map(e => e.name.trim().toLowerCase()));
-      const newOnes = imported.filter(i => !existingNames.has(i.name.trim().toLowerCase()));
-      const merged = [...existing, ...newOnes];
-      setSpotlight(merged);
-      saveSpotlight(merged);
-      setImportMsg({ type: 'ok', text: `Imported ${newOnes.length} new alumni from Google Sheets (${existing.length} existing kept).` });
-    } catch {
-      setImportMsg({ type: 'err', text: 'Could not fetch from Google Sheets. Check your internet connection.' });
-    } finally {
-      setImportLoading(false);
-    }
-  };
-
   if (!isLoggedIn) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center bg-gray-50 px-4">
@@ -307,9 +179,6 @@ export default function Admin() {
           </button>
           <button onClick={() => setTab('wof')} className={`flex items-center gap-2 pb-4 px-2 font-bold whitespace-nowrap transition-colors ${tab === 'wof' ? 'text-primary border-b-2 border-primary' : 'text-gray-500 hover:text-gray-700'}`}>
             <Award size={20} /> Wall of Fame
-          </button>
-          <button onClick={() => setTab('spotlight')} className={`flex items-center gap-2 pb-4 px-2 font-bold whitespace-nowrap transition-colors ${tab === 'spotlight' ? 'text-primary border-b-2 border-primary' : 'text-gray-500 hover:text-gray-700'}`}>
-            <Users size={20} /> Alumni Spotlight
           </button>
         </div>
 
@@ -461,128 +330,7 @@ export default function Admin() {
               </div>
             </motion.div>
           )}
-          {tab === 'spotlight' && (
-            <motion.div key="spotlight" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
-              {/* Google Sheets Sync Banner */}
-              <div className="mb-6 p-5 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row sm:items-center gap-4">
-                <div className="flex-1">
-                  <p className="text-sm font-bold text-primary mb-1">📋 Sync from Google Sheets</p>
-                  <p className="text-xs text-gray-600">Click to import all current submissions from your Google Form. Existing edits are preserved — only new names are added.</p>
-                  {importMsg && (
-                    <div className={`mt-2 flex items-center gap-2 text-xs font-semibold ${importMsg.type === 'ok' ? 'text-green-600' : 'text-red-500'}`}>
-                      {importMsg.type === 'ok' ? <CheckCircle2 size={14} /> : <AlertCircle size={14} />}
-                      {importMsg.text}
-                    </div>
-                  )}
-                </div>
-                <button
-                  onClick={handleImportFromSheets}
-                  disabled={importLoading}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-xl hover:bg-primary/90 transition-colors disabled:opacity-60 shrink-0"
-                >
-                  {importLoading ? <Loader2 size={16} className="animate-spin" /> : <RefreshCw size={16} />}
-                  {importLoading ? 'Importing…' : 'Import from Sheets'}
-                </button>
-              </div>
 
-              <p className="text-xs text-gray-400 mb-6 -mt-2">ℹ️ Alumni saved here will appear on the Alumni page instead of live Google Sheets data. Delete all entries to revert to Google Sheets.</p>
-
-              {/* Add / Edit Form */}
-              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 mb-8">
-                <h2 className="text-xl font-bold text-gray-900 mb-6">{editingSpotId ? 'Edit Alumnus' : 'Add New Alumnus'}</h2>
-                <form onSubmit={handleSaveSpot} className="space-y-4">
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Full Name <span className="text-red-400">*</span></label>
-                      <input type="text" value={spotForm.name} onChange={e => setSpotForm(f => ({ ...f, name: e.target.value }))} placeholder="e.g., Kamusiime Anatori" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Period of Study</label>
-                      <input type="text" value={spotForm.period} onChange={e => setSpotForm(f => ({ ...f, period: e.target.value }))} placeholder="e.g., 2013-2016" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Profession</label>
-                      <input type="text" value={spotForm.profession} onChange={e => setSpotForm(f => ({ ...f, profession: e.target.value }))} placeholder="e.g., Lawyer" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Current Work Station</label>
-                      <input type="text" value={spotForm.workStation} onChange={e => setSpotForm(f => ({ ...f, workStation: e.target.value }))} placeholder="e.g., D. Kagarura Advocates, Kampala" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" />
-                    </div>
-                  </div>
-
-                  {/* Image Section */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Profile Image</label>
-                    <div className="flex gap-2 mb-3">
-                      <button type="button" onClick={() => setImageMode('url')} className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold border transition-all ${imageMode === 'url' ? 'bg-primary text-white border-primary' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}>
-                        <Link size={14} /> Paste URL
-                      </button>
-                      <button type="button" onClick={() => { setImageMode('upload'); fileInputRef.current?.click(); }} className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold border transition-all ${imageMode === 'upload' ? 'bg-primary text-white border-primary' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}>
-                        <Upload size={14} /> Upload File
-                      </button>
-                    </div>
-                    <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
-                    {imageMode === 'url' && (
-                      <input type="url" value={spotForm.imageUrl} onChange={e => setSpotForm(f => ({ ...f, imageUrl: e.target.value }))} placeholder="https://... (Google Drive, Dropbox, or any direct image URL)" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" />
-                    )}
-                    {spotForm.imageUrl && (
-                      <div className="mt-3 flex items-center gap-4">
-                        <img src={spotForm.imageUrl} alt="Preview" className="w-20 h-20 object-cover rounded-2xl border border-gray-200 shadow-sm" onError={e => { e.currentTarget.style.display = 'none'; }} />
-                        <button type="button" onClick={() => setSpotForm(f => ({ ...f, imageUrl: '' }))} className="text-sm text-red-500 hover:text-red-700 font-medium flex items-center gap-1"><X size={14} /> Remove image</button>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="flex gap-2 pt-2 border-t border-gray-100">
-                    <button type="submit" className="flex items-center justify-center gap-2 bg-primary text-white py-2.5 px-6 rounded-xl font-bold hover:bg-primary/90 transition-colors">
-                      {editingSpotId ? <Edit2 size={18} /> : <Plus size={18} />} {editingSpotId ? 'Update' : 'Add to Spotlight'}
-                    </button>
-                    {editingSpotId && <button type="button" onClick={() => { setEditingSpotId(null); setSpotForm(EMPTY_SPOTLIGHT); setImageMode('url'); }} className="px-6 py-2.5 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-colors">Cancel</button>}
-                  </div>
-                </form>
-              </div>
-
-              {/* List */}
-              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
-                <div className="p-6 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
-                  <h2 className="text-lg font-bold text-gray-900">Current Spotlight Alumni</h2>
-                  <span className="text-sm text-gray-500">{spotlight.length} record{spotlight.length !== 1 ? 's' : ''}</span>
-                </div>
-                {spotlight.length === 0 ? (
-                  <div className="p-10 text-center text-gray-400">
-                    <Users size={40} className="mx-auto mb-3 opacity-30" />
-                    <p className="font-medium">No alumni added yet.</p>
-                    <p className="text-sm mt-1">The Alumni page will show data from Google Sheets.</p>
-                  </div>
-                ) : (
-                  <div className="divide-y divide-gray-100">
-                    {spotlight.map(alumnus => (
-                      <div key={alumnus.id} className="p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 hover:bg-gray-50 transition-colors">
-                        {alumnus.imageUrl ? (
-                          <img src={alumnus.imageUrl} alt={alumnus.name} className="w-16 h-16 object-cover rounded-2xl border border-gray-100 shrink-0" onError={e => { e.currentTarget.style.display='none'; }} />
-                        ) : (
-                          <div className="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center shrink-0">
-                            <Users size={24} className="text-primary/40" />
-                          </div>
-                        )}
-                        <div className="flex-1 min-w-0">
-                          <p className="font-black text-gray-900 text-base">{alumnus.name}</p>
-                          <p className="text-sm text-primary font-semibold truncate">{alumnus.profession}</p>
-                          <p className="text-xs text-gray-500 truncate">{alumnus.workStation}</p>
-                          <p className="text-xs text-gray-400 mt-0.5">📅 {alumnus.period}</p>
-                        </div>
-                        <div className="flex items-center gap-2 shrink-0">
-                          <button onClick={() => { setEditingSpotId(alumnus.id); setSpotForm({ name: alumnus.name, period: alumnus.period, profession: alumnus.profession, workStation: alumnus.workStation, imageUrl: alumnus.imageUrl }); setImageMode('url'); }} className="p-2 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-lg transition-colors"><Edit2 size={18} /></button>
-                          <button onClick={() => handleDeleteSpot(alumnus.id)} className="p-2 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"><Trash2 size={18} /></button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          )}
         </AnimatePresence>
       </div>
     </div>

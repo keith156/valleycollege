@@ -76,8 +76,8 @@ export default function Home() {
     { 
       year: "1997", 
       title: "Foundation", 
-      desc: "This photo captures the first cohort of students of Valley College Secondary School—the pioneers who laid the foundation of excellence. Admitted in 1997, when the school opened with about 48 A-Level students, they embraced the vision of a young institution with determination, discipline, and resilience, setting the standards that continue to define the school today.",
-      img: "/images/12.jpeg"
+      desc: "This image features the statue of Mzee William Mukaira, the founder of Valley College Secondary School, whose vision and leadership led to the establishment of the school in 1997. The institution began with a pioneering cohort of just 48 A-Level students. His unwavering commitment to excellence, discipline, and quality education laid a strong foundation and continues to shape the values and success of Valley College today.",
+      img: "/images/foundation.jpeg"
     },
     { 
       year: "2010", 
