@@ -31,7 +31,7 @@ function getDriveImageUrls(driveLink: string): { primary: string; fallback: stri
       };
     }
   }
-  return { primary: '', fallback: '' };
+  return { primary: driveLink, fallback: '' };
 }
 
 
