@@ -97,45 +97,28 @@ export default function Alumni() {
   const posRef = useRef(0);
   const isPausedRef = useRef(false);
 
-  // Load alumni: Firebase takes priority over Google Sheets
+  // Load alumni: localStorage (admin-managed) takes priority over Google Sheets
   useEffect(() => {
-    let mounted = true;
-    const loadData = async () => {
-      setAlumniLoading(true);
-      try {
-        const stored = await getSpotlight();
-        
-        if (!mounted) return;
-        
-        if (stored.length > 0) {
-          // Admin has managed data — use it directly, no fetch needed
-          setAlumni(stored.map(s => ({
-            name: s.name,
-            period: s.period,
-            profession: s.profession,
-            workStation: s.workStation,
-            imageUrl: s.imageUrl,
-            imageFallback: '',
-          })));
-          setAlumniLoading(false);
-        } else {
-          // No admin data — fall back to live Google Sheets
-          const res = await fetch(SHEET_CSV_URL);
-          if (!res.ok) throw new Error('Network error');
-          const text = await res.text();
-          if (!mounted) return;
-          setAlumni(parseCSV(text));
-          setAlumniLoading(false);
-        }
-      } catch (err) {
-        if (!mounted) return;
-        setAlumniError(true);
-        setAlumniLoading(false);
-      }
-    };
-    
-    loadData();
-    return () => { mounted = false; };
+    setAlumniLoading(true);
+    const stored = getSpotlight();
+    if (stored.length > 0) {
+      // Admin has managed data — use it directly, no fetch needed
+      setAlumni(stored.map(s => ({
+        name: s.name,
+        period: s.period,
+        profession: s.profession,
+        workStation: s.workStation,
+        imageUrl: s.imageUrl,
+        imageFallback: '',
+      })));
+      setAlumniLoading(false);
+    } else {
+      // No admin data — fall back to live Google Sheets
+      fetch(SHEET_CSV_URL)
+        .then(res => { if (!res.ok) throw new Error('Network error'); return res.text(); })
+        .then(text => { setAlumni(parseCSV(text)); setAlumniLoading(false); })
+        .catch(() => { setAlumniError(true); setAlumniLoading(false); });
+    }
   }, []);
 
   // Smooth CSS-based auto-scroll animation via requestAnimationFrame

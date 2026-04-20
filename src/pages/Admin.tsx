@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { SchoolEvent, getEvents, saveEvents } from '../lib/events';
 import { NewsItem, getNews, saveNews } from '../lib/news';
 import { WallOfFameYear, getWallOfFame, saveWallOfFame, StudentRecord } from '../lib/wallOfFame';
-import { SpotlightAlumnus, getSpotlight, saveSpotlight, uploadSpotlightImage } from '../lib/spotlight';
+import { SpotlightAlumnus, getSpotlight, saveSpotlight } from '../lib/spotlight';
 import { Trash2, Edit2, Plus, LogOut, Calendar, Newspaper, Award, X, Users, Upload, Link, Loader2, RefreshCw, CheckCircle2, AlertCircle } from 'lucide-react';
 
 const EMPTY_SPOTLIGHT: Omit<SpotlightAlumnus, 'id'> = { name: '', period: '', profession: '', workStation: '', imageUrl: '' };
@@ -43,7 +43,7 @@ export default function Admin() {
       setEvents(getEvents());
       setNews(getNews());
       setWof(getWallOfFame());
-      getSpotlight().then(setSpotlight);
+      setSpotlight(getSpotlight());
     }
   }, [isLoggedIn]);
 
@@ -152,20 +152,12 @@ export default function Admin() {
   };
 
   // --- SPOTLIGHT CRUD ---
-  const handleSaveSpot = async (e: React.FormEvent) => {
+  const handleSaveSpot = (e: React.FormEvent) => {
     e.preventDefault();
     if (!spotForm.name.trim()) return;
     
-    // We update UI first to feel snappy, but we show loading state? Admin dashboard is fine
     const targetId = editingSpotId || Date.now().toString();
-    
-    // Check if we need to upload an image to storage
-    let finalImageUrl = spotForm.imageUrl;
-    if (finalImageUrl.startsWith('data:image')) {
-      finalImageUrl = await uploadSpotlightImage(targetId, finalImageUrl);
-    }
-
-    const finalSpot = { id: targetId, ...spotForm, imageUrl: finalImageUrl };
+    const finalSpot = { id: targetId, ...spotForm };
     
     let updated: SpotlightAlumnus[];
     if (editingSpotId) {
@@ -174,18 +166,18 @@ export default function Admin() {
       updated = [finalSpot, ...spotlight];
     }
     setSpotlight(updated);
-    await saveSpotlight(updated);
+    saveSpotlight(updated);
     
     setSpotForm(EMPTY_SPOTLIGHT);
     setEditingSpotId(null);
     setImageMode('url');
   };
 
-  const handleDeleteSpot = async (id: string) => {
+  const handleDeleteSpot = (id: string) => {
     if (window.confirm('Delete this alumnus from the spotlight?')) {
       const updated = spotlight.filter(s => s.id !== id);
       setSpotlight(updated);
-      await saveSpotlight(updated);
+      saveSpotlight(updated);
     }
   };
 
@@ -265,12 +257,12 @@ export default function Admin() {
       }).filter(a => a.name.trim().length > 0);
 
       // Merge: keep existing edits, add new sheet entries that aren't already saved
-      const existing = await getSpotlight();
+      const existing = getSpotlight();
       const existingNames = new Set(existing.map(e => e.name.trim().toLowerCase()));
       const newOnes = imported.filter(i => !existingNames.has(i.name.trim().toLowerCase()));
       const merged = [...existing, ...newOnes];
       setSpotlight(merged);
-      await saveSpotlight(merged);
+      saveSpotlight(merged);
       setImportMsg({ type: 'ok', text: `Imported ${newOnes.length} new alumni from Google Sheets (${existing.length} existing kept).` });
     } catch {
       setImportMsg({ type: 'err', text: 'Could not fetch from Google Sheets. Check your internet connection.' });
