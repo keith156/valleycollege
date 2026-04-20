@@ -1,21 +1,84 @@
-import { Users, Briefcase, GraduationCap, HeartHandshake, MessageCircle, ExternalLink, Globe, Award, Image as ImageIcon, Trophy, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Users, GraduationCap, HeartHandshake, MessageCircle, ExternalLink, Globe, Award, Image as ImageIcon, Trophy, X, ChevronLeft, ChevronRight, Briefcase, MapPin, Calendar, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
+import { getSpotlight } from '../lib/spotlight';
 
-const successfulAlumni = [
-  { name: "Dr. Emmanuel K.", role: "Medical Officer, Mulago Hospital", img: "/images/16.jpeg" },
-  { name: "Sarah N.", role: "Software Engineer, Tech Hub Kampala", img: "/images/17.jpeg" },
-  { name: "Michael B.", role: "Managing Director, MB Finance", img: "/images/18.jpeg" },
-  { name: "Grace A.", role: "Senior Lecturer, Makerere University", img: "/images/19.jpeg" },
-  { name: "David O.", role: "Civil Engineer, UNRA", img: "/images/20.jpeg" },
-  { name: "Juliet T.", role: "Founder, JT Legal Associates", img: "/images/21.jpeg" },
-  { name: "Peter M.", role: "Agricultural Entrepreneur", img: "/images/23.jpeg" },
-  { name: "Esther W.", role: "Head of Marketing, Telecom UG", img: "/images/24.jpeg" },
-  { name: "Daniel K.", role: "Architect, Design Studio", img: "/images/IMG_20260401_183215_540.jpg" },
-  { name: "Ruth N.", role: "Public Health Specialist, WHO", img: "/images/IMG_20260401_183242_518.jpg" },
-  { name: "Isaac S.", role: "Data Scientist, Global Tech", img: "/images/IMG_20260401_183305_246.jpg" },
-  { name: "Florence M.", role: "Award-winning Journalist", img: "/images/IMG_20260401_183315_730.jpg" },
-];
+// --- Types ---
+interface AlumnusData {
+  name: string;
+  period: string;
+  profession: string;
+  workStation: string;
+  imageUrl: string;
+  imageFallback: string;
+}
+
+// Convert Google Drive share link → embeddable URLs
+// Returns { primary, fallback } — both tried in the img tag
+function getDriveImageUrls(driveLink: string): { primary: string; fallback: string } {
+  const patterns = [
+    /\/file\/d\/([a-zA-Z0-9_-]+)/,
+    /id=([a-zA-Z0-9_-]+)/,
+    /\/d\/([a-zA-Z0-9_-]+)/,
+  ];
+  for (const pattern of patterns) {
+    const match = driveLink.match(pattern);
+    if (match) {
+      const id = match[1];
+      return {
+        primary:  `https://lh3.googleusercontent.com/d/${id}`,
+        fallback: `https://drive.google.com/uc?export=view&id=${id}`,
+      };
+    }
+  }
+  return { primary: '', fallback: '' };
+}
+
+
+// Parse CSV text into structured data
+function parseLine(line: string): string[] {
+  const cols: string[] = [];
+  let current = '';
+  let inQuotes = false;
+  for (const char of line) {
+    if (char === '"') { inQuotes = !inQuotes; }
+    else if (char === ',' && !inQuotes) { cols.push(current.trim()); current = ''; }
+    else { current += char; }
+  }
+  cols.push(current.trim());
+  return cols;
+}
+
+function parseCSV(csv: string): AlumnusData[] {
+  const lines = csv.trim().split('\n');
+  if (lines.length < 2) return [];
+
+  // Build a header-name → index map (strip quotes, lowercase, trim)
+  const headers = parseLine(lines[0]).map(h => h.toLowerCase().replace(/[^a-z ]/g, '').trim());
+  const idx = (keyword: string) => headers.findIndex(h => h.includes(keyword));
+
+  const nameIdx       = idx('name');
+  const periodIdx     = idx('period');
+  const professionIdx = idx('profession');
+  const workIdx       = idx('work') !== -1 ? idx('work') : idx('station');
+  const imageIdx      = idx('image') !== -1 ? idx('image') : idx('profile');
+
+  return lines.slice(1).map(line => {
+    const cols = parseLine(line);
+    const driveUrl = cols[imageIdx] || '';
+    const { primary, fallback } = driveUrl ? getDriveImageUrls(driveUrl) : { primary: '', fallback: '' };
+    return {
+      name:          cols[nameIdx]       || '',
+      period:        cols[periodIdx]     || '',
+      profession:    cols[professionIdx] || '',
+      workStation:   cols[workIdx]       || '',
+      imageUrl:      primary,
+      imageFallback: fallback,
+    };
+  }).filter(a => a.name && a.name.length > 0);
+}
+
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1NC3QF6GOPnp84WOV_cAMqI3wxKbx_bkpjsASYx01Bz8/gviz/tq?tqx=out:csv&sheet=Sheet1';
 
 const galleryImages = [
   "VACO-9.jpg", "VACO-10.jpg", "VACO-11.jpg", "VACO-12.jpg", "VACO-13.jpg", 
@@ -26,6 +89,73 @@ const galleryImages = [
 
 export default function Alumni() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [alumni, setAlumni] = useState<AlumnusData[]>([]);
+  const [alumniLoading, setAlumniLoading] = useState(true);
+  const [alumniError, setAlumniError] = useState(false);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const animRef = useRef<number | null>(null);
+  const posRef = useRef(0);
+  const isPausedRef = useRef(false);
+
+  // Load alumni: Firebase takes priority over Google Sheets
+  useEffect(() => {
+    let mounted = true;
+    const loadData = async () => {
+      setAlumniLoading(true);
+      try {
+        const stored = await getSpotlight();
+        
+        if (!mounted) return;
+        
+        if (stored.length > 0) {
+          // Admin has managed data — use it directly, no fetch needed
+          setAlumni(stored.map(s => ({
+            name: s.name,
+            period: s.period,
+            profession: s.profession,
+            workStation: s.workStation,
+            imageUrl: s.imageUrl,
+            imageFallback: '',
+          })));
+          setAlumniLoading(false);
+        } else {
+          // No admin data — fall back to live Google Sheets
+          const res = await fetch(SHEET_CSV_URL);
+          if (!res.ok) throw new Error('Network error');
+          const text = await res.text();
+          if (!mounted) return;
+          setAlumni(parseCSV(text));
+          setAlumniLoading(false);
+        }
+      } catch (err) {
+        if (!mounted) return;
+        setAlumniError(true);
+        setAlumniLoading(false);
+      }
+    };
+    
+    loadData();
+    return () => { mounted = false; };
+  }, []);
+
+  // Smooth CSS-based auto-scroll animation via requestAnimationFrame
+  useEffect(() => {
+    if (!trackRef.current || alumni.length === 0) return;
+    const track = trackRef.current;
+    const speed = 0.5; // px per frame
+    const animate = () => {
+      if (!isPausedRef.current) {
+        posRef.current += speed;
+        // Reset when we've scrolled through exactly half the duplicated list
+        const halfWidth = track.scrollWidth / 2;
+        if (posRef.current >= halfWidth) posRef.current = 0;
+        track.style.transform = `translateX(-${posRef.current}px)`;
+      }
+      animRef.current = requestAnimationFrame(animate);
+    };
+    animRef.current = requestAnimationFrame(animate);
+    return () => { if (animRef.current) cancelAnimationFrame(animRef.current); };
+  }, [alumni]);
 
   const gridImages = galleryImages.slice(0, 7);
   const scrollImages = galleryImages;
@@ -55,17 +185,16 @@ export default function Alumni() {
   // Layout helper for the featured bento cluster (7 images)
   const getBentoClass = (idx: number) => {
     switch (idx) {
-      case 0: return 'md:col-span-2 md:row-span-2'; // Large
-      case 1: return 'md:col-span-1 md:row-span-1'; // Small
-      case 2: return 'md:col-span-1 md:row-span-1'; // Small
-      case 3: return 'md:col-span-2 md:row-span-1'; // Wide
-      case 4: return 'md:col-span-1 md:row-span-1'; // Small
-      case 5: return 'md:col-span-1 md:row-span-1'; // Small
-      case 6: return 'md:col-span-2 md:row-span-1'; // Wide
+      case 0: return 'md:col-span-2 md:row-span-2';
+      case 1: return 'md:col-span-1 md:row-span-1';
+      case 2: return 'md:col-span-1 md:row-span-1';
+      case 3: return 'md:col-span-2 md:row-span-1';
+      case 4: return 'md:col-span-1 md:row-span-1';
+      case 5: return 'md:col-span-1 md:row-span-1';
+      case 6: return 'md:col-span-2 md:row-span-1';
       default: return 'col-span-1 row-span-1';
     }
   };
-
 
 
   return (
@@ -146,47 +275,108 @@ export default function Alumni() {
           </motion.div>
         </div>
 
-        {/* Success Stories - Horizontal Cards */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-32">
+        {/* Alumni Spotlight - Live Auto-Scrolling from Google Sheets */}
+        <motion.div id="spotlight" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-32">
           <div className="text-center mb-12">
-            <h2 id="spotlight" className="text-3xl md:text-4xl font-bold mb-4 flex items-center justify-center gap-3">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-primary font-bold mb-4 text-sm">
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" /> Live from Alumni Network
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center justify-center gap-3">
               <GraduationCap className="text-primary" size={32} /> Alumni Spotlight
             </h2>
-            <p className="text-gray-600 text-base lg:text-lg max-w-2xl mx-auto">Meet some of our outstanding alumni making significant contributions in their respective fields.</p>
+            <p className="text-gray-600 text-base lg:text-lg max-w-2xl mx-auto">Meet our outstanding alumni making significant contributions across the globe.</p>
           </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
-            {successfulAlumni.map((alumni, idx) => (
-              <motion.div 
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 }}
-                className="flex flex-col bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group"
-              >
-                {/* Image Top */}
-                <div className="w-full h-56 sm:h-64 relative overflow-hidden shrink-0">
-                  <img 
-                    src={alumni.img} 
-                    alt={alumni.name} 
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    referrerPolicy="no-referrer"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+          {/* Loading State */}
+          {alumniLoading && (
+            <div className="flex items-center justify-center py-24 gap-3 text-primary">
+              <Loader2 size={32} className="animate-spin" />
+              <span className="text-lg font-medium">Loading alumni data…</span>
+            </div>
+          )}
+
+          {/* Error State */}
+          {alumniError && !alumniLoading && (
+            <div className="text-center py-16 text-gray-500">
+              <p className="text-lg">Could not load alumni data. Please check your connection.</p>
+            </div>
+          )}
+
+          {/* Horizontal Auto-Scroll Strip */}
+          {!alumniLoading && !alumniError && alumni.length > 0 && (
+            <div
+              className="relative overflow-hidden"
+              onMouseEnter={() => { isPausedRef.current = true; }}
+              onMouseLeave={() => { isPausedRef.current = false; }}
+            >
+              {/* Fade edges */}
+              <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
+              <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
+
+              {/* Scrolling track — duplicated list for seamless loop */}
+              <div className="overflow-hidden py-4">
+                <div ref={trackRef} className="flex gap-6 w-max">
+                  {[...alumni, ...alumni].map((person, idx) => (
+                    <div
+                      key={idx}
+                      className="group flex-none w-64 sm:w-72 bg-white rounded-[2rem] shadow-md border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col"
+                    >
+                      {/* Photo */}
+                      <div className="w-full h-52 relative overflow-hidden bg-gray-100 shrink-0">
+                        {person.imageUrl ? (
+                          <img
+                            src={person.imageUrl}
+                            alt={person.name}
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            loading="lazy"
+                            decoding="async"
+                            onError={(e) => {
+                              const target = e.currentTarget;
+                              // Try fallback URL first
+                              if (target.src !== person.imageFallback && person.imageFallback) {
+                                target.src = person.imageFallback;
+                              } else {
+                                // Both failed — show avatar placeholder
+                                target.style.display = 'none';
+                                const parent = target.parentElement;
+                                if (parent) {
+                                  parent.innerHTML = `<div class="w-full h-full flex flex-col items-center justify-center bg-blue-50 gap-2"><svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='none' stroke='#001a40' stroke-width='1.5'><circle cx='12' cy='8' r='4'/><path d='M4 20c0-4 3.6-7 8-7s8 3 8 7'/></svg></div>`;
+                                }
+                              }
+                            }}
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center bg-blue-50">
+                            <GraduationCap size={48} className="text-primary/30" />
+                          </div>
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                        {/* Period Badge */}
+                        <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/50 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
+                          <Calendar size={10} /> {person.period}
+                        </div>
+                      </div>
+
+                      {/* Info */}
+                      <div className="p-5 flex flex-col gap-2 grow">
+                        <h3 className="text-base font-black text-gray-900 leading-tight line-clamp-1 group-hover:text-primary transition-colors">
+                          {person.name}
+                        </h3>
+                        <div className="flex items-start gap-2 text-primary">
+                          <Briefcase size={13} className="shrink-0 mt-0.5" />
+                          <span className="text-xs font-semibold leading-snug line-clamp-2">{person.profession}</span>
+                        </div>
+                        <div className="flex items-start gap-2 text-gray-500">
+                          <MapPin size={13} className="shrink-0 mt-0.5" />
+                          <span className="text-xs leading-snug line-clamp-2">{person.workStation}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                
-                {/* Content Bottom */}
-                <div className="p-5 sm:p-7 flex flex-col justify-center bg-white relative grow">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-primary rounded-b-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-2 line-clamp-1 text-center">{alumni.name}</h3>
-                  <p className="text-xs sm:text-sm text-gray-500 font-medium line-clamp-2 leading-relaxed text-center">{alumni.role}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </div>
+          )}
         </motion.div>
 
         {/* Alumni College League Section */}

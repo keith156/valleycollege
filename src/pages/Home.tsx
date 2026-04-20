@@ -200,16 +200,16 @@ export default function Home() {
       {/* Message from Our Head Teacher */}
       <section className="pt-20 pb-6 bg-white overflow-hidden relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start lg:items-stretch">
             {/* Image Side */}
             <motion.div 
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative"
+              className="relative h-full"
             >
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl w-full lg:mr-auto lg:ml-0 h-[400px] md:h-[500px] lg:h-[600px]">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl w-full lg:mr-auto lg:ml-0 h-[400px] md:h-[500px] lg:h-full min-h-[400px]">
                 <img
                   src="/HM valley college.jpg"
                   alt="Ms. Kabezi Doreen - Head Teacher"
@@ -352,16 +352,16 @@ export default function Home() {
                     <motion.div 
                       className="w-full md:w-1/2 pl-12 md:pl-0 z-20"
                       initial={{ 
-                        x: idx % 2 === 0 ? "110%" : "-110%",
+                        x: idx % 2 === 0 ? 100 : -100,
                         opacity: 0,
-                        scale: 1.1
+                        scale: 0.95
                       }}
                       whileInView={{ 
                         x: 0,
                         opacity: 1,
                         scale: 1
                       }}
-                      viewport={{ once: false, margin: "-100px" }}
+                      viewport={{ once: true, margin: "-50px" }}
                       transition={{ 
                         duration: 2.5, 
                         ease: [0.22, 1, 0.36, 1], // Custom cubic-bezier for a premium slide

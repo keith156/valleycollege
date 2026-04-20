@@ -211,9 +211,9 @@ export default function About() {
             <div className="h-2 w-24 bg-primary mx-auto rounded-full" />
           </div>
 
-          <div className="flex flex-col items-center py-6 px-0 md:px-8 max-w-7xl mx-auto overflow-hidden">
+          <div className="flex flex-col py-6 px-4 md:px-8 max-w-7xl mx-auto overflow-hidden">
             {governanceData.map((item, idx) => (
-              <div key={idx} className="w-full flex flex-col items-center">
+              <div key={idx} className="w-full flex flex-col items-start">
                 <motion.div 
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -344,12 +344,12 @@ export default function About() {
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
           className="pb-32 px-4 md:px-8"
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 auto-rows-[250px] md:auto-rows-[300px] max-w-[1600px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 grid-flow-dense gap-4 sm:gap-6 auto-rows-[250px] md:auto-rows-[300px] max-w-[1600px] mx-auto">
             {[
               "IMG_20260401_181411_242.jpg", 
               "2.jpeg", "4.jpeg", "6.jpeg", "8.jpeg", "9.jpeg", 
               "12.jpeg", "13.jpeg", "14.jpeg", "15.jpeg", 
-              "16.jpeg", "17.jpeg", "18.jpeg", "19.jpeg", "20.jpeg", 
+              "16.jpeg", "18.jpeg", "20.jpeg", 
               "21.jpeg", "23.jpeg", "24.jpeg", 
               "IMG_20260401_184319_761.jpg", "IMG_20260401_184701_943.jpg", 
               "IMG_20260401_181848_193.jpg", "IMG_20260401_184018_232.jpg"
