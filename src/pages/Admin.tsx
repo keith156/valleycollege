@@ -226,7 +226,7 @@ export default function Admin() {
     setImportLoading(true);
     setImportMsg(null);
     try {
-      const CSV_URL = 'https://docs.google.com/spreadsheets/d/1NC3QF6GOPnp84WOV_cAMqI3wxKbx_bkpjsASYx01Bz8/gviz/tq?tqx=out:csv&sheet=Sheet1';
+      const CSV_URL = 'https://docs.google.com/spreadsheets/d/1NC3QF6GOPnp84WOV_cAMqI3wxKbx_bkpjsASYx01Bz8/export?format=csv';
       const res = await fetch(CSV_URL);
       if (!res.ok) throw new Error('Fetch failed');
       const csv = await res.text();

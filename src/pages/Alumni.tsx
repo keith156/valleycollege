@@ -78,7 +78,7 @@ function parseCSV(csv: string): AlumnusData[] {
   }).filter(a => a.name && a.name.length > 0);
 }
 
-const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1NC3QF6GOPnp84WOV_cAMqI3wxKbx_bkpjsASYx01Bz8/gviz/tq?tqx=out:csv&sheet=Sheet1';
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1NC3QF6GOPnp84WOV_cAMqI3wxKbx_bkpjsASYx01Bz8/export?format=csv';
 
 const galleryImages = [
   "VACO-9.jpg", "VACO-10.jpg", "VACO-11.jpg", "VACO-12.jpg", "VACO-13.jpg", 
