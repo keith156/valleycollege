@@ -77,25 +77,25 @@ export default function Home() {
       year: "1997", 
       title: "Foundation", 
       desc: "This image features the statue of Mzee William Mukaira, the founder of Valley College Secondary School, whose vision and leadership led to the establishment of the school in 1997. The institution began with a pioneering cohort of just 48 A-Level students. His unwavering commitment to excellence, discipline, and quality education laid a strong foundation and continues to shape the values and success of Valley College today.",
-      img: "/images/foundation.jpeg"
+      img: "/images/growth milestones img/foundation.jpeg"
     },
     { 
-      year: "2010", 
+      year: "2000", 
       title: "Expansion", 
-      desc: "Establishment of the state-of-the-art science laboratories and modern dormitories.",
-      img: "/images/13.jpeg"
+      desc: "Following its establishment in 1997, Valley College Secondary School experienced significant expansion between 2000 and 2010, a period that defined its physical and academic growth. During this time, the institution invested in the construction of key infrastructure, including classroom blocks, science laboratories, administrative facilities, and student accommodation, to support its steadily increasing enrollment.",
+      img: "/images/growth milestones img/expansion.jpeg"
     },
     { 
-      year: "2015", 
+      year: "2018", 
       title: "Partnership", 
-      desc: "Strategic partnership formed with Valley University of Science and Technology.",
-      img: "/images/14.jpeg"
+      desc: "Valley College Secondary School and Valley University share a strong historical and strategic partnership under the leadership of the Mukaira Foundation. United by a common vision for excellence in education and located side by side, the two institutions complement each other by creating a seamless pathway from secondary to university education. This close relationship promotes mentorship, academic growth, innovation, and shared values of discipline, leadership, and service, strengthening opportunities for learners at every stage",
+      img: "/images/growth milestones img/partnership.jpeg"
     },
     { 
-      year: "2020", 
+      year: "2026", 
       title: "Excellence", 
-      desc: "Consistent top-tier performance in national UNEB examinations year over year.",
-      img: "/images/15.jpeg"
+      desc: "Valley College Secondary School has consistently upheld a culture of excellence grounded in strong academic performance, discipline, and holistic student development. The school has distinguished itself through outstanding national examination results and effective teaching. Notably, in 2005, it emerged as the best-performing secondary school in Western Uganda, highlighting its commitment to quality education.",
+      img: "/images/growth milestones img/excellence.jpeg"
     }
   ];
 
@@ -198,7 +198,8 @@ export default function Home() {
       </div>
 
       {/* Message from Our Head Teacher */}
-      <section className="pt-20 pb-6 bg-white overflow-hidden relative z-20">
+      <section className="pt-12 pb-4 bg-white overflow-hidden relative z-20">
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start lg:items-stretch">
             {/* Image Side */}
@@ -305,12 +306,14 @@ export default function Home() {
       </section>
 
       {/* Growth Milestones Timeline (Transferred from About) */}
-      <section className="pt-6 pb-24 bg-white relative overflow-hidden">
+      <section className="py-12 bg-white relative overflow-hidden">
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 md:mb-20">
-            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Our History</span>
+          <div className="flex flex-col items-center text-center mb-12">
+            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Our History</span>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-gray-900">Growth Milestones</h2>
           </div>
+
 
           <div className="relative max-w-7xl mx-auto">
             {/* Center Line */}
@@ -389,17 +392,19 @@ export default function Home() {
       </section>
 
       {/* Key Highlights */}
-      <section className="py-24 bg-gray-50 relative">
+      <section className="py-12 bg-gray-50 relative">
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16 max-w-5xl mx-auto"
+            className="flex flex-col items-center text-center mb-12 max-w-6xl mx-auto"
           >
             <h2 className="text-4xl font-bold mb-4">Why Choose Valley College?</h2>
             <p className="text-xl text-gray-600 max-w-none">We provide a holistic educational experience designed to nurture every aspect of student development.</p>
           </motion.div>
+
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -428,14 +433,17 @@ export default function Home() {
       {/* Removed School Programs and News Updates from Home */}
 
       {/* Testimonials */}
-      <section className="pt-8 pb-12 bg-gray-50 overflow-hidden">
+      <section className="py-12 bg-gray-50 overflow-hidden">
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            className="flex flex-col items-center mb-12"
           >
-            <h2 className="text-4xl font-bold mb-12 text-center">What Our Community Says</h2>
+            <h2 className="text-4xl font-bold mb-0 text-center">What Our Community Says</h2>
+
             <div className="-mx-4 sm:-mx-8">
               <Carousel autoPlayInterval={5000}>
                 {[

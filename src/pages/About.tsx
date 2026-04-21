@@ -119,8 +119,9 @@ const governanceData = [
 
 export default function About() {
   return (
-    <div className="flex flex-col bg-gray-50 pb-20">
+    <div className="flex flex-col bg-gray-50">
       {/* Hero Section */}
+
       <div className="relative bg-primary text-white py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
           <div className="w-full h-full bg-gray-900" />
@@ -157,7 +158,8 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-20 w-full">
         
         {/* Bento Grid: Vision, Mission, Values */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+
           {/* Vision */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
@@ -215,13 +217,15 @@ export default function About() {
         </div>
 
         {/* Pioneer Students Section (U.A.C.E 1998) */}
-        <section className="mb-32">
-          <div className="text-center mb-12">
-            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-3 block">U.A.C.E 1998</span>
-            <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight">Our Pioneer Students</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Honoring our very first A-Level cohort of 1998, who set the standard for excellence at Valley College.</p>
-            <div className="h-2 w-24 bg-primary mx-auto mt-6 rounded-full" />
+        <section className="mb-20">
+
+          <div className="flex flex-col items-center text-center mb-12">
+            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">U.A.C.E 1998</span>
+            <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">Our Pioneer Students</h2>
+            <p className="text-lg text-gray-600 max-w-4xl mx-auto mb-6">Honoring our very first A-Level cohort of 1998, who set the standard for excellence at Valley College.</p>
+            <div className="h-2 w-24 bg-primary mx-auto rounded-full" />
           </div>
+
 
           <div className="-mx-4 sm:-mx-8">
             <Carousel autoPlayInterval={4000}>
@@ -249,11 +253,13 @@ export default function About() {
         </section>
 
         {/* New Governance Structure Section */}
-        <section id="governance" className="mb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 md:mb-16">
+        <section id="governance" className="mb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="flex flex-col items-center text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight">Governance Structure</h2>
-            <div className="h-2 w-24 bg-primary mx-auto rounded-full" />
+            <div className="h-2 w-24 bg-primary rounded-full" />
           </div>
+
 
           <div className="flex flex-col py-6 px-4 md:px-8 max-w-7xl mx-auto overflow-hidden">
             {governanceData.map((item, idx) => (
@@ -311,7 +317,8 @@ export default function About() {
         </section>
 
         {/* Facilities & Overview Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white p-8 rounded-[2rem] shadow-lg border border-gray-100">
             <MapPin className="text-primary mb-6" size={40} />
             <h3 className="text-2xl font-bold mb-4">Location & Ownership</h3>
@@ -365,18 +372,20 @@ export default function About() {
       </div>
 
       {/* Campus Life Section (Full Width) */}
-      <div className="w-full bg-white pb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12 text-center">
+      <div className="w-full bg-white pb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-12 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            className="flex flex-col items-center"
           >
-            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-3 block">Perspective</span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-4">Campus Life</h2>
+            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Perspective</span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6">Campus Life</h2>
             <div className="h-1.5 w-20 bg-primary mx-auto rounded-full" />
           </motion.div>
         </div>
+
 
         {/* Zoom Parallax Gallery (Full Width) */}
         <section className="bg-white text-gray-900 relative">
@@ -386,8 +395,9 @@ export default function About() {
         {/* Campus Life Gallery (Continuous) */}
         <motion.section 
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-          className="pb-32 px-4 md:px-8"
+          className="pb-8 px-4 md:px-8"
         >
+
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 grid-flow-dense gap-4 sm:gap-6 auto-rows-[250px] md:auto-rows-[300px] max-w-[1600px] mx-auto">
             {[
               "IMG_20260401_181411_242.jpg", 

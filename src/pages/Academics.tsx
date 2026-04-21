@@ -19,7 +19,7 @@ export default function Academics() {
   }, []);
 
   return (
-    <div className="flex flex-col bg-gray-50 pb-20">
+    <div className="flex flex-col bg-gray-50">
       {/* Page Header */}
       <div className="relative bg-primary text-white py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
@@ -45,10 +45,10 @@ export default function Academics() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
         
         {/* Curriculum & Approach Overview */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-16">
           {/* Curriculum */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="lg:col-span-3 bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden relative group">
             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-blue-100 transition-colors duration-700" />
@@ -126,14 +126,14 @@ export default function Academics() {
         </div>
 
         {/* UACE Wall of Fame */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-32 max-w-4xl mx-auto">
-          <div className="text-center mb-12">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20 max-w-4xl mx-auto">
+          <div className="flex flex-col items-center text-center mb-10">
             <div className="inline-flex items-center justify-center gap-3 bg-green-100 text-green-800 px-6 py-2 rounded-full mb-4">
               <Star size={20} className="fill-green-600 text-green-600" />
               <h2 id="fame" className="text-2xl md:text-3xl font-bold">UACE Wall of Fame</h2>
               <Star size={20} className="fill-green-600 text-green-600" />
             </div>
-            <p className="text-gray-600 text-base lg:text-lg max-w-2xl mx-auto">Celebrating our top performing students in the Uganda Advanced Certificate of Education (UACE) examinations over the years.</p>
+            <p className="text-gray-600 text-base lg:text-lg max-w-4xl">Celebrating our top performing students in the Uganda Advanced Certificate of Education (UACE) examinations over the years.</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
@@ -188,11 +188,11 @@ export default function Academics() {
         </motion.div>
 
         {/* Departments & Subjects */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-32">
-          <div className="text-center mb-16">
-            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Departments</span>
-            <h2 id="subjects" className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-gray-900">Subjects Offered</h2>
-            <p className="text-gray-600 text-lg lg:text-xl max-w-3xl mx-auto">We offer a comprehensive range of subjects at both Ordinary and Advanced levels, catering to diverse student interests and career aspirations.</p>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
+          <div className="flex flex-col items-center text-center mb-12">
+            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Departments</span>
+            <h2 id="subjects" className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 text-gray-900">Subjects Offered</h2>
+            <p className="text-gray-600 text-lg lg:text-xl max-w-4xl">We offer a comprehensive range of subjects at both Ordinary and Advanced levels, catering to diverse student interests and career aspirations.</p>
           </div>
           
           <div className="space-y-16">
@@ -290,11 +290,11 @@ export default function Academics() {
         </motion.div>
 
         {/* Co-curricular Activities */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
-          <div className="text-center mb-12">
-            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Beyond The Classroom</span>
-            <h2 id="activities" className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 text-gray-900">Co-curricular Activities</h2>
-            <p className="text-gray-600 text-lg lg:text-xl max-w-3xl mx-auto">Education goes beyond the classroom. We encourage all students to participate in sports and clubs to develop leadership skills, teamwork, and physical well-being.</p>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16">
+          <div className="flex flex-col items-center text-center mb-10">
+            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Beyond The Classroom</span>
+            <h2 id="activities" className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 text-gray-900">Co-curricular Activities</h2>
+            <p className="text-gray-600 text-lg lg:text-xl max-w-4xl">Education goes beyond the classroom. We encourage all students to participate in sports and clubs to develop leadership skills, teamwork, and physical well-being.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -347,18 +347,18 @@ export default function Academics() {
         </motion.div>
 
         {/* School Programs for the Term (Transferred from Home) */}
-        <section className="py-16 lg:py-24 bg-white rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden mt-16">
+        <section className="py-12 lg:py-16 bg-white rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden mt-12">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.05),transparent_50%)] pointer-events-none" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="flex flex-col items-center text-center mb-12"
             >
-              <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Upcoming Events</span>
+              <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Upcoming Events</span>
               <h2 id="calendar" className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">School Programs for the Term</h2>
-              <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto">Stay updated with our key academic and co-curricular activities for this term.</p>
+              <p className="text-lg lg:text-xl text-gray-600 max-w-4xl">Stay updated with our key academic and co-curricular activities for this term.</p>
             </motion.div>
 
             <div className="max-w-4xl mx-auto">

@@ -2,6 +2,8 @@ import { Users, GraduationCap, HeartHandshake, MessageCircle, ExternalLink, Glob
 import { motion, AnimatePresence } from 'motion/react';
 import { useState, useCallback, useEffect } from 'react';
 import { getSpotlight, SpotlightAlumnus } from '../lib/spotlight';
+import { Carousel } from '../components/Carousel';
+
 
 const CARDS_PER_PAGE = 3;
 
@@ -14,19 +16,10 @@ const galleryImages = [
 
 export default function Alumni() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [spotlightPage, setSpotlightPage] = useState(0);
+  // Carousel handles navigation and auto-play
   const alumni: SpotlightAlumnus[] = getSpotlight();
 
-  const totalPages = Math.ceil(alumni.length / CARDS_PER_PAGE);
-  const visibleAlumni = alumni.slice(spotlightPage * CARDS_PER_PAGE, (spotlightPage + 1) * CARDS_PER_PAGE);
 
-  const handleSpotlightPrev = useCallback(() => {
-    setSpotlightPage(p => (p - 1 + totalPages) % totalPages);
-  }, [totalPages]);
-
-  const handleSpotlightNext = useCallback(() => {
-    setSpotlightPage(p => (p + 1) % totalPages);
-  }, [totalPages]);
 
   const gridImages = galleryImages.slice(0, 7);
   const scrollImages = galleryImages;
@@ -69,7 +62,7 @@ export default function Alumni() {
 
 
   return (
-    <div className="flex flex-col bg-gray-50 pb-20">
+    <div className="flex flex-col bg-gray-50">
       {/* Page Header */}
       <div className="relative bg-primary text-white py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
@@ -95,10 +88,11 @@ export default function Alumni() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
         
         {/* Introduction - Bento Box Style */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-primary font-bold mb-6">
               <Users size={20} /> Our Community
@@ -147,116 +141,90 @@ export default function Alumni() {
         </div>
 
         {/* Alumni Spotlight — Paginated Cards with Arrows */}
-        <motion.div id="spotlight" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-32">
-          <div className="text-center mb-12">
+        <motion.div id="spotlight" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16">
+
+          <div className="flex flex-col items-center text-center mb-10">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-primary font-bold mb-4 text-sm">
               <GraduationCap size={16} /> Alumni Network
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center justify-center gap-3">
               <GraduationCap className="text-primary" size={32} /> Alumni Spotlight
             </h2>
-            <p className="text-gray-600 text-base lg:text-lg max-w-2xl mx-auto">Meet our outstanding alumni making significant contributions across the globe.</p>
+            <p className="text-gray-600 text-base lg:text-lg max-w-4xl">Meet our outstanding alumni making significant contributions across the globe.</p>
           </div>
 
-          {/* Cards + Navigation */}
+          {/* Cards Carousel */}
           {alumni.length > 0 && (
-            <div className="relative">
-              {/* Left Arrow */}
-              <button
-                onClick={handleSpotlightPrev}
-                className="absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 bg-white shadow-xl border border-gray-200 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all hover:scale-110 hover:shadow-2xl"
-                aria-label="Previous alumni"
-              >
-                <ChevronLeft size={28} />
-              </button>
+            <div className="-mx-4 sm:-mx-8">
+              <Carousel autoPlayInterval={6000}>
+                {alumni.map((person) => (
+                  <div
+                    key={person.id}
+                    className="snap-start shrink-0 w-[85%] sm:w-[350px] md:w-[380px] group bg-white rounded-[2rem] shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col"
+                  >
+                    {/* Photo */}
+                    <div className="w-full h-72 md:h-80 relative overflow-hidden bg-gray-100 shrink-0">
+                      {person.imageUrl ? (
+                        <img
+                          src={person.imageUrl}
+                          alt={person.name}
+                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                          loading="lazy"
+                          decoding="async"
+                          onError={(e) => {
+                            const target = e.currentTarget;
+                            target.style.display = 'none';
+                            const parent = target.parentElement;
+                            if (parent) {
+                              parent.innerHTML = `<div class="w-full h-full flex flex-col items-center justify-center bg-blue-50 gap-2"><svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='none' stroke='#001a40' stroke-width='1.5'><circle cx='12' cy='8' r='4'/><path d='M4 20c0-4 3.6-7 8-7s8 3 8 7'/></svg></div>`;
+                            }
+                          }}
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-blue-50">
+                          <GraduationCap size={48} className="text-primary/30" />
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                    </div>
 
-              {/* Right Arrow */}
-              <button
-                onClick={handleSpotlightNext}
-                className="absolute -right-2 md:-right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 bg-white shadow-xl border border-gray-200 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all hover:scale-110 hover:shadow-2xl"
-                aria-label="Next alumni"
-              >
-                <ChevronRight size={28} />
-              </button>
-
-              {/* Cards Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 px-6 md:px-8">
-                <AnimatePresence mode="wait">
-                  {visibleAlumni.map((person) => (
-                    <motion.div
-                      key={person.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.4 }}
-                      className="group bg-white rounded-[2rem] shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col"
-                    >
-                      {/* Photo */}
-                      <div className="w-full h-72 md:h-80 relative overflow-hidden bg-gray-100 shrink-0">
-                        {person.imageUrl ? (
-                          <img
-                            src={person.imageUrl}
-                            alt={person.name}
-                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                            loading="lazy"
-                            decoding="async"
-                            onError={(e) => {
-                              const target = e.currentTarget;
-                              target.style.display = 'none';
-                              const parent = target.parentElement;
-                              if (parent) {
-                                parent.innerHTML = `<div class="w-full h-full flex flex-col items-center justify-center bg-blue-50 gap-2"><svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='none' stroke='#001a40' stroke-width='1.5'><circle cx='12' cy='8' r='4'/><path d='M4 20c0-4 3.6-7 8-7s8 3 8 7'/></svg></div>`;
-                              }
-                            }}
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center bg-blue-50">
-                            <GraduationCap size={48} className="text-primary/30" />
-                          </div>
-                        )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                        {/* Period Badge */}
-                        <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-black/50 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full">
+                    {/* Info */}
+                    <div className="p-6 md:p-8 flex flex-col gap-4 grow">
+                      <div className="flex justify-between items-start gap-4">
+                        <h3 className="text-xl font-black text-gray-900 leading-tight group-hover:text-primary transition-colors">
+                          {person.name}
+                        </h3>
+                        <div className="flex items-center gap-1.5 bg-blue-50 text-primary text-[10px] font-bold px-3 py-1 rounded-full shrink-0">
                           <Calendar size={12} /> {person.period}
                         </div>
                       </div>
-
-                      {/* Info */}
-                      <div className="p-6 flex flex-col gap-3 grow">
-                        <h3 className="text-lg font-black text-gray-900 leading-tight line-clamp-1 group-hover:text-primary transition-colors">
-                          {person.name}
-                        </h3>
-                        <div className="flex items-start gap-2 text-primary">
-                          <Briefcase size={15} className="shrink-0 mt-0.5" />
-                          <span className="text-sm font-semibold leading-snug line-clamp-2">{person.profession}</span>
+                      
+                      <div className="space-y-3">
+                        <div className="flex items-start gap-3 text-gray-700">
+                          <div className="bg-blue-50 p-2 rounded-lg text-primary">
+                            <Briefcase size={16} className="shrink-0" />
+                          </div>
+                          <span className="text-sm font-bold leading-tight">{person.profession}</span>
                         </div>
-                        <div className="flex items-start gap-2 text-gray-500">
-                          <MapPin size={15} className="shrink-0 mt-0.5" />
-                          <span className="text-sm leading-snug line-clamp-2">{person.workStation}</span>
+                        <div className="flex items-start gap-3 text-gray-500">
+                          <div className="bg-gray-50 p-2 rounded-lg">
+                            <MapPin size={16} className="shrink-0" />
+                          </div>
+                          <span className="text-sm font-medium leading-tight">{person.workStation}</span>
                         </div>
                       </div>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-              </div>
-
-              {/* Page Indicators */}
-              <div className="flex items-center justify-center gap-2 mt-8">
-                {Array.from({ length: totalPages }).map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setSpotlightPage(i)}
-                    className={`h-2.5 rounded-full transition-all duration-300 ${i === spotlightPage ? 'w-8 bg-primary' : 'w-2.5 bg-gray-300 hover:bg-gray-400'}`}
-                    aria-label={`Go to page ${i + 1}`}
-                  />
+                    </div>
+                  </div>
                 ))}
-              </div>
+              </Carousel>
             </div>
           )}
         </motion.div>
 
+
         {/* Alumni College League Section */}
-        <section id="league" className="mb-32">
+        <section id="league" className="mb-16">
+
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -321,19 +289,20 @@ export default function Alumni() {
         </section>
 
         {/* Funding Project - Centered & Prominent */}
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-7xl mx-auto mb-32">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-7xl mx-auto mb-16">
+
           <div className="bg-white p-10 lg:p-16 rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden">
             {/* Decorative Background Elements */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3 pointer-events-none" />
             
             <div className="relative z-10">
-              <div className="text-center mb-12">
+              <div className="flex flex-col items-center text-center mb-10">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 text-primary mb-6 shadow-sm border border-blue-100">
                   <HeartHandshake size={32} />
                 </div>
-                <h2 id="giveback" className="text-3xl lg:text-4xl font-bold mb-6 text-gray-900">Alumni Giveback Project</h2>
-                <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                <h2 id="giveback" className="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">Alumni Giveback Project</h2>
+                <p className="text-lg lg:text-xl text-gray-600 max-w-4xl leading-relaxed">
                   We are currently raising funds for the construction of a new state-of-the-art ICT laboratory. Join hands with fellow alumni to make this a reality and empower the next generation!
                 </p>
               </div>
@@ -382,18 +351,20 @@ export default function Alumni() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative pt-8 pb-16"
+          className="relative pt-8 pb-8"
+
         >
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-100 text-primary mb-6 shadow-sm">
+          <div className="flex flex-col items-center text-center mb-10">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-100 text-primary mb-4 shadow-sm">
               <ImageIcon size={28} />
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight">Alumni Gallery</h2>
-            <div className="h-1.5 w-24 bg-primary mx-auto rounded-full mb-6" />
-            <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto">Capturing memories and milestones of our alumni community through the years.</p>
+            <div className="h-1.5 w-24 bg-primary rounded-full mb-4" />
+            <p className="text-lg lg:text-xl text-gray-600 max-w-4xl">Capturing memories and milestones of our alumni community through the years.</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 auto-rows-[150px] md:auto-rows-[250px] mb-20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 auto-rows-[150px] md:auto-rows-[250px] mb-12">
+
             {gridImages.map((image, idx) => (
               <motion.div
                 key={idx}

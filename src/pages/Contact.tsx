@@ -3,9 +3,9 @@ import { motion } from 'motion/react';
 
 export default function Contact() {
   return (
-    <div className="flex flex-col bg-gray-50 pb-20">
+    <div className="flex flex-col bg-gray-50">
       {/* Page Header */}
-      <div className="relative bg-primary text-white py-20 lg:py-24 overflow-hidden">
+      <div className="relative bg-primary text-white py-12 lg:py-16 overflow-hidden">
         <div className="absolute inset-0">
           <div className="w-full h-full bg-gray-900" />
           <img
@@ -21,14 +21,14 @@ export default function Contact() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-md">Contact Us</h1>
-            <p className="text-lg lg:text-xl text-blue-100 max-w-2xl mx-auto drop-shadow-sm">
+            <p className="text-lg lg:text-xl text-blue-100 max-w-4xl mx-auto drop-shadow-sm">
               We'd love to hear from you. Get in touch with Valley College.
             </p>
           </motion.div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           
           {/* Contact Information */}
@@ -131,7 +131,7 @@ export default function Contact() {
         </div>
 
         {/* Map Placeholder */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-20 rounded-3xl overflow-hidden shadow-sm border border-gray-200 h-[400px] bg-gray-200 relative group">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-12 rounded-3xl overflow-hidden shadow-sm border border-gray-200 h-[400px] bg-gray-200 relative group">
           <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-500 z-10 bg-gray-100/80 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500">
             <MapPin size={48} className="mb-4 text-primary" />
             <p className="font-medium text-lg">Interactive Map Placeholder</p>

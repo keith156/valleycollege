@@ -78,7 +78,7 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full shadow-sm font-sans">
       {/* Top Banner */}
-      <div className="bg-[#001a40] text-white h-[38px] flex items-center justify-center px-4 sm:px-6 lg:px-8 border-b border-white/10 overflow-hidden">
+      <div className="bg-[#001a40] text-white h-[48px] flex items-center justify-center px-4 sm:px-6 lg:px-8 border-b border-white/10 overflow-hidden">
         <div className="max-w-[1440px] mx-auto flex justify-center items-center">
           <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-[10px] md:text-[11px] font-bold tracking-wider uppercase">
             <a href="mailto:info@valleycollege.sc.ug" className="flex items-center gap-1.5 hover:text-blue-200 transition-colors whitespace-nowrap">
@@ -99,27 +99,27 @@ export function Navbar() {
 
       {/* Main Navbar */}
       <div className="bg-[#b0c4de] w-full">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12">
-          <div className="flex justify-between items-center h-24 md:h-28">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+          <div className="flex justify-between items-center h-20 lg:h-24 xl:h-28">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-4 md:gap-6 group">
+            <Link to="/" className="flex items-center gap-3 lg:gap-4 xl:gap-6 group shrink-0">
               <img 
                 src="/logo.png" 
                 alt="Valley College Logo" 
-                className="h-16 md:h-20 w-auto object-contain group-hover:scale-105 transition-transform"
+                className="h-14 lg:h-16 xl:h-20 w-auto object-contain group-hover:scale-105 transition-transform"
               />
               <div className="flex flex-col justify-center">
-                <span className="font-extrabold text-xl md:text-3xl text-[#001a40] leading-none tracking-tighter mb-1">
+                <span className="font-extrabold text-lg lg:text-xl xl:text-3xl text-[#001a40] leading-none tracking-tighter mb-0.5">
                   VALLEY COLLEGE
                 </span>
-                <span className="font-bold text-xs md:text-sm text-[#001a40]/80 leading-tight tracking-widest uppercase">
+                <span className="font-bold text-[10px] lg:text-xs xl:text-sm text-[#001a40]/80 leading-tight tracking-widest uppercase">
                   Secondary School
                 </span>
               </div>
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+            <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5">
               {NAV_LINKS.map((link) => (
                 <div 
                   key={link.name} 
@@ -130,7 +130,7 @@ export function Navbar() {
                   <Link
                     to={link.path}
                     className={cn(
-                      "flex items-center gap-1 text-[13px] lg:text-sm font-black tracking-widest transition-all hover:text-[#001a40] py-4 px-4 rounded-xl uppercase",
+                      "flex items-center gap-1 text-[11px] lg:text-[12px] xl:text-sm font-black tracking-wider xl:tracking-widest transition-all hover:text-[#001a40] py-3 lg:py-3.5 xl:py-4 px-2.5 lg:px-3 xl:px-4 rounded-xl uppercase whitespace-nowrap",
                       location.pathname === link.path 
                         ? "text-[#001a40] bg-white/40 shadow-sm" 
                         : "text-[#001a40]/70 hover:bg-white/20"
@@ -139,9 +139,9 @@ export function Navbar() {
                     {link.name}
                     {link.subLinks && (
                       <ChevronDown 
-                        size={14} 
+                        size={13} 
                         className={cn(
-                          "transition-transform duration-300",
+                          "transition-transform duration-300 shrink-0",
                           activeDropdown === link.name ? "rotate-180" : ""
                         )}
                       />
@@ -176,7 +176,7 @@ export function Navbar() {
               ))}
               <Link
                 to="/admissions#process"
-                className="bg-[#001a40] hover:bg-[#002a60] text-white px-8 py-3.5 rounded-xl font-black text-sm tracking-widest transition-all shadow-lg active:scale-95 ml-6 uppercase"
+                className="bg-[#001a40] hover:bg-[#002a60] text-white px-5 xl:px-8 py-3 xl:py-3.5 rounded-xl font-black text-[11px] lg:text-xs xl:text-sm tracking-wider xl:tracking-widest transition-all shadow-lg active:scale-95 ml-3 xl:ml-6 uppercase whitespace-nowrap"
               >
                 APPLY NOW
               </Link>
@@ -184,7 +184,7 @@ export function Navbar() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-3 text-[#001a40] bg-white/20 rounded-xl transition-colors active:scale-90"
+              className="lg:hidden p-3 text-[#001a40] bg-white/20 rounded-xl transition-colors active:scale-90"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >
@@ -201,7 +201,7 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#b0c4de] border-t border-[#001a40]/10 overflow-hidden"
+            className="lg:hidden bg-[#b0c4de] border-t border-[#001a40]/10 overflow-hidden"
           >
             <div className="px-4 py-6 space-y-2">
               {NAV_LINKS.map((link) => (
