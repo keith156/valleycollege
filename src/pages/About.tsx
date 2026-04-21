@@ -1,6 +1,5 @@
 import { Building2, Target, History, Users, BookOpen, Handshake, MapPin, Image as ImageIcon, Compass, Star, ShieldCheck, ArrowRight, Clock, User, GraduationCap, ClipboardList } from 'lucide-react';
 import { motion } from 'motion/react';
-import { ZoomParallax } from '../components/ui/zoom-parallax';
 import { Carousel } from '../components/Carousel';
 
 const pioneerGroups = [
@@ -13,19 +12,7 @@ const pioneerGroups = [
   ["Namirembe Winnie", "Musinguzi Wilson Katson", "Natukunda Merian", "Atusimire Shallon", "Akugizibwe David", "Natukunda Betty", "Tutarimwebwa Ovia"]
 ];
 
-const parallaxImages = [
-  { src: '/images/IMG_20260401_181411_242.jpg', alt: 'School building' },
-  { src: '/images/1.jpeg', alt: 'Students in class' },
-  { src: '/images/3.jpeg', alt: 'Science lab' },
-  { src: '/images/IMG_20260401_183410_033.jpg', alt: 'Sports field' },
-  { src: '/images/5.jpeg', alt: 'Library' },
-  { src: '/images/IMG_20260401_181902_661.jpg', alt: 'Graduation' },
-  { src: '/images/7.jpeg', alt: 'Campus grounds' },
-  { src: '/images/IMG_20260401_183339_106.jpg', alt: 'Art class' },
-  { src: '/images/IMG_20260401_184335_095.jpg', alt: 'Computer lab' },
-  { src: '/images/10.jpeg', alt: 'Cafeteria' },
-  { src: '/images/11.jpeg', alt: 'School event' },
-];
+
 
 const governanceData = [
   {
@@ -217,13 +204,13 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Pioneer Students Section (U.A.C.E 1998) */}
+        {/* Pioneer Students Section (U.A.C.E 1997) */}
         <section className="mb-20">
 
           <div className="flex flex-col items-center text-center mb-12">
-            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">U.A.C.E 1998</span>
+            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">U.A.C.E 1997</span>
             <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">Our Pioneer Students</h2>
-            <p className="text-lg text-gray-600 max-w-4xl mx-auto mb-6">Honoring our very first A-Level cohort of 1998, who set the standard for excellence at Valley College.</p>
+            <p className="text-lg text-gray-600 max-w-4xl mx-auto mb-6">Honoring our very first A-Level cohort of 1997, who set the standard for excellence at Valley College.</p>
             <div className="h-2 w-24 bg-primary mx-auto rounded-full" />
           </div>
 
@@ -231,17 +218,17 @@ export default function About() {
           <div className="-mx-4 sm:-mx-8">
             <Carousel autoPlayInterval={4000}>
               {pioneerGroups.map((group, idx) => (
-                <div key={idx} className="snap-start shrink-0 w-[85%] sm:w-[350px] bg-white p-8 rounded-[2rem] shadow-lg border border-gray-100 flex flex-col relative overflow-hidden group hover:border-primary/30 transition-colors">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                <div key={idx} className="snap-start shrink-0 w-[85%] sm:w-[350px] bg-primary p-8 rounded-[2rem] shadow-lg border border-blue-900 flex flex-col relative overflow-hidden group hover:border-blue-400 transition-colors">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-blue-900/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
                   <div className="flex items-center gap-4 mb-4 relative z-10">
-                    <div className="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center shrink-0 border border-blue-100">
+                    <div className="w-12 h-12 bg-white/10 text-blue-200 rounded-xl flex items-center justify-center shrink-0 border border-white/20">
                       <GraduationCap size={24} />
                     </div>
                   </div>
                   <ul className="space-y-4 relative z-10">
                     {group.map((name, i) => (
-                      <li key={i} className="flex items-start gap-3 text-gray-600 font-medium group-hover:text-gray-900 transition-colors">
-                        <div className="w-2 h-2 rounded-full bg-primary shrink-0 mt-2" />
+                      <li key={i} className="flex items-start gap-3 text-blue-100 font-medium group-hover:text-white transition-colors">
+                        <div className="w-2 h-2 rounded-full bg-blue-300 shrink-0 mt-2" />
                         {name}
                       </li>
                     ))}
@@ -319,21 +306,21 @@ export default function About() {
         {/* Facilities & Overview Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
 
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white p-8 rounded-[2rem] shadow-lg border border-gray-100">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-blue-50 p-8 rounded-[2rem] shadow-lg border border-blue-100">
             <MapPin className="text-primary mb-6" size={40} />
             <h3 className="text-2xl font-bold mb-4">Location & Ownership</h3>
-            <p className="text-lg text-gray-600 mb-6 leading-relaxed">Located in the serene and academic-friendly environment of <strong className="text-gray-900">Bushenyi District</strong>, our campus provides the perfect atmosphere for focused learning.</p>
-            <ul className="space-y-3 text-gray-600 mb-6">
+            <p className="text-lg text-gray-700 mb-6 leading-relaxed">Located in the serene and academic-friendly environment of <strong className="text-primary">Bushenyi District</strong>, our campus provides the perfect atmosphere for focused learning.</p>
+            <ul className="space-y-3 text-gray-700 mb-6">
               <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-primary rounded-full" /> Bushenyi Municipality, Western Uganda</li>
               <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-primary rounded-full" /> Easy access via Mbarara-Kasese Highway</li>
               <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-primary rounded-full" /> Proudly owned by Mukaira Foundation Ltd</li>
             </ul>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-white p-8 rounded-[2rem] shadow-lg border border-gray-100">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-blue-50 p-8 rounded-[2rem] shadow-lg border border-blue-100">
             <Building2 className="text-primary mb-6" size={40} />
             <h3 className="text-2xl font-bold mb-6">World-Class Facilities</h3>
-            <ul className="space-y-4 text-gray-600 text-lg font-medium">
+            <ul className="space-y-4 text-gray-700 text-lg font-medium">
               <li className="flex items-center gap-3"><div className="w-2 h-2 bg-primary rounded-full" /> Modern Classrooms</li>
               <li className="flex items-center gap-3"><div className="w-2 h-2 bg-primary rounded-full" /> Science Laboratories</li>
               <li className="flex items-center gap-3"><div className="w-2 h-2 bg-primary rounded-full" /> Comprehensive Library</li>
@@ -385,12 +372,6 @@ export default function About() {
             <div className="h-1.5 w-20 bg-primary mx-auto rounded-full" />
           </motion.div>
         </div>
-
-
-        {/* Zoom Parallax Gallery (Full Width) */}
-        <section className="bg-white text-gray-900 relative">
-          <ZoomParallax images={parallaxImages} />
-        </section>
 
         {/* Campus Life Gallery (Continuous) */}
         <motion.section 

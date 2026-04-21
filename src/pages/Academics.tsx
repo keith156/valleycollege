@@ -130,10 +130,10 @@ export default function Academics() {
           <div className="flex flex-col items-center text-center mb-10">
             <div className="inline-flex items-center justify-center gap-3 bg-green-100 text-green-800 px-6 py-2 rounded-full mb-4">
               <Star size={20} className="fill-green-600 text-green-600" />
-              <h2 id="fame" className="text-2xl md:text-3xl font-bold">UACE Wall of Fame</h2>
+              <h2 id="fame" className="text-2xl md:text-3xl font-bold">Wall of Fame</h2>
               <Star size={20} className="fill-green-600 text-green-600" />
             </div>
-            <p className="text-gray-600 text-base lg:text-lg max-w-4xl">Celebrating our top performing students in the Uganda Advanced Certificate of Education (UACE) examinations over the years.</p>
+            <p className="text-gray-600 text-base lg:text-lg max-w-4xl">Celebrating our top performing students in national examinations over the years.</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
@@ -173,7 +173,7 @@ export default function Academics() {
                               <span className="font-bold text-gray-900 text-lg mb-2">{student.name}</span>
                               <div className="flex justify-between items-center mt-auto pt-3 border-t border-gray-50">
                                 <span className="text-gray-600 font-medium bg-gray-100 px-2 py-1 rounded-md text-xs">{student.combo}</span>
-                                <span className="text-primary font-black text-sm">{student.pts} pts</span>
+                                <span className="text-primary font-black text-sm">{student.pts}</span>
                               </div>
                             </div>
                           ))}

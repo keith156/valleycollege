@@ -1,4 +1,4 @@
-import { Users, GraduationCap, HeartHandshake, MessageCircle, ExternalLink, Globe, Award, Image as ImageIcon, Trophy, X, ChevronLeft, ChevronRight, Briefcase, MapPin, Calendar } from 'lucide-react';
+import { Users, GraduationCap, HeartHandshake, MessageCircle, ExternalLink, Image as ImageIcon, Trophy, X, ChevronLeft, ChevronRight, Briefcase, MapPin, Calendar } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useState, useCallback, useEffect } from 'react';
 import { getSpotlight, SpotlightAlumnus } from '../lib/spotlight';
@@ -8,7 +8,7 @@ import { Carousel } from '../components/Carousel';
 const CARDS_PER_PAGE = 3;
 
 const galleryImages = [
-  "VACO-9.jpg", "VACO-10.jpg", "VACO-11.jpg", "VACO-12.jpg", "VACO-13.jpg", 
+  "VACO-15.jpg", "VACO-9.jpg", "VACO-10.jpg", "VACO-11.jpg", "VACO-12.jpg", "VACO-13.jpg", 
   "VACO-17.jpg", "VACO-18.jpg", "VACO-19.jpg", "VACO-20.jpg",
   "VACO-21.jpg", "VACO-22.jpg", "VACO-23.jpg", "VACO-24.jpg",
   "FCocfTQWQAMUN01.jpg"
@@ -79,8 +79,8 @@ export default function Alumni() {
           <div className="absolute inset-0 bg-gradient-to-r from-primary from-10% via-primary/80 via-50% to-transparent" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-md">Alumni Network</h1>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-4xl">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-md">Alumni</h1>
             <p className="text-lg lg:text-xl text-white drop-shadow-sm">
               Connecting past students, celebrating success, and building a lifelong community.
             </p>
@@ -90,53 +90,31 @@ export default function Alumni() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
         
-        {/* Introduction - Bento Box Style */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+        {/* Introduction - Side by Side */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch mb-16">
 
-          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-primary font-bold mb-6">
+          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex flex-col justify-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-primary font-bold mb-6 w-fit">
               <Users size={20} /> Our Community
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-gray-900 leading-tight">A Legacy of <br/><span className="text-primary">Excellence</span></h2>
             <p className="text-base lg:text-lg text-gray-600 mb-8 leading-relaxed">
               The Valley College Alumni Network is a vibrant community of former students who have passed through the gates of our great institution. We are leaders, innovators, professionals, and change-makers spread across the globe. Our network exists to foster lifelong connections and provide mentorship to the next generation.
             </p>
-            <a href="#" className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-bold transition-all hover:scale-105 shadow-lg hover:shadow-green-500/30">
+            <a href="#" className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-bold transition-all hover:scale-105 shadow-lg hover:shadow-green-500/30 w-fit">
               <MessageCircle size={24} /> Join the Official WhatsApp Group
             </a>
           </motion.div>
           
-          <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="grid grid-cols-2 gap-4 lg:gap-6">
-            <div className="space-y-4 lg:space-y-6">
-              <div className="bg-blue-50 rounded-3xl p-6 lg:p-8 text-center flex flex-col justify-center aspect-square border border-blue-100">
-                <Globe className="mx-auto text-primary mb-4" size={32} />
-                <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">10k+</h3>
-                <p className="text-gray-600 text-sm lg:text-base font-medium">Global Alumni</p>
-              </div>
-              <img 
-                src="/alumni gallery/VACO-14.jpg" 
-                alt="Alumni gathering" 
-                className="rounded-3xl w-full h-48 lg:h-64 object-cover shadow-sm" 
-                referrerPolicy="no-referrer" 
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div className="space-y-4 lg:space-y-6 pt-8 lg:pt-12">
-              <img 
-                src="/alumni gallery/VACO-15.jpg" 
-                alt="Graduation" 
-                className="rounded-3xl w-full h-48 lg:h-64 object-cover shadow-sm" 
-                referrerPolicy="no-referrer" 
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="bg-primary rounded-3xl p-6 lg:p-8 text-center flex flex-col justify-center aspect-square text-white shadow-lg">
-                <Award className="mx-auto text-blue-300 mb-4" size={32} />
-                <h3 className="text-3xl lg:text-4xl font-bold text-white mb-2">50+</h3>
-                <p className="text-white text-sm lg:text-base font-medium">Industries</p>
-              </div>
-            </div>
+          <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="rounded-3xl overflow-hidden shadow-lg">
+            <img 
+              src="/alumni gallery/VACO-15.jpg" 
+              alt="Alumni community" 
+              className="w-full h-full object-cover" 
+              referrerPolicy="no-referrer" 
+              loading="lazy"
+              decoding="async"
+            />
           </motion.div>
         </div>
 
@@ -144,9 +122,6 @@ export default function Alumni() {
         <motion.div id="spotlight" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16">
 
           <div className="flex flex-col items-center text-center mb-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-primary font-bold mb-4 text-sm">
-              <GraduationCap size={16} /> Alumni Network
-            </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center justify-center gap-3">
               <GraduationCap className="text-primary" size={32} /> Alumni Spotlight
             </h2>
@@ -168,7 +143,7 @@ export default function Alumni() {
                         <img
                           src={person.imageUrl}
                           alt={person.name}
-                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                          className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
                           loading="lazy"
                           decoding="async"
                           onError={(e) => {
@@ -388,7 +363,7 @@ export default function Alumni() {
           </div>
 
           {/* Continuous Auto-Scroll Section */}
-          <div className="relative mt-20 overflow-hidden py-10 bg-gray-50/50 rounded-[3rem] border border-gray-100">
+          <div className="relative mt-8 overflow-hidden py-6 bg-gray-50/50 rounded-[3rem] border border-gray-100">
             <div className="flex whitespace-nowrap overflow-hidden">
               <motion.div 
                 animate={{ x: ["0%", "-50%"] }}

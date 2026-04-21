@@ -10,35 +10,47 @@ export interface WallOfFameYear {
   students: StudentRecord[];
 }
 
-const STORAGE_KEY = 'valley_college_wof';
+const STORAGE_KEY = 'valley_college_wof_v2';
 
 const defaultWof: WallOfFameYear[] = [
   {
     id: '1',
-    year: "2024",
+    year: "2025",
     students: [
-      { name: "Ajuna Rodney", combo: "BCM/ICT", pts: "19 pts" },
-      { name: "Sabiti Alvin", combo: "PCM/ICT", pts: "19 pts" },
-      { name: "Mugisha Ethan", combo: "PEM/ICT", pts: "18 pts" },
-      { name: "Kato Joshua", combo: "MEG/ICT", pts: "18 pts" }
+      { name: "Ainonugisha Messiah Kiyimba", combo: "O-Level", pts: "3As 6Bs" },
+      { name: "Musinguzi Edpa", combo: "O-Level", pts: "2As, 6Bs, 1C" }
     ]
   },
   {
     id: '2',
-    year: "2023",
+    year: "2024",
     students: [
-      { name: "Namanya Grace", combo: "BCM/SUB", pts: "20 pts" },
-      { name: "Otim Daniel", combo: "PCM/ICT", pts: "19 pts" },
-      { name: "Akello Sarah", combo: "HEG/SUB", pts: "18 pts" }
+      { name: "Kabupho Claire Ayebale", combo: "O-Level", pts: "3As, 6Bs" },
+      { name: "Mazima Pretty Comfort", combo: "O-Level", pts: "3As, 5Bs, 1C" }
     ]
   },
   {
     id: '3',
+    year: "2023",
+    students: [
+      { name: "Asiimwe Lucky", combo: "O-Level", pts: "9 Agg." },
+      { name: "Nimusiima Anthony", combo: "O-Level", pts: "12 Agg." }
+    ]
+  },
+  {
+    id: '4',
     year: "2022",
     students: [
-      { name: "Kizza Martin", combo: "PEM/ICT", pts: "20 pts" },
-      { name: "Nalubega Joy", combo: "BCM/SUB", pts: "19 pts" },
-      { name: "Ssekandi Paul", combo: "MEG/ICT", pts: "18 pts" }
+      { name: "Sande Innocent", combo: "O-Level", pts: "18 Agg." },
+      { name: "Mumbere Brandon", combo: "O-Level", pts: "19 Agg." }
+    ]
+  },
+  {
+    id: '5',
+    year: "2020",
+    students: [
+      { name: "Natukunde Arnold", combo: "O-Level", pts: "21 Agg." },
+      { name: "Bucureezi Sabellah", combo: "O-Level", pts: "22 Agg." }
     ]
   }
 ];
