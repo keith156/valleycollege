@@ -266,8 +266,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 sm:px-0">
             {[
-              { end: 29, label: "Years of Excellence", icon: TrophyIcon, img: "/images/counter (2).jpeg" },
-              { end: 27, label: "Subjects Offered", icon: BookOpenIcon, img: "/images/counter (1).jpeg" },
+              { end: 29, label: "Years of Excellence", icon: TrophyIcon, img: "/alumni gallery/VACO-17.jpg" },
+              { end: 27, label: "Subjects Offered", icon: BookOpenIcon, img: "/images/subjects offered.jpeg" },
               { end: 650, label: "Number of Students", icon: UsersIcon, img: "/images/10.jpeg" }
             ].map((stat, idx) => (
               <motion.div 
@@ -433,16 +433,16 @@ export default function Home() {
       {/* Removed School Programs and News Updates from Home */}
 
       {/* Testimonials */}
-      <section className="py-12 bg-gray-50 overflow-hidden">
+      <section className="pt-12 pb-4 bg-gray-50 overflow-hidden">
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex flex-col items-center mb-12"
+            className="flex flex-col items-center"
           >
-            <h2 className="text-4xl font-bold mb-0 text-center">What Our Community Says</h2>
+            <h2 className="text-4xl font-bold mb-12 text-center">What Our Community Says</h2>
 
             <div className="-mx-4 sm:-mx-8">
               <Carousel autoPlayInterval={5000}>

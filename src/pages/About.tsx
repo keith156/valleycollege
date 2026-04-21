@@ -9,7 +9,8 @@ const pioneerGroups = [
   ["Tihairwe T. Mugooma", "Akatwijuka Richard", "Twesigye Nicholas", "Bwogi James Barya", "Kaganzi Collins Kaganzi", "Kansiime Rose", "Ayebare John Bosco"],
   ["Byonanebye Ketrah", "Arinda Clare Katagata", "Atwijukire Rona", "Mbabazi Chrispher", "Busingye Susan", "Katagata Patrick", "Kyabagye Justus"],
   ["Twinomujuni Tendeo", "Tusiime Doreen", "Nalanga Winnie", "Rutakirwa Naboth", "Mwesigwa Apollo", "Agaba Gloria", "Arikiriza Alice"],
-  ["Kamugasha Apollo", "Mugabi Richard Twijukye", "Mpamizo Andrew", "Mbatekateka Vicent"]
+  ["Kamugasha Apollo", "Mugabi Richard Twijukye", "Mpamizo Andrew", "Mbatekateka Vicent", "Tukundane Rosebell", "Kyarikunda Genisgy Mpora", "Namara Peace"],
+  ["Namirembe Winnie", "Musinguzi Wilson Katson", "Natukunda Merian", "Atusimire Shallon", "Akugizibwe David", "Natukunda Betty", "Tutarimwebwa Ovia"]
 ];
 
 const parallaxImages = [
@@ -232,11 +233,10 @@ export default function About() {
               {pioneerGroups.map((group, idx) => (
                 <div key={idx} className="snap-start shrink-0 w-[85%] sm:w-[350px] bg-white p-8 rounded-[2rem] shadow-lg border border-gray-100 flex flex-col relative overflow-hidden group hover:border-primary/30 transition-colors">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                  <div className="flex items-center gap-4 mb-8 relative z-10">
+                  <div className="flex items-center gap-4 mb-4 relative z-10">
                     <div className="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center shrink-0 border border-blue-100">
-                      <Users size={24} />
+                      <GraduationCap size={24} />
                     </div>
-                    <span className="font-bold text-gray-800 text-xl">Group {idx + 1}</span>
                   </div>
                   <ul className="space-y-4 relative z-10">
                     {group.map((name, i) => (
