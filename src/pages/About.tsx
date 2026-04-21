@@ -1,6 +1,16 @@
 import { Building2, Target, History, Users, BookOpen, Handshake, MapPin, Image as ImageIcon, Compass, Star, ShieldCheck, ArrowRight, Clock, User, GraduationCap, ClipboardList } from 'lucide-react';
 import { motion } from 'motion/react';
 import { ZoomParallax } from '../components/ui/zoom-parallax';
+import { Carousel } from '../components/Carousel';
+
+const pioneerGroups = [
+  ["Twebaze Paul", "Tumwesigye Adonia", "Muhangi James Mukaira", "Natukunda Jeninah", "Noowe Innocent Kariisa", "Forward Moses Luke", "Asiimwe David"],
+  ["Arinda Ezra", "Kamukama Abel Abangira", "Nabanzi Siyana", "Katungwensi Anatoli Ignis", "Ntamuuhira Godwin", "Owatuhaire Ham", "Turinawe Julius"],
+  ["Tihairwe T. Mugooma", "Akatwijuka Richard", "Twesigye Nicholas", "Bwogi James Barya", "Kaganzi Collins Kaganzi", "Kansiime Rose", "Ayebare John Bosco"],
+  ["Byonanebye Ketrah", "Arinda Clare Katagata", "Atwijukire Rona", "Mbabazi Chrispher", "Busingye Susan", "Katagata Patrick", "Kyabagye Justus"],
+  ["Twinomujuni Tendeo", "Tusiime Doreen", "Nalanga Winnie", "Rutakirwa Naboth", "Mwesigwa Apollo", "Agaba Gloria", "Arikiriza Alice"],
+  ["Kamugasha Apollo", "Mugabi Richard Twijukye", "Mpamizo Andrew", "Mbatekateka Vicent"]
+];
 
 const parallaxImages = [
   { src: '/images/IMG_20260401_181411_242.jpg', alt: 'School building' },
@@ -203,6 +213,40 @@ export default function About() {
             </div>
           </motion.div>
         </div>
+
+        {/* Pioneer Students Section (U.A.C.E 1998) */}
+        <section className="mb-32">
+          <div className="text-center mb-12">
+            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-3 block">U.A.C.E 1998</span>
+            <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight">Our Pioneer Students</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Honoring our very first A-Level cohort of 1998, who set the standard for excellence at Valley College.</p>
+            <div className="h-2 w-24 bg-primary mx-auto mt-6 rounded-full" />
+          </div>
+
+          <div className="-mx-4 sm:-mx-8">
+            <Carousel autoPlayInterval={4000}>
+              {pioneerGroups.map((group, idx) => (
+                <div key={idx} className="snap-start shrink-0 w-[85%] sm:w-[350px] bg-white p-8 rounded-[2rem] shadow-lg border border-gray-100 flex flex-col relative overflow-hidden group hover:border-primary/30 transition-colors">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                  <div className="flex items-center gap-4 mb-8 relative z-10">
+                    <div className="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center shrink-0 border border-blue-100">
+                      <Users size={24} />
+                    </div>
+                    <span className="font-bold text-gray-800 text-xl">Group {idx + 1}</span>
+                  </div>
+                  <ul className="space-y-4 relative z-10">
+                    {group.map((name, i) => (
+                      <li key={i} className="flex items-start gap-3 text-gray-600 font-medium group-hover:text-gray-900 transition-colors">
+                        <div className="w-2 h-2 rounded-full bg-primary shrink-0 mt-2" />
+                        {name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </Carousel>
+          </div>
+        </section>
 
         {/* New Governance Structure Section */}
         <section id="governance" className="mb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

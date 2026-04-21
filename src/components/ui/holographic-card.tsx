@@ -108,13 +108,13 @@ export const HolographicCard: React.FC<HolographicCardProps> = ({ title, descrip
         }
       `}</style>
       <div 
-        className="holo-card-wrapper relative bg-white border border-gray-200 rounded-3xl p-10 shadow-sm hover:shadow-2xl cursor-default overflow-hidden h-full"
+        className="holo-card-wrapper relative bg-[#b0c4de] border border-[#001a40]/10 rounded-3xl p-10 shadow-md hover:shadow-2xl cursor-default overflow-hidden h-full"
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
         <div className="holo-content relative z-20 flex flex-col items-center text-center">
-          <div className="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+          <div className="w-16 h-16 bg-white text-primary rounded-2xl flex items-center justify-center mb-6 shadow-sm border border-white/50">
             {icon}
           </div>
           <h3 className="text-2xl font-bold text-gray-900 mb-4">{title}</h3>

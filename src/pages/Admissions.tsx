@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function Admissions() {
-  const [applyMethod, setApplyMethod] = useState<'online' | 'offline'>('offline');
 
   return (
     <div className="flex flex-col bg-gray-50 pb-20">
@@ -101,115 +100,33 @@ export default function Admissions() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-12">
             
-            {/* Application Process Toggle */}
+            {/* Application Process */}
             <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white p-8 lg:p-10 rounded-3xl shadow-sm border border-gray-100">
               <div className="text-center mb-10">
                 <h2 id="process" className="text-2xl lg:text-3xl font-bold mb-4">How to Apply</h2>
-                <p className="text-gray-600 text-base lg:text-lg">Select your preferred method of application below.</p>
+                <p className="text-gray-600 text-base lg:text-lg">Follow these steps to secure a place for your child.</p>
               </div>
 
-              <div className="flex p-1 bg-gray-100 rounded-2xl mb-10">
-                <button 
-                  onClick={() => setApplyMethod('offline')}
-                  className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-base lg:text-lg transition-all ${applyMethod === 'offline' ? 'bg-white text-primary shadow-sm' : 'text-gray-500 hover:text-gray-900'}`}
-                >
-                  <Printer size={20} /> Offline Application
-                </button>
-                <button 
-                  onClick={() => setApplyMethod('online')}
-                  className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-base lg:text-lg transition-all ${applyMethod === 'online' ? 'bg-white text-primary shadow-sm' : 'text-gray-500 hover:text-gray-900'}`}
-                >
-                  <Monitor size={20} /> Online Application
-                </button>
+              <div className="space-y-8">
+                <div className="space-y-6">
+                  {[
+                    { step: 1, title: "Download the Application Form", desc: "Get the form from the Application Documents section above or pick a physical copy from the school reception." },
+                    { step: 2, title: "Fill & Gather Documents", desc: "Complete the form and attach previous academic results, a copy of the birth certificate, and passport photos." },
+                    { step: 3, title: "Submit at Reception", desc: "Bring the completed package to the Valley College main campus reception during working hours." },
+                    { step: 4, title: "Interview / Assessment", desc: "Eligible candidates will be invited for a brief interview and academic assessment." }
+                  ].map((item) => (
+                    <div key={item.step} className="flex gap-6 items-start group">
+                      <div className="w-12 h-12 rounded-full bg-blue-50 text-primary font-bold text-xl flex items-center justify-center shrink-0 border border-blue-100 group-hover:bg-primary group-hover:text-white transition-colors">
+                        {item.step}
+                      </div>
+                      <div className="pt-1">
+                        <h4 className="font-bold text-gray-900 text-lg lg:text-xl mb-2">{item.title}</h4>
+                        <p className="text-gray-600 text-base lg:text-lg">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-
-              <AnimatePresence mode="wait">
-                {applyMethod === 'offline' ? (
-                  <motion.div 
-                    key="offline"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="space-y-8"
-                  >
-                    <p className="text-gray-600 text-base lg:text-lg">
-                      Prefer to submit a physical application? Follow these steps to secure a place for your child.
-                    </p>
-                    <div className="space-y-6">
-                      {[
-                        { step: 1, title: "Download the Application Form", desc: "Get the form from the Application Documents section above or pick a physical copy from the school reception." },
-                        { step: 2, title: "Fill & Gather Documents", desc: "Complete the form and attach previous academic results, a copy of the birth certificate, and passport photos." },
-                        { step: 3, title: "Submit at Reception", desc: "Bring the completed package to the Valley College main campus reception during working hours." },
-                        { step: 4, title: "Interview / Assessment", desc: "Eligible candidates will be invited for a brief interview and academic assessment." }
-                      ].map((item) => (
-                        <div key={item.step} className="flex gap-6 items-start group">
-                          <div className="w-12 h-12 rounded-full bg-blue-50 text-primary font-bold text-xl flex items-center justify-center shrink-0 border border-blue-100 group-hover:bg-primary group-hover:text-white transition-colors">
-                            {item.step}
-                          </div>
-                          <div className="pt-1">
-                            <h4 className="font-bold text-gray-900 text-lg lg:text-xl mb-2">{item.title}</h4>
-                            <p className="text-gray-600 text-base lg:text-lg">{item.desc}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                ) : (
-                  <motion.div 
-                    key="online"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="space-y-6"
-                  >
-                    <div className="bg-blue-50 p-6 rounded-2xl border border-blue-100 mb-8">
-                      <h3 className="font-bold text-primary text-lg lg:text-xl mb-2">Online Admission Form</h3>
-                      <p className="text-gray-700 text-sm lg:text-base">Fill out the form below to submit your application directly to our admissions office. We will review it and get back to you shortly.</p>
-                    </div>
-                    
-                    <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <label className="font-bold text-gray-700">Student's Full Name</label>
-                          <input type="text" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Enter full name" />
-                        </div>
-                        <div className="space-y-2">
-                          <label className="font-bold text-gray-700">Applying for Class</label>
-                          <select className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all">
-                            <option>Senior 1</option>
-                            <option>Senior 2</option>
-                            <option>Senior 3</option>
-                            <option>Senior 5</option>
-                          </select>
-                        </div>
-                        <div className="space-y-2">
-                          <label className="font-bold text-gray-700">Parent/Guardian Name</label>
-                          <input type="text" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Enter parent's name" />
-                        </div>
-                        <div className="space-y-2">
-                          <label className="font-bold text-gray-700">Phone Number</label>
-                          <input type="tel" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Enter phone number" />
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <label className="font-bold text-gray-700">Previous School</label>
-                        <input type="text" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Enter previous school name" />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="font-bold text-gray-700">Upload Results (PLE/UCE)</label>
-                        <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:bg-gray-50 transition-colors cursor-pointer">
-                          <Download className="mx-auto text-gray-400 mb-2" size={32} />
-                          <p className="text-gray-600 font-medium">Click to upload or drag and drop</p>
-                          <p className="text-sm text-gray-500">PDF, JPG, or PNG (Max 5MB)</p>
-                        </div>
-                      </div>
-                      <button className="w-full bg-primary text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-900 transition-colors flex items-center justify-center gap-2">
-                        Submit Application <Send size={20} />
-                      </button>
-                    </form>
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </motion.section>
 
             {/* Admission Requirements */}

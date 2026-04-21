@@ -143,9 +143,9 @@ export default function Home() {
               EXCELLENCE • DISCIPLINE • VALUES
             </motion.div>
 
-            {/* Main Animated Title (SVG Outline) */}
-            <div className="mb-8 w-full max-w-[900px] h-[150px] md:h-[250px] flex items-center justify-center">
-              <TextOutline text="DELIVERANCE" />
+            {/* Main Title */}
+            <div className="mb-4 w-full flex items-center justify-center h-[120px] md:h-[180px] lg:h-[240px]">
+              <TextOutline text="DELIVERANCE" className="drop-shadow-2xl" />
             </div>
 
             {/* Subtext */}
@@ -185,7 +185,7 @@ export default function Home() {
 
       {/* Shared Values Banner Overlay */}
       <div className="relative z-30 -mt-16 sm:-mt-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto bg-primary shadow-2xl p-8 sm:p-12 text-center">
+        <div className="max-w-5xl mx-auto bg-primary shadow-2xl px-8 py-10 sm:px-12 sm:py-16 text-center rounded-3xl">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -275,13 +275,13 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="relative group h-[400px] sm:h-[450px] overflow-hidden rounded-[2.5rem] shadow-2xl"
+                className="relative group h-[280px] sm:h-[320px] overflow-hidden rounded-[2.5rem] shadow-2xl"
               >
                 {/* Background Image */}
                 <img 
                   src={stat.img} 
                   alt={stat.label} 
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
 
@@ -372,7 +372,7 @@ export default function Home() {
                         <img 
                           src={milestone.img} 
                           alt={milestone.title} 
-                          className="w-full h-56 md:h-72 object-cover group-hover:scale-110 transition-transform duration-700"
+                          className="w-full h-80 md:h-[400px] object-cover group-hover:scale-110 transition-transform duration-700"
                           referrerPolicy="no-referrer"
                           loading="lazy"
                           decoding="async"
@@ -428,7 +428,7 @@ export default function Home() {
       {/* Removed School Programs and News Updates from Home */}
 
       {/* Testimonials */}
-      <section className="pt-8 pb-24 bg-gray-50 overflow-hidden">
+      <section className="pt-8 pb-12 bg-gray-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
