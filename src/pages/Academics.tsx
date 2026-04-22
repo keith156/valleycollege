@@ -8,6 +8,7 @@ export default function Academics() {
   const [expandedYear, setExpandedYear] = useState<string | null>(null);
   const [wallOfFameData, setWallOfFameData] = useState<WallOfFameYear[]>([]);
   const [termEvents, setTermEvents] = useState<SchoolEvent[]>([]);
+  const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
 
   useEffect(() => {
     const data = getWallOfFame();
@@ -15,8 +16,61 @@ export default function Academics() {
     if (data.length > 0) {
       setExpandedYear(data[0].year);
     }
-    setTermEvents(getEvents());
+    const events = getEvents();
+    setTermEvents(events);
+    if (events.length > 0) {
+      setSelectedEventId(events[0].id);
+    }
   }, []);
+
+  const selectedEvent = termEvents.find(e => e.id === selectedEventId);
+
+  const renderMonth = (month: number, year: number) => {
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDay = new Date(year, month, 1).getDay();
+    const days = [];
+    
+    // Add empty slots for first day
+    for (let i = 0; i < firstDay; i++) {
+      days.push(<div key={`empty-${i}`} className="h-8 w-8" />);
+    }
+    
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateStr = new Date(year, month, d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      // Map "May 8, 2026" format from getEvents()
+      const event = termEvents.find(e => {
+        const eDate = new Date(e.date);
+        return eDate.getDate() === d && eDate.getMonth() === month && eDate.getFullYear() === year;
+      });
+      
+      days.push(
+        <button
+          key={d}
+          onClick={() => event && setSelectedEventId(event.id)}
+          className={`h-8 w-8 flex items-center justify-center rounded-full text-xs font-medium transition-all ${
+            event 
+              ? 'bg-primary text-white shadow-md scale-110 ring-2 ring-primary/20 hover:scale-125' 
+              : 'text-gray-500 hover:bg-gray-100'
+          } ${selectedEventId === event?.id ? 'ring-4 ring-primary/30' : ''}`}
+        >
+          {d}
+        </button>
+      );
+    }
+
+    return (
+      <div className="flex flex-col gap-3">
+        <h4 className="text-sm font-bold text-gray-900 text-center">{monthNames[month]} {year}</h4>
+        <div className="grid grid-cols-7 gap-1">
+          {["S", "M", "T", "W", "T", "F", "S"].map(d => (
+            <div key={d} className="h-8 w-8 flex items-center justify-center text-[10px] font-bold text-gray-400">{d}</div>
+          ))}
+          {days}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="flex flex-col bg-gray-50">
@@ -36,7 +90,7 @@ export default function Academics() {
           <div className="absolute inset-0 bg-gradient-to-r from-primary from-10% via-primary/80 via-50% to-transparent" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-5xl">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-md">Academics</h1>
             <p className="text-lg lg:text-xl text-white drop-shadow-sm">
               A rigorous curriculum designed to foster critical thinking, creativity, and lifelong learning.
@@ -146,11 +200,11 @@ export default function Academics() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.05 }}
-                  className={`bg-white rounded-2xl shadow-md border border-primary overflow-hidden transition-all duration-300`}
+                  className={`bg-white rounded-2xl shadow-md border border-primary relative transition-all duration-300 ${isExpanded ? 'z-40' : 'z-0'}`}
                 >
                   <button 
                     onClick={() => setExpandedYear(isExpanded ? null : yearData.year)}
-                    className={`w-full flex items-center justify-between p-6 transition-colors bg-primary text-white hover:bg-primary/90`}
+                    className={`w-full flex items-center justify-between p-6 transition-all bg-primary text-white hover:bg-primary/90 ${isExpanded ? 'rounded-t-2xl' : 'rounded-2xl'}`}
                   >
                     <div className="flex items-center gap-4">
                       <Medal size={28} className="text-yellow-400" />
@@ -167,7 +221,7 @@ export default function Academics() {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <div className="p-6 grid grid-cols-1 gap-4 bg-gray-50/50">
+                        <div className="absolute top-full left-0 right-0 p-6 grid grid-cols-1 gap-4 bg-white rounded-b-2xl shadow-xl border-x border-b border-primary z-40 max-h-[350px] overflow-y-auto custom-scrollbar">
                           {yearData.students.map((student, sIdx) => (
                             <div key={sIdx} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex flex-col">
                               <span className="font-bold text-gray-900 text-lg mb-2">{student.name}</span>
@@ -207,8 +261,8 @@ export default function Academics() {
                 {[
                   { category: "Sciences", icon: Beaker, subjects: ["Physics", "Chemistry", "Biology", "Mathematics", "Agriculture"] },
                   { category: "Humanities", icon: BookOpen, subjects: ["Geography", "History", "CRE"] },
-                  { category: "Languages", icon: Users, subjects: ["English Language", "Literature"] },
-                  { category: "Vocational", icon: Laptop, subjects: ["Computer Studies", "Entrepreneurship", "Commerce", "Fine Art", "Principles of Accounts"] }
+                  { category: "Languages", icon: Users, subjects: ["English Language", "Literature", "Kiswahili", "Runyankore", "Rukiga"] },
+                  { category: "Vocational", icon: Laptop, subjects: ["Computer Studies", "Entrepreneurship", "Fine Art"] }
                 ].map((group, idx) => (
                   <div key={idx} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                     <div className="flex items-center gap-3 mb-4 border-b border-gray-100 pb-3">
@@ -337,7 +391,7 @@ export default function Academics() {
                 </div>
                 <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">Clubs & Societies</h3>
                 <div className="flex flex-wrap gap-3">
-                  {["Debate Club", "Science Club", "ICT & Innovation", "Writers' Club"].map(club => (
+                  {["Debate Club", "Science Club", "ICT & Innovation", "Writers' Club", "Leos Club", "Patriotic Club", "Interact Club"].map(club => (
                     <span key={club} className="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-medium border border-white/10">{club}</span>
                   ))}
                 </div>
@@ -347,49 +401,78 @@ export default function Academics() {
         </motion.div>
 
         {/* School Programs for the Term (Transferred from Home) */}
-        <section className="py-12 lg:py-16 bg-white rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden mt-12">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.05),transparent_50%)] pointer-events-none" />
+        <section className="py-20 lg:py-24 bg-white rounded-[3rem] shadow-2xl border border-gray-100 relative overflow-hidden mt-16">
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.08),transparent_50%)] pointer-events-none" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex flex-col items-center text-center mb-12"
+              className="flex flex-col items-center text-center mb-16"
             >
-              <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Upcoming Events</span>
-              <h2 id="calendar" className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">School Programs for the Term</h2>
-              <p className="text-lg lg:text-xl text-gray-600 max-w-4xl">Stay updated with our key academic and co-curricular activities for this term.</p>
+              <div className="inline-flex items-center gap-2 bg-blue-50 text-primary px-4 py-1.5 rounded-full text-sm font-bold mb-4">
+                <Clock size={16} />
+                <span>Term Schedule</span>
+              </div>
+              <h2 id="calendar" className="text-4xl lg:text-5xl font-black text-gray-900 mb-6">School Programs for the Term</h2>
+              <p className="text-lg lg:text-xl text-gray-600 max-w-3xl">Our multi-month academic calendar ensures you never miss an important date.</p>
             </motion.div>
 
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
-                <div className="max-h-[400px] overflow-y-auto p-2 sm:p-4">
-                  {termEvents.length === 0 ? (
-                    <div className="text-center p-12 bg-gray-50 rounded-2xl border border-gray-100">
-                      <p className="text-gray-500 text-lg">No programs scheduled for this term yet.</p>
-                    </div>
-                  ) : (
-                    <div className="flex flex-col gap-2">
-                      {termEvents.map((event, idx) => (
-                        <motion.div 
-                          key={event.id}
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: idx * 0.05 }}
-                          className="flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100 group"
-                        >
-                          <div className="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
-                            <Clock size={20} />
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* Event List (Left) */}
+              <div className="lg:col-span-4 order-2 lg:order-1 bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100">
+                <h3 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-3">
+                  <Activity className="text-primary" size={24} />
+                  Highlights
+                </h3>
+                <div className="space-y-6">
+                  {termEvents.map((event) => (
+                    <div
+                      key={event.id}
+                      onClick={() => setSelectedEventId(event.id)}
+                      className="group cursor-pointer py-3 border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors px-2 rounded-lg"
+                    >
+                      <div className="flex justify-between items-start gap-4">
+                        <div className="flex-1">
+                          <div className={`text-[10px] font-bold uppercase tracking-widest mb-0.5 ${selectedEventId === event.id ? 'text-primary' : 'text-gray-400 group-hover:text-primary transition-colors'}`}>
+                            {event.date}
                           </div>
-                          <div className="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
-                            <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">{event.title}</h3>
-                            <div className="text-sm font-bold text-primary whitespace-nowrap bg-blue-50/50 px-3 py-1 rounded-full w-fit">{event.date}</div>
+                          <div className={`font-bold text-sm ${selectedEventId === event.id ? 'text-primary' : 'text-gray-700'}`}>
+                            {event.title}
                           </div>
-                        </motion.div>
-                      ))}
+                        </div>
+                        <div className={`w-2 h-2 rounded-full mt-1.5 transition-all ${selectedEventId === event.id ? 'bg-primary scale-125' : 'bg-gray-200 group-hover:bg-primary/40'}`} />
+                      </div>
                     </div>
+                  ))}
+                  {termEvents.length === 0 && (
+                    <div className="text-gray-400 italic">No events scheduled.</div>
                   )}
+                </div>
+              </div>
+
+              {/* Calendar Grid (Right) - Continuous Looking */}
+              <div className="lg:col-span-8 order-1 lg:order-2">
+                <div className="bg-gray-50/80 p-8 sm:p-12 rounded-[2.5rem] border border-gray-100 shadow-inner">
+                  <div className="flex flex-col gap-16">
+                    {/* Continuous stack of months */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+                      {renderMonth(4, 2026)} {/* May */}
+                      {renderMonth(5, 2026)} {/* June */}
+                      {renderMonth(6, 2026)} {/* July */}
+                    </div>
+                  </div>
+                  
+                  <div className="mt-12 flex flex-wrap items-center gap-6 justify-center text-sm text-gray-500 bg-white/60 py-5 px-8 rounded-2xl border border-gray-100 shadow-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 bg-primary rounded-full shadow-sm" />
+                      <span className="font-medium text-gray-700">School Event</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 bg-gray-200 rounded-full" />
+                      <span className="font-medium text-gray-500">Regular Day</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

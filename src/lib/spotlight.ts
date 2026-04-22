@@ -22,9 +22,9 @@ const spotlightData: SpotlightAlumnus[] = [
     id: '2',
     name: 'Dr. Atukwatse Judith',
     period: '1998-2000',
-    profession: 'DVCA',
+    profession: 'DDAA',
     workStation: 'Kampala International University',
-    imageUrl: '/spotlight2/[1998-2000]_Dr.Atukwatse Judith_DVCA_Kampala International University.png',
+    imageUrl: '/spotlight2/[1998-2000]_Dr.Atukwatse Judith_DDAA_Kampala International University.png',
   },
   {
     id: '3',
@@ -48,7 +48,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2003 - 2008',
     profession: 'Electrical Engineer',
     workStation: 'ATC',
-    imageUrl: '/spotlight2/[2003 - 2008]_Justus Rukundo_Electrical Engineer_ATC.png',
+    imageUrl: '/spotlight2/[2003 - 2008]_Justus Rukundo_Electrical Engineer_ATC.jpeg',
   },
   {
     id: '6',
@@ -201,6 +201,14 @@ const spotlightData: SpotlightAlumnus[] = [
     profession: 'Lawyer',
     workStation: 'D. Kagarura Advocates and Solicitors, Kampala Road',
     imageUrl: '/spotlight2/[2013-2016]_Kamusiime Anatori_Lawyer_D. Kagarura Advocates and Solicitors, Kampala road.png',
+  },
+  {
+    id: '25',
+    name: 'Michael Mukaira A',
+    period: '1998-2000',
+    profession: 'Architect + Urban Planner',
+    workStation: 'Valley University',
+    imageUrl: '/spotlight2/[1998-2000]_Michael Mukaira A_Architect+Urban Planner_Valley University.jpeg',
   },
 ];
 

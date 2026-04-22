@@ -22,14 +22,9 @@ const governanceData = [
     dotColor: "#2d3e80",
     lineColor: "#27a648",
     svg: (
-      <svg className="w-9 h-9 mb-1 fill-white" viewBox="0 0 40 40">
-        <rect x="4" y="18" width="32" height="18" rx="2"/>
-        <rect x="10" y="8" width="20" height="12" rx="2"/>
-        <rect x="16" y="2" width="8" height="8" rx="1"/>
-        <rect x="8" y="22" width="4" height="8"/>
-        <rect x="18" y="22" width="4" height="8"/>
-        <rect x="28" y="22" width="4" height="8"/>
-      </svg>
+      <div className="w-16 h-16 mb-2 rounded-xl overflow-hidden border border-white/20">
+        <img src="/Mukaira Foundation.jpeg" alt="Mukaira Foundation" className="w-full h-full object-cover" />
+      </div>
     )
   },
   {
@@ -128,15 +123,14 @@ export default function About() {
           <div className="absolute inset-0 bg-gradient-to-r from-primary from-10% via-primary/80 via-50% to-transparent" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left z-10">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} className="max-w-3xl">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} className="w-full">
             <span className="inline-block py-1 px-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-bold tracking-widest uppercase mb-6">
               Our Story
             </span>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight drop-shadow-lg leading-tight">
-              A Legacy of <br className="hidden md:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">Excellence</span>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight drop-shadow-lg leading-tight whitespace-nowrap">
+              A Legacy of Excellence
             </h1>
-            <p className="text-base md:text-lg lg:text-xl text-white drop-shadow-md font-medium leading-relaxed">
+            <p className="text-base md:text-lg lg:text-xl text-white drop-shadow-md font-medium leading-relaxed max-w-5xl">
               Discover our history, our values, and what makes our institution a beacon of educational transformation.
             </p>
           </motion.div>
@@ -204,13 +198,65 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Pioneer Students Section (U.A.C.E 1997) */}
+        {/* Founder Section */}
+        <section className="mb-24 py-16 bg-white rounded-[3rem] shadow-xl border border-gray-100 overflow-hidden">
+          <div className="max-w-6xl mx-auto px-6 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="lg:col-span-5"
+              >
+                <div className="relative group">
+                  <div className="absolute -inset-4 bg-primary/5 rounded-[2.5rem] blur-2xl group-hover:bg-primary/10 transition-colors" />
+                  <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white h-full min-h-[300px]">
+                    <img 
+                      src="/Founder_img.jpeg" 
+                      alt="Mzee William Mukaira" 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="lg:col-span-7"
+              >
+                <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">The Visionary</span>
+                <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-8 leading-tight">
+                  Our Founder — <br/>
+                  Mzee William Mukaira
+                </h2>
+                <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
+                  <p>
+                    Mzee William Mukaira is the visionary founder of Valley College Secondary School, established in 1997 with an inaugural class of just 48 A-Level students.
+                  </p>
+                  <p>
+                    Driven by a commitment to raise education standards in Bushenyi and beyond, he laid the foundation for what has grown into one of Western Uganda’s most respected institutions.
+                  </p>
+                  <p>
+                    Under his leadership, Valley College expanded to include O-Level, earning a reputation for academic excellence, discipline, and holistic education. His passion for learning and development extended further with the founding of Valley University of Science and Technology (VUST), broadening access to higher education in the region.
+                  </p>
+                  <p className="font-medium text-gray-900 italic">
+                    An accomplished entrepreneur and educationist, Mzee Mukaira’s vision transformed Bushenyi into a stronger academic hub. His legacy of excellence continues to inspire generations of learners, educators, and leaders at Valley College and beyond.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Pioneer Students Section (U.A.C.E 1998) */}
         <section className="mb-20">
 
           <div className="flex flex-col items-center text-center mb-12">
-            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">U.A.C.E 1997</span>
+            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">U.A.C.E 1998</span>
             <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">Our Pioneer Students</h2>
-            <p className="text-lg text-gray-600 max-w-4xl mx-auto mb-6">Honoring our very first A-Level cohort of 1997, who set the standard for excellence at Valley College.</p>
+            <p className="text-lg text-gray-600 max-w-4xl mx-auto mb-6">Honoring our very first A-Level cohort of 1998, who set the standard for excellence at Valley College.</p>
             <div className="h-2 w-24 bg-primary mx-auto rounded-full" />
           </div>
 
@@ -387,11 +433,13 @@ export default function About() {
               "16.jpeg", "18.jpeg", "20.jpeg", 
               "21.jpeg", "23.jpeg", "24.jpeg", 
               "IMG_20260401_184319_761.jpg", "IMG_20260401_184701_943.jpg", 
-              "IMG_20260401_181848_193.jpg", "IMG_20260401_184018_232.jpg"
+              "IMG_20260401_181848_193.jpg", "IMG_20260401_184018_232.jpg",
+              "subjects offered.jpeg"
             ].map((img, idx) => {
-              const isLarge = idx % 7 === 0;
-              const isTall = idx % 5 === 0 && !isLarge;
-              const isWide = idx % 6 === 0 && !isLarge && !isTall;
+              const matchesFixedSquare = img === "subjects offered.jpeg";
+              const isLarge = idx % 7 === 0 && !matchesFixedSquare;
+              const isTall = idx % 5 === 0 && !isLarge && !matchesFixedSquare;
+              const isWide = idx % 6 === 0 && !isLarge && !isTall && !matchesFixedSquare;
               
               return (
               <motion.div 

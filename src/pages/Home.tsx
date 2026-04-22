@@ -266,7 +266,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 sm:px-0">
             {[
-              { end: 29, label: "Years of Excellence", icon: TrophyIcon, img: "/alumni gallery/VACO-17.jpg" },
+              { end: 29, label: "Years of Excellence", icon: TrophyIcon, img: "/images/growth milestones img/excellence.jpeg" },
               { end: 27, label: "Subjects Offered", icon: BookOpenIcon, img: "/images/subjects offered.jpeg" },
               { end: 650, label: "Number of Students", icon: UsersIcon, img: "/images/10.jpeg" }
             ].map((stat, idx) => (

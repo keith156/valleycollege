@@ -135,10 +135,10 @@ export default function Alumni() {
                 {alumni.map((person) => (
                   <div
                     key={person.id}
-                    className="snap-start shrink-0 w-[85%] sm:w-[350px] md:w-[380px] group bg-white rounded-[2rem] shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col"
+                    className="snap-start shrink-0 w-[85%] sm:w-[280px] md:w-[320px] group bg-white rounded-[2rem] shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col"
                   >
                     {/* Photo */}
-                    <div className="w-full h-72 md:h-80 relative overflow-hidden bg-gray-100 shrink-0">
+                    <div className="w-full h-56 md:h-64 relative overflow-hidden bg-gray-100 shrink-0">
                       {person.imageUrl ? (
                         <img
                           src={person.imageUrl}
@@ -164,12 +164,12 @@ export default function Alumni() {
                     </div>
 
                     {/* Info */}
-                    <div className="p-6 md:p-8 flex flex-col gap-4 grow">
-                      <div className="flex justify-between items-start gap-4">
-                        <h3 className="text-xl font-black text-gray-900 leading-tight group-hover:text-primary transition-colors">
+                    <div className="p-5 md:p-6 flex flex-col gap-4 grow">
+                      <div className="flex flex-col gap-2">
+                        <h3 className="text-lg font-black text-gray-900 leading-tight group-hover:text-primary transition-colors">
                           {person.name}
                         </h3>
-                        <div className="flex items-center gap-1.5 bg-blue-50 text-primary text-[10px] font-bold px-3 py-1 rounded-full shrink-0">
+                        <div className="flex items-center gap-1.5 bg-blue-50 text-primary text-[10px] font-bold px-3 py-1 rounded-full shrink-0 w-fit">
                           <Calendar size={12} /> {person.period}
                         </div>
                       </div>
@@ -363,7 +363,7 @@ export default function Alumni() {
           </div>
 
           {/* Continuous Auto-Scroll Section */}
-          <div className="relative mt-8 overflow-hidden py-6 bg-gray-50/50 rounded-[3rem] border border-gray-100">
+          <div className="relative mt-4 overflow-hidden py-2 bg-gray-50/50 rounded-[3rem] border border-gray-100">
             <div className="flex whitespace-nowrap overflow-hidden">
               <motion.div 
                 animate={{ x: ["0%", "-50%"] }}
@@ -376,7 +376,7 @@ export default function Alumni() {
                     <div 
                       key={idx}
                       onClick={() => setSelectedIndex(originalIdx)}
-                      className="w-40 h-40 md:w-56 md:h-56 rounded-2xl overflow-hidden shadow-lg border-4 border-white shrink-0 cursor-pointer transition-transform hover:scale-105"
+                      className="w-56 h-56 md:w-80 md:h-80 rounded-3xl overflow-hidden shadow-lg border-4 border-white shrink-0 cursor-pointer transition-transform hover:scale-105"
                     >
                       <img 
                         src={`/alumni gallery/${image}`} 
