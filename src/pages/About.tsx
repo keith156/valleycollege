@@ -206,7 +206,7 @@ export default function About() {
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="lg:col-span-5"
+                className="lg:col-span-4"
               >
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-primary/5 rounded-[2.5rem] blur-2xl group-hover:bg-primary/10 transition-colors" />
@@ -224,7 +224,7 @@ export default function About() {
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="lg:col-span-7"
+                className="lg:col-span-8"
               >
                 <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">The Visionary</span>
                 <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-4 leading-tight">

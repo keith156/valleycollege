@@ -13,9 +13,9 @@ const NAV_LINKS = [
     path: '/academics',
     subLinks: [
       { name: 'Curriculum', path: '/academics#curriculum' },
+      { name: 'Wall of Fame', path: '/academics#fame' },
       { name: 'Subjects Offered', path: '/academics#subjects' },
       { name: 'Co-curricular Activities', path: '/academics#activities' },
-      { name: 'Wall of Fame', path: '/academics#fame' },
       { name: 'School Calendar', path: '/academics#calendar' },
     ]
   },
@@ -24,8 +24,8 @@ const NAV_LINKS = [
     path: '/admissions',
     subLinks: [
       { name: 'Application Documents', path: '/admissions#documents' },
-      { name: 'Admission Requirements', path: '/admissions#requirements' },
       { name: 'Application Process', path: '/admissions#process' },
+      { name: 'Admission Requirements', path: '/admissions#requirements' },
     ]
   },
   { 
@@ -33,8 +33,8 @@ const NAV_LINKS = [
     path: '/alumni',
     subLinks: [
       { name: 'Alumni Spotlight', path: '/alumni#spotlight' },
-      { name: 'Alumni Giveback Project', path: '/alumni#giveback' },
       { name: 'Alumni College League', path: '/alumni#league' },
+      { name: 'Alumni Giveback Project', path: '/alumni#giveback' },
       { name: 'Alumni Gallery', path: '/alumni#gallery' },
     ]
   },
