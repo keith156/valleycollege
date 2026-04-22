@@ -227,11 +227,11 @@ export default function About() {
                 className="lg:col-span-7"
               >
                 <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">The Visionary</span>
-                <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-8 leading-tight">
+                <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-4 leading-tight">
                   Our Founder — <br/>
                   Mzee William Mukaira
                 </h2>
-                <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
+                <div className="space-y-3 text-gray-600 text-sm md:text-base leading-relaxed">
                   <p>
                     Mzee William Mukaira is the visionary founder of Valley College Secondary School, established in 1997 with an inaugural class of just 48 A-Level students.
                   </p>
@@ -241,7 +241,7 @@ export default function About() {
                   <p>
                     Under his leadership, Valley College expanded to include O-Level, earning a reputation for academic excellence, discipline, and holistic education. His passion for learning and development extended further with the founding of Valley University of Science and Technology (VUST), broadening access to higher education in the region.
                   </p>
-                  <p className="font-medium text-gray-900 italic">
+                  <p className="font-bold text-gray-900 italic pt-2">
                     An accomplished entrepreneur and educationist, Mzee Mukaira’s vision transformed Bushenyi into a stronger academic hub. His legacy of excellence continues to inspire generations of learners, educators, and leaders at Valley College and beyond.
                   </p>
                 </div>

@@ -138,7 +138,7 @@ export default function Alumni() {
                     className="snap-start shrink-0 w-[85%] sm:w-[280px] md:w-[320px] group bg-white rounded-[2rem] shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col"
                   >
                     {/* Photo */}
-                    <div className="w-full h-56 md:h-64 relative overflow-hidden bg-gray-100 shrink-0">
+                    <div className="w-full h-72 md:h-80 relative overflow-hidden bg-gray-100 shrink-0">
                       {person.imageUrl ? (
                         <img
                           src={person.imageUrl}

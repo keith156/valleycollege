@@ -147,7 +147,7 @@ export default function Admissions() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                   {/* S1 Entry */}
                   <div className="relative bg-gray-50 rounded-3xl p-8 border border-gray-200 hover:border-primary/30 hover:shadow-md transition-all group">
                     <div className="absolute top-0 left-8 -translate-y-1/2 bg-primary text-white px-6 py-2 rounded-full font-bold shadow-sm">
@@ -190,6 +190,17 @@ export default function Admissions() {
                         </li>
                       ))}
                     </ul>
+                  </div>
+
+                  {/* Requirements Photo */}
+                  <div className="relative h-full min-h-[300px] md:col-span-2 xl:col-span-1">
+                    <div className="h-full rounded-3xl overflow-hidden shadow-md border border-gray-100 group">
+                      <img 
+                        src="/admissions.jpeg" 
+                        alt="Join Valley College" 
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </div>
                   </div>
                 </div>
 
