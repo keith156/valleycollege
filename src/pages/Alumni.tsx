@@ -99,7 +99,7 @@ export default function Alumni() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-4xl">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-md">Alumni</h1>
             <p className="text-lg lg:text-xl text-white drop-shadow-sm">
-              Connecting past students, celebrating success, and building a lifelong community.
+              Connecting our global community of former students from one of the <span className="font-bold border-b-2 border-white/30">best secondary schools in Uganda</span>.
             </p>
           </motion.div>
         </div>

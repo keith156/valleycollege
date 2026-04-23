@@ -140,7 +140,7 @@ export default function Home() {
               transition={{ delay: 0.5, duration: 0.5 }}
               className="mb-8 px-6 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-xs md:text-sm font-bold tracking-[0.3em] uppercase"
             >
-              EXCELLENCE • DISCIPLINE • VALUES
+              BEST SECONDARY SCHOOL IN UGANDA • BUILT ON VALUES
             </motion.div>
 
             {/* Main Title */}
@@ -155,7 +155,7 @@ export default function Home() {
               transition={{ delay: 1.2, duration: 1 }}
               className="text-base md:text-xl lg:text-2xl text-blue-100 max-w-3xl mb-12 font-medium leading-relaxed drop-shadow-md px-4"
             >
-              Empowering the next generation of leaders through <span className="text-white border-b-2 border-white/30">academic excellence</span>, <span className="text-white border-b-2 border-white/30">unwavering discipline</span>, and <span className="text-white border-b-2 border-white/30">strong core values</span>.
+              Recognized as one of the <span className="text-white border-b-2 border-white/30">best secondary schools in Uganda</span>, Valley College empowers the next generation in <span className="text-white border-b-2 border-white/30">Bushenyi</span> through academic excellence and unwavering discipline.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -192,7 +192,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-lg sm:text-xl md:text-2xl font-black text-white tracking-widest leading-relaxed uppercase"
           >
-            VALLEY COLLEGE SS IS BUILT ON STRONG FOUNDATION OF ACADEMIC <span className="text-blue-300">EXCELLENCE</span>, <span className="text-blue-300">DISCIPLINE</span>, AND <span className="text-blue-300">VALUES</span> THAT SHAPE FUTURE LEADERS.
+            VALLEY COLLEGE IS ONE OF THE <span className="text-blue-300">BEST SECONDARY SCHOOLS IN UGANDA</span>, BUILT ON A STRONG FOUNDATION OF ACADEMIC EXCELLENCE IN <span className="text-blue-300">BUSHENYI</span>.
           </motion.h2>
         </div>
       </div>

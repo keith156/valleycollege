@@ -131,7 +131,7 @@ export default function About() {
               A Legacy of Excellence
             </h1>
             <p className="text-base md:text-lg lg:text-xl text-white drop-shadow-md font-medium leading-relaxed max-w-5xl">
-              Discover our history, our values, and what makes our institution a beacon of educational transformation.
+              Established with a vision for transformation, Valley College is recognized as one of the <span className="font-bold border-b-2 border-white/30">best secondary schools in Uganda</span>, shaping the future of education in the <span className="font-bold border-b-2 border-white/30">Bushenyi</span> region.
             </p>
           </motion.div>
         </div>

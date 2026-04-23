@@ -93,7 +93,7 @@ export default function Academics() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-5xl">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-md">Academics</h1>
             <p className="text-lg lg:text-xl text-white drop-shadow-sm">
-              A rigorous curriculum designed to foster critical thinking, creativity, and lifelong learning.
+              Consistently ranked among the <span className="font-bold border-b-2 border-white/30">leading schools in Bushenyi</span> and a top choice for <span className="font-bold border-b-2 border-white/30">secondary education in Uganda</span>.
             </p>
           </motion.div>
         </div>

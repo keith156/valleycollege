@@ -27,7 +27,7 @@ export default function Admissions() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-4xl">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-md">Admissions</h1>
             <p className="text-lg lg:text-xl text-white drop-shadow-sm md:whitespace-nowrap">
-              Join the Valley College community. Choose the application method that works best for you.
+              Join one of the <span className="font-bold border-b-2 border-white/30">best secondary schools in Uganda</span>. Start your journey of excellence today.
             </p>
           </motion.div>
         </div>
