@@ -208,13 +208,13 @@ export default function About() {
                 viewport={{ once: true }}
                 className="lg:col-span-4"
               >
-                <div className="relative group">
+                <div className="relative group h-full">
                   <div className="absolute -inset-4 bg-primary/5 rounded-[2.5rem] blur-2xl group-hover:bg-primary/10 transition-colors" />
                   <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white h-full min-h-[300px]">
                     <img 
                       src="/Founder_img.jpeg" 
                       alt="Mzee William Mukaira" 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
                 </div>

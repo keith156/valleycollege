@@ -180,7 +180,7 @@ export default function Academics() {
         </div>
 
         {/* UACE Wall of Fame */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20 max-w-4xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20 max-w-4xl mx-auto w-full">
           <div className="flex flex-col items-center text-center mb-10">
             <div className="inline-flex items-center justify-center gap-3 bg-green-100 text-green-800 px-6 py-2 rounded-full mb-4">
               <Star size={20} className="fill-green-600 text-green-600" />
@@ -190,7 +190,7 @@ export default function Academics() {
             <p className="text-gray-600 text-base lg:text-lg max-w-4xl">Celebrating our top performing students in national examinations over the years.</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+          <div className="flex flex-col gap-4">
             {wallOfFameData.map((yearData, idx) => {
               const isExpanded = expandedYear === yearData.year;
               return (
@@ -200,15 +200,15 @@ export default function Academics() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.05 }}
-                  className={`bg-white rounded-2xl shadow-md border border-primary relative transition-all duration-300 ${isExpanded ? 'z-40' : 'z-0'}`}
+                  className={`bg-white rounded-2xl shadow-sm border border-gray-100 relative transition-all duration-300 ${isExpanded ? 'ring-2 ring-primary border-transparent' : 'hover:border-primary/30'} flex flex-col`}
                 >
                   <button 
                     onClick={() => setExpandedYear(isExpanded ? null : yearData.year)}
-                    className={`w-full flex items-center justify-between p-6 transition-all bg-primary text-white hover:bg-primary/90 ${isExpanded ? 'rounded-t-2xl' : 'rounded-2xl'}`}
+                    className={`w-full flex items-center justify-between p-6 transition-all hover:bg-blue-900 bg-primary ${isExpanded ? 'rounded-t-2xl' : 'rounded-2xl'}`}
                   >
                     <div className="flex items-center gap-4">
                       <Medal size={28} className="text-yellow-400" />
-                      <span className="text-2xl font-bold text-white tracking-wider">Class of {yearData.year}</span>
+                      <span className="text-xl font-bold text-white">UACE {yearData.year}</span>
                     </div>
                     <ChevronDown size={24} className={`transition-transform duration-300 ${isExpanded ? 'rotate-180 text-white' : 'text-white/70'}`} />
                   </button>
@@ -221,13 +221,13 @@ export default function Academics() {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <div className="absolute top-full left-0 right-0 p-6 grid grid-cols-1 gap-4 bg-white rounded-b-2xl shadow-xl border-x border-b border-primary z-40 max-h-[350px] overflow-y-auto custom-scrollbar">
+                        <div className="px-6 pb-6 pt-2 flex flex-col border-t border-gray-100/50">
                           {yearData.students.map((student, sIdx) => (
-                            <div key={sIdx} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex flex-col">
-                              <span className="font-bold text-gray-900 text-lg mb-2">{student.name}</span>
-                              <div className="flex justify-between items-center mt-auto pt-3 border-t border-gray-50">
-                                <span className="text-gray-600 font-medium bg-gray-100 px-2 py-1 rounded-md text-xs">{student.combo}</span>
-                                <span className="text-primary font-black text-sm">{student.pts}</span>
+                            <div key={sIdx} className="w-full flex justify-between items-center py-3 border-b border-gray-50 last:border-0 hover:bg-gray-50/50 px-2 rounded-lg transition-colors">
+                              <span className="font-semibold text-gray-800 text-base md:text-lg">{student.name}</span>
+                              <div className="flex items-center text-sm md:text-base">
+                                <span className="text-gray-500 font-medium mr-3">{student.combo}</span>
+                                <span className="text-primary font-bold bg-blue-50 px-3 py-1 rounded-full">{student.pts}</span>
                               </div>
                             </div>
                           ))}

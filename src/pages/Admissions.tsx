@@ -249,15 +249,14 @@ export default function Admissions() {
             </div>
 
             {/* Image Side */}
-            <div className="relative h-[400px] lg:h-auto bg-gray-100">
+            <div className="relative min-h-[400px] lg:h-auto bg-[#001a40] flex items-center justify-center p-4 md:p-8">
               <img 
                 src="/admissions.jpeg" 
                 alt="Admission Requirements" 
-                className="absolute inset-0 w-full h-full object-cover"
+                className="w-full h-full max-h-[800px] object-contain drop-shadow-2xl rounded-2xl"
                 referrerPolicy="no-referrer"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-l from-black/20 to-transparent lg:hidden" />
             </div>
           </div>
         </motion.section>

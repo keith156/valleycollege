@@ -148,7 +148,7 @@ export default function Alumni() {
           {/* Cards Carousel */}
           {alumni.length > 0 && (
             <div className="-mx-4 sm:-mx-8">
-              <Carousel autoPlayInterval={6000}>
+              <Carousel autoPlayInterval={0} continuousScroll={true}>
                 {alumni.map((person) => (
                   <div
                     key={person.id}
@@ -401,7 +401,7 @@ export default function Alumni() {
               <div className="flex whitespace-nowrap overflow-hidden">
                 <motion.div 
                   animate={{ x: ["0%", "-50%"] }}
-                  transition={{ duration: 80, ease: "linear", repeat: Infinity }}
+                  transition={{ duration: 150, ease: "linear", repeat: Infinity }}
                   className="flex gap-6 px-3"
                 >
                   {[...slider1Images, ...slider1Images].map((image, idx) => (
@@ -428,7 +428,7 @@ export default function Alumni() {
               <div className="flex whitespace-nowrap overflow-hidden">
                 <motion.div 
                   animate={{ x: ["-50%", "0%"] }}
-                  transition={{ duration: 90, ease: "linear", repeat: Infinity }}
+                  transition={{ duration: 180, ease: "linear", repeat: Infinity }}
                   className="flex gap-6 px-3"
                 >
                   {[...slider2Images, ...slider2Images].map((image, idx) => (
