@@ -16,6 +16,8 @@ const Admissions = lazy(() => import('./pages/Admissions'));
 const Alumni = lazy(() => import('./pages/Alumni'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Admin = lazy(() => import('./pages/Admin'));
+const Terms = lazy(() => import('./pages/Terms'));
+const Privacy = lazy(() => import('./pages/Privacy'));
 
 // Loading fallback components
 const PageLoader = () => (
@@ -38,6 +40,8 @@ export default function App() {
             <Route path="alumni" element={<Alumni />} />
             <Route path="contact" element={<Contact />} />
             <Route path="admin" element={<Admin />} />
+            <Route path="terms" element={<Terms />} />
+            <Route path="privacy" element={<Privacy />} />
           </Route>
         </Routes>
       </Suspense>

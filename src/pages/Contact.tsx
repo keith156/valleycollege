@@ -1,4 +1,5 @@
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 
 export default function Contact() {
@@ -122,7 +123,19 @@ export default function Contact() {
                 <textarea rows={5} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all bg-gray-50 focus:bg-white resize-none" placeholder="How can we help you?"></textarea>
               </div>
 
-              <button type="button" className="w-full bg-primary text-white hover:bg-primary/90 py-4 rounded-xl font-bold transition-all hover:-translate-y-1 shadow-md flex items-center justify-center gap-2 text-lg">
+              <div className="flex items-start gap-3 p-1">
+                <input 
+                  type="checkbox" 
+                  id="terms" 
+                  required 
+                  className="mt-1.5 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary transition-all cursor-pointer" 
+                />
+                <label htmlFor="terms" className="text-sm text-gray-600 leading-relaxed cursor-pointer select-none">
+                  I agree to the <Link to="/terms" className="text-primary hover:underline font-semibold">Terms of Service</Link> and <Link to="/privacy" className="text-primary hover:underline font-semibold">Privacy Policy</Link>. I understand that Valley College will process my data according to these terms.
+                </label>
+              </div>
+
+              <button type="submit" className="w-full bg-primary text-white hover:bg-primary/90 py-4 rounded-xl font-bold transition-all hover:-translate-y-1 shadow-md flex items-center justify-center gap-2 text-lg">
                 <Send size={20} /> Send Message
               </button>
             </form>
