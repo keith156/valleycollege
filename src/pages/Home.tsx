@@ -35,12 +35,12 @@ export default function Home() {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
 
   const heroImages = [
-    "/heroimages/1.png",
+    "/heroimages/ vaco_students (1).png",
+    "/heroimages/ vaco_students (2).png",
+    "/heroimages/ vaco_students (3).png",
     "/heroimages/2.png",
-    "/heroimages/3.jpg",
     "/heroimages/4.png",
-    "/heroimages/5.jpeg",
-    "/heroimages/6.jpg"
+    "/heroimages/expansion.jpeg"
   ];
 
   const slideVariants = {
@@ -212,7 +212,7 @@ export default function Home() {
             >
               <div className="relative rounded-3xl overflow-hidden shadow-2xl w-full lg:mr-auto lg:ml-0 h-[400px] md:h-[500px] lg:h-full min-h-[400px]">
                 <img
-                  src="/HM valley college.jpg"
+                  src="/headteacher.jpeg"
                   alt="Ms. Kabezi Doreen - Head Teacher"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"

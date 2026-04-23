@@ -130,21 +130,37 @@ export default function Contact() {
 
         </div>
 
-        {/* Map Placeholder */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-12 rounded-3xl overflow-hidden shadow-sm border border-gray-200 h-[400px] bg-gray-200 relative group">
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-500 z-10 bg-gray-100/80 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500">
-            <MapPin size={48} className="mb-4 text-primary" />
-            <p className="font-medium text-lg">Interactive Map Placeholder</p>
-            <p className="text-sm">Bushenyi, Uganda</p>
+        {/* Interactive Google Map */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-12 relative">
+          <div className="rounded-3xl overflow-hidden shadow-2xl border-8 border-white h-[450px] relative group bg-gray-100">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7408!2d30.132!3d-0.505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19d919864a787ed9%3A0xe1043f6ff3a2a6b2!2sValley%20College%20SS%20Bushenyi!5e0!3m2!1sen!2sug!4v1713801000000!5m2!1sen!2sug"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen={true}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Valley College SS Location"
+              className="grayscale-[20%] contrast-[1.1] hover:grayscale-0 transition-all duration-700"
+            ></iframe>
+            
+            {/* Map Overlay Button (Always Visible or Hover) */}
+            <div className="absolute bottom-6 right-6 z-10 transition-transform hover:scale-105">
+              <a 
+                href="https://maps.app.goo.gl/nH62hk2qtw3qku9a8" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-primary text-white px-6 py-3 rounded-xl font-bold shadow-2xl flex items-center gap-2 hover:bg-blue-900 transition-colors"
+              >
+                <MapPin size={20} />
+                View on Google Maps
+              </a>
+            </div>
           </div>
-          <img 
-            src="/images/IMG_20260401_183135_616.jpg" 
-            alt="Map location" 
-            className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-500"
-            referrerPolicy="no-referrer"
-            loading="lazy"
-            decoding="async"
-          />
+          
+          {/* Subtle decoration */}
+          <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-blue-50/30 rounded-full blur-3xl pointer-events-none" />
         </motion.div>
 
       </div>

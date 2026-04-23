@@ -131,93 +131,6 @@ export default function Admissions() {
                 </div>
               </div>
             </motion.section>
-
-            {/* Admission Requirements */}
-            <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white p-8 lg:p-12 rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-              
-              <div className="relative z-10">
-                <div className="flex items-center gap-4 mb-10">
-                  <div className="w-14 h-14 bg-blue-50 text-primary rounded-2xl flex items-center justify-center shrink-0 border border-blue-100">
-                    <CheckCircle2 size={28} />
-                  </div>
-                  <div>
-                    <h2 id="requirements" className="text-2xl lg:text-3xl font-bold text-gray-900">Admission Requirements</h2>
-                    <p className="text-gray-600 text-sm lg:text-base mt-1">Ensure you have the following documents ready.</p>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-                  <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4 sm:mt-0 p-1">
-                    {/* S1 Entry */}
-                    <div className="relative bg-gray-50 rounded-3xl p-8 border border-gray-200 hover:border-primary/30 hover:shadow-md transition-all group">
-                    <div className="absolute top-0 left-8 -translate-y-1/2 bg-primary text-white px-6 py-2 rounded-full font-bold shadow-sm">
-                      Entry for S1
-                    </div>
-                    <ul className="space-y-4 mt-4 text-gray-700">
-                      {[
-                        "PLE Pass Slip (Original & Copy)",
-                        "Recommendation letter",
-                        "2 Passport size photographs",
-                        "Birth Certificate"
-                      ].map((req, idx) => (
-                        <li key={idx} className="flex items-start gap-3">
-                          <div className="w-6 h-6 rounded-full bg-blue-100 text-primary flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-primary group-hover:text-white transition-colors">
-                            <CheckCircle2 size={14} />
-                          </div>
-                          <span className="font-medium">{req}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* S5 Entry */}
-                  <div className="relative bg-gray-50 rounded-3xl p-8 border border-gray-200 hover:border-primary/30 hover:shadow-md transition-all group">
-                    <div className="absolute top-0 left-8 -translate-y-1/2 bg-primary text-white px-6 py-2 rounded-full font-bold shadow-sm">
-                      Entry for S5
-                    </div>
-                    <ul className="space-y-4 mt-4 text-gray-700">
-                      {[
-                        "UCE Result Slip (Original & Copy)",
-                        "Recommendation from previous school",
-                        "2 Passport size photographs",
-                        "Identity Card from previous school"
-                      ].map((req, idx) => (
-                        <li key={idx} className="flex items-start gap-3">
-                          <div className="w-6 h-6 rounded-full bg-blue-100 text-primary flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-primary group-hover:text-white transition-colors">
-                            <CheckCircle2 size={14} />
-                          </div>
-                          <span className="font-medium">{req}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    </div>
-                  </div>
-
-                  {/* Requirements Photo */}
-                  <div className="relative h-full min-h-[400px] lg:col-span-2">
-                    <div className="h-full absolute inset-0 rounded-3xl overflow-hidden shadow-md border border-gray-100 group">
-                      <img 
-                        src="/admissions.jpeg" 
-                        alt="Join Valley College" 
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-10 p-6 bg-blue-50/50 rounded-2xl text-gray-700 flex gap-5 border border-blue-100 items-start">
-                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary shrink-0 shadow-sm">
-                    <AlertCircle size={24} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 text-lg mb-1">Transfer Students</h4>
-                    <p className="text-gray-600 leading-relaxed">Students transferring to other classes (S2, S3) must present official report cards from their previous school covering all terms attended.</p>
-                  </div>
-                </div>
-              </div>
-            </motion.section>
-
           </div>
 
           {/* Sidebar */}
@@ -255,6 +168,93 @@ export default function Admissions() {
 
           </div>
         </div>
+
+        {/* Admission Requirements (Full Width) */}
+        <motion.section 
+          initial={{ opacity: 0, y: 20 }} 
+          whileInView={{ opacity: 1, y: 0 }} 
+          viewport={{ once: true }} 
+          className="bg-white rounded-[3rem] shadow-xl border border-gray-100 overflow-hidden mb-12"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-stretch">
+            {/* Text Side */}
+            <div className="p-10 lg:p-20 flex flex-col justify-center relative">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+              
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-14 h-14 bg-blue-50 text-primary rounded-2xl flex items-center justify-center shrink-0 border border-blue-100">
+                    <CheckCircle2 size={28} />
+                  </div>
+                  <div>
+                    <h2 id="requirements" className="text-2xl lg:text-3xl font-bold text-gray-900">Admission Requirements</h2>
+                    <p className="text-gray-600 text-sm lg:text-base mt-1">Ensure you have the following ready.</p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                  {/* S1 Entry */}
+                  <div className="relative bg-gray-50 rounded-3xl p-8 border border-gray-200 group">
+                    <div className="absolute top-0 left-8 -translate-y-1/2 bg-primary text-white px-6 py-2 rounded-full font-bold shadow-sm">
+                      Entry for S1
+                    </div>
+                    <ul className="space-y-4 mt-4 text-gray-700">
+                      {[
+                        "PLE Pass Slip (Original & Copy)",
+                        "Recommendation letter",
+                        "2 Passport size photographs",
+                        "Birth Certificate"
+                      ].map((req, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <CheckCircle2 size={18} className="text-primary shrink-0 mt-0.5" />
+                          <span className="font-medium">{req}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* S5 Entry */}
+                  <div className="relative bg-gray-50 rounded-3xl p-8 border border-gray-200 group">
+                    <div className="absolute top-0 left-8 -translate-y-1/2 bg-primary text-white px-6 py-2 rounded-full font-bold shadow-sm">
+                      Entry for S5
+                    </div>
+                    <ul className="space-y-4 mt-4 text-gray-700">
+                      {[
+                        "UCE Result Slip (Original & Copy)",
+                        "Recommendation from previous school",
+                        "2 Passport size photographs",
+                        "Identity Card from previous school"
+                      ].map((req, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <CheckCircle2 size={18} className="text-primary shrink-0 mt-0.5" />
+                          <span className="font-medium">{req}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Transfer Tip */}
+                <div className="mt-10 p-6 bg-blue-50/50 rounded-2xl text-gray-700 flex gap-5 border border-blue-100 items-start">
+                  <AlertCircle size={24} className="text-primary shrink-0" />
+                  <p className="text-base leading-relaxed">Students transferring to other classes (S2, S3) must present official report cards from their previous school covering all terms attended.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Image Side */}
+            <div className="relative h-[400px] lg:h-auto bg-gray-100">
+              <img 
+                src="/admissions.jpeg" 
+                alt="Admission Requirements" 
+                className="absolute inset-0 w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-l from-black/20 to-transparent lg:hidden" />
+            </div>
+          </div>
+        </motion.section>
       </div>
     </div>
   );

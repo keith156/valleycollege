@@ -14,6 +14,24 @@ const galleryImages = [
   "FCocfTQWQAMUN01.jpg"
 ];
 
+const leagueImages = [
+  "vaco_league (1).jpg", "vaco_league (1).png", "vaco_league (2).jpg", "vaco_league (3).jpg", 
+  "vaco_league (4).jpg", "vaco_league (5).jpg", "vaco_league (6).jpg", "vaco_league (7).jpg", 
+  "vaco_league (8).jpg", "vaco_league (9).jpg"
+];
+
+const slider1Images = [
+  "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "8.jpg", "9.jpg", "10.jpg",
+  "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg",
+  "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg", "FCocfTQWQAMUN01.jpg", "VACO-19.jpg", "VACO-23.jpg"
+];
+
+const slider2Images = [
+  "A1.jpg", "A2.jpg", "A3.jpg", "A4.jpg", "A5.jpg", "A6.jpg", "A7.jpg", "A8.jpg", "A9.jpg", "A10.jpg",
+  "A11.jpg", "A12.jpg", "A13.jpg", "A14.jpg", "A15.jpg", "A16.jpg", "A17.jpg", "A18.jpg", "A19.jpg", "A20.jpg",
+  "A21.jpg", "A22.jpg", "A23.jpg", "A24.jpg", "A25.jpg"
+];
+
 export default function Alumni() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   // Carousel handles navigation and auto-play
@@ -22,7 +40,6 @@ export default function Alumni() {
 
 
   const gridImages = galleryImages.slice(0, 7);
-  const scrollImages = galleryImages;
 
   const handleNext = useCallback(() => {
     if (selectedIndex === null) return;
@@ -260,6 +277,21 @@ export default function Alumni() {
                 <div className="absolute inset-0 bg-gradient-to-l from-black/20 to-transparent pointer-events-none" />
               </div>
             </div>
+
+            {/* League Gallery Row */}
+            <div className="bg-gray-50/50 border-t border-gray-100 p-6">
+              <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-none snap-x">
+                {leagueImages.map((img, idx) => (
+                  <div key={idx} className="shrink-0 w-40 h-28 md:w-56 md:h-40 rounded-2xl overflow-hidden shadow-sm border-2 border-white snap-center hover:scale-105 transition-transform duration-300">
+                    <img 
+                      src={`/league gallery/${img}`} 
+                      alt={`League event ${idx + 1}`} 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </motion.div>
         </section>
 
@@ -362,36 +394,59 @@ export default function Alumni() {
             ))}
           </div>
 
-          {/* Continuous Auto-Scroll Section */}
-          <div className="relative mt-4 overflow-hidden py-2 bg-gray-50/50 rounded-[3rem] border border-gray-100">
-            <div className="flex whitespace-nowrap overflow-hidden">
-              <motion.div 
-                animate={{ x: ["0%", "-50%"] }}
-                transition={{ duration: 30, ease: "linear", repeat: Infinity }}
-                className="flex gap-6 px-3"
-              >
-                {[...scrollImages, ...scrollImages].map((image, idx) => {
-                  const originalIdx = idx % scrollImages.length;
-                  return (
+          {/* Dual Auto-Scroll Section */}
+          <div className="space-y-6 mt-12 relative overflow-hidden">
+            {/* Slider 1: Right to Left */}
+            <div className="relative overflow-hidden py-2 bg-gray-50/50 rounded-[2rem] border border-gray-100">
+              <div className="flex whitespace-nowrap overflow-hidden">
+                <motion.div 
+                  animate={{ x: ["0%", "-50%"] }}
+                  transition={{ duration: 40, ease: "linear", repeat: Infinity }}
+                  className="flex gap-6 px-3"
+                >
+                  {[...slider1Images, ...slider1Images].map((image, idx) => (
                     <div 
                       key={idx}
-                      onClick={() => setSelectedIndex(originalIdx)}
-                      className="w-56 h-56 md:w-80 md:h-80 rounded-3xl overflow-hidden shadow-lg border-4 border-white shrink-0 cursor-pointer transition-transform hover:scale-105"
+                      className="w-56 h-56 md:w-72 md:h-72 rounded-3xl overflow-hidden shadow-lg border-4 border-white shrink-0 cursor-pointer transition-transform hover:scale-105"
                     >
                       <img 
-                        src={`/alumni gallery/${image}`} 
-                        alt={`Scroll image ${idx}`} 
+                        src={`/slider1 alumni/${image}`} 
+                        alt={`Slider 1 image ${idx}`} 
                         className="w-full h-full object-cover"
                       />
                     </div>
-                  );
-                })}
-              </motion.div>
+                  ))}
+                </motion.div>
+              </div>
+              <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10" />
+              <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10" />
             </div>
-            
-            {/* Fade effect edges */}
-            <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10" />
-            <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10" />
+
+            {/* Slider 2: Left to Right */}
+            <div className="relative overflow-hidden py-2 bg-gray-100/30 rounded-[2rem] border border-gray-100">
+              <div className="flex whitespace-nowrap overflow-hidden">
+                <motion.div 
+                  animate={{ x: ["-50%", "0%"] }}
+                  transition={{ duration: 45, ease: "linear", repeat: Infinity }}
+                  className="flex gap-6 px-3"
+                >
+                  {[...slider2Images, ...slider2Images].map((image, idx) => (
+                    <div 
+                      key={idx}
+                      className="w-56 h-56 md:w-72 md:h-72 rounded-3xl overflow-hidden shadow-lg border-4 border-white shrink-0 cursor-pointer transition-transform hover:scale-105"
+                    >
+                      <img 
+                        src={`/slider2 allumni/${image}`} 
+                        alt={`Slider 2 image ${idx}`} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+              <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10" />
+              <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10" />
+            </div>
           </div>
         </motion.section>
 

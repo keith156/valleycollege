@@ -4,13 +4,12 @@ export interface SchoolEvent {
   date: string;
 }
 
-const STORAGE_KEY = 'valley_college_events';
+const STORAGE_KEY = 'valley_college_events_term2';
 
 const defaultEvents: SchoolEvent[] = [
-  { id: '1', title: 'Beginning of Term I', date: 'Feb 5, 2026' },
-  { id: '2', title: 'Mid-Term Examinations', date: 'Mar 15, 2026' },
-  { id: '3', title: 'Annual Sports Gala', date: 'Apr 10, 2026' },
-  { id: '4', title: 'End of Term I', date: 'May 8, 2026' },
+  { id: '1', title: 'Opening of the Term', date: 'May 5, 2026' },
+  { id: '2', title: 'Visiting Day (VD)', date: 'Jun 18, 2026' },
+  { id: '3', title: 'Term Closing', date: 'Jul 24, 2026' },
 ];
 
 export function getEvents(): SchoolEvent[] {
