@@ -51,46 +51,46 @@ export default function Admissions() {
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <a href="#" className="group flex flex-col items-center p-8 bg-gray-50 rounded-2xl border border-gray-200 hover:border-primary hover:bg-blue-50 hover:shadow-md transition-all duration-300 text-center">
-                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary shadow-sm mb-4 group-hover:scale-110 transition-transform">
+              <a href="#" className="group flex flex-col items-center p-8 bg-primary rounded-2xl border border-primary hover:bg-blue-900 hover:shadow-xl transition-all duration-300 text-center">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white shadow-sm mb-4 group-hover:scale-110 transition-transform">
                   <FileText size={24} />
                 </div>
-                <h3 className="font-bold text-gray-900 text-lg mb-2">Application Form</h3>
-                <p className="text-sm text-gray-500 mb-4">Official form for offline applications.</p>
-                <span className="inline-flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wider group-hover:underline">
+                <h3 className="font-bold text-white text-lg mb-2">Application Form</h3>
+                <p className="text-sm text-blue-200 mb-4">Official form for offline applications.</p>
+                <span className="inline-flex items-center gap-2 text-white font-bold text-sm uppercase tracking-wider group-hover:underline">
                   Download PDF <Download size={16} />
                 </span>
               </a>
               
-              <a href="#" className="group flex flex-col items-center p-8 bg-gray-50 rounded-2xl border border-gray-200 hover:border-primary hover:bg-blue-50 hover:shadow-md transition-all duration-300 text-center">
-                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary shadow-sm mb-4 group-hover:scale-110 transition-transform">
+              <a href="#" className="group flex flex-col items-center p-8 bg-primary rounded-2xl border border-primary hover:bg-blue-900 hover:shadow-xl transition-all duration-300 text-center">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white shadow-sm mb-4 group-hover:scale-110 transition-transform">
                   <FileText size={24} />
                 </div>
-                <h3 className="font-bold text-gray-900 text-lg mb-2">Fees Structure</h3>
-                <p className="text-sm text-gray-500 mb-4">Current academic year tuition details.</p>
-                <span className="inline-flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wider group-hover:underline">
+                <h3 className="font-bold text-white text-lg mb-2">Fees Structure</h3>
+                <p className="text-sm text-blue-200 mb-4">Current academic year tuition details.</p>
+                <span className="inline-flex items-center gap-2 text-white font-bold text-sm uppercase tracking-wider group-hover:underline">
                   Download PDF <Download size={16} />
                 </span>
               </a>
               
-              <a href="#" className="group flex flex-col items-center p-8 bg-gray-50 rounded-2xl border border-gray-200 hover:border-primary hover:bg-blue-50 hover:shadow-md transition-all duration-300 text-center">
-                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary shadow-sm mb-4 group-hover:scale-110 transition-transform">
+              <a href="#" className="group flex flex-col items-center p-8 bg-primary rounded-2xl border border-primary hover:bg-blue-900 hover:shadow-xl transition-all duration-300 text-center">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white shadow-sm mb-4 group-hover:scale-110 transition-transform">
                   <FileText size={24} />
                 </div>
-                <h3 className="font-bold text-gray-900 text-lg mb-2">Rules & Regulations</h3>
-                <p className="text-sm text-gray-500 mb-4">School policies and code of conduct.</p>
-                <span className="inline-flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wider group-hover:underline">
+                <h3 className="font-bold text-white text-lg mb-2">Rules & Regulations</h3>
+                <p className="text-sm text-blue-200 mb-4">School policies and code of conduct.</p>
+                <span className="inline-flex items-center gap-2 text-white font-bold text-sm uppercase tracking-wider group-hover:underline">
                   Download PDF <Download size={16} />
                 </span>
               </a>
 
-              <a href="#" className="group flex flex-col items-center p-8 bg-gray-50 rounded-2xl border border-gray-200 hover:border-primary hover:bg-blue-50 hover:shadow-md transition-all duration-300 text-center">
-                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary shadow-sm mb-4 group-hover:scale-110 transition-transform">
+              <a href="#" className="group flex flex-col items-center p-8 bg-primary rounded-2xl border border-primary hover:bg-blue-900 hover:shadow-xl transition-all duration-300 text-center">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white shadow-sm mb-4 group-hover:scale-110 transition-transform">
                   <FileText size={24} />
                 </div>
-                <h3 className="font-bold text-gray-900 text-lg mb-2">School Circular</h3>
-                <p className="text-sm text-gray-500 mb-4">Latest updates and announcements.</p>
-                <span className="inline-flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wider group-hover:underline">
+                <h3 className="font-bold text-white text-lg mb-2">School Circular</h3>
+                <p className="text-sm text-blue-200 mb-4">Latest updates and announcements.</p>
+                <span className="inline-flex items-center gap-2 text-white font-bold text-sm uppercase tracking-wider group-hover:underline">
                   Download PDF <Download size={16} />
                 </span>
               </a>

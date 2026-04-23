@@ -225,7 +225,7 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 text-white drop-shadow-lg">
-                  <h3 className="text-2xl sm:text-3xl font-bold font-serif mb-1 text-white">Ms. Kabezi Doreen</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold font-serif mb-1 text-white">Ms. Kabezi Doreen</h3>
                   <p className="text-blue-300 font-bold tracking-wide uppercase text-sm">Head Teacher</p>
                 </div>
               </div>
@@ -340,7 +340,7 @@ export default function Home() {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: false }}
                       transition={{ delay: 0.5, duration: 0.8 }}
-                      className={`w-full md:w-1/2 pl-12 md:pl-0 ${idx % 2 === 0 ? 'md:text-left' : 'md:text-right'} z-10`}
+                      className={`w-full md:w-1/2 pl-12 md:pl-0 order-2 md:order-none ${idx % 2 === 0 ? 'md:text-left' : 'md:text-right'} z-10`}
                     >
                       <div className="text-4xl md:text-6xl lg:text-8xl font-black text-primary mb-2 mt-0 md:-mt-14 tracking-tighter select-none drop-shadow-sm opacity-20">
                         {milestone.year}
@@ -353,7 +353,7 @@ export default function Home() {
 
                     {/* Content (Image) - This slides to reveal */}
                     <motion.div 
-                      className="w-full md:w-1/2 pl-12 md:pl-0 z-20"
+                      className="w-full md:w-1/2 pl-12 md:pl-0 z-20 order-1 md:order-none"
                       initial={{ 
                         x: idx % 2 === 0 ? 100 : -100,
                         opacity: 0,

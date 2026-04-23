@@ -13,26 +13,37 @@ export function TextOutline({ text, className = "" }: TextOutlineProps) {
       className={`w-full h-full ${className}`}
       preserveAspectRatio="xMidYMid meet"
     >
+      {/* Subtle inner glow for depth */}
+      <text
+        x="50%"
+        y="50%"
+        textAnchor="middle"
+        dominantBaseline="middle"
+        stroke="rgba(255,255,255,0.06)"
+        strokeWidth="5"
+        fill="none"
+        className="font-black tracking-tighter"
+        style={{ fontSize: "120px" }}
+      >
+        {text}
+      </text>
+      {/* Clean solid outline */}
       <motion.text
         x="50%"
         y="50%"
         textAnchor="middle"
         dominantBaseline="middle"
-        initial={{ strokeDasharray: 1000, strokeDashoffset: 1000, fill: "rgba(255, 255, 255, 0)" }}
-        animate={{ 
-          strokeDashoffset: [1000, 0, 0, 1000],
-          fill: ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.1)", "rgba(255, 255, 255, 0)"]
-        }}
+        initial={{ strokeDasharray: 2000, strokeDashoffset: 2000 }}
+        animate={{ strokeDashoffset: 0 }}
         transition={{ 
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-          times: [0, 0.4, 0.6, 1]
+          duration: 3,
+          ease: "easeOut",
         }}
         stroke="white"
-        strokeWidth="2"
+        strokeWidth="1.5"
+        fill="none"
         className="font-black tracking-tighter"
-        style={{ fontSize: "120px" }}
+        style={{ fontSize: "120px", strokeLinejoin: "round", strokeLinecap: "round" }}
       >
         {text}
       </motion.text>

@@ -91,7 +91,7 @@ export function Navbar() {
             </span>
             <div className="flex items-center gap-1.5 whitespace-nowrap">
               <Phone size={12} className="text-blue-300" />
-              <a href="tel:+256703069869" className="hover:text-blue-200 transition-colors">+256 703069869</a>
+              <a href="tel:+256782679985" className="hover:text-blue-200 transition-colors">+256 782 679 985</a>
             </div>
           </div>
         </div>
@@ -109,7 +109,7 @@ export function Navbar() {
                 className="h-14 lg:h-16 xl:h-20 w-auto object-contain group-hover:scale-105 transition-transform"
               />
               <div className="flex flex-col justify-center">
-                <span className="font-extrabold text-lg lg:text-xl xl:text-3xl text-[#001a40] leading-none tracking-tighter mb-0.5">
+                <span className="font-extrabold text-lg lg:text-xl xl:text-3xl text-[#001a40] leading-none tracking-tighter pb-1.5">
                   VALLEY COLLEGE
                 </span>
                 <span className="font-bold text-[10px] lg:text-xs xl:text-sm text-[#001a40]/80 leading-tight tracking-widest uppercase">
