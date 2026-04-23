@@ -15,9 +15,9 @@ const galleryImages = [
 ];
 
 const leagueImages = [
-  "vaco_league (1).jpg", "vaco_league (1).png", "vaco_league (2).jpg", "vaco_league (3).jpg", 
-  "vaco_league (4).jpg", "vaco_league (5).jpg", "vaco_league (6).jpg", "vaco_league (7).jpg", 
-  "vaco_league (8).jpg", "vaco_league (9).jpg"
+  "vaco_league_1.png", "vaco_league_2.png", "vaco_league_3.png", "vaco_league_4.png", 
+  "vaco_league_5.png", "vaco_league_6.png", "vaco_league_7.png", "vaco_league_8.png", 
+  "vaco_league_9.png", "vaco_league_10.png", "vaco_league_11.png"
 ];
 
 const slider1Images = [
@@ -284,7 +284,7 @@ export default function Alumni() {
                 {leagueImages.map((img, idx) => (
                   <div key={idx} className="shrink-0 w-40 h-28 md:w-56 md:h-40 rounded-2xl overflow-hidden shadow-sm border-2 border-white snap-center hover:scale-105 transition-transform duration-300">
                     <img 
-                      src={`/league gallery/${img}`} 
+                      src={`/league2/${img}`} 
                       alt={`League event ${idx + 1}`} 
                       className="w-full h-full object-cover"
                     />
