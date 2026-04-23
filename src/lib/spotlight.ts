@@ -88,7 +88,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2004-2005',
     profession: 'Engineer - Head of Engineering & Production',
     workStation: 'Engineering Development and Innovation Centre (EDiC), Namanve',
-    imageUrl: '/spotlight2/[2004-2005]_Eng. Moses Agaba (CEng)_Engineer - Head of Engineering & Production_Engineering Development and Innovation Centre (EDiC), Kampala Industrial & Business Park - Namanve.png',
+    imageUrl: '/spotlight2/[2004-2005]_Eng. Moses Agaba (CEng)_Engineer - Head of Engineering & Production_Engineering Development and Innovation Centre (EDiC), Kampala Industrial & Business Park - Namanve.JPG',
   },
   {
     id: '11',

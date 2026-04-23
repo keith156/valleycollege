@@ -9,9 +9,9 @@ const CARDS_PER_PAGE = 3;
 
 const galleryImages = [
   "VACO-15.jpg", "VACO-9.jpg", "VACO-10.jpg", "VACO-11.jpg", "VACO-12.jpg", "VACO-13.jpg", 
-  "VACO-17.jpg", "VACO-18.jpg", "VACO-19.jpg", "VACO-20.jpg",
-  "VACO-21.jpg", "VACO-22.jpg", "VACO-23.jpg", "VACO-24.jpg",
-  "FCocfTQWQAMUN01.jpg"
+  "VACO-17.jpg", "VACO-14.jpg", "VACO-20.jpg", "VACO-24.jpg",
+  "VACO-4.png", "VACO-5.jpg", "VACO-6.jpg", "VACO-7.jpg",
+  "FCocDmcWUA4QFd2.jpg"
 ];
 
 const leagueImages = [
