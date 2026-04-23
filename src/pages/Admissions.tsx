@@ -158,7 +158,13 @@ export default function Admissions() {
               </p>
               <div className="space-y-3">
                 <p className="font-bold text-gray-900 flex items-center gap-2">
-                  <span className="text-primary">Phone:</span> +256 (0) 123 456 789
+                  <span className="text-primary">Phone:</span> +256 782 679 985
+                </p>
+                <p className="font-bold text-gray-900 flex items-center gap-2">
+                  <span className="text-primary">Phone:</span> +256 701 679 985
+                </p>
+                <p className="font-bold text-gray-900 flex items-center gap-2">
+                  <span className="text-primary">Phone:</span> +256 772 646 421
                 </p>
                 <p className="font-bold text-gray-900 flex items-center gap-2">
                   <span className="text-primary">Email:</span> admissions@valleycollege.edu.ug

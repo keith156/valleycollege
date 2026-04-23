@@ -6,7 +6,7 @@ export default function Contact() {
   return (
     <div className="flex flex-col bg-gray-50">
       {/* Page Header */}
-      <div className="relative bg-primary text-white py-12 lg:py-16 overflow-hidden">
+      <div className="relative bg-primary text-white py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
           <div className="w-full h-full bg-gray-900" />
           <img
@@ -17,13 +17,14 @@ export default function Contact() {
             decoding="async"
             fetchPriority="high"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
+          <div className="absolute inset-0 bg-gray-900/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary from-10% via-primary/80 via-50% to-transparent" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-md">Contact Us</h1>
-            <p className="text-lg lg:text-xl text-blue-100 max-w-4xl mx-auto drop-shadow-sm">
-              We'd love to hear from you. Get in touch with Valley College.
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-4xl">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-md">Contact Us</h1>
+            <p className="text-lg lg:text-xl text-white drop-shadow-sm">
+              We'd love to hear from you. Get in touch with Valley College Secondary School, Bushenyi.
             </p>
           </motion.div>
         </div>
@@ -59,8 +60,9 @@ export default function Contact() {
                 </div>
                 <h3 className="font-bold text-gray-900 mb-2 text-base lg:text-lg">Phone Numbers</h3>
                 <p className="text-gray-600">
-                  +256 (0) 123 456 789<br />
-                  +256 (0) 987 654 321
+                  +256 782 679 985<br />
+                  +256 701 679 985<br />
+                  +256 772 646 421
                 </p>
               </div>
 

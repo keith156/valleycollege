@@ -395,13 +395,13 @@ export default function Alumni() {
           </div>
 
           {/* Dual Auto-Scroll Section */}
-          <div className="space-y-6 mt-12 relative overflow-hidden">
+          <div className="space-y-12 mt-12 relative overflow-hidden">
             {/* Slider 1: Right to Left */}
             <div className="relative overflow-hidden py-2 bg-gray-50/50 rounded-[2rem] border border-gray-100">
               <div className="flex whitespace-nowrap overflow-hidden">
                 <motion.div 
                   animate={{ x: ["0%", "-50%"] }}
-                  transition={{ duration: 40, ease: "linear", repeat: Infinity }}
+                  transition={{ duration: 80, ease: "linear", repeat: Infinity }}
                   className="flex gap-6 px-3"
                 >
                   {[...slider1Images, ...slider1Images].map((image, idx) => (
@@ -411,8 +411,9 @@ export default function Alumni() {
                     >
                       <img 
                         src={`/slider1 alumni/${image}`} 
-                        alt={`Slider 1 image ${idx}`} 
+                        alt={`Slider 1 image ${image}`} 
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     </div>
                   ))}
@@ -427,7 +428,7 @@ export default function Alumni() {
               <div className="flex whitespace-nowrap overflow-hidden">
                 <motion.div 
                   animate={{ x: ["-50%", "0%"] }}
-                  transition={{ duration: 45, ease: "linear", repeat: Infinity }}
+                  transition={{ duration: 90, ease: "linear", repeat: Infinity }}
                   className="flex gap-6 px-3"
                 >
                   {[...slider2Images, ...slider2Images].map((image, idx) => (
@@ -437,8 +438,9 @@ export default function Alumni() {
                     >
                       <img 
                         src={`/slider2 allumni/${image}`} 
-                        alt={`Slider 2 image ${idx}`} 
+                        alt={`Slider 2 image ${image}`} 
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     </div>
                   ))}
