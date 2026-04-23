@@ -35,9 +35,9 @@ export default function Home() {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
 
   const heroImages = [
-    "/heroimages/vaco_students (1).png",
-    "/heroimages/vaco_students (2).png",
-    "/heroimages/vaco_students (3).png",
+    "/heroimages/vaco_students_1.png",
+    "/heroimages/vaco_students_2.png",
+    "/heroimages/vaco_students_3.png",
     "/heroimages/2.png",
     "/heroimages/4.png",
     "/heroimages/expansion.jpeg"
