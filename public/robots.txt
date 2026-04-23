@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://valleycollege.sc.ug/sitemap.xml
