@@ -69,7 +69,7 @@ export default function Admissions() {
                 </span>
               </a>
               
-              <a href="https://drive.google.com/file/d/1psI03VyAFax7_LViHfOQzw0X0_eCdNpu/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center p-8 bg-primary rounded-2xl border border-primary hover:bg-blue-900 hover:shadow-xl transition-all duration-300 text-center">
+              <a href="https://drive.google.com/file/d/1_kPfjdq2mT--J27j1O5xNc6sQYFj3iNf/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center p-8 bg-primary rounded-2xl border border-primary hover:bg-blue-900 hover:shadow-xl transition-all duration-300 text-center">
                 <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white shadow-sm mb-4 group-hover:scale-110 transition-transform">
                   <FileText size={24} />
                 </div>
@@ -258,7 +258,7 @@ export default function Admissions() {
             {/* Image Side */}
             <div className="relative min-h-[400px] lg:h-auto bg-[#001a40] flex items-center justify-center p-4 md:p-8">
               <img 
-                src="/admissions.jpeg" 
+                src="/admissions.jpeg?v=2" 
                 alt="Admission Requirements" 
                 className="w-full h-full max-h-[800px] object-contain drop-shadow-2xl rounded-2xl"
                 referrerPolicy="no-referrer"
