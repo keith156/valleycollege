@@ -174,12 +174,14 @@ export function Navbar() {
                   </AnimatePresence>
                 </div>
               ))}
-              <Link
-                to="/admissions#process"
+              <a
+                href="https://forms.gle/9zy69WUU5eYKBYcn6"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-[#001a40] hover:bg-[#002a60] text-white px-5 xl:px-8 py-3 xl:py-3.5 rounded-xl font-black text-[11px] lg:text-xs xl:text-sm tracking-wider xl:tracking-widest transition-all shadow-lg active:scale-95 ml-3 xl:ml-6 uppercase whitespace-nowrap"
               >
                 APPLY NOW
-              </Link>
+              </a>
             </nav>
 
             {/* Mobile Menu Button */}
@@ -259,13 +261,15 @@ export function Navbar() {
                 </div>
               ))}
               <div className="pt-6">
-                <Link
-                  to="/admissions#process"
+                <a
+                  href="https://forms.gle/9zy69WUU5eYKBYcn6"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="block w-full text-center bg-[#001a40] text-white px-8 py-5 rounded-2xl font-black tracking-widest transition-all shadow-xl active:scale-95 uppercase"
                   onClick={() => setIsOpen(false)}
                 >
                   APPLY NOW
-                </Link>
+                </a>
               </div>
             </div>
           </motion.div>

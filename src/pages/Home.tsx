@@ -165,13 +165,15 @@ export default function Home() {
               transition={{ delay: 1.5, duration: 0.8 }}
               className="flex flex-col sm:flex-row gap-6"
             >
-              <Link
-                to="/admissions"
+              <a
+                href="https://forms.gle/9zy69WUU5eYKBYcn6"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="relative group bg-white text-[#001a40] px-8 py-4 md:px-10 md:py-5 rounded-xl font-black text-base md:text-lg transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_40px_rgba(255,255,255,0.5)] hover:-translate-y-1 overflow-hidden"
               >
                 <span className="relative z-10">APPLY FOR 2026</span>
                 <div className="absolute inset-0 bg-blue-100 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" />
-              </Link>
+              </a>
               <Link
                 to="/contact"
                 className="bg-transparent border-2 border-white/50 text-white hover:bg-white/10 hover:border-white px-8 py-4 md:px-10 md:py-5 rounded-xl font-black text-base md:text-lg transition-all backdrop-blur-sm hover:-translate-y-1"

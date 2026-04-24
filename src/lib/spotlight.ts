@@ -210,6 +210,14 @@ const spotlightData: SpotlightAlumnus[] = [
     workStation: 'Valley University',
     imageUrl: '/spotlight2/[1998-2000]_Michael Mukaira A_Architect+Urban Planner_Valley University.jpeg',
   },
+  {
+    id: '26',
+    name: 'Kabezi Doreen',
+    period: '1999-2000',
+    profession: 'Headteacher',
+    workStation: 'Valley College',
+    imageUrl: '/spotlight2/[1999-2000]_Kabezi Doreen_Headteacher_Valley College.jpeg',
+  },
 ];
 
 export function getSpotlight(): SpotlightAlumnus[] {

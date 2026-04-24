@@ -118,7 +118,7 @@ export default function Alumni() {
             <p className="text-base lg:text-lg text-gray-600 mb-8 leading-relaxed">
               The Valley College Alumni Network is a vibrant community of former students who have passed through the gates of our great institution. We are leaders, innovators, professionals, and change-makers spread across the globe. Our network exists to foster lifelong connections and provide mentorship to the next generation.
             </p>
-            <a href="#" className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-bold transition-all hover:scale-105 shadow-lg hover:shadow-green-500/30 w-fit">
+            <a href="https://wa.me/256702171521" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-bold transition-all hover:scale-105 shadow-lg hover:shadow-green-500/30 w-fit">
               <MessageCircle size={24} /> Join the Official WhatsApp Group
             </a>
           </motion.div>
@@ -256,10 +256,10 @@ export default function Alumni() {
                     </p>
                   </div>
                   <div className="flex flex-col gap-6">
-                    <button className="bg-primary text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-900 transition-all shadow-lg hover:shadow-primary/30 flex items-center gap-2 group w-fit">
+                    <a href="https://wa.me/256702171521" target="_blank" rel="noopener noreferrer" className="bg-primary text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-900 transition-all shadow-lg hover:shadow-primary/30 flex items-center gap-2 group w-fit">
                       Register Your Team
                       <ExternalLink size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -341,12 +341,12 @@ export default function Alumni() {
               </div>
               
               <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-2xl mx-auto">
-                <button className="flex-1 bg-primary text-white py-4 px-8 rounded-2xl font-bold text-lg hover:bg-blue-900 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                <a href="https://wa.me/256702171521" target="_blank" rel="noopener noreferrer" className="flex-1 bg-primary text-white py-4 px-8 rounded-2xl font-bold text-lg hover:bg-blue-900 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center">
                   Contribute Now
-                </button>
-                <button className="flex-1 bg-white text-primary border-2 border-gray-200 py-4 px-8 rounded-2xl font-bold text-lg hover:border-primary hover:bg-blue-50 transition-all flex items-center justify-center gap-2">
+                </a>
+                <a href="https://wa.me/256702171521" target="_blank" rel="noopener noreferrer" className="flex-1 bg-white text-primary border-2 border-gray-200 py-4 px-8 rounded-2xl font-bold text-lg hover:border-primary hover:bg-blue-50 transition-all flex items-center justify-center gap-2">
                   View Contributors <ExternalLink size={20} />
-                </button>
+                </a>
               </div>
             </div>
           </div>

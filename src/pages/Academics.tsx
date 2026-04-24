@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BookOpen, GraduationCap, Laptop, Activity, Trophy, Beaker, Users, Star, Medal, ChevronDown, Clock } from 'lucide-react';
+import { BookOpen, GraduationCap, Laptop, Activity, Trophy, Beaker, Users, Star, Medal, ChevronDown, Clock, Scissors, Sparkles, Flame } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { getWallOfFame, WallOfFameYear } from '../lib/wallOfFame';
 import { getEvents, SchoolEvent } from '../lib/events';
@@ -48,11 +48,16 @@ export default function Academics() {
         <button
           key={d}
           onClick={() => event && setSelectedEventId(event.id)}
-          className={`h-8 w-8 flex items-center justify-center rounded-full text-xs font-medium transition-all ${
+          className={`h-8 w-8 flex items-center justify-center rounded-full text-xs font-medium transition-all outline-none ${
             event 
-              ? 'bg-primary text-white shadow-md scale-110 ring-2 ring-primary/20 hover:scale-125' 
+              ? 'bg-primary text-white shadow-md hover:scale-110' 
               : 'text-gray-500 hover:bg-gray-100'
-          } ${selectedEventId === event?.id ? 'ring-4 ring-primary/30' : ''}`}
+          } ${selectedEventId === event?.id ? 'scale-125 z-10' : (event ? 'scale-100' : '')}`}
+          style={{
+            boxShadow: selectedEventId === event?.id 
+              ? '0 0 0 3px #fcc600' 
+              : (event ? '0 0 0 2px rgba(0, 26, 64, 0.2)' : 'none')
+          }}
         >
           {d}
         </button>
@@ -114,21 +119,27 @@ export default function Academics() {
               <p className="text-gray-600 leading-relaxed mb-8 text-lg lg:text-xl">
                 We strictly follow the <strong>Uganda National Curriculum</strong> for both O-Level and A-Level, ensuring our students are well-prepared for national examinations and future academic pursuits.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 hover:border-primary transition-colors">
-                  <Laptop className="text-primary mb-3" size={24} />
-                  <h4 className="font-bold text-gray-900 mb-2">ICT Integration</h4>
-                  <p className="text-sm text-gray-600">Seamless technology use in daily lessons.</p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 mt-8">
+                <div className="bg-gray-50 p-5 lg:p-6 rounded-2xl border border-gray-100 hover:border-primary/50 transition-all hover:shadow-md flex flex-col h-full group">
+                  <div className="w-12 h-12 rounded-xl bg-blue-50/80 flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform origin-left">
+                    <Laptop size={24} />
+                  </div>
+                  <h4 className="font-bold text-gray-900 mb-2 text-base lg:text-lg">ICT Integration</h4>
+                  <p className="text-sm text-gray-600 leading-relaxed flex-grow">Seamless technology use in daily lessons.</p>
                 </div>
-                <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 hover:border-primary transition-colors">
-                  <Beaker className="text-primary mb-3" size={24} />
-                  <h4 className="font-bold text-gray-900 mb-2">Practical Focus</h4>
-                  <p className="text-sm text-gray-600">Hands-on learning in modern labs.</p>
+                <div className="bg-gray-50 p-5 lg:p-6 rounded-2xl border border-gray-100 hover:border-primary/50 transition-all hover:shadow-md flex flex-col h-full group">
+                  <div className="w-12 h-12 rounded-xl bg-blue-50/80 flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform origin-left">
+                    <Beaker size={24} />
+                  </div>
+                  <h4 className="font-bold text-gray-900 mb-2 text-base lg:text-lg">Practical Focus</h4>
+                  <p className="text-sm text-gray-600 leading-relaxed flex-grow">Hands-on learning in modern labs.</p>
                 </div>
-                <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 hover:border-primary transition-colors">
-                  <Users className="text-primary mb-3" size={24} />
-                  <h4 className="font-bold text-gray-900 mb-2">Student-Centered</h4>
-                  <p className="text-sm text-gray-600">Interactive and engaging methodologies.</p>
+                <div className="bg-gray-50 p-5 lg:p-6 rounded-2xl border border-gray-100 hover:border-primary/50 transition-all hover:shadow-md flex flex-col h-full group">
+                  <div className="w-12 h-12 rounded-xl bg-blue-50/80 flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform origin-left">
+                    <Users size={24} />
+                  </div>
+                  <h4 className="font-bold text-gray-900 mb-2 text-base lg:text-lg">Student-Centered</h4>
+                  <p className="text-sm text-gray-600 leading-relaxed flex-grow">Interactive and engaging methodologies.</p>
                 </div>
               </div>
             </div>
@@ -179,7 +190,7 @@ export default function Academics() {
           </motion.div>
         </div>
 
-        {/* UACE Wall of Fame */}
+        {/* UCE Wall of Fame */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20 max-w-4xl mx-auto w-full">
           <div className="flex flex-col items-center text-center mb-10">
             <div className="inline-flex items-center justify-center gap-3 bg-green-100 text-green-800 px-6 py-2 rounded-full mb-4">
@@ -208,7 +219,7 @@ export default function Academics() {
                   >
                     <div className="flex items-center gap-4">
                       <Medal size={28} className="text-yellow-400" />
-                      <span className="text-xl font-bold text-white">UACE {yearData.year}</span>
+                      <span className="text-xl font-bold text-white">UCE {yearData.year}</span>
                     </div>
                     <ChevronDown size={24} className={`transition-transform duration-300 ${isExpanded ? 'rotate-180 text-white' : 'text-white/70'}`} />
                   </button>
@@ -400,6 +411,47 @@ export default function Academics() {
           </div>
         </motion.div>
 
+        {/* Vocational Skilling & Innovation */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16">
+          <div className="flex flex-col items-center text-center mb-10">
+            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Empowering Hands</span>
+            <h2 id="skilling" className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 text-gray-900">Vocational Skilling</h2>
+            <p className="text-gray-600 text-lg lg:text-xl max-w-4xl">We believe in equipping our students with practical, life-long skills. Our skilling programs ensure that every student graduates with hands-on expertise to thrive in the real world.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Tailoring */}
+            <div className="bg-[#001a40] rounded-[2rem] p-8 shadow-xl hover:shadow-2xl border border-[#002a60] hover:border-[#fcc600]/50 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group flex flex-col items-center text-center">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-white/10 transition-colors" />
+              <div className="w-20 h-20 bg-white/10 text-white rounded-3xl flex items-center justify-center mb-6 shadow-sm border border-white/5 group-hover:scale-110 transition-transform duration-300 relative z-10">
+                <Scissors size={36} strokeWidth={1.5} />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4 relative z-10">Fashion & Tailoring</h3>
+              <p className="text-blue-100 mb-6 relative z-10 text-base lg:text-lg">Students learn the art of garment construction, design, and textile handling, setting a foundation for creative fashion entrepreneurship.</p>
+            </div>
+
+            {/* Soap Making */}
+            <div className="bg-[#001a40] rounded-[2rem] p-8 shadow-xl hover:shadow-2xl border border-[#002a60] hover:border-[#fcc600]/50 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group flex flex-col items-center text-center">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-white/10 transition-colors" />
+              <div className="w-20 h-20 bg-white/10 text-white rounded-3xl flex items-center justify-center mb-6 shadow-sm border border-white/5 group-hover:scale-110 transition-transform duration-300 relative z-10">
+                <Sparkles size={36} strokeWidth={1.5} />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4 relative z-10">Soap Making</h3>
+              <p className="text-blue-100 mb-6 relative z-10 text-base lg:text-lg">A hands-on approach to industrial chemistry and entrepreneurship, where students produce quality detergent and bar soaps.</p>
+            </div>
+
+            {/* Baking */}
+            <div className="bg-[#001a40] rounded-[2rem] p-8 shadow-xl hover:shadow-2xl border border-[#002a60] hover:border-[#fcc600]/50 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group flex flex-col items-center text-center">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-white/10 transition-colors" />
+              <div className="w-20 h-20 bg-white/10 text-white rounded-3xl flex items-center justify-center mb-6 shadow-sm border border-white/5 group-hover:scale-110 transition-transform duration-300 relative z-10">
+                <Flame size={36} strokeWidth={1.5} />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4 relative z-10">Baking & Pastry</h3>
+              <p className="text-blue-100 mb-6 relative z-10 text-base lg:text-lg">Mastering culinary arts, students learn professional baking techniques, from breads to exquisite pastries and cake decoration.</p>
+            </div>
+          </div>
+        </motion.div>
+
         {/* School Programs for the Term (Transferred from Home) */}
         <section className="py-20 lg:py-24 bg-white rounded-[3rem] shadow-2xl border border-gray-100 relative overflow-hidden mt-16">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.08),transparent_50%)] pointer-events-none" />
@@ -414,7 +466,7 @@ export default function Academics() {
                 <Clock size={16} />
                 <span>Term Schedule</span>
               </div>
-              <h2 id="calendar" className="text-4xl lg:text-5xl font-black text-gray-900 mb-6">School Programs for the Term</h2>
+              <h2 id="calendar" className="text-4xl lg:text-5xl font-black text-gray-900 mb-6">School Programs for Term 2</h2>
               <p className="text-lg lg:text-xl text-gray-600 max-w-3xl">Our multi-month academic calendar ensures you never miss an important date.</p>
             </motion.div>
 
@@ -456,10 +508,11 @@ export default function Academics() {
                 <div className="bg-gray-50/80 p-8 sm:p-12 rounded-[2.5rem] border border-gray-100 shadow-inner">
                   <div className="flex flex-col gap-16">
                     {/* Continuous stack of months */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 items-start">
                       {renderMonth(4, 2026)} {/* May */}
                       {renderMonth(5, 2026)} {/* June */}
                       {renderMonth(6, 2026)} {/* July */}
+                      {renderMonth(7, 2026)} {/* August */}
                     </div>
                   </div>
                   

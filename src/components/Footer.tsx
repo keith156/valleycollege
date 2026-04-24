@@ -10,7 +10,7 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-12">
           <div className="col-span-1 sm:col-span-2 md:col-span-1">
             <div 
-              className="flex items-center gap-3 mb-6 cursor-pointer select-none"
+              className="flex items-center gap-3 mb-6 cursor-pointer select-none h-12"
               onDoubleClick={() => navigate('/admin')}
               title="Double click for Admin Access"
             >
@@ -23,14 +23,15 @@ export function Footer() {
                 Valley College
               </span>
             </div>
-            <p className="text-blue-200 text-sm leading-relaxed">
-              Excellence, Discipline, and Integrity. Empowering the next generation of leaders through quality education.
+            <p className="text-blue-200 text-sm leading-relaxed pr-4">
+              Excellence, Discipline, and Integrity. We are deeply committed to empowering the next generation of leaders through holistic, quality education. By fostering an environment where every student thrives academically and morally, we prepare them for lifelong success.
             </p>
           </div>
 
-          <div>
-            <h4 className="text-lg font-bold mb-6 text-white">Quick Links</h4>
+          <div className="flex flex-col">
+            <h4 className="text-lg font-bold text-white h-12 flex items-center mb-6">Quick Links</h4>
             <ul className="space-y-3 text-sm text-blue-200">
+              <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
               <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
               <li><Link to="/academics" className="hover:text-white transition-colors">Academics</Link></li>
               <li><Link to="/admissions" className="hover:text-white transition-colors">Admissions</Link></li>
@@ -38,8 +39,8 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-lg font-bold mb-6 text-white">Contact Us</h4>
+          <div className="flex flex-col">
+            <h4 className="text-lg font-bold text-white h-12 flex items-center mb-6">Contact Us</h4>
             <ul className="space-y-4 text-sm text-blue-200">
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="shrink-0 mt-0.5" />
@@ -64,17 +65,19 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-lg font-bold mb-6 text-white">Admissions</h4>
+          <div className="flex flex-col">
+            <h4 className="text-lg font-bold text-white h-12 flex items-center mb-6">Admissions</h4>
             <p className="text-blue-200 text-sm mb-4">
               We are currently accepting applications for the upcoming academic year.
             </p>
-            <Link
-              to="/admissions"
-              className="inline-block bg-white text-primary hover:bg-gray-100 px-6 py-2 rounded-md font-semibold transition-colors text-sm"
+            <a
+              href="https://forms.gle/9zy69WUU5eYKBYcn6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-white text-primary hover:bg-gray-100 px-6 py-2 rounded-md font-semibold transition-colors text-sm w-fit"
             >
               Apply Today
-            </Link>
+            </a>
           </div>
         </div>
 

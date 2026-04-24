@@ -51,18 +51,18 @@ export default function Admissions() {
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <a href="#" className="group flex flex-col items-center p-8 bg-primary rounded-2xl border border-primary hover:bg-blue-900 hover:shadow-xl transition-all duration-300 text-center">
+              <a href="https://forms.gle/9zy69WUU5eYKBYcn6" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center p-8 bg-primary rounded-2xl border border-primary hover:bg-blue-900 hover:shadow-xl transition-all duration-300 text-center">
                 <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white shadow-sm mb-4 group-hover:scale-110 transition-transform">
-                  <FileText size={24} />
+                  <Send size={24} />
                 </div>
                 <h3 className="font-bold text-white text-lg mb-2">Application Form</h3>
-                <p className="text-sm text-blue-200 mb-4">Official form for offline applications.</p>
+                <p className="text-sm text-blue-200 mb-4">Complete your school application online.</p>
                 <span className="inline-flex items-center gap-2 text-white font-bold text-sm uppercase tracking-wider group-hover:underline">
-                  Download PDF <Download size={16} />
+                  Apply Online <ArrowRight size={16} />
                 </span>
               </a>
               
-              <a href="#" className="group flex flex-col items-center p-8 bg-primary rounded-2xl border border-primary hover:bg-blue-900 hover:shadow-xl transition-all duration-300 text-center">
+              <a href="https://drive.google.com/file/d/1psI03VyAFax7_LViHfOQzw0X0_eCdNpu/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center p-8 bg-primary rounded-2xl border border-primary hover:bg-blue-900 hover:shadow-xl transition-all duration-300 text-center">
                 <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white shadow-sm mb-4 group-hover:scale-110 transition-transform">
                   <FileText size={24} />
                 </div>
@@ -73,7 +73,7 @@ export default function Admissions() {
                 </span>
               </a>
               
-              <a href="#" className="group flex flex-col items-center p-8 bg-primary rounded-2xl border border-primary hover:bg-blue-900 hover:shadow-xl transition-all duration-300 text-center">
+              <a href="https://drive.google.com/file/d/18CJ8Uhd2U1t3QQHoi8Qi4g1yyCgB8h1z/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center p-8 bg-primary rounded-2xl border border-primary hover:bg-blue-900 hover:shadow-xl transition-all duration-300 text-center">
                 <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white shadow-sm mb-4 group-hover:scale-110 transition-transform">
                   <FileText size={24} />
                 </div>
@@ -113,9 +113,9 @@ export default function Admissions() {
               <div className="space-y-8">
                 <div className="space-y-6">
                   {[
-                    { step: 1, title: "Download the Application Form", desc: "Get the form from the Application Documents section above or pick a physical copy from the school reception." },
-                    { step: 2, title: "Fill & Gather Documents", desc: "Complete the form and attach previous academic results, a copy of the birth certificate, and passport photos." },
-                    { step: 3, title: "Submit at Reception", desc: "Bring the completed package to the Valley College main campus reception during working hours." },
+                    { step: 1, title: "Fill Online Form", desc: "Complete the online application form via the link in the documents section above to start the process." },
+                    { step: 2, title: "Gather Documents", desc: "Prepare previous academic results, a copy of the birth certificate, and passport photos for physical verification." },
+                    { step: 3, title: "Document Submission", desc: "Bring the required documents to the Valley College reception for verification and final processing." },
                     { step: 4, title: "Interview / Assessment", desc: "Eligible candidates will be invited for a brief interview and academic assessment." }
                   ].map((item) => (
                     <div key={item.step} className="flex gap-6 items-start group">
