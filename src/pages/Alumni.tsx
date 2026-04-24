@@ -30,7 +30,7 @@ const slider1Images = [
 const slider2Images = [
   "A1.jpg", "A2.jpg", "A3.jpg", "A4.jpg", "A5.jpg", "A6.jpg", "A7.jpg", "A8.jpg", "A9.jpg", "A10.jpg",
   "A11.jpg", "A12.jpg", "A13.jpg", "A14.jpg", "A15.jpg", "A16.jpg", "A17.jpg", "A18.jpg", "A19.jpg", "A20.jpg",
-  "A21.jpg", "A22.jpg", "A23.jpg", "A24.jpg", "A25.jpg"
+  "A21.jpg", "A22.jpg", "A23.jpg", "A24.jpg", "A25.jpg", "A26.jpeg"
 ];
 
 export default function Alumni() {
@@ -149,7 +149,7 @@ export default function Alumni() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center justify-center gap-3">
               <GraduationCap className="text-primary" size={32} /> Alumni Spotlight
             </h2>
-            <p className="text-gray-600 text-base lg:text-lg max-w-4xl">Meet our outstanding alumni making significant contributions across the globe.</p>
+            <p className="text-gray-600 text-base lg:text-lg max-w-4xl">Meet some of our outstanding alumni making significant contributions across the globe.</p>
           </div>
 
           {/* Cards Carousel */}

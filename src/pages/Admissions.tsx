@@ -91,7 +91,7 @@ export default function Admissions() {
                 </span>
               </a>
 
-              <a href="#" className="group flex flex-col items-center p-8 bg-primary rounded-2xl border border-primary hover:bg-blue-900 hover:shadow-xl transition-all duration-300 text-center">
+              <a href="https://drive.google.com/file/d/10LcG1dcvqquBmjumNePgQaxG-Kymbo5k/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center p-8 bg-primary rounded-2xl border border-primary hover:bg-blue-900 hover:shadow-xl transition-all duration-300 text-center">
                 <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white shadow-sm mb-4 group-hover:scale-110 transition-transform">
                   <FileText size={24} />
                 </div>

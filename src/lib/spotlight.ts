@@ -72,7 +72,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2004-2005',
     profession: 'Lawyer',
     workStation: 'State Attorney, Office of Director of Public Prosecutions',
-    imageUrl: '/spotlight2/[2004-2005]_Arinaitwe Robert_Lawyer_State Attorney, Office of Director of Public Prosecutions.png',
+    imageUrl: '/spotlight2/[2004-2005]_Arinaitwe Robert_Lawyer_State Attorney, Office of Director of Public Prosecutions.jpeg',
   },
   {
     id: '9',
@@ -168,7 +168,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2007-2008',
     profession: 'Environmentalist',
     workStation: 'Geotropic Consults Ltd',
-    imageUrl: '/spotlight2/[2007-2008]_Barbra Atuhereza_Geotropic Consults Ltd_Eviromentalist.png',
+    imageUrl: '/spotlight2/[2007-2008]_Barbra Atuhereza_Geotropic Consults Ltd_Eviromentalist.jpeg',
   },
   {
     id: '21',
