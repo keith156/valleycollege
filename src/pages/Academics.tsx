@@ -3,6 +3,7 @@ import { BookOpen, GraduationCap, Laptop, Activity, Trophy, Beaker, Users, Star,
 import { motion, AnimatePresence } from 'motion/react';
 import { getWallOfFame, WallOfFameYear } from '../lib/wallOfFame';
 import { getEvents, SchoolEvent } from '../lib/events';
+import { SEO } from '../components/SEO';
 
 export default function Academics() {
   const [expandedYear, setExpandedYear] = useState<string | null>(null);
@@ -79,6 +80,12 @@ export default function Academics() {
 
   return (
     <div className="flex flex-col bg-gray-50">
+      <SEO 
+        title="Academics"
+        description="Explore the academic programs at Valley College Secondary School Bushenyi. We offer a robust O & A Level curriculum, science laboratories, ICT integration, and vocational skilling in tailoring and baking."
+        keywords="O Level curriculum Uganda, A Level curriculum Uganda, science education Bushenyi, vocational skilling schools Uganda, Valley College school calendar"
+        path="/academics"
+      />
       {/* Page Header */}
       <div className="relative bg-primary text-white py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">

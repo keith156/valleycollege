@@ -1,10 +1,17 @@
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
+import { SEO } from '../components/SEO';
 
 export default function Contact() {
   return (
     <div className="flex flex-col bg-gray-50">
+      <SEO 
+        title="Contact Us"
+        description="Get in touch with Valley College Secondary School Bushenyi. Find our location, phone numbers, and email addresses, or send us a message directly."
+        keywords="Contact Valley College, school location Bushenyi, Valley College phone number, school email address Uganda, contact secondary school Bushenyi"
+        path="/contact"
+      />
       {/* Page Header */}
       <div className="relative bg-primary text-white py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">

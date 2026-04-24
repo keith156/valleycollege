@@ -4,6 +4,7 @@
  */
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { Layout } from './components/Layout';
 import { ScrollToTop } from './components/ScrollToTop';
 import { lazy, Suspense } from 'react';
@@ -28,23 +29,25 @@ const PageLoader = () => (
 
 export default function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="academics" element={<Academics />} />
-            <Route path="admissions" element={<Admissions />} />
-            <Route path="alumni" element={<Alumni />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="admin" element={<Admin />} />
-            <Route path="terms" element={<Terms />} />
-            <Route path="privacy" element={<Privacy />} />
-          </Route>
-        </Routes>
-      </Suspense>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <ScrollToTop />
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="about" element={<About />} />
+              <Route path="academics" element={<Academics />} />
+              <Route path="admissions" element={<Admissions />} />
+              <Route path="alumni" element={<Alumni />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="admin" element={<Admin />} />
+              <Route path="terms" element={<Terms />} />
+              <Route path="privacy" element={<Privacy />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </Router>
+    </HelmetProvider>
   );
 }

@@ -2,11 +2,18 @@ import { useState } from 'react';
 import { FileText, CheckCircle2, Download, AlertCircle, ArrowRight, Monitor, Printer, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
+import { SEO } from '../components/SEO';
 
 export default function Admissions() {
 
   return (
     <div className="flex flex-col bg-gray-50">
+      <SEO 
+        title="Admissions"
+        description="Enroll at Valley College Secondary School Bushenyi. Find admission requirements, download application forms, and start your journey towards excellence and discipline."
+        keywords="Valley College admissions, enroll secondary school Uganda, Bushenyi school requirements, application forms school Uganda, admissions secondary school Bushenyi"
+        path="/admissions"
+      />
       {/* Page Header */}
       <div className="relative bg-primary text-white py-12 lg:py-16 overflow-hidden">
 

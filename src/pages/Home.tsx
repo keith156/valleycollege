@@ -6,6 +6,7 @@ import { HolographicCard } from '../components/ui/holographic-card';
 import { TextOutline } from '../components/ui/text-outline';
 import React, { useEffect, useState } from 'react';
 import { ZoomParallax } from '../components/ui/zoom-parallax';
+import { SEO } from '../components/SEO';
 
 interface CountUpProps {
   end: number;
@@ -101,6 +102,12 @@ export default function Home() {
 
   return (
     <div className="flex flex-col">
+      <SEO 
+        title="Home"
+        description="Valley College Secondary School Bushenyi is a top-ranked secondary school in Uganda dedicated to academic excellence, discipline, and integrity. Offering O & A Level education and vocational skills."
+        keywords="Valley College Bushenyi, best secondary school Uganda, secondary schools in Bushenyi, O Level education Uganda, A Level education Uganda, vocational skilling Uganda"
+        path="/"
+      />
       {/* Hero Section */}
       <section className="relative h-screen min-h-[700px] flex items-center justify-center text-white overflow-hidden bg-black">
         {/* Background Layer */}

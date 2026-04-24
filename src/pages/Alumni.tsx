@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useState, useCallback, useEffect } from 'react';
 import { getSpotlight, SpotlightAlumnus } from '../lib/spotlight';
 import { Carousel } from '../components/Carousel';
+import { SEO } from '../components/SEO';
 
 
 const CARDS_PER_PAGE = 3;
@@ -80,6 +81,12 @@ export default function Alumni() {
 
   return (
     <div className="flex flex-col bg-gray-50">
+      <SEO 
+        title="Alumni Network"
+        description="Join the Valley College Alumni Network. Connecting global leaders, innovators, and professionals who graduated from Valley College Secondary School Bushenyi."
+        keywords="Valley College Alumni, Alumni Network Uganda, global alumni community, mentorship programs Uganda, school alumni network"
+        path="/alumni"
+      />
       {/* Page Header */}
       <div className="relative bg-primary text-white py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">

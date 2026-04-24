@@ -1,6 +1,7 @@
 import { Building2, Target, History, Users, BookOpen, Handshake, MapPin, Image as ImageIcon, Compass, Star, ShieldCheck, ArrowRight, Clock, User, GraduationCap, ClipboardList } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Carousel } from '../components/Carousel';
+import { SEO } from '../components/SEO';
 
 const pioneerGroups = [
   ["Twebaze Paul", "Tumwesigye Adonia", "Muhangi James Mukaira", "Natukunda Jeninah", "Noowe Innocent Kariisa", "Forward Moses Luke", "Asiimwe David"],
@@ -103,6 +104,12 @@ const governanceData = [
 export default function About() {
   return (
     <div className="flex flex-col bg-gray-50">
+      <SEO 
+        title="About Us"
+        description="Learn about the history, vision, mission, and leadership of Valley College Secondary School Bushenyi. Founded by Mzee William Mukaira with a legacy of excellence since 1997."
+        keywords="Valley College history, Mzee William Mukaira, school mission and vision, secondary school leadership Uganda, Bushenyi education history"
+        path="/about"
+      />
       {/* Hero Section */}
 
       <div className="relative bg-primary text-white py-20 lg:py-24 overflow-hidden">
