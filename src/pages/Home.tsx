@@ -276,7 +276,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 sm:px-0">
             {[
               { end: 29, label: "Years of Excellence", icon: TrophyIcon, img: "/Years_of_excellence.jpeg" },
-              { end: 27, label: "Subjects Offered", icon: BookOpenIcon, img: "/images/subjects offered.jpeg" },
+              { end: 18, label: "Subjects Offered", icon: BookOpenIcon, img: "/images/subjects offered.jpeg" },
               { end: 650, label: "Number of Students", icon: UsersIcon, img: "/images/10.jpeg" }
             ].map((stat, idx) => (
               <motion.div 
