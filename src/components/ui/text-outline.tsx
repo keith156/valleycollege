@@ -45,15 +45,13 @@ export function TextOutline({ text, className = "" }: TextOutlineProps) {
           y="50%"
           textAnchor="middle"
           dominantBaseline="middle"
-          initial={{ strokeDasharray: 2000, strokeDashoffset: 2000 }}
+          initial={{ strokeDasharray: 5000, strokeDashoffset: 5000 }}
           animate={{ 
-            strokeDashoffset: [2000, 0, 0, 2000],
-            opacity: [0, 1, 1, 0]
+            strokeDashoffset: [5000, 0, 5000],
           }}
           transition={{ 
-            duration: 6,
+            duration: 10,
             repeat: Infinity,
-            times: [0, 0.4, 0.7, 1],
             ease: "easeInOut",
           }}
           whileHover={{ scale: 1.02 }}
