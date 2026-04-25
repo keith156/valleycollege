@@ -7,8 +7,8 @@ export function Footer() {
   return (
     <footer className="bg-primary text-white pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 mb-16 text-center sm:text-left">
-          <div className="flex flex-col items-center sm:items-start h-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 mb-16 text-center">
+          <div className="flex flex-col items-center h-full">
             <div 
               className="flex items-center gap-3 mb-6 cursor-pointer select-none"
               onDoubleClick={() => navigate('/admin')}
@@ -28,7 +28,7 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="flex flex-col items-center sm:items-start h-full">
+          <div className="flex flex-col items-center h-full">
             <h4 className="text-lg font-bold text-white mb-6 uppercase tracking-wider text-sm">Quick Links</h4>
             <ul className="space-y-4 text-sm text-blue-200">
               <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
@@ -38,7 +38,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="flex flex-col items-center sm:items-start h-full">
+          <div className="flex flex-col items-center h-full">
             <h4 className="text-lg font-bold text-white mb-6 uppercase tracking-wider text-sm">Contact Us</h4>
             <ul className="space-y-5 text-sm text-blue-200">
               <li className="flex items-start gap-3">
@@ -56,7 +56,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="flex flex-col items-center sm:items-start h-full space-y-8">
+          <div className="flex flex-col items-center h-full space-y-8">
             <div>
               <h4 className="text-lg font-bold text-white mb-4 uppercase tracking-wider text-sm">Admissions</h4>
               <p className="text-blue-200 text-xs mb-5 leading-relaxed max-w-[200px]">
