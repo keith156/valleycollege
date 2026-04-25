@@ -23,7 +23,7 @@ export function TextOutline({ text, className = "" }: TextOutlineProps) {
         strokeWidth="5"
         fill="none"
         className="font-black tracking-tighter"
-        style={{ fontSize: "120px" }}
+        style={{ fontSize: "120px", fontFamily: "'Poppins', sans-serif" }}
       >
         {text}
       </text>
@@ -43,7 +43,7 @@ export function TextOutline({ text, className = "" }: TextOutlineProps) {
         strokeWidth="1.5"
         fill="none"
         className="font-black tracking-tighter"
-        style={{ fontSize: "120px", strokeLinejoin: "round", strokeLinecap: "round" }}
+        style={{ fontSize: "120px", strokeLinejoin: "round", strokeLinecap: "round", fontFamily: "'Poppins', sans-serif" }}
       >
         {text}
       </motion.text>

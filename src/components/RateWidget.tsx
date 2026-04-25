@@ -36,7 +36,7 @@ export function RateWidget() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "YOUR_ACCESS_KEY_HERE", 
+          access_key: "b86bb0fd-7c22-4e14-8941-c17778d858ec",
           subject: `New Website Rating: ${rating} Stars`,
           rating: rating,
           comment: comment,
@@ -63,7 +63,36 @@ export function RateWidget() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[9999]">
+    <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end">
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8, x: 20 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            exit={{ opacity: 0, scale: 0.8, x: 20 }}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setIsOpen(true)}
+            className="flex items-center gap-3 bg-white/90 backdrop-blur-xl border border-white/20 p-2 pl-4 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] group hover:shadow-[0_15px_40px_rgba(0,0,0,0.15)] transition-all duration-300"
+          >
+            <div className="flex flex-col items-start leading-tight">
+              <div className="flex items-center gap-1">
+                <span className="text-lg font-black text-gray-900">4.8</span>
+                <div className="flex">
+                  {[1, 2, 3, 4, 5].map((s) => (
+                    <Star key={s} size={10} className={s <= 4 ? "fill-yellow-400 text-yellow-400" : "text-gray-200"} />
+                  ))}
+                </div>
+              </div>
+              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">326 Reviews</span>
+            </div>
+            <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg group-hover:rotate-12 transition-transform duration-500">
+              <Star className="w-5 h-5 fill-white" />
+            </div>
+          </motion.button>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -76,10 +105,10 @@ export function RateWidget() {
             <div className="bg-primary p-5 flex justify-between items-center text-white relative overflow-hidden">
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12 blur-2xl" />
               <h3 className="font-bold flex items-center gap-2 relative z-10">
-                <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" /> 
+                <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                 Rate Your Experience
               </h3>
-              <button 
+              <button
                 onClick={() => setIsOpen(false)}
                 className="p-1.5 hover:bg-white/20 rounded-full transition-colors relative z-10"
               >
@@ -89,7 +118,7 @@ export function RateWidget() {
 
             <div className="p-6">
               {isSubmitted ? (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   className="py-10 text-center flex flex-col items-center gap-4"

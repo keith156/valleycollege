@@ -72,23 +72,6 @@ export function Footer() {
               </a>
             </div>
 
-            <div className="w-full max-w-[220px] bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 group hover:bg-white/10 transition-all">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl font-black text-white">4.8</span>
-                <div className="flex gap-0.5">
-                  {[1, 2, 3, 4, 5].map((s) => (
-                    <Star key={s} size={12} className={s <= 4 ? "fill-yellow-400 text-yellow-400" : "text-white/20"} />
-                  ))}
-                </div>
-              </div>
-              <p className="text-[10px] text-blue-300 uppercase tracking-[0.2em] mb-4 font-bold">326 Visitor Reviews</p>
-              <button 
-                onClick={() => window.dispatchEvent(new CustomEvent('open-rate-widget'))}
-                className="w-full py-2.5 bg-blue-500/20 hover:bg-blue-500/40 text-white border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-95"
-              >
-                Rate Our Website
-              </button>
-            </div>
           </div>
         </div>
 
