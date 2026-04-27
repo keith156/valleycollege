@@ -125,9 +125,12 @@ export default function Alumni() {
             <p className="text-base lg:text-lg text-gray-600 mb-8 leading-relaxed">
               The Valley College Alumni Network is a vibrant community of former students who have passed through the gates of our great institution. We are leaders, innovators, professionals, and change-makers spread across the globe. Our network exists to foster lifelong connections and provide mentorship to the next generation.
             </p>
-            <a href="https://wa.me/256702171521" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-bold transition-all hover:scale-105 shadow-lg hover:shadow-green-500/30 w-fit">
-              <MessageCircle size={24} /> Join the Official WhatsApp Group
-            </a>
+            <div className="flex items-center gap-4">
+              <a href="https://chat.whatsapp.com/E54b48dGuZKLZj1FoShlVz?mode=gi_t" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-6 py-4 rounded-full font-bold transition-all hover:scale-105 shadow-lg hover:shadow-green-500/30 w-fit">
+                <MessageCircle size={24} /> Join the Official WhatsApp Group
+              </a>
+              <img src="/group_icon.jpeg" alt="Valley College Alumni WhatsApp Group" className="w-20 h-20 md:w-24 md:h-24 rounded-full shadow-lg border-[3px] border-green-500 object-cover hover:scale-105 transition-transform" />
+            </div>
           </motion.div>
           
           <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="rounded-3xl overflow-hidden shadow-lg">
