@@ -301,19 +301,36 @@ export default function About() {
           </div>
 
 
-          <div className="flex flex-col py-6 px-4 md:px-8 max-w-7xl mx-auto overflow-hidden">
+          <div className="grid grid-cols-[140px_1fr] sm:grid-cols-[200px_1fr] md:grid-cols-[310px_1fr] gap-x-4 md:gap-x-12 max-w-7xl mx-auto overflow-hidden px-4 md:px-8 py-6">
             {governanceData.map((item, idx) => (
-              <div key={idx} className="w-full flex flex-col items-start">
+              <div key={idx} className="contents">
+                {/* Left Column (Pill and vertical lines) */}
                 <motion.div 
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
-                  className="flex flex-row items-center w-full gap-4 md:gap-12"
+                  className="flex flex-col items-center w-full h-full relative z-0"
                 >
-                  {/* Left Column: Pill (Side-by-side on all screens) */}
-                  <div className="flex-none w-[140px] sm:w-[200px] md:w-[310px] flex flex-col items-center">
-                    <div className={`w-full rounded-[2rem] md:rounded-[3rem] flex flex-col items-center justify-center p-3 md:p-8 shadow-xl min-h-[70px] md:min-h-[110px] border-2 md:border-4 ${item.pillClass} group hover:scale-105 transition-transform duration-500`}>
+                  {/* Vertical line stretching to the top if not first item */}
+                  {idx > 0 && (
+                    <div className="w-[2.5px] md:w-[4px] flex-1" style={{ backgroundColor: governanceData[idx - 1].lineColor }} />
+                  )}
+                  {/* Space for the top dot if this item has no line from above */}
+                  {idx === 0 && <div className="flex-1" />}
+
+                  {/* Pill Container with Attached Dots */}
+                  <div className="flex flex-col items-center shrink-0 w-full relative z-20">
+                    {/* Top Dot */}
+                    {idx > 0 && (
+                      <div 
+                        className="w-3 h-3 md:w-5 md:h-5 rounded-full border-[2.5px] md:border-[4px] border-solid bg-white shrink-0 z-30 -mb-[1.25px] md:-mb-[2px]" 
+                        style={{ borderColor: item.dotColor }} 
+                      />
+                    )}
+
+                    {/* The Pill */}
+                    <div className={`w-full rounded-[2rem] md:rounded-[3rem] flex flex-col items-center justify-center p-3 md:p-8 shadow-xl min-h-[70px] md:min-h-[110px] border-2 md:border-4 ${item.pillClass} group hover:scale-105 transition-transform duration-500 z-20 relative`}>
                       <div className="group-hover:scale-110 transition-transform duration-500 scale-75 md:scale-100">
                         {item.svg}
                       </div>
@@ -321,34 +338,45 @@ export default function About() {
                         {item.title}
                       </div>
                     </div>
+
+                    {/* Bottom Dot */}
+                    {idx < governanceData.length - 1 && (
+                      <div 
+                        className="w-3 h-3 md:w-5 md:h-5 rounded-full border-[2.5px] md:border-[4px] border-solid bg-white shrink-0 z-30 -mt-[1.25px] md:-mt-[2px]" 
+                        style={{ borderColor: item.dotColor }} 
+                      />
+                    )}
                   </div>
 
-                  {/* Right Column: Description (Horizontal) */}
-                  <div className="flex-1 text-[12px] sm:text-sm md:text-lg leading-relaxed text-gray-700 text-left py-2">
-                    {item.desc}
-                  </div>
+                  {/* Vertical line stretching to the bottom if not last item */}
+                  {idx < governanceData.length - 1 && (
+                    <div className="w-[2.5px] md:w-[4px] flex-1" style={{ backgroundColor: item.lineColor }} />
+                  )}
+                  {idx === governanceData.length - 1 && <div className="flex-1" />}
                 </motion.div>
 
-                {/* Connector Logic */}
+                {/* Right Column (Description) */}
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="flex items-center text-[12px] sm:text-sm md:text-lg leading-relaxed text-gray-700 py-4"
+                >
+                  {item.desc}
+                </motion.div>
+
+                {/* Connector Space Between Rows (Just the line, providing vertical gap) */}
                 {idx < governanceData.length - 1 && (
-                  <div className="w-full h-8 md:h-16 flex items-stretch">
-                    <div className="flex-none w-[140px] sm:w-[200px] md:w-[310px] flex justify-center">
-                      <div className="flex flex-col items-center w-1 relative">
-                        <div 
-                          className="w-3 h-3 md:w-5 md:h-5 rounded-full border-[2.5px] md:border-[4px] border-solid bg-white absolute top-0 -translate-y-1/2 z-20" 
-                          style={{ borderColor: item.dotColor }} 
-                        />
-                        <div 
-                          className="w-[2.5px] md:w-[4px] h-full" 
-                          style={{ backgroundColor: item.lineColor }} 
-                        />
-                        <div 
-                          className="w-3 h-3 md:w-5 md:h-5 rounded-full border-[2.5px] md:border-[4px] border-solid bg-white absolute bottom-0 translate-y-1/2 z-20" 
-                          style={{ borderColor: governanceData[idx+1].dotColor }} 
-                        />
-                      </div>
+                  <div className="contents">
+                    <div className="flex justify-center w-full h-8 md:h-12 relative z-0">
+                      <div 
+                        className="w-[2.5px] md:w-[4px] h-full" 
+                        style={{ backgroundColor: item.lineColor }} 
+                      />
                     </div>
-                    <div className="flex-1" />
+                    {/* Empty cell for the right column in the connector row */}
+                    <div></div>
                   </div>
                 )}
               </div>
