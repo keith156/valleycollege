@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Star, MessageSquare, Send, X, CheckCircle } from 'lucide-react';
+import { Star, MessageSquare, Send, X, CheckCircle, User, MapPin, Users } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -12,6 +12,9 @@ export function RateWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+  const [name, setName] = useState('');
+  const [location, setLocation] = useState('');
+  const [relationship, setRelationship] = useState('');
   const [comment, setComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -28,7 +31,6 @@ export function RateWidget() {
 
     setIsSubmitting(true);
     try {
-      // Note: User needs to replace 'YOUR_ACCESS_KEY_HERE' with their actual Web3Forms access key
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
@@ -39,8 +41,11 @@ export function RateWidget() {
           access_key: "b86bb0fd-7c22-4e14-8941-c17778d858ec",
           subject: `New Website Rating: ${rating} Stars`,
           rating: rating,
+          name: name || "Not provided",
+          location: location || "Not provided",
+          relationship: relationship || "Not provided",
           comment: comment,
-          from_name: "Valley College Website Visitor",
+          from_name: name || "Valley College Website Visitor",
         }),
       });
 
@@ -51,6 +56,9 @@ export function RateWidget() {
           setIsOpen(false);
           setIsSubmitted(false);
           setRating(0);
+          setName('');
+          setLocation('');
+          setRelationship('');
           setComment('');
         }, 3000);
       }
@@ -99,10 +107,10 @@ export function RateWidget() {
             initial={{ opacity: 0, scale: 0.9, y: 20, filter: 'blur(10px)' }}
             animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
             exit={{ opacity: 0, scale: 0.9, y: 20, filter: 'blur(10px)' }}
-            className="mb-4 w-80 bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-gray-100 overflow-hidden"
+            className="mb-4 w-80 max-h-[85vh] overflow-y-auto scrollbar-none bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-gray-100"
           >
             {/* Header */}
-            <div className="bg-primary p-5 flex justify-between items-center text-white relative overflow-hidden">
+            <div className="bg-primary p-5 flex justify-between items-center text-white relative overflow-hidden shrink-0">
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12 blur-2xl" />
               <h3 className="font-bold flex items-center gap-2 relative z-10">
                 <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
@@ -132,8 +140,8 @@ export function RateWidget() {
                   </div>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="text-center">
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="text-center mb-2">
                     <p className="text-sm text-gray-500 mb-3 font-semibold uppercase tracking-wider">Tap to rate</p>
                     <div className="flex justify-center gap-1.5">
                       {[1, 2, 3, 4, 5].map((star) => (
@@ -158,7 +166,53 @@ export function RateWidget() {
                     </div>
                   </div>
 
-                  <div className="space-y-1.5">
+                  <div className="space-y-3">
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <User className="h-4 w-4 text-gray-400" />
+                      </div>
+                      <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Your Name"
+                        className="w-full pl-10 pr-4 py-3 text-sm bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30 focus:bg-white transition-all shadow-inner"
+                      />
+                    </div>
+                    
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <MapPin className="h-4 w-4 text-gray-400" />
+                      </div>
+                      <input
+                        type="text"
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                        placeholder="Location (e.g. Kampala)"
+                        className="w-full pl-10 pr-4 py-3 text-sm bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30 focus:bg-white transition-all shadow-inner"
+                      />
+                    </div>
+
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <Users className="h-4 w-4 text-gray-400" />
+                      </div>
+                      <select
+                        value={relationship}
+                        onChange={(e) => setRelationship(e.target.value)}
+                        className={cn("w-full pl-10 pr-4 py-3 text-sm bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30 focus:bg-white transition-all shadow-inner appearance-none", relationship === '' ? "text-gray-400" : "text-gray-900")}
+                      >
+                        <option value="" disabled>Relationship with school</option>
+                        <option value="Current Student">Current Student</option>
+                        <option value="Alumnus">Alumnus / Old Student</option>
+                        <option value="Parent">Parent / Guardian</option>
+                        <option value="Staff">Staff Member</option>
+                        <option value="Well Wisher">Well Wisher / Visitor</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5 pt-2">
                     <label className="text-xs font-bold text-gray-400 flex items-center gap-1.5 px-1 uppercase tracking-wider">
                       <MessageSquare className="w-3.5 h-3.5" /> Any comments?
                     </label>
@@ -166,14 +220,14 @@ export function RateWidget() {
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
                       placeholder="Help us improve..."
-                      className="w-full p-4 text-sm bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary/30 focus:bg-white resize-none min-h-[100px] transition-all shadow-inner"
+                      className="w-full p-4 text-sm bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary/30 focus:bg-white resize-none min-h-[80px] transition-all shadow-inner"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={rating === 0 || isSubmitting}
-                    className="w-full bg-primary text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-primary-hover disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-primary/20 transition-all active:scale-[0.98]"
+                    className="w-full bg-primary text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-primary-hover disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-primary/20 transition-all active:scale-[0.98] mt-2"
                   >
                     {isSubmitting ? (
                       <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
