@@ -222,7 +222,7 @@ export default function Home() {
               <div className="relative rounded-3xl overflow-hidden shadow-2xl w-full lg:mr-auto lg:ml-0 h-[400px] md:h-[500px] lg:h-full min-h-[400px]">
                 <img
                   src="/headteacher.jpeg"
-                  alt="Ms. Kabezi Doreen - Head Teacher"
+                  alt="Ms. Kabeizi Doreen - Head Teacher"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                   loading="lazy"
@@ -234,7 +234,7 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 text-white drop-shadow-lg">
-                  <h3 className="text-xl sm:text-2xl font-bold font-serif mb-1 text-white">Ms. Kabezi Doreen</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold font-serif mb-1 text-white">Ms. Kabeizi Doreen</h3>
                   <p className="text-blue-300 font-bold tracking-wide uppercase text-sm">Head Teacher</p>
                 </div>
               </div>

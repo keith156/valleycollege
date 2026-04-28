@@ -34,35 +34,32 @@ const slider2Images = [
 ];
 
 export default function Alumni() {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  // Carousel handles navigation and auto-play
+  const [lightbox, setLightbox] = useState<{ images: string[], index: number, prefix: string } | null>(null);
   const alumni: SpotlightAlumnus[] = getSpotlight();
-
-
 
   const gridImages = galleryImages.slice(0, 7);
 
   const handleNext = useCallback(() => {
-    if (selectedIndex === null) return;
-    setSelectedIndex((prev) => (prev! + 1) % galleryImages.length);
-  }, [selectedIndex]);
+    if (!lightbox) return;
+    setLightbox(prev => prev ? { ...prev, index: (prev.index + 1) % prev.images.length } : null);
+  }, [lightbox]);
 
   const handlePrev = useCallback(() => {
-    if (selectedIndex === null) return;
-    setSelectedIndex((prev) => (prev! - 1 + galleryImages.length) % galleryImages.length);
-  }, [selectedIndex]);
+    if (!lightbox) return;
+    setLightbox(prev => prev ? { ...prev, index: (prev.index - 1 + prev.images.length) % prev.images.length } : null);
+  }, [lightbox]);
 
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (selectedIndex === null) return;
+      if (!lightbox) return;
       if (e.key === 'ArrowRight') handleNext();
       if (e.key === 'ArrowLeft') handlePrev();
-      if (e.key === 'Escape') setSelectedIndex(null);
+      if (e.key === 'Escape') setLightbox(null);
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedIndex, handleNext, handlePrev]);
+  }, [lightbox, handleNext, handlePrev]);
 
   // Layout helper for the featured bento cluster (7 images)
   const getBentoClass = (idx: number) => {
@@ -291,15 +288,19 @@ export default function Alumni() {
             {/* League Gallery Row */}
             <div className="bg-gray-50/50 border-t border-gray-100 p-6">
               <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-none snap-x">
-                {leagueImages.map((img, idx) => (
-                  <div key={idx} className="shrink-0 w-40 h-28 md:w-56 md:h-40 rounded-2xl overflow-hidden shadow-sm border-2 border-white snap-center hover:scale-105 transition-transform duration-300">
+                  {leagueImages.map((img, idx) => (
+                  <div 
+                    key={idx} 
+                    onClick={() => setLightbox({ images: leagueImages, index: idx, prefix: '/league2/' })}
+                    className="shrink-0 w-40 h-28 md:w-56 md:h-40 rounded-2xl overflow-hidden shadow-sm border-2 border-white snap-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+                  >
                     <img 
                       src={`/league2/${img}`} 
                       alt={`League event ${idx + 1}`} 
                       className="w-full h-full object-cover"
                     />
                   </div>
-                ))}
+                  ))}
               </div>
             </div>
           </motion.div>
@@ -389,7 +390,7 @@ export default function Alumni() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: (idx % 4) * 0.1 }}
-                onClick={() => setSelectedIndex(idx)}
+                onClick={() => setLightbox({ images: galleryImages, index: idx, prefix: '/alumni gallery/' })}
                 className={`group relative rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 bg-gray-50 cursor-pointer ${getBentoClass(idx)}`}
               >
                 <img
@@ -417,6 +418,7 @@ export default function Alumni() {
                   {[...slider1Images, ...slider1Images].map((image, idx) => (
                     <div 
                       key={idx}
+                      onClick={() => setLightbox({ images: slider1Images, index: idx % slider1Images.length, prefix: '/slider1 alumni/' })}
                       className="w-56 h-56 md:w-72 md:h-72 rounded-3xl overflow-hidden shadow-lg border-4 border-white shrink-0 cursor-pointer transition-transform hover:scale-105"
                     >
                       <img 
@@ -444,6 +446,7 @@ export default function Alumni() {
                   {[...slider2Images, ...slider2Images].map((image, idx) => (
                     <div 
                       key={idx}
+                      onClick={() => setLightbox({ images: slider2Images, index: idx % slider2Images.length, prefix: '/slider2 allumni/' })}
                       className="w-56 h-56 md:w-72 md:h-72 rounded-3xl overflow-hidden shadow-lg border-4 border-white shrink-0 cursor-pointer transition-transform hover:scale-105"
                     >
                       <img 
@@ -464,22 +467,22 @@ export default function Alumni() {
 
         {/* Lightbox Modal */}
         <AnimatePresence mode="wait">
-          {selectedIndex !== null && (
+          {lightbox !== null && (
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-md flex items-center justify-center p-4 md:p-10"
+              className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 md:p-10"
             >
               {/* Backdrop Click */}
               <div 
                 className="absolute inset-0 cursor-zoom-out" 
-                onClick={() => setSelectedIndex(null)} 
+                onClick={() => setLightbox(null)} 
               />
 
               {/* Close Button */}
               <button 
-                onClick={() => setSelectedIndex(null)}
+                onClick={() => setLightbox(null)}
                 className="absolute top-6 right-6 p-4 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[110]"
               >
                 <X size={32} />
@@ -502,18 +505,23 @@ export default function Alumni() {
               
               {/* Image Container */}
               <motion.div 
-                key={selectedIndex}
+                key={lightbox.index}
                 initial={{ scale: 0.9, opacity: 0, x: 20 }}
                 animate={{ scale: 1, opacity: 1, x: 0 }}
                 exit={{ scale: 1.1, opacity: 0, x: -20 }}
                 className="relative max-w-6xl w-full h-[80vh] flex items-center justify-center z-[105] pointer-events-none"
               >
                 <img 
-                  src={`/alumni gallery/${galleryImages[selectedIndex]}`} 
+                  src={`${lightbox.prefix}${lightbox.images[lightbox.index]}`} 
                   alt="Full preview" 
                   className="max-w-full max-h-full object-contain rounded-xl shadow-2xl pointer-events-auto"
                 />
               </motion.div>
+
+              {/* Image Counter */}
+              <div className="absolute top-8 left-1/2 -translate-x-1/2 text-white font-bold bg-white/10 px-4 py-1 rounded-full backdrop-blur-md">
+                {lightbox.index + 1} / {lightbox.images.length}
+              </div>
 
               {/* Mobile Swipe / Tap Hint */}
               <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 text-sm md:hidden">

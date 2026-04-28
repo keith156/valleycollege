@@ -18,10 +18,12 @@ export function RateWidget() {
   const [comment, setComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [reviewCount, setReviewCount] = useState(326);
 
   useEffect(() => {
     const handleOpen = () => setIsOpen(true);
     window.addEventListener('open-rate-widget', handleOpen);
+    
     return () => window.removeEventListener('open-rate-widget', handleOpen);
   }, []);
 
@@ -30,27 +32,29 @@ export function RateWidget() {
     if (rating === 0) return;
 
     setIsSubmitting(true);
+    
+    const submissionData = {
+      access_key: "b86bb0fd-7c22-4e14-8941-c17778d858ec",
+      subject: `New Website Rating: ${rating} Stars`,
+      rating: rating,
+      name: name || "Not provided",
+      location: location || "Not provided",
+      relationship: relationship || "Not provided",
+      comment: comment,
+      from_name: name || "Valley College Website Visitor",
+    };
+
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          access_key: "b86bb0fd-7c22-4e14-8941-c17778d858ec",
-          subject: `New Website Rating: ${rating} Stars`,
-          rating: rating,
-          name: name || "Not provided",
-          location: location || "Not provided",
-          relationship: relationship || "Not provided",
-          comment: comment,
-          from_name: name || "Valley College Website Visitor",
-        }),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(submissionData),
       });
 
       if (response.ok) {
         setIsSubmitted(true);
+        setReviewCount(prev => prev + 1);
+        
         // Reset and close after a delay
         setTimeout(() => {
           setIsOpen(false);
@@ -92,7 +96,7 @@ export function RateWidget() {
                   ))}
                 </div>
               </div>
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">326 Reviews</span>
+              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{reviewCount} Reviews</span>
             </div>
             <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg group-hover:rotate-12 transition-transform duration-500">
               <Star className="w-5 h-5 fill-white" />

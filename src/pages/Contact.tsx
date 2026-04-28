@@ -19,21 +19,20 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const submissionData = {
+      access_key: "80d4b6ca-4390-4d82-88dc-66230d20c01f",
+      name: `${formData.firstName} ${formData.lastName}`,
+      email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+      from_name: "Valley College Website Contact Form",
+    };
+
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          access_key: "80d4b6ca-4390-4d82-88dc-66230d20c01f",
-          name: `${formData.firstName} ${formData.lastName}`,
-          email: formData.email,
-          subject: `New Website Contact: ${formData.subject}`,
-          message: formData.message,
-          from_name: "Valley College Website Contact Form",
-        }),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(submissionData),
       });
 
       if (response.ok) {
@@ -268,7 +267,7 @@ export default function Contact() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-12 relative">
           <div className="rounded-3xl overflow-hidden shadow-2xl border-8 border-white h-[450px] relative group bg-gray-100">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7408!2d30.132!3d-0.505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19d919864a787ed9%3A0xe1043f6ff3a2a6b2!2sValley%20College%20SS%20Bushenyi!5e0!3m2!1sen!2sug!4v1713801000000!5m2!1sen!2sug"
+              src="https://maps.google.com/maps?q=Valley%20College%20Secondary%20School%20Bushenyi&t=&z=16&ie=UTF8&iwloc=B&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}

@@ -212,7 +212,7 @@ const spotlightData: SpotlightAlumnus[] = [
   },
   {
     id: '26',
-    name: 'Kabezi Doreen',
+    name: 'Kabeizi Doreen',
     period: '1999-2000',
     profession: 'Headteacher',
     workStation: 'Valley College',
