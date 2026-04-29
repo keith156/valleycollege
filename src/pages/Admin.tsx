@@ -1,37 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { SchoolEvent, getEvents, saveEvents } from '../lib/events';
-import { NewsItem, getNews, saveNews } from '../lib/news';
-import { WallOfFameYear, getWallOfFame, saveWallOfFame, StudentRecord } from '../lib/wallOfFame';
-import { Trash2, Edit2, Plus, LogOut, Calendar, Newspaper, Award, X } from 'lucide-react';
+import { SchoolEvent, getEvents, saveEvent, deleteEvent } from '../lib/events';
+import { WallOfFameYear, getWallOfFame, saveWofYear, deleteWofYear, StudentRecord } from '../lib/wallOfFame';
+import { SpotlightAlumnus, getSpotlight, saveAlumnus, deleteAlumnus } from '../lib/spotlight';
+import { Trash2, Edit2, Plus, LogOut, Calendar, Award, X, Users, Loader2 } from 'lucide-react';
 
 export default function Admin() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [tab, setTab] = useState<'events' | 'news' | 'wof'>('events');
+  const [tab, setTab] = useState<'events' | 'wof' | 'spotlight'>('events');
+  const [isLoading, setIsLoading] = useState(false);
   
   // Events State
   const [events, setEvents] = useState<SchoolEvent[]>([]);
   const [editingEventId, setEditingEventId] = useState<string | null>(null);
   const [eventForm, setEventForm] = useState({ title: '', date: '' });
 
-  // News State
-  const [news, setNews] = useState<NewsItem[]>([]);
-  const [editingNewsId, setEditingNewsId] = useState<string | null>(null);
-  const [newsForm, setNewsForm] = useState({ title: '', date: '', excerpt: '', img: '' });
 
   // Wall of Fame State
   const [wof, setWof] = useState<WallOfFameYear[]>([]);
+
+  // Spotlight State
+  const [spotlight, setSpotlight] = useState<SpotlightAlumnus[]>([]);
+  const [editingAlumniId, setEditingAlumniId] = useState<string | null>(null);
+  const [alumniForm, setAlumniForm] = useState({ name: '', period: '', profession: '', workStation: '', imageUrl: '' });
   const [editingWofId, setEditingWofId] = useState<string | null>(null);
   const [wofForm, setWofForm] = useState<{ year: string; students: StudentRecord[] }>({ year: '', students: [] });
 
   useEffect(() => {
-    if (isLoggedIn) {
-      setEvents(getEvents());
-      setNews(getNews());
-      setWof(getWallOfFame());
-    }
+    const fetchData = async () => {
+      if (isLoggedIn) {
+        setIsLoading(true);
+        try {
+          const [evs, wofData, spotData] = await Promise.all([
+            getEvents(),
+            getWallOfFame(),
+            getSpotlight()
+          ]);
+          setEvents(evs);
+          setWof(wofData);
+          setSpotlight(spotData);
+        } catch (err) {
+          console.error("Error fetching data:", err);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+    fetchData();
   }, [isLoggedIn]);
 
   const handleLogin = (e: React.FormEvent) => {
@@ -50,76 +65,114 @@ export default function Admin() {
   };
 
   // --- EVENTS CRUD ---
-  const handleSaveEvent = (e: React.FormEvent) => {
+  const handleSaveEvent = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!eventForm.title || !eventForm.date) return;
-    let updated;
-    if (editingEventId) {
-      updated = events.map(ev => ev.id === editingEventId ? { ...ev, ...eventForm } : ev);
-    } else {
-      updated = [...events, { id: Date.now().toString(), ...eventForm }];
-    }
-    setEvents(updated);
-    saveEvents(updated);
-    setEventForm({ title: '', date: '' });
-    setEditingEventId(null);
-  };
-
-  const handleDeleteEvent = (id: string) => {
-    if (window.confirm('Delete this event?')) {
-      const updated = events.filter(ev => ev.id !== id);
+    
+    setIsLoading(true);
+    const id = editingEventId || Date.now().toString();
+    const event = { id, ...eventForm };
+    
+    try {
+      await saveEvent(event);
+      const updated = await getEvents();
       setEvents(updated);
-      saveEvents(updated);
+      setEventForm({ title: '', date: '' });
+      setEditingEventId(null);
+    } catch (err) {
+      alert("Failed to save event");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // --- NEWS CRUD ---
-  const handleSaveNews = (e: React.FormEvent) => {
+  const handleDeleteEvent = async (id: string) => {
+    if (window.confirm('Delete this event?')) {
+      setIsLoading(true);
+      try {
+        await deleteEvent(id);
+        const updated = await getEvents();
+        setEvents(updated);
+      } catch (err) {
+        alert("Failed to delete event");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
+
+  // --- SPOTLIGHT CRUD ---
+  const handleSaveAlumni = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newsForm.title || !newsForm.date || !newsForm.excerpt || !newsForm.img) return;
-    let updated;
-    if (editingNewsId) {
-      updated = news.map(n => n.id === editingNewsId ? { ...n, ...newsForm } : n);
-    } else {
-      updated = [{ id: Date.now().toString(), ...newsForm }, ...news];
+    if (!alumniForm.name || !alumniForm.period || !alumniForm.profession || !alumniForm.workStation || !alumniForm.imageUrl) return;
+    
+    setIsLoading(true);
+    const id = editingAlumniId || Date.now().toString();
+    const alumnus = { id, ...alumniForm };
+    
+    try {
+      await saveAlumnus(alumnus);
+      const updated = await getSpotlight();
+      setSpotlight(updated);
+      setAlumniForm({ name: '', period: '', profession: '', workStation: '', imageUrl: '' });
+      setEditingAlumniId(null);
+    } catch (err) {
+      alert("Failed to save alumni record");
+    } finally {
+      setIsLoading(false);
     }
-    setNews(updated);
-    saveNews(updated);
-    setNewsForm({ title: '', date: '', excerpt: '', img: '' });
-    setEditingNewsId(null);
   };
 
-  const handleDeleteNews = (id: string) => {
-    if (window.confirm('Delete this news item?')) {
-      const updated = news.filter(n => n.id !== id);
-      setNews(updated);
-      saveNews(updated);
+  const handleDeleteAlumni = async (id: string) => {
+    if (window.confirm('Delete this alumni spotlight record?')) {
+      setIsLoading(true);
+      try {
+        await deleteAlumnus(id);
+        const updated = await getSpotlight();
+        setSpotlight(updated);
+      } catch (err) {
+        alert("Failed to delete alumni record");
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
   // --- WOF CRUD ---
-  const handleSaveWof = (e: React.FormEvent) => {
+  const handleSaveWof = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!wofForm.year) return;
-    let updated;
-    if (editingWofId) {
-      updated = wof.map(w => w.id === editingWofId ? { ...w, ...wofForm } : w);
-    } else {
-      updated = [{ id: Date.now().toString(), ...wofForm }, ...wof];
+    
+    setIsLoading(true);
+    const id = editingWofId || Date.now().toString();
+    const yearData = { id, ...wofForm };
+    
+    try {
+      await saveWofYear(yearData);
+      const updated = await getWallOfFame();
+      setWof(updated);
+      setWofForm({ year: '', students: [] });
+      setEditingWofId(null);
+    } catch (err) {
+      alert("Failed to save Wall of Fame data");
+    } finally {
+      setIsLoading(false);
     }
-    // Sort by year descending
-    updated.sort((a, b) => parseInt(b.year) - parseInt(a.year));
-    setWof(updated);
-    saveWallOfFame(updated);
-    setWofForm({ year: '', students: [] });
-    setEditingWofId(null);
   };
 
-  const handleDeleteWof = (id: string) => {
+  const handleDeleteWof = async (id: string) => {
     if (window.confirm('Delete this Wall of Fame year?')) {
-      const updated = wof.filter(w => w.id !== id);
-      setWof(updated);
-      saveWallOfFame(updated);
+      setIsLoading(true);
+      try {
+        await deleteWofYear(id);
+        const updated = await getWallOfFame();
+        setWof(updated);
+      } catch (err) {
+        alert("Failed to delete Wall of Fame data");
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -174,11 +227,11 @@ export default function Admin() {
           <button onClick={() => setTab('events')} className={`flex items-center gap-2 pb-4 px-2 font-bold whitespace-nowrap transition-colors ${tab === 'events' ? 'text-primary border-b-2 border-primary' : 'text-gray-500 hover:text-gray-700'}`}>
             <Calendar size={20} /> School Programs
           </button>
-          <button onClick={() => setTab('news')} className={`flex items-center gap-2 pb-4 px-2 font-bold whitespace-nowrap transition-colors ${tab === 'news' ? 'text-primary border-b-2 border-primary' : 'text-gray-500 hover:text-gray-700'}`}>
-            <Newspaper size={20} /> News & Updates
-          </button>
           <button onClick={() => setTab('wof')} className={`flex items-center gap-2 pb-4 px-2 font-bold whitespace-nowrap transition-colors ${tab === 'wof' ? 'text-primary border-b-2 border-primary' : 'text-gray-500 hover:text-gray-700'}`}>
             <Award size={20} /> Wall of Fame
+          </button>
+          <button onClick={() => setTab('spotlight')} className={`flex items-center gap-2 pb-4 px-2 font-bold whitespace-nowrap transition-colors ${tab === 'spotlight' ? 'text-primary border-b-2 border-primary' : 'text-gray-500 hover:text-gray-700'}`}>
+            <Users size={20} /> Alumni Spotlight
           </button>
         </div>
 
@@ -190,21 +243,26 @@ export default function Admin() {
                 <form onSubmit={handleSaveEvent} className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
                   <div className="md:col-span-1">
                     <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
-                    <input type="text" value={eventForm.date} onChange={(e) => setEventForm({ ...eventForm, date: e.target.value })} placeholder="e.g., Oct 20, 2026" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required />
+                    <input type="text" value={eventForm.date} onChange={(e) => setEventForm({ ...eventForm, date: e.target.value })} placeholder="e.g., Oct 20, 2026" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required disabled={isLoading} />
                   </div>
                   <div className="md:col-span-1">
                     <label className="block text-sm font-medium text-gray-700 mb-1">Event Title</label>
-                    <input type="text" value={eventForm.title} onChange={(e) => setEventForm({ ...eventForm, title: e.target.value })} placeholder="e.g., Mid-Term Exams" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required />
+                    <input type="text" value={eventForm.title} onChange={(e) => setEventForm({ ...eventForm, title: e.target.value })} placeholder="e.g., Mid-Term Exams" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required disabled={isLoading} />
                   </div>
                   <div className="md:col-span-1 flex gap-2">
-                    <button type="submit" className="flex-1 flex items-center justify-center gap-2 bg-primary text-white py-2.5 px-4 rounded-xl font-bold hover:bg-primary/90 transition-colors">
-                      {editingEventId ? <Edit2 size={18} /> : <Plus size={18} />} {editingEventId ? 'Update' : 'Add'}
+                    <button type="submit" disabled={isLoading} className="flex-1 flex items-center justify-center gap-2 bg-primary text-white py-2.5 px-4 rounded-xl font-bold hover:bg-primary/90 transition-colors disabled:opacity-50">
+                      {isLoading ? <Loader2 className="animate-spin" size={18} /> : (editingEventId ? <Edit2 size={18} /> : <Plus size={18} />)} {editingEventId ? 'Update' : 'Add'}
                     </button>
-                    {editingEventId && <button type="button" onClick={() => { setEditingEventId(null); setEventForm({ title: '', date: '' }); }} className="px-4 py-2.5 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-colors">Cancel</button>}
+                    {editingEventId && <button type="button" onClick={() => { setEditingEventId(null); setEventForm({ title: '', date: '' }); }} className="px-4 py-2.5 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-colors" disabled={isLoading}>Cancel</button>}
                   </div>
                 </form>
               </div>
-              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden relative">
+                {isLoading && (
+                  <div className="absolute inset-0 bg-white/50 backdrop-blur-[1px] z-10 flex items-center justify-center">
+                    <Loader2 className="animate-spin text-primary" size={32} />
+                  </div>
+                )}
                 <div className="p-6 border-b border-gray-100 bg-gray-50"><h2 className="text-lg font-bold text-gray-900">Current Programs</h2></div>
                 <div className="divide-y divide-gray-100">
                   {events.map(event => (
@@ -221,51 +279,68 @@ export default function Admin() {
             </motion.div>
           )}
 
-          {tab === 'news' && (
-            <motion.div key="news" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
-              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 mb-8">
-                <h2 className="text-xl font-bold text-gray-900 mb-6">{editingNewsId ? 'Edit News' : 'Add News Item'}</h2>
-                <form onSubmit={handleSaveNews} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
-                      <input type="text" value={newsForm.date} onChange={(e) => setNewsForm({ ...newsForm, date: e.target.value })} placeholder="e.g., Oct 15, 2026" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
-                      <input type="text" value={newsForm.img} onChange={(e) => setNewsForm({ ...newsForm, img: e.target.value })} placeholder="https://..." className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
-                    <input type="text" value={newsForm.title} onChange={(e) => setNewsForm({ ...newsForm, title: e.target.value })} className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Excerpt</label>
-                    <textarea value={newsForm.excerpt} onChange={(e) => setNewsForm({ ...newsForm, excerpt: e.target.value })} rows={3} className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required />
-                  </div>
-                  <div className="flex gap-2 pt-2">
-                    <button type="submit" className="flex items-center justify-center gap-2 bg-primary text-white py-2.5 px-6 rounded-xl font-bold hover:bg-primary/90 transition-colors">
-                      {editingNewsId ? <Edit2 size={18} /> : <Plus size={18} />} {editingNewsId ? 'Update' : 'Add'}
-                    </button>
-                    {editingNewsId && <button type="button" onClick={() => { setEditingNewsId(null); setNewsForm({ title: '', date: '', excerpt: '', img: '' }); }} className="px-6 py-2.5 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-colors">Cancel</button>}
-                  </div>
-                </form>
-              </div>
-              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
-                <div className="p-6 border-b border-gray-100 bg-gray-50"><h2 className="text-lg font-bold text-gray-900">Current News</h2></div>
+
+          {tab === 'spotlight' && (
+            <motion.div key="spotlight" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
+               <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 mb-8">
+                 <h2 className="text-xl font-bold text-gray-900 mb-6">{editingAlumniId ? 'Edit Alumni Spotlight' : 'Add Alumni Spotlight'}</h2>
+                 <form onSubmit={handleSaveAlumni} className="space-y-4">
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                     <div>
+                       <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                       <input type="text" value={alumniForm.name} onChange={(e) => setAlumniForm({ ...alumniForm, name: e.target.value })} className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required disabled={isLoading} />
+                     </div>
+                     <div>
+                       <label className="block text-sm font-medium text-gray-700 mb-1">Period (e.g., 2004-2005)</label>
+                       <input type="text" value={alumniForm.period} onChange={(e) => setAlumniForm({ ...alumniForm, period: e.target.value })} className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required disabled={isLoading} />
+                     </div>
+                     <div>
+                       <label className="block text-sm font-medium text-gray-700 mb-1">Profession</label>
+                       <input type="text" value={alumniForm.profession} onChange={(e) => setAlumniForm({ ...alumniForm, profession: e.target.value })} className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required disabled={isLoading} />
+                     </div>
+                     <div>
+                       <label className="block text-sm font-medium text-gray-700 mb-1">Work Station</label>
+                       <input type="text" value={alumniForm.workStation} onChange={(e) => setAlumniForm({ ...alumniForm, workStation: e.target.value })} className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required disabled={isLoading} />
+                     </div>
+                   </div>
+                   <div>
+                     <label className="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
+                     <input type="text" value={alumniForm.imageUrl} onChange={(e) => setAlumniForm({ ...alumniForm, imageUrl: e.target.value })} placeholder="https://..." className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required disabled={isLoading} />
+                   </div>
+                   <div className="flex gap-2 pt-2">
+                     <button type="submit" disabled={isLoading} className="flex items-center justify-center gap-2 bg-primary text-white py-2.5 px-6 rounded-xl font-bold hover:bg-primary/90 transition-colors disabled:opacity-50">
+                       {isLoading ? <Loader2 className="animate-spin" size={18} /> : (editingAlumniId ? <Edit2 size={18} /> : <Plus size={18} />)} {editingAlumniId ? 'Update' : 'Add'}
+                     </button>
+                     {editingAlumniId && (
+                       <button type="button" onClick={() => { setEditingAlumniId(null); setAlumniForm({ name: '', period: '', profession: '', workStation: '', imageUrl: '' }); }} className="px-6 py-2.5 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-colors" disabled={isLoading}>
+                         Cancel
+                       </button>
+                     )}
+                   </div>
+                 </form>
+               </div>
+ 
+               <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden relative">
+                 {isLoading && (
+                   <div className="absolute inset-0 bg-white/50 backdrop-blur-[1px] z-10 flex items-center justify-center">
+                     <Loader2 className="animate-spin text-primary" size={32} />
+                   </div>
+                 )}
+                 <div className="p-6 border-b border-gray-100 bg-gray-50">
+                   <h2 className="text-lg font-bold text-gray-900">Current Spotlight Alumni</h2>
+                 </div>
                 <div className="divide-y divide-gray-100">
-                  {news.map(item => (
-                    <div key={item.id} className="p-6 flex flex-col sm:flex-row gap-4 hover:bg-gray-50 transition-colors">
-                      <img src={item.img} alt="" className="w-24 h-24 object-cover rounded-xl shrink-0" />
+                  {spotlight.map(person => (
+                    <div key={person.id} className="p-6 flex flex-col sm:flex-row gap-4 hover:bg-gray-50 transition-colors">
+                      <img src={person.imageUrl} alt="" className="w-20 h-20 object-cover rounded-xl shrink-0" />
                       <div className="flex-1">
-                        <span className="text-sm font-bold text-primary mb-1 block">{item.date}</span>
-                        <h3 className="text-lg font-bold text-gray-900 mb-1">{item.title}</h3>
-                        <p className="text-gray-600 text-sm line-clamp-2">{item.excerpt}</p>
+                        <h3 className="text-lg font-bold text-gray-900 mb-0.5">{person.name}</h3>
+                        <p className="text-primary text-sm font-bold mb-1">{person.period} • {person.profession}</p>
+                        <p className="text-gray-500 text-xs">{person.workStation}</p>
                       </div>
                       <div className="flex items-start gap-2 shrink-0">
-                        <button onClick={() => { setEditingNewsId(item.id); setNewsForm({ title: item.title, date: item.date, excerpt: item.excerpt, img: item.img }); }} className="p-2 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-lg transition-colors"><Edit2 size={18} /></button>
-                        <button onClick={() => handleDeleteNews(item.id)} className="p-2 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"><Trash2 size={18} /></button>
+                        <button onClick={() => { setEditingAlumniId(person.id); setAlumniForm({ name: person.name, period: person.period, profession: person.profession, workStation: person.workStation, imageUrl: person.imageUrl }); }} className="p-2 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-lg transition-colors"><Edit2 size={18} /></button>
+                        <button onClick={() => handleDeleteAlumni(person.id)} className="p-2 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"><Trash2 size={18} /></button>
                       </div>
                     </div>
                   ))}
@@ -281,21 +356,21 @@ export default function Admin() {
                 <form onSubmit={handleSaveWof} className="space-y-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Year</label>
-                    <input type="text" value={wofForm.year} onChange={(e) => setWofForm({ ...wofForm, year: e.target.value })} placeholder="e.g., 2025" className="w-full md:w-1/3 px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required />
+                    <input type="text" value={wofForm.year} onChange={(e) => setWofForm({ ...wofForm, year: e.target.value })} placeholder="e.g., 2025" className="w-full md:w-1/3 px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required disabled={isLoading} />
                   </div>
                   
                   <div>
                     <div className="flex items-center justify-between mb-4">
                       <label className="block text-sm font-medium text-gray-700">Students</label>
-                      <button type="button" onClick={addWofStudent} className="text-sm font-bold text-primary flex items-center gap-1 hover:text-blue-700"><Plus size={16} /> Add Student</button>
+                      <button type="button" onClick={addWofStudent} className="text-sm font-bold text-primary flex items-center gap-1 hover:text-blue-700" disabled={isLoading}><Plus size={16} /> Add Student</button>
                     </div>
                     <div className="space-y-3">
                       {wofForm.students.map((student, idx) => (
                         <div key={idx} className="flex flex-col sm:flex-row gap-3 items-start sm:items-center bg-gray-50 p-4 rounded-xl border border-gray-200">
-                          <input type="text" value={student.name} onChange={(e) => updateWofStudent(idx, 'name', e.target.value)} placeholder="Student Name" className="flex-1 w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required />
-                          <input type="text" value={student.combo} onChange={(e) => updateWofStudent(idx, 'combo', e.target.value)} placeholder="Combination (e.g., PCM/ICT)" className="w-full sm:w-48 px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required />
-                          <input type="text" value={student.pts} onChange={(e) => updateWofStudent(idx, 'pts', e.target.value)} placeholder="Points (e.g., 20 pts)" className="w-full sm:w-32 px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required />
-                          <button type="button" onClick={() => removeWofStudent(idx)} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors shrink-0"><X size={20} /></button>
+                          <input type="text" value={student.name} onChange={(e) => updateWofStudent(idx, 'name', e.target.value)} placeholder="Student Name" className="flex-1 w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required disabled={isLoading} />
+                          <input type="text" value={student.combo} onChange={(e) => updateWofStudent(idx, 'combo', e.target.value)} placeholder="Combination (e.g., PCM/ICT)" className="w-full sm:w-48 px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required disabled={isLoading} />
+                          <input type="text" value={student.pts} onChange={(e) => updateWofStudent(idx, 'pts', e.target.value)} placeholder="Points (e.g., 20 pts)" className="w-full sm:w-32 px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required disabled={isLoading} />
+                          <button type="button" onClick={() => removeWofStudent(idx)} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors shrink-0" disabled={isLoading}><X size={20} /></button>
                         </div>
                       ))}
                       {wofForm.students.length === 0 && <p className="text-sm text-gray-500 italic">No students added yet.</p>}
@@ -303,15 +378,20 @@ export default function Admin() {
                   </div>
 
                   <div className="flex gap-2 pt-4 border-t border-gray-100">
-                    <button type="submit" className="flex items-center justify-center gap-2 bg-primary text-white py-2.5 px-6 rounded-xl font-bold hover:bg-primary/90 transition-colors">
-                      {editingWofId ? <Edit2 size={18} /> : <Plus size={18} />} {editingWofId ? 'Update Year' : 'Save Year'}
+                    <button type="submit" disabled={isLoading} className="flex items-center justify-center gap-2 bg-primary text-white py-2.5 px-6 rounded-xl font-bold hover:bg-primary/90 transition-colors disabled:opacity-50">
+                      {isLoading ? <Loader2 className="animate-spin" size={18} /> : (editingWofId ? <Edit2 size={18} /> : <Plus size={18} />)} {editingWofId ? 'Update Year' : 'Save Year'}
                     </button>
-                    {editingWofId && <button type="button" onClick={() => { setEditingWofId(null); setWofForm({ year: '', students: [] }); }} className="px-6 py-2.5 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-colors">Cancel</button>}
+                    {editingWofId && <button type="button" onClick={() => { setEditingWofId(null); setWofForm({ year: '', students: [] }); }} className="px-6 py-2.5 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-colors" disabled={isLoading}>Cancel</button>}
                   </div>
                 </form>
               </div>
 
-              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden relative">
+                {isLoading && (
+                  <div className="absolute inset-0 bg-white/50 backdrop-blur-[1px] z-10 flex items-center justify-center">
+                    <Loader2 className="animate-spin text-primary" size={32} />
+                  </div>
+                )}
                 <div className="p-6 border-b border-gray-100 bg-gray-50"><h2 className="text-lg font-bold text-gray-900">Wall of Fame Records</h2></div>
                 <div className="divide-y divide-gray-100">
                   {wof.map(yearData => (

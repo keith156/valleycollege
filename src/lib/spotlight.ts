@@ -1,3 +1,6 @@
+import { collection, getDocs, setDoc, doc, deleteDoc } from "firebase/firestore";
+import { db } from "./firebase";
+
 export interface SpotlightAlumnus {
   id: string;
   name: string;
@@ -220,6 +223,31 @@ const spotlightData: SpotlightAlumnus[] = [
   },
 ];
 
-export function getSpotlight(): SpotlightAlumnus[] {
-  return spotlightData;
+export async function getSpotlight(): Promise<SpotlightAlumnus[]> {
+  try {
+    const querySnapshot = await getDocs(collection(db, "spotlight"));
+    if (querySnapshot.empty) {
+      for (const alumnus of spotlightData) {
+        await saveAlumnus(alumnus);
+      }
+      return spotlightData;
+    }
+    const alumni: SpotlightAlumnus[] = [];
+    querySnapshot.forEach((doc) => {
+      alumni.push({ ...doc.data(), id: doc.id } as SpotlightAlumnus);
+    });
+    return alumni;
+  } catch (e) {
+    console.error("Error getting spotlight: ", e);
+    return spotlightData;
+  }
+}
+
+export async function saveAlumnus(alumnus: SpotlightAlumnus) {
+  const { id, ...data } = alumnus;
+  await setDoc(doc(db, "spotlight", id), data);
+}
+
+export async function deleteAlumnus(id: string) {
+  await deleteDoc(doc(db, "spotlight", id));
 }

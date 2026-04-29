@@ -12,16 +12,27 @@ export default function Academics() {
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
 
   useEffect(() => {
-    const data = getWallOfFame();
-    setWallOfFameData(data);
-    if (data.length > 0) {
-      setExpandedYear(data[0].year);
-    }
-    const events = getEvents();
-    setTermEvents(events);
-    if (events.length > 0) {
-      setSelectedEventId(events[0].id);
-    }
+    const fetchData = async () => {
+      try {
+        const [wofData, events] = await Promise.all([
+          getWallOfFame(),
+          getEvents()
+        ]);
+        
+        setWallOfFameData(wofData);
+        if (wofData.length > 0) {
+          setExpandedYear(wofData[0].year);
+        }
+        
+        setTermEvents(events);
+        if (events.length > 0) {
+          setSelectedEventId(events[0].id);
+        }
+      } catch (err) {
+        console.error("Error fetching academic data:", err);
+      }
+    };
+    fetchData();
   }, []);
 
   const selectedEvent = termEvents.find(e => e.id === selectedEventId);

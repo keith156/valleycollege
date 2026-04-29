@@ -1,10 +1,11 @@
+import { collection, getDocs, setDoc, doc, deleteDoc } from "firebase/firestore";
+import { db } from "./firebase";
+
 export interface SchoolEvent {
   id: string;
   title: string;
   date: string;
 }
-
-const STORAGE_KEY = 'valley_college_events_term2_v4';
 
 const defaultEvents: SchoolEvent[] = [
   { id: '1', title: 'Opening of the Term', date: 'May 25, 2026' },
@@ -13,20 +14,32 @@ const defaultEvents: SchoolEvent[] = [
   { id: '4', title: 'Term Closing', date: 'Aug 22, 2026' },
 ];
 
-export function getEvents(): SchoolEvent[] {
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored) {
-    try {
-      return JSON.parse(stored);
-    } catch (e) {
-      console.error('Failed to parse events from local storage', e);
+export async function getEvents(): Promise<SchoolEvent[]> {
+  try {
+    const querySnapshot = await getDocs(collection(db, "events"));
+    if (querySnapshot.empty) {
+      // Initialize with defaults if empty
+      for (const event of defaultEvents) {
+        await saveEvent(event);
+      }
+      return defaultEvents;
     }
+    const events: SchoolEvent[] = [];
+    querySnapshot.forEach((doc) => {
+      events.push({ ...doc.data(), id: doc.id } as SchoolEvent);
+    });
+    return events;
+  } catch (e) {
+    console.error("Error getting events: ", e);
+    return defaultEvents;
   }
-  // Initialize with default events if none exist
-  saveEvents(defaultEvents);
-  return defaultEvents;
 }
 
-export function saveEvents(events: SchoolEvent[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
+export async function saveEvent(event: SchoolEvent) {
+  const { id, ...data } = event;
+  await setDoc(doc(db, "events", id), data);
+}
+
+export async function deleteEvent(id: string) {
+  await deleteDoc(doc(db, "events", id));
 }

@@ -1,3 +1,6 @@
+import { collection, getDocs, setDoc, doc, deleteDoc } from "firebase/firestore";
+import { db } from "./firebase";
+
 export interface StudentRecord {
   name: string;
   combo: string;
@@ -9,8 +12,6 @@ export interface WallOfFameYear {
   year: string;
   students: StudentRecord[];
 }
-
-const STORAGE_KEY = 'valley_college_wof_v2';
 
 const defaultWof: WallOfFameYear[] = [
   {
@@ -55,19 +56,31 @@ const defaultWof: WallOfFameYear[] = [
   }
 ];
 
-export function getWallOfFame(): WallOfFameYear[] {
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored) {
-    try {
-      return JSON.parse(stored);
-    } catch (e) {
-      console.error('Failed to parse wall of fame from local storage', e);
+export async function getWallOfFame(): Promise<WallOfFameYear[]> {
+  try {
+    const querySnapshot = await getDocs(collection(db, "wallOfFame"));
+    if (querySnapshot.empty) {
+      for (const year of defaultWof) {
+        await saveWofYear(year);
+      }
+      return defaultWof;
     }
+    const data: WallOfFameYear[] = [];
+    querySnapshot.forEach((doc) => {
+      data.push({ ...doc.data(), id: doc.id } as WallOfFameYear);
+    });
+    return data.sort((a, b) => b.year.localeCompare(a.year));
+  } catch (e) {
+    console.error("Error getting wall of fame: ", e);
+    return defaultWof;
   }
-  saveWallOfFame(defaultWof);
-  return defaultWof;
 }
 
-export function saveWallOfFame(data: WallOfFameYear[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+export async function saveWofYear(year: WallOfFameYear) {
+  const { id, ...data } = year;
+  await setDoc(doc(db, "wallOfFame", id), data);
+}
+
+export async function deleteWofYear(id: string) {
+  await deleteDoc(doc(db, "wallOfFame", id));
 }

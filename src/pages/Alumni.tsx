@@ -1,6 +1,7 @@
 import { Users, GraduationCap, HeartHandshake, MessageCircle, ExternalLink, Image as ImageIcon, Trophy, X, ChevronLeft, ChevronRight, Briefcase, MapPin, Calendar } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useState, useCallback, useEffect } from 'react';
+
 import { getSpotlight, SpotlightAlumnus } from '../lib/spotlight';
 import { Carousel } from '../components/Carousel';
 import { SEO } from '../components/SEO';
@@ -35,7 +36,15 @@ const slider2Images = [
 
 export default function Alumni() {
   const [lightbox, setLightbox] = useState<{ images: string[], index: number, prefix: string } | null>(null);
-  const alumni: SpotlightAlumnus[] = getSpotlight();
+  const [alumni, setAlumni] = useState<SpotlightAlumnus[]>([]);
+
+  useEffect(() => {
+    const fetchAlumni = async () => {
+      const data = await getSpotlight();
+      setAlumni(data);
+    };
+    fetchAlumni();
+  }, []);
 
   const gridImages = galleryImages.slice(0, 7);
 
