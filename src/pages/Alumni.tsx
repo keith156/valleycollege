@@ -9,7 +9,7 @@ import { SEO } from '../components/SEO';
 const CARDS_PER_PAGE = 3;
 
 const galleryImages = [
-  "VACO-15.jpg", "VACO-9.jpg", "VACO-10.jpg", "VACO-11.jpg", "VACO-12.jpg", "VACO-13.jpg", 
+  "vaco -99.jpeg", "VACO-9.jpg", "VACO-10.jpg", "VACO-15.jpg", "VACO-12.jpg", "VACO-13.jpg", 
   "VACO-17.jpg", "VACO-14.jpg", "VACO-20.jpg", "VACO-24.jpg",
   "VACO-4.png", "VACO-5.jpg", "VACO-6.jpg", "VACO-7.jpg",
   "FCocDmcWUA4QFd2.jpg"
@@ -79,9 +79,9 @@ export default function Alumni() {
   return (
     <div className="flex flex-col bg-gray-50">
       <SEO 
-        title="Alumni Network"
-        description="Join the Valley College Alumni Network. Connecting global leaders, innovators, and professionals who graduated from Valley College Secondary School Bushenyi."
-        keywords="Valley College Alumni, Alumni Network Uganda, global alumni community, mentorship programs Uganda, school alumni network"
+        title="Alumni Network & Community"
+        description="Join the Valley College Alumni Network — connecting graduates, leaders, innovators, and professionals from Valley College Secondary School Bushenyi. Featuring alumni spotlight, the Valley College Alumni League (VACL), and community giveback projects."
+        keywords="Valley College Alumni, Valley College alumni network, VACL alumni league, alumni community Uganda, Valley College graduates, school alumni Bushenyi"
         path="/alumni"
       />
       {/* Page Header */}
@@ -149,7 +149,7 @@ export default function Alumni() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center justify-center gap-3">
               <GraduationCap className="text-primary" size={32} /> Alumni Spotlight
             </h2>
-            <p className="text-gray-600 text-base lg:text-lg max-w-4xl">Meet some of our outstanding alumni making significant contributions across the globe.</p>
+            <p className="text-gray-600 text-base lg:text-lg max-w-6xl">Meet some of our outstanding alumni making significant contributions across the globe. As leaders, innovators, educators, and changemakers, they embody the spirit of excellence nurtured by our institution and continue to make us proud through their remarkable accomplishments.</p>
           </div>
 
           {/* Cards Carousel */}

@@ -81,9 +81,9 @@ export default function Academics() {
   return (
     <div className="flex flex-col bg-gray-50">
       <SEO 
-        title="Academics"
-        description="Explore the academic programs at Valley College Secondary School Bushenyi. We offer a robust O & A Level curriculum, science laboratories, ICT integration, and vocational skilling in tailoring and baking."
-        keywords="O Level curriculum Uganda, A Level curriculum Uganda, science education Bushenyi, vocational skilling schools Uganda, Valley College school calendar"
+        title="Academics & Curriculum - O Level & A Level Programs"
+        description="Explore the academic programs at Valley College Secondary School Bushenyi. We offer O-Level and A-Level curriculum following UNEB standards, science laboratories, ICT integration, and vocational skilling in tailoring, baking, and soap making. 85% first grade pass rate."
+        keywords="Valley College academics, O Level curriculum Uganda, A Level curriculum Uganda, science education Bushenyi, vocational skilling schools Uganda, Valley College subjects, UNEB results Bushenyi, best performing schools Bushenyi"
         path="/academics"
       />
       {/* Page Header */}

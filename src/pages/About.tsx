@@ -105,9 +105,9 @@ export default function About() {
   return (
     <div className="flex flex-col bg-gray-50">
       <SEO 
-        title="About Us"
-        description="Learn about the history, vision, mission, and leadership of Valley College Secondary School Bushenyi. Founded by Mzee William Mukaira with a legacy of excellence since 1997."
-        keywords="Valley College history, Mzee William Mukaira, school mission and vision, secondary school leadership Uganda, Bushenyi education history"
+        title="About Valley College Bushenyi - History, Vision & Mission"
+        description="Learn about Valley College Secondary School Bushenyi — founded in 1997 by Mzee William Mukaira. Discover our vision, mission, core values, governance structure, and 29-year legacy of academic excellence in Western Uganda."
+        keywords="Valley College history, Valley College Bushenyi about, Mzee William Mukaira founder, school mission and vision Uganda, secondary school leadership Bushenyi, Mukaira Foundation, best schools Western Uganda"
         path="/about"
       />
       {/* Hero Section */}

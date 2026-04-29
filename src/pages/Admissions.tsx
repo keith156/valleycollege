@@ -9,9 +9,9 @@ export default function Admissions() {
   return (
     <div className="flex flex-col bg-gray-50">
       <SEO 
-        title="Admissions"
-        description="Enroll at Valley College Secondary School Bushenyi. Find admission requirements, download application forms, and start your journey towards excellence and discipline."
-        keywords="Valley College admissions, enroll secondary school Uganda, Bushenyi school requirements, application forms school Uganda, admissions secondary school Bushenyi"
+        title="Admissions 2026 - Apply Now"
+        description="Enroll at Valley College Secondary School Bushenyi for 2026. Find admission requirements for S1 and S5 entry, download application forms, fees structure, and school circular. Start your journey towards excellence."
+        keywords="Valley College admissions 2026, enroll secondary school Bushenyi, school fees Valley College, admission requirements Uganda, application forms secondary school, S1 entry Bushenyi, S5 entry Uganda"
         path="/admissions"
       />
       {/* Page Header */}

@@ -56,9 +56,9 @@ export default function Contact() {
   return (
     <div className="flex flex-col bg-gray-50">
       <SEO 
-        title="Contact Us"
-        description="Get in touch with Valley College Secondary School Bushenyi. Find our location, phone numbers, and email addresses, or send us a message directly."
-        keywords="Contact Valley College, school location Bushenyi, Valley College phone number, school email address Uganda, contact secondary school Bushenyi"
+        title="Contact Us - Location & Phone"
+        description="Get in touch with Valley College Secondary School, Bushenyi Municipality, Western Uganda. Call +256 782 679 985, email info@valleycollege.edu.ug, or send us a message. Visit our campus on the Mbarara-Kasese Highway."
+        keywords="Contact Valley College, Valley College phone number, Valley College Bushenyi location, school address Bushenyi, Valley College email, directions Valley College, Bushenyi Municipality school"
         path="/contact"
       />
       {/* Page Header */}

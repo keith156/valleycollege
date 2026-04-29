@@ -104,8 +104,8 @@ export default function Home() {
     <div className="flex flex-col">
       <SEO 
         title="Home"
-        description="Valley College Secondary School Bushenyi is a top-ranked secondary school in Uganda dedicated to academic excellence, discipline, and integrity. Offering O & A Level education and vocational skills."
-        keywords="Valley College Bushenyi, best secondary school Uganda, secondary schools in Bushenyi, O Level education Uganda, A Level education Uganda, vocational skilling Uganda"
+        description="Valley College Secondary School Bushenyi — ranked among the best secondary schools in Uganda. Offering quality O-Level and A-Level education, science laboratories, vocational skilling in tailoring & baking, and holistic student development since 1997. Located in Bushenyi District, Western Uganda."
+        keywords="Valley College, Valley College Bushenyi, Valley College Secondary School, best secondary schools in Uganda, secondary schools in Bushenyi, O Level schools Uganda, A Level schools Uganda, vocational skilling Uganda, schools in Bushenyi District, VACO Bushenyi, Valley College SSS"
         path="/"
       />
       {/* Hero Section */}
@@ -116,7 +116,7 @@ export default function Home() {
             <motion.img
               key={currentHeroImage}
               src={heroImages[currentHeroImage]}
-              alt="Valley College Campus"
+              alt="Valley College Secondary School Bushenyi campus and students"
               variants={slideVariants}
               initial="initial"
               animate="animate"
@@ -150,8 +150,9 @@ export default function Home() {
               BEST SECONDARY SCHOOL IN UGANDA • BUILT ON VALUES
             </motion.div>
 
-            {/* Main Title */}
-            <div className="mb-4 w-full flex items-center justify-center h-[120px] md:h-[180px] lg:h-[240px]">
+            {/* Main Title — h1 for SEO, visually styled to match design */}
+            <h1 className="sr-only">Valley College Secondary School Bushenyi — Best Secondary School in Uganda</h1>
+            <div className="mb-4 w-full flex items-center justify-center h-[120px] md:h-[180px] lg:h-[240px]" aria-hidden="true">
               <TextOutline text="DELIVERANCE" className="drop-shadow-2xl" />
             </div>
 
@@ -275,9 +276,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 sm:px-0">
             {[
-              { end: 29, label: "Years of Excellence", icon: TrophyIcon, img: "/Years_of_excellence.jpeg" },
-              { end: 18, label: "Subjects Offered", icon: BookOpenIcon, img: "/images/subjects offered.jpeg" },
-              { end: 650, label: "Number of Students", icon: UsersIcon, img: "/images/10.jpeg" }
+              { end: 29, label: "Years of Excellence", icon: TrophyIcon, img: "/Years_of_excellence.jpeg", altText: "Valley College 29 years of educational excellence in Bushenyi Uganda" },
+              { end: 18, label: "Subjects Offered", icon: BookOpenIcon, img: "/images/subjects offered.jpeg", altText: "18 subjects offered at Valley College including Sciences, Humanities and Vocational" },
+              { end: 650, label: "Number of Students", icon: UsersIcon, img: "/images/10.jpeg", altText: "650 students enrolled at Valley College Secondary School Bushenyi" }
             ].map((stat, idx) => (
               <motion.div 
                 key={idx}
@@ -290,7 +291,7 @@ export default function Home() {
                 {/* Background Image */}
                 <img 
                   src={stat.img} 
-                  alt={stat.label} 
+                  alt={stat.altText || stat.label} 
                   className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
