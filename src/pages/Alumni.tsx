@@ -9,7 +9,7 @@ import { SEO } from '../components/SEO';
 const CARDS_PER_PAGE = 3;
 
 const galleryImages = [
-  "vaco -99.jpeg", "VACO-9.jpg", "VACO-10.jpg", "VACO-15.jpg", "VACO-12.jpg", "VACO-13.jpg", 
+  "VACO-15.jpg", "VACO-9.jpg", "VACO-10.jpg", "vaco -99.jpeg", "VACO-12.jpg", "VACO-13.jpg", 
   "VACO-17.jpg", "VACO-14.jpg", "VACO-20.jpg", "VACO-24.jpg",
   "VACO-4.png", "VACO-5.jpg", "VACO-6.jpg", "VACO-7.jpg",
   "FCocDmcWUA4QFd2.jpg"
