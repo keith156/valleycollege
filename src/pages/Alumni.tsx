@@ -134,7 +134,7 @@ export default function Alumni() {
             <img 
               src="/alumni gallery/VACO-15.jpg" 
               alt="Alumni community" 
-              className="w-full h-full object-cover" 
+              className="w-full h-full object-cover object-top" 
               referrerPolicy="no-referrer" 
               loading="lazy"
               decoding="async"
@@ -396,7 +396,7 @@ export default function Alumni() {
                 <img
                   src={`/alumni gallery/${image}`}
                   alt={`Alumni memory ${idx + 1}`}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
                   referrerPolicy="no-referrer"
                   loading="lazy"
                 />
@@ -424,7 +424,7 @@ export default function Alumni() {
                       <img 
                         src={`/slider1 alumni/${image}`} 
                         alt={`Slider 1 image ${image}`} 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-top"
                         loading="lazy"
                       />
                     </div>
@@ -452,7 +452,7 @@ export default function Alumni() {
                       <img 
                         src={`/slider2 allumni/${image}`} 
                         alt={`Slider 2 image ${image}`} 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-top"
                         loading="lazy"
                       />
                     </div>
