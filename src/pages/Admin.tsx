@@ -3,13 +3,16 @@ import { motion, AnimatePresence } from 'motion/react';
 import { SchoolEvent, getEvents, saveEvent, deleteEvent } from '../lib/events';
 import { WallOfFameYear, getWallOfFame, saveWofYear, deleteWofYear, StudentRecord } from '../lib/wallOfFame';
 import { SpotlightAlumnus, getSpotlight, saveAlumnus, deleteAlumnus } from '../lib/spotlight';
-import { Trash2, Edit2, Plus, LogOut, Calendar, Award, X, Users, Loader2, Upload, Image as ImageIcon } from 'lucide-react';
+import { Review, getReviews, deleteReview } from '../lib/reviews';
+import { Trash2, Edit2, Plus, LogOut, Calendar, Award, X, Users, Loader2, Upload, Image as ImageIcon, Star, MessageSquare } from 'lucide-react';
+
+const BASE_REVIEWS = 326;
 
 export default function Admin() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [tab, setTab] = useState<'events' | 'wof' | 'spotlight'>('events');
+  const [tab, setTab] = useState<'events' | 'wof' | 'spotlight' | 'reviews'>('events');
   const [isLoading, setIsLoading] = useState(false);
   
   // Events State
@@ -28,6 +31,10 @@ export default function Admin() {
   const [editingWofId, setEditingWofId] = useState<string | null>(null);
   const [wofForm, setWofForm] = useState<{ year: string; students: StudentRecord[] }>({ year: '', students: [] });
   const [uploadProgress, setUploadProgress] = useState<{ progress: number; status: string } | null>(null);
+
+  // Reviews State
+  const [reviews, setReviews] = useState<Review[]>([]);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
@@ -40,14 +47,16 @@ export default function Admin() {
       if (isLoggedIn) {
         setIsLoading(true);
         try {
-          const [evs, wofData, spotData] = await Promise.all([
+          const [evs, wofData, spotData, revData] = await Promise.all([
             getEvents(),
             getWallOfFame(),
-            getSpotlight()
+            getSpotlight(),
+            getReviews()
           ]);
           setEvents(evs);
           setWof(wofData);
           setSpotlight(spotData);
+          setReviews(revData);
         } catch (err) {
           console.error("Error fetching data:", err);
         } finally {
@@ -260,6 +269,21 @@ export default function Admin() {
     setWofForm({ ...wofForm, students: newStudents });
   };
 
+  const handleDeleteReview = async (id: string) => {
+    if (window.confirm('Are you sure you want to delete this review?')) {
+      setIsLoading(true);
+      try {
+        await deleteReview(id);
+        const updated = await getReviews();
+        setReviews(updated);
+      } catch (err) {
+        alert("Failed to delete review");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
   if (!isLoggedIn) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center bg-gray-50 px-4">
@@ -301,6 +325,9 @@ export default function Admin() {
           </button>
           <button onClick={() => setTab('spotlight')} className={`flex items-center gap-2 pb-4 px-2 font-bold whitespace-nowrap transition-colors ${tab === 'spotlight' ? 'text-primary border-b-2 border-primary' : 'text-gray-500 hover:text-gray-700'}`}>
             <Users size={20} /> Alumni Spotlight
+          </button>
+          <button onClick={() => setTab('reviews')} className={`flex items-center gap-2 pb-4 px-2 font-bold whitespace-nowrap transition-colors ${tab === 'reviews' ? 'text-primary border-b-2 border-primary' : 'text-gray-500 hover:text-gray-700'}`}>
+            <Star size={20} /> Reviews ({reviews.length})
           </button>
         </div>
 
@@ -490,6 +517,57 @@ export default function Admin() {
             </motion.div>
           )}
 
+          {tab === 'reviews' && (
+            <motion.div key="reviews" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
+              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden relative">
+                {isLoading && (
+                  <div className="absolute inset-0 bg-white/50 backdrop-blur-[1px] z-10 flex items-center justify-center">
+                    <Loader2 className="animate-spin text-primary" size={32} />
+                  </div>
+                )}
+                <div className="p-6 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
+                  <h2 className="text-lg font-bold text-gray-900">User Reviews</h2>
+                  <span className="text-sm font-bold text-primary bg-blue-50 px-3 py-1 rounded-full">
+                    Total: {BASE_REVIEWS + reviews.length}
+                  </span>
+                </div>
+                <div className="divide-y divide-gray-100">
+                  {reviews.length > 0 ? reviews.map(review => (
+                    <div key={review.id} className="p-6 hover:bg-gray-50 transition-colors">
+                      <div className="flex flex-col sm:flex-row justify-between gap-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2">
+                            <h3 className="font-bold text-gray-900">{review.name}</h3>
+                            <div className="flex items-center gap-0.5">
+                              {[...Array(5)].map((_, i) => (
+                                <Star key={i} size={12} className={i < review.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-200"} />
+                              ))}
+                            </div>
+                          </div>
+                          <p className="text-xs font-bold text-primary uppercase tracking-wider mb-2">
+                            {review.relationship} • {review.location} • {review.createdAt}
+                          </p>
+                          <p className="text-gray-600 italic">"{review.comment}"</p>
+                        </div>
+                        <div className="flex items-start shrink-0">
+                          <button onClick={() => review.id && handleDeleteReview(review.id)} className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
+                            <Trash2 size={20} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )) : (
+                    <div className="p-12 text-center text-gray-500 italic">
+                      No new reviews yet.
+                    </div>
+                  )}
+                </div>
+              </div>
+              <p className="mt-4 text-xs text-gray-400 px-2 italic">
+                * Note: The base count of {BASE_REVIEWS} reviews is static. Only new reviews from the website will appear here for moderation.
+              </p>
+            </motion.div>
+          )}
         </AnimatePresence>
       </div>
     </div>

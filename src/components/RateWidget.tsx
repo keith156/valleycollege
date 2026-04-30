@@ -1,12 +1,15 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Star, MessageSquare, Send, X, CheckCircle, User, MapPin, Users } from 'lucide-react';
+import { saveReview, getReviews } from '../lib/reviews';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+const BASE_REVIEWS = 326;
 
 export function RateWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,9 +21,19 @@ export function RateWidget() {
   const [comment, setComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [reviewCount, setReviewCount] = useState(326);
+  const [reviewCount, setReviewCount] = useState(BASE_REVIEWS);
 
   useEffect(() => {
+    const fetchCount = async () => {
+      try {
+        const reviews = await getReviews();
+        setReviewCount(BASE_REVIEWS + reviews.length);
+      } catch (err) {
+        console.error("Error fetching review count:", err);
+      }
+    };
+    fetchCount();
+
     const handleOpen = () => setIsOpen(true);
     window.addEventListener('open-rate-widget', handleOpen);
     
@@ -33,39 +46,28 @@ export function RateWidget() {
 
     setIsSubmitting(true);
     
-    const submissionData = {
-      access_key: "b86bb0fd-7c22-4e14-8941-c17778d858ec",
-      subject: `New Website Rating: ${rating} Stars`,
-      rating: rating,
-      name: name || "Not provided",
-      location: location || "Not provided",
-      relationship: relationship || "Not provided",
-      comment: comment,
-      from_name: name || "Valley College Website Visitor",
-    };
-
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(submissionData),
+      await saveReview({
+        rating,
+        name: name || "Visitor",
+        location: location || "Not provided",
+        relationship: relationship || "Not provided",
+        comment: comment || ""
       });
 
-      if (response.ok) {
-        setIsSubmitted(true);
-        setReviewCount(prev => prev + 1);
-        
-        // Reset and close after a delay
-        setTimeout(() => {
-          setIsOpen(false);
-          setIsSubmitted(false);
-          setRating(0);
-          setName('');
-          setLocation('');
-          setRelationship('');
-          setComment('');
-        }, 3000);
-      }
+      setIsSubmitted(true);
+      setReviewCount(prev => prev + 1);
+      
+      // Reset and close after a delay
+      setTimeout(() => {
+        setIsOpen(false);
+        setIsSubmitted(false);
+        setRating(0);
+        setName('');
+        setLocation('');
+        setRelationship('');
+        setComment('');
+      }, 3000);
     } catch (error) {
       console.error("Error submitting rating:", error);
       alert("Something went wrong. Please try again later.");
