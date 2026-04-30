@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { SEO } from '../components/SEO';
@@ -90,15 +90,15 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           
           {/* Contact Information */}
-          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-8">
+          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex flex-col space-y-8 h-full">
             <div>
               <h2 className="text-2xl lg:text-3xl font-bold mb-6">Get in Touch</h2>
               <p className="text-gray-600 text-base lg:text-lg leading-relaxed">
-                Whether you have a question about admissions, academics, or anything else, our team is ready to answer all your questions.
+                Whether you have a question about admissions, academics, or campus life, our team is ready to assist you.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 flex-grow">
               <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                 <div className="w-10 h-10 bg-blue-50 text-primary rounded-xl flex items-center justify-center mb-6">
                   <MapPin size={20} />
@@ -117,8 +117,7 @@ export default function Contact() {
                 <h3 className="font-bold text-gray-900 mb-2 text-base lg:text-lg">Phone Numbers</h3>
                 <p className="text-gray-600">
                   +256 782 679 985<br />
-                  +256 701 679 985<br />
-                  +256 772 646 421
+                  +256 701 679 985
                 </p>
               </div>
 
@@ -127,9 +126,8 @@ export default function Contact() {
                   <Mail size={20} />
                 </div>
                 <h3 className="font-bold text-gray-900 mb-2 text-base lg:text-lg">Email Address</h3>
-                <p className="text-gray-600">
-                  info@valleycollege.edu.ug<br />
-                  admissions@valleycollege.edu.ug
+                <p className="text-gray-600 break-words">
+                  info@valleycollege.edu.ug
                 </p>
               </div>
 
@@ -139,9 +137,29 @@ export default function Contact() {
                 </div>
                 <h3 className="font-bold text-gray-900 mb-2 text-base lg:text-lg">Office Hours</h3>
                 <p className="text-gray-600">
-                  Mon - Fri: 8:00 AM - 5:00 PM<br />
-                  Sat: 9:00 AM - 1:00 PM
+                  Mon - Fri: 8 AM - 5 PM
                 </p>
+              </div>
+
+              {/* Small & Simple WhatsApp Card */}
+              <div className="sm:col-span-2 bg-green-50/50 p-6 rounded-2xl border border-green-100 hover:shadow-md transition-shadow flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="flex items-center gap-4 text-center sm:text-left">
+                  <div className="w-12 h-12 bg-green-600 text-white rounded-xl flex items-center justify-center shrink-0 shadow-lg shadow-green-200">
+                    <MessageSquare size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900">Chat with Admissions</h3>
+                    <p className="text-sm text-gray-600">Get instant support on WhatsApp</p>
+                  </div>
+                </div>
+                <a 
+                  href="https://wa.me/256782679985" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto px-6 py-3 bg-green-600 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-green-700 transition-all shadow-md active:scale-95"
+                >
+                  <MessageSquare size={18} /> Chat Now
+                </a>
               </div>
             </div>
           </motion.div>
@@ -267,7 +285,7 @@ export default function Contact() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-12 relative">
           <div className="rounded-3xl overflow-hidden shadow-2xl border-8 border-white h-[450px] relative group bg-gray-100">
             <iframe
-              src="https://maps.google.com/maps?q=Valley%20College%20Secondary%20School%20Bushenyi&t=&z=16&ie=UTF8&iwloc=B&output=embed"
+              src="https://maps.google.com/maps?q=-0.543,30.201&z=17&t=m&ie=UTF8&iwloc=B&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -277,6 +295,7 @@ export default function Contact() {
               title="Valley College SS Location"
               className="grayscale-[20%] contrast-[1.1] hover:grayscale-0 transition-all duration-700"
             ></iframe>
+
             
             {/* Map Overlay Button (Always Visible or Hover) */}
             <div className="absolute bottom-6 right-6 z-10 transition-transform hover:scale-105">
