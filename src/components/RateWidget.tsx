@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Star, MessageSquare, Send, X, CheckCircle, User, MapPin, Users } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
@@ -27,7 +27,7 @@ export function RateWidget() {
     return () => window.removeEventListener('open-rate-widget', handleOpen);
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (rating === 0) return;
 

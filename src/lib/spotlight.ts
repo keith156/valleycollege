@@ -236,7 +236,7 @@ export async function getSpotlight(): Promise<SpotlightAlumnus[]> {
     querySnapshot.forEach((doc) => {
       alumni.push({ ...doc.data(), id: doc.id } as SpotlightAlumnus);
     });
-    return alumni;
+    return alumni.sort((a, b) => a.name.localeCompare(b.name));
   } catch (e) {
     console.error("Error getting spotlight: ", e);
     return spotlightData;

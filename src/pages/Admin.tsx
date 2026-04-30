@@ -1,7 +1,9 @@
+import React, { useState, useEffect, useRef, ChangeEvent, FormEvent } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { SchoolEvent, getEvents, saveEvent, deleteEvent } from '../lib/events';
 import { WallOfFameYear, getWallOfFame, saveWofYear, deleteWofYear, StudentRecord } from '../lib/wallOfFame';
 import { SpotlightAlumnus, getSpotlight, saveAlumnus, deleteAlumnus } from '../lib/spotlight';
-import { Trash2, Edit2, Plus, LogOut, Calendar, Award, X, Users, Loader2 } from 'lucide-react';
+import { Trash2, Edit2, Plus, LogOut, Calendar, Award, X, Users, Loader2, Upload, Image as ImageIcon } from 'lucide-react';
 
 export default function Admin() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -25,6 +27,13 @@ export default function Admin() {
   const [alumniForm, setAlumniForm] = useState({ name: '', period: '', profession: '', workStation: '', imageUrl: '' });
   const [editingWofId, setEditingWofId] = useState<string | null>(null);
   const [wofForm, setWofForm] = useState<{ year: string; students: StudentRecord[] }>({ year: '', students: [] });
+  const [uploadProgress, setUploadProgress] = useState<{ progress: number; status: string } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,7 +74,7 @@ export default function Admin() {
   };
 
   // --- EVENTS CRUD ---
-  const handleSaveEvent = async (e: React.FormEvent) => {
+  const handleSaveEvent = async (e: FormEvent) => {
     e.preventDefault();
     if (!eventForm.title || !eventForm.date) return;
     
@@ -79,6 +88,7 @@ export default function Admin() {
       setEvents(updated);
       setEventForm({ title: '', date: '' });
       setEditingEventId(null);
+      alert(editingEventId ? "Program updated successfully!" : "Program added successfully!");
     } catch (err) {
       alert("Failed to save event");
     } finally {
@@ -103,9 +113,66 @@ export default function Admin() {
 
 
   // --- SPOTLIGHT CRUD ---
-  const handleSaveAlumni = async (e: React.FormEvent) => {
+  const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadProgress({ progress: 0, status: 'Processing image...' });
+    try {
+      const dataUrl = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new window.Image();
+          img.src = event.target?.result as string;
+          img.onload = () => {
+            setUploadProgress({ progress: 30, status: 'Compressing...' });
+            const canvas = document.createElement('canvas');
+            const MAX_SIZE = 600;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+              if (width > MAX_SIZE) { height = Math.round(height * (MAX_SIZE / width)); width = MAX_SIZE; }
+            } else {
+              if (height > MAX_SIZE) { width = Math.round(width * (MAX_SIZE / height)); height = MAX_SIZE; }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) { reject(new Error('Canvas failed')); return; }
+            ctx.drawImage(img, 0, 0, width, height);
+            setUploadProgress({ progress: 70, status: 'Encoding...' });
+            // Convert directly to a data URL — no Firebase Storage needed
+            const result = canvas.toDataURL('image/jpeg', 0.7);
+            resolve(result);
+          };
+          img.onerror = () => reject(new Error('Failed to load image'));
+        };
+        reader.onerror = () => reject(new Error('Failed to read file'));
+        reader.readAsDataURL(file);
+      });
+
+      setUploadProgress({ progress: 100, status: 'Done!' });
+      setAlumniForm(prev => ({ ...prev, imageUrl: dataUrl }));
+
+      // Brief delay so user sees "Done!" before it disappears
+      setTimeout(() => setUploadProgress(null), 500);
+    } catch (err: any) {
+      console.error('Image processing error:', err);
+      alert(`Failed to process image: ${err.message || 'Unknown error'}`);
+      setUploadProgress(null);
+    } finally {
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
+  const handleSaveAlumni = async (e: FormEvent) => {
     e.preventDefault();
-    if (!alumniForm.name || !alumniForm.period || !alumniForm.profession || !alumniForm.workStation || !alumniForm.imageUrl) return;
+    if (!alumniForm.name || !alumniForm.period || !alumniForm.profession || !alumniForm.workStation || !alumniForm.imageUrl) {
+      alert("Please fill all fields, including the image.");
+      return;
+    }
     
     setIsLoading(true);
     const id = editingAlumniId || Date.now().toString();
@@ -117,6 +184,7 @@ export default function Admin() {
       setSpotlight(updated);
       setAlumniForm({ name: '', period: '', profession: '', workStation: '', imageUrl: '' });
       setEditingAlumniId(null);
+      alert(editingAlumniId ? "Alumni spotlight updated successfully!" : "Alumni spotlight added successfully!");
     } catch (err) {
       alert("Failed to save alumni record");
     } finally {
@@ -140,7 +208,7 @@ export default function Admin() {
   };
 
   // --- WOF CRUD ---
-  const handleSaveWof = async (e: React.FormEvent) => {
+  const handleSaveWof = async (e: FormEvent) => {
     e.preventDefault();
     if (!wofForm.year) return;
     
@@ -154,6 +222,7 @@ export default function Admin() {
       setWof(updated);
       setWofForm({ year: '', students: [] });
       setEditingWofId(null);
+      alert(editingWofId ? "Wall of Fame record updated successfully!" : "Wall of Fame record added successfully!");
     } catch (err) {
       alert("Failed to save Wall of Fame data");
     } finally {
@@ -238,7 +307,7 @@ export default function Admin() {
         <AnimatePresence mode="wait">
           {tab === 'events' && (
             <motion.div key="events" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
-              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 mb-8">
+              <div ref={formRef} className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 mb-8">
                 <h2 className="text-xl font-bold text-gray-900 mb-6">{editingEventId ? 'Edit Event' : 'Add New Event'}</h2>
                 <form onSubmit={handleSaveEvent} className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
                   <div className="md:col-span-1">
@@ -269,7 +338,7 @@ export default function Admin() {
                     <div key={event.id} className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-gray-50 transition-colors">
                       <div><span className="inline-block px-3 py-1 bg-blue-50 text-primary text-sm font-bold rounded-full mb-2">{event.date}</span><h3 className="text-lg font-bold text-gray-900">{event.title}</h3></div>
                       <div className="flex items-center gap-2">
-                        <button onClick={() => { setEditingEventId(event.id); setEventForm({ title: event.title, date: event.date }); }} className="p-2 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-lg transition-colors"><Edit2 size={18} /></button>
+                        <button onClick={() => { setEditingEventId(event.id); setEventForm({ title: event.title, date: event.date }); scrollToForm(); }} className="p-2 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-lg transition-colors"><Edit2 size={18} /></button>
                         <button onClick={() => handleDeleteEvent(event.id)} className="p-2 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"><Trash2 size={18} /></button>
                       </div>
                     </div>
@@ -282,7 +351,7 @@ export default function Admin() {
 
           {tab === 'spotlight' && (
             <motion.div key="spotlight" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
-               <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 mb-8">
+               <div ref={formRef} className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 mb-8">
                  <h2 className="text-xl font-bold text-gray-900 mb-6">{editingAlumniId ? 'Edit Alumni Spotlight' : 'Add Alumni Spotlight'}</h2>
                  <form onSubmit={handleSaveAlumni} className="space-y-4">
                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -304,8 +373,18 @@ export default function Admin() {
                      </div>
                    </div>
                    <div>
-                     <label className="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
-                     <input type="text" value={alumniForm.imageUrl} onChange={(e) => setAlumniForm({ ...alumniForm, imageUrl: e.target.value })} placeholder="https://..." className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required disabled={isLoading} />
+                     <label className="block text-sm font-medium text-gray-700 mb-1">Image</label>
+                     <div className="flex gap-2">
+                       <div className="flex-1 relative">
+                         <ImageIcon size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                         <input type="text" value={alumniForm.imageUrl} onChange={(e) => setAlumniForm({ ...alumniForm, imageUrl: e.target.value })} placeholder="Image URL or upload..." className="w-full pl-12 pr-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50" required disabled={isLoading || !!uploadProgress} />
+                       </div>
+                       <input type="file" ref={fileInputRef} onChange={handleImageUpload} accept="image/*" className="hidden" />
+                       <button type="button" onClick={() => fileInputRef.current?.click()} disabled={isLoading || !!uploadProgress} className="flex items-center gap-2 px-6 py-2.5 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-colors disabled:opacity-50">
+                         {uploadProgress ? <Loader2 className="animate-spin" size={18} /> : <Upload size={18} />}
+                         {uploadProgress ? `${uploadProgress.progress}%` : "Upload"}
+                       </button>
+                     </div>
                    </div>
                    <div className="flex gap-2 pt-2">
                      <button type="submit" disabled={isLoading} className="flex items-center justify-center gap-2 bg-primary text-white py-2.5 px-6 rounded-xl font-bold hover:bg-primary/90 transition-colors disabled:opacity-50">
@@ -339,7 +418,7 @@ export default function Admin() {
                         <p className="text-gray-500 text-xs">{person.workStation}</p>
                       </div>
                       <div className="flex items-start gap-2 shrink-0">
-                        <button onClick={() => { setEditingAlumniId(person.id); setAlumniForm({ name: person.name, period: person.period, profession: person.profession, workStation: person.workStation, imageUrl: person.imageUrl }); }} className="p-2 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-lg transition-colors"><Edit2 size={18} /></button>
+                        <button onClick={() => { setEditingAlumniId(person.id); setAlumniForm({ name: person.name, period: person.period, profession: person.profession, workStation: person.workStation, imageUrl: person.imageUrl }); scrollToForm(); }} className="p-2 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-lg transition-colors"><Edit2 size={18} /></button>
                         <button onClick={() => handleDeleteAlumni(person.id)} className="p-2 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"><Trash2 size={18} /></button>
                       </div>
                     </div>
@@ -351,7 +430,7 @@ export default function Admin() {
 
           {tab === 'wof' && (
             <motion.div key="wof" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
-              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 mb-8">
+              <div ref={formRef} className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 mb-8">
                 <h2 className="text-xl font-bold text-gray-900 mb-6">{editingWofId ? 'Edit Wall of Fame Year' : 'Add Wall of Fame Year'}</h2>
                 <form onSubmit={handleSaveWof} className="space-y-6">
                   <div>
@@ -401,7 +480,7 @@ export default function Admin() {
                         <p className="text-sm text-gray-600">{yearData.students.length} students recorded</p>
                       </div>
                       <div className="flex items-start gap-2 shrink-0">
-                        <button onClick={() => { setEditingWofId(yearData.id); setWofForm({ year: yearData.year, students: yearData.students }); }} className="p-2 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-lg transition-colors"><Edit2 size={18} /></button>
+                        <button onClick={() => { setEditingWofId(yearData.id); setWofForm({ year: yearData.year, students: yearData.students }); scrollToForm(); }} className="p-2 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-lg transition-colors"><Edit2 size={18} /></button>
                         <button onClick={() => handleDeleteWof(yearData.id)} className="p-2 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"><Trash2 size={18} /></button>
                       </div>
                     </div>

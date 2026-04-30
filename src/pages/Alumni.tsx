@@ -41,7 +41,9 @@ export default function Alumni() {
   useEffect(() => {
     const fetchAlumni = async () => {
       const data = await getSpotlight();
-      setAlumni(data);
+      // Sort by period descending (most recent first)
+      const sorted = [...data].sort((a, b) => b.period.localeCompare(a.period));
+      setAlumni(sorted);
     };
     fetchAlumni();
   }, []);
@@ -181,11 +183,7 @@ export default function Alumni() {
                           decoding="async"
                           onError={(e) => {
                             const target = e.currentTarget;
-                            target.style.display = 'none';
-                            const parent = target.parentElement;
-                            if (parent) {
-                              parent.innerHTML = `<div class="w-full h-full flex flex-col items-center justify-center bg-blue-50 gap-2"><svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='none' stroke='#001a40' stroke-width='1.5'><circle cx='12' cy='8' r='4'/><path d='M4 20c0-4 3.6-7 8-7s8 3 8 7'/></svg></div>`;
-                            }
+                            target.src = "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop"; // Better fallback
                           }}
                         />
                       ) : (

@@ -28,7 +28,7 @@ export async function getEvents(): Promise<SchoolEvent[]> {
     querySnapshot.forEach((doc) => {
       events.push({ ...doc.data(), id: doc.id } as SchoolEvent);
     });
-    return events;
+    return events.sort((a, b) => a.date.localeCompare(b.date));
   } catch (e) {
     console.error("Error getting events: ", e);
     return defaultEvents;
