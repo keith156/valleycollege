@@ -36,6 +36,7 @@ const slider2Images = [
 
 export default function Alumni() {
   const [lightbox, setLightbox] = useState<{ images: string[], index: number, prefix: string } | null>(null);
+  const [spotlightLB, setSpotlightLB] = useState<{ index: number } | null>(null);
   const [alumni, setAlumni] = useState<SpotlightAlumnus[]>([]);
 
   useEffect(() => {
@@ -60,9 +61,14 @@ export default function Alumni() {
     setLightbox(prev => prev ? { ...prev, index: (prev.index - 1 + prev.images.length) % prev.images.length } : null);
   }, [lightbox]);
 
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (spotlightLB) {
+        if (e.key === 'ArrowRight') setSpotlightLB(prev => prev ? { index: (prev.index + 1) % alumni.length } : null);
+        if (e.key === 'ArrowLeft') setSpotlightLB(prev => prev ? { index: (prev.index - 1 + alumni.length) % alumni.length } : null);
+        if (e.key === 'Escape') setSpotlightLB(null);
+        return;
+      }
       if (!lightbox) return;
       if (e.key === 'ArrowRight') handleNext();
       if (e.key === 'ArrowLeft') handlePrev();
@@ -70,7 +76,7 @@ export default function Alumni() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightbox, handleNext, handlePrev]);
+  }, [lightbox, spotlightLB, alumni.length, handleNext, handlePrev]);
 
   // Layout helper for the featured bento cluster (7 images)
   const getBentoClass = (idx: number) => {
@@ -170,7 +176,8 @@ export default function Alumni() {
                 {alumni.map((person) => (
                   <div
                     key={person.id}
-                    className="snap-start shrink-0 w-[85%] sm:w-[280px] md:w-[320px] group bg-white rounded-[2rem] shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col"
+                    onClick={() => setSpotlightLB({ index: alumni.indexOf(person) })}
+                    className="snap-start shrink-0 w-[85%] sm:w-[280px] md:w-[320px] group bg-white rounded-[2rem] shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col cursor-pointer"
                   >
                     {/* Photo */}
                     <div className="w-full h-72 md:h-80 relative overflow-hidden bg-gray-100 shrink-0">
@@ -495,19 +502,21 @@ export default function Alumni() {
                 <X size={32} />
               </button>
 
-              {/* Navigation Arrows */}
+              {/* Navigation Arrows — visible on all devices */}
               <button 
                 onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                className="absolute left-6 top-1/2 -translate-y-1/2 p-4 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[110] hidden md:block"
+                className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 p-2 md:p-4 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[110]"
               >
-                <ChevronLeft size={48} />
+                <ChevronLeft size={28} className="md:hidden" />
+                <ChevronLeft size={48} className="hidden md:block" />
               </button>
               
               <button 
                 onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                className="absolute right-6 top-1/2 -translate-y-1/2 p-4 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[110] hidden md:block"
+                className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 p-2 md:p-4 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[110]"
               >
-                <ChevronRight size={48} />
+                <ChevronRight size={28} className="md:hidden" />
+                <ChevronRight size={48} className="hidden md:block" />
               </button>
               
               {/* Image Container */}
@@ -529,13 +538,95 @@ export default function Alumni() {
               <div className="absolute top-8 left-1/2 -translate-x-1/2 text-white font-bold bg-white/10 px-4 py-1 rounded-full backdrop-blur-md">
                 {lightbox.index + 1} / {lightbox.images.length}
               </div>
-
-              {/* Mobile Swipe / Tap Hint */}
-              <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 text-sm md:hidden">
-                Tap edges to navigate
-              </div>
             </motion.div>
           )}
+        </AnimatePresence>
+
+        {/* Alumni Spotlight Lightbox */}
+        <AnimatePresence mode="wait">
+          {spotlightLB !== null && alumni[spotlightLB.index] && (() => {
+            const person = alumni[spotlightLB.index];
+            return (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 md:p-10"
+              >
+                <div className="absolute inset-0 cursor-zoom-out" onClick={() => setSpotlightLB(null)} />
+
+                <button onClick={() => setSpotlightLB(null)} className="absolute top-4 right-4 md:top-6 md:right-6 p-3 md:p-4 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[110]">
+                  <X size={24} />
+                </button>
+
+                {/* Navigation Arrows */}
+                <button
+                  onClick={(e) => { e.stopPropagation(); setSpotlightLB(prev => prev ? { index: (prev.index - 1 + alumni.length) % alumni.length } : null); }}
+                  className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 p-2 md:p-4 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[110]"
+                >
+                  <ChevronLeft size={28} className="md:hidden" />
+                  <ChevronLeft size={48} className="hidden md:block" />
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setSpotlightLB(prev => prev ? { index: (prev.index + 1) % alumni.length } : null); }}
+                  className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 p-2 md:p-4 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[110]"
+                >
+                  <ChevronRight size={28} className="md:hidden" />
+                  <ChevronRight size={48} className="hidden md:block" />
+                </button>
+
+                {/* Profile Card */}
+                <motion.div
+                  key={spotlightLB.index}
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.9, opacity: 0 }}
+                  className="relative z-[105] bg-white rounded-3xl overflow-hidden shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col"
+                >
+                  {/* Large Photo */}
+                  <div className="w-full h-72 sm:h-96 relative overflow-hidden bg-gray-100 shrink-0">
+                    {person.imageUrl ? (
+                      <img
+                        src={person.imageUrl}
+                        alt={person.name}
+                        className="absolute inset-0 w-full h-full object-cover object-top"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-blue-50">
+                        <GraduationCap size={64} className="text-primary/30" />
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                  </div>
+
+                  {/* Info */}
+                  <div className="p-6 md:p-8 flex flex-col gap-4">
+                    <div>
+                      <h3 className="text-2xl font-black text-gray-900 mb-1">{person.name}</h3>
+                      <div className="flex items-center gap-1.5 bg-blue-50 text-primary text-xs font-bold px-3 py-1 rounded-full w-fit">
+                        <Calendar size={12} /> {person.period}
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3 text-gray-700">
+                        <div className="bg-blue-50 p-2.5 rounded-xl text-primary"><Briefcase size={18} /></div>
+                        <span className="font-bold">{person.profession}</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-gray-500">
+                        <div className="bg-gray-50 p-2.5 rounded-xl"><MapPin size={18} /></div>
+                        <span className="font-medium">{person.workStation}</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Counter */}
+                <div className="absolute top-6 left-1/2 -translate-x-1/2 text-white font-bold bg-white/10 px-4 py-1 rounded-full backdrop-blur-md z-[110]">
+                  {spotlightLB.index + 1} / {alumni.length}
+                </div>
+              </motion.div>
+            );
+          })()}
         </AnimatePresence>
 
       </div>
