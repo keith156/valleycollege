@@ -285,7 +285,7 @@ export default function Contact() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-12 relative">
           <div className="rounded-3xl overflow-hidden shadow-2xl border-8 border-white h-[450px] relative group bg-gray-100">
             <iframe
-              src="https://maps.google.com/maps?q=-0.543,30.201&z=17&t=m&ie=UTF8&iwloc=B&output=embed"
+              src="https://maps.google.com/maps?q=Valley%20College%20Secondary%20School%20Bushenyi&t=k&z=16&ie=UTF8&iwloc=B&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}
