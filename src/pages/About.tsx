@@ -37,12 +37,6 @@ const formerHeadTeachers = [
     period: "2016 - 2018",
     title: "Headmistress (HM)",
     image: "/former head teachers/[2016-2018]-Ninkwakuzire Miriam-HM-Valley College.png"
-  },
-  {
-    name: "Kabeizi Doreen",
-    period: "2018 - Date",
-    title: "Headmistress (HM)",
-    image: "/former head teachers/[2018-Date]-Kabeizi Doreen-HM-Valley College.png"
   }
 ];
 
@@ -301,48 +295,58 @@ export default function About() {
             <p className="text-lg text-gray-600 max-w-4xl mx-auto">Honoring the visionary leaders who have guided Valley College through its 29-year journey of academic excellence and transformation.</p>
           </div>
 
-          <div className="-mx-4 sm:-mx-8">
-            <Carousel autoPlayInterval={0} continuousScroll={true}>
-              {formerHeadTeachers.map((teacher, idx) => (
-                <div
-                  key={idx}
-                  className="snap-start shrink-0 w-[85%] sm:w-[280px] md:w-[320px] group bg-white rounded-[2rem] shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col"
-                >
-                  {/* Photo */}
-                  <div className="w-full h-72 md:h-80 relative overflow-hidden bg-gray-100 shrink-0">
-                    <img
-                      src={teacher.image}
-                      alt={teacher.name}
-                      className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-                  </div>
+          <div className="relative overflow-hidden py-4">
+            <div className="flex whitespace-nowrap overflow-hidden">
+              <motion.div 
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{ duration: 40, ease: "linear", repeat: Infinity }}
+                className="flex gap-6 px-3"
+              >
+                {[...formerHeadTeachers, ...formerHeadTeachers].map((teacher, idx) => (
+                  <div
+                    key={idx}
+                    className="shrink-0 w-[280px] md:w-[320px] group bg-white rounded-[2rem] shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col whitespace-normal"
+                  >
+                    {/* Photo */}
+                    <div className="w-full h-72 md:h-80 relative overflow-hidden bg-gray-100 shrink-0">
+                      <img
+                        src={teacher.image}
+                        alt={teacher.name}
+                        className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                    </div>
 
-                  {/* Info */}
-                  <div className="p-5 md:p-6 flex flex-col gap-4 grow">
-                    <div className="flex flex-col gap-2">
-                      <h3 className="text-lg font-black text-gray-900 leading-tight group-hover:text-primary transition-colors">
-                        {teacher.name}
-                      </h3>
-                      <div className="flex items-center gap-1.5 bg-blue-50 text-primary text-[10px] font-bold px-3 py-1 rounded-full shrink-0 w-fit">
-                        <Clock size={12} /> {teacher.period}
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-3">
-                      <div className="flex items-start gap-3 text-gray-700">
-                        <div className="bg-blue-50 p-2 rounded-lg text-primary">
-                          <User size={16} className="shrink-0" />
+                    {/* Info */}
+                    <div className="p-5 md:p-6 flex flex-col gap-4 grow">
+                      <div className="flex flex-col gap-2">
+                        <h3 className="text-lg font-black text-gray-900 leading-tight group-hover:text-primary transition-colors">
+                          {teacher.name}
+                        </h3>
+                        <div className="flex items-center gap-1.5 bg-blue-50 text-primary text-[10px] font-bold px-3 py-1 rounded-full shrink-0 w-fit">
+                          <Clock size={12} /> {teacher.period}
                         </div>
-                        <span className="text-sm font-bold leading-tight">{teacher.title}</span>
+                      </div>
+                      
+                      <div className="space-y-3">
+                        <div className="flex items-start gap-3 text-gray-700">
+                          <div className="bg-blue-50 p-2 rounded-lg text-primary">
+                            <User size={16} className="shrink-0" />
+                          </div>
+                          <span className="text-sm font-bold leading-tight">{teacher.title}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </Carousel>
+                ))}
+              </motion.div>
+            </div>
+            
+            {/* Gradient Fades for seamless edges */}
+            <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
           </div>
         </section>
 
