@@ -1,5 +1,6 @@
-import { Building2, Target, History, Users, BookOpen, Handshake, MapPin, Image as ImageIcon, Compass, Star, ShieldCheck, ArrowRight, Clock, User, GraduationCap, ClipboardList } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Building2, Target, History, Users, BookOpen, Handshake, MapPin, Image as ImageIcon, Compass, Star, ShieldCheck, ArrowRight, Clock, User, GraduationCap, ClipboardList, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { useState, useCallback, useEffect } from 'react';
 import { Carousel } from '../components/Carousel';
 import { SEO } from '../components/SEO';
 
@@ -129,6 +130,29 @@ const governanceData = [
 ];
 
 export default function About() {
+  const [lightbox, setLightbox] = useState<{ index: number } | null>(null);
+
+  const handleNext = useCallback(() => {
+    if (!lightbox) return;
+    setLightbox(prev => prev ? { index: (prev.index + 1) % formerHeadTeachers.length } : null);
+  }, [lightbox]);
+
+  const handlePrev = useCallback(() => {
+    if (!lightbox) return;
+    setLightbox(prev => prev ? { index: (prev.index - 1 + formerHeadTeachers.length) % formerHeadTeachers.length } : null);
+  }, [lightbox]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!lightbox) return;
+      if (e.key === 'ArrowRight') handleNext();
+      if (e.key === 'ArrowLeft') handlePrev();
+      if (e.key === 'Escape') setLightbox(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightbox, handleNext, handlePrev]);
+
   return (
     <div className="flex flex-col bg-gray-50">
       <SEO 
@@ -305,7 +329,8 @@ export default function About() {
                 {[...formerHeadTeachers, ...formerHeadTeachers].map((teacher, idx) => (
                   <div
                     key={idx}
-                    className="shrink-0 w-[280px] md:w-[320px] group bg-white rounded-[2rem] shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col whitespace-normal"
+                    onClick={() => setLightbox({ index: idx % formerHeadTeachers.length })}
+                    className="shrink-0 w-[280px] md:w-[320px] group bg-white rounded-[2rem] shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col whitespace-normal cursor-pointer"
                   >
                     {/* Photo */}
                     <div className="w-full h-72 md:h-80 relative overflow-hidden bg-gray-100 shrink-0">
@@ -530,7 +555,6 @@ export default function About() {
             </a>
           </motion.div>
         </div>
-      </div>
 
       {/* Campus Life Section (Full Width) */}
       <div className="w-full bg-white pb-12">
@@ -599,5 +623,94 @@ export default function About() {
         </motion.section>
         </div>
       </div>
-    );
+
+      {/* Lightbox Modal */}
+      <AnimatePresence mode="wait">
+        {lightbox !== null && formerHeadTeachers[lightbox.index] && (() => {
+          const teacher = formerHeadTeachers[lightbox.index];
+          return (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 md:p-10"
+            >
+              {/* Backdrop Click */}
+              <div 
+                className="absolute inset-0 cursor-zoom-out" 
+                onClick={() => setLightbox(null)} 
+              />
+
+              {/* Close Button */}
+              <button 
+                onClick={() => setLightbox(null)}
+                className="absolute top-6 right-6 p-4 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[110]"
+              >
+                <X size={32} />
+              </button>
+
+              {/* Navigation Arrows */}
+              <button 
+                onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+                className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 p-2 md:p-4 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[110]"
+              >
+                <ChevronLeft size={28} className="md:hidden" />
+                <ChevronLeft size={48} className="hidden md:block" />
+              </button>
+              
+              <button 
+                onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 p-2 md:p-4 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[110]"
+              >
+                <ChevronRight size={28} className="md:hidden" />
+                <ChevronRight size={48} className="hidden md:block" />
+              </button>
+              
+              {/* Profile Card */}
+              <motion.div
+                key={lightbox.index}
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="relative z-[105] bg-white rounded-3xl overflow-hidden shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col"
+              >
+                {/* Large Photo */}
+                <div className="w-full h-72 sm:h-96 relative overflow-hidden bg-gray-100 shrink-0">
+                  <img
+                    src={teacher.image}
+                    alt={teacher.name}
+                    className="absolute inset-0 w-full h-full object-cover object-top"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                </div>
+
+                {/* Info */}
+                <div className="p-6 md:p-8 flex flex-col gap-4">
+                  <div>
+                    <h3 className="text-2xl font-black text-gray-900 mb-1">{teacher.name}</h3>
+                    <div className="flex items-center gap-1.5 bg-blue-50 text-primary text-xs font-bold px-3 py-1 rounded-full w-fit">
+                      <Clock size={12} /> {teacher.period}
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3 text-gray-700">
+                      <div className="bg-blue-50 p-2.5 rounded-xl text-primary">
+                        <User size={18} />
+                      </div>
+                      <span className="font-bold">{teacher.title}</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Counter */}
+              <div className="absolute top-6 left-1/2 -translate-x-1/2 text-white font-bold bg-white/10 px-4 py-1 rounded-full backdrop-blur-md z-[110]">
+                {lightbox.index + 1} / {formerHeadTeachers.length}
+              </div>
+            </motion.div>
+          );
+        })()}
+      </AnimatePresence>
+    </div>
+  );
 }
