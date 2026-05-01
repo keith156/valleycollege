@@ -13,6 +13,39 @@ const pioneerGroups = [
   ["Namirembe Winnie", "Musinguzi Wilson Katson", "Natukunda Merian", "Atusimire Shallon", "Akugizibwe David", "Natukunda Betty", "Tutarimwebwa Ovia"]
 ];
 
+const formerHeadTeachers = [
+  {
+    name: "Mary Antoinette Kabesiime Babiiha",
+    period: "1997 - 2005",
+    title: "Headmistress (HM)",
+    image: "/former head teachers/[1997-2005]-Mary Antoinette Kabesiime Babiiha-HM-Valley College.png"
+  },
+  {
+    name: "Akoramaziima Miriam",
+    period: "2006 - 2008",
+    title: "Headmistress (HM)",
+    image: "/former head teachers/[2006-2008]-Akoramaziima Miriam-HM-Valley College.png"
+  },
+  {
+    name: "Muhanguzi William",
+    period: "2009 - 2015",
+    title: "Head Teacher (HT)",
+    image: "/former head teachers/[2009-2015]-Muhanguzi William-HT-Valley College.png"
+  },
+  {
+    name: "Ninkwakuzire Miriam",
+    period: "2016 - 2018",
+    title: "Headmistress (HM)",
+    image: "/former head teachers/[2016-2018]-Ninkwakuzire Miriam-HM-Valley College.png"
+  },
+  {
+    name: "Kabeizi Doreen",
+    period: "2018 - Date",
+    title: "Headmistress (HM)",
+    image: "/former head teachers/[2018-Date]-Kabeizi Doreen-HM-Valley College.png"
+  }
+];
+
 
 
 const governanceData = [
@@ -254,6 +287,62 @@ export default function About() {
                 </div>
               </motion.div>
             </div>
+          </div>
+        </section>
+
+        {/* Former Head Teachers Section */}
+        <section className="mb-24">
+          <div className="flex flex-col items-center text-center mb-12">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-100 text-primary mb-4 shadow-sm">
+              <History size={28} />
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">Former Head Teachers</h2>
+            <div className="h-2 w-24 bg-primary mx-auto rounded-full mb-6" />
+            <p className="text-lg text-gray-600 max-w-4xl mx-auto">Honoring the visionary leaders who have guided Valley College through its 29-year journey of academic excellence and transformation.</p>
+          </div>
+
+          <div className="-mx-4 sm:-mx-8">
+            <Carousel autoPlayInterval={0} continuousScroll={true}>
+              {formerHeadTeachers.map((teacher, idx) => (
+                <div
+                  key={idx}
+                  className="snap-start shrink-0 w-[85%] sm:w-[280px] md:w-[320px] group bg-white rounded-[2rem] shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col"
+                >
+                  {/* Photo */}
+                  <div className="w-full h-72 md:h-80 relative overflow-hidden bg-gray-100 shrink-0">
+                    <img
+                      src={teacher.image}
+                      alt={teacher.name}
+                      className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                  </div>
+
+                  {/* Info */}
+                  <div className="p-5 md:p-6 flex flex-col gap-4 grow">
+                    <div className="flex flex-col gap-2">
+                      <h3 className="text-lg font-black text-gray-900 leading-tight group-hover:text-primary transition-colors">
+                        {teacher.name}
+                      </h3>
+                      <div className="flex items-center gap-1.5 bg-blue-50 text-primary text-[10px] font-bold px-3 py-1 rounded-full shrink-0 w-fit">
+                        <Clock size={12} /> {teacher.period}
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <div className="flex items-start gap-3 text-gray-700">
+                        <div className="bg-blue-50 p-2 rounded-lg text-primary">
+                          <User size={16} className="shrink-0" />
+                        </div>
+                        <span className="text-sm font-bold leading-tight">{teacher.title}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Carousel>
           </div>
         </section>
 
