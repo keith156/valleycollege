@@ -19,7 +19,7 @@ const formerHeadTeachers = [
     name: "Mary Antoinette Kabesiime Babiiha",
     period: "1997 - 2005",
     title: "Headmistress (HM)",
-    image: "/former head teachers/[1997-2005]-Mary Antoinette Kabesiime Babiiha-HM-Valley College.png"
+    image: "/former head teachers/[1997-2005]-Mary Antoinette Kabesiime Babiiha-HM-Valley College.jpeg"
   },
   {
     name: "Akoramaziima Miriam",
