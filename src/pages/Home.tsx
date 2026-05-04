@@ -97,7 +97,7 @@ export default function Home() {
       year: "2026", 
       title: "Excellence", 
       desc: "Valley College Secondary School has consistently upheld a culture of excellence grounded in strong academic performance, discipline, and holistic student development. The school has distinguished itself through outstanding national examination results and effective teaching. Notably, in 2005, it emerged as the best-performing secondary school in Western Uganda, highlighting its commitment to quality education.",
-      img: "/images/growth milestones img/excellence$VACO students.jpeg"
+      img: "/images/growth milestones img/excellence$ValleyCollege  students.jpeg"
     }
   ];
 

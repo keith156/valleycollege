@@ -337,7 +337,8 @@ export default function About() {
 
           <div className="flex flex-col items-center text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight">Governance Structure</h2>
-            <div className="h-2 w-24 bg-primary rounded-full" />
+            <div className="h-2 w-24 bg-primary rounded-full mb-6" />
+            <p className="text-lg text-gray-600 max-w-4xl mx-auto">A strong governance framework that ensures accountability, transparency, and the effective management of our school.</p>
           </div>
 
 
@@ -450,12 +451,12 @@ export default function About() {
               "2.jpeg", "4.jpeg", "6.jpeg", "8.jpeg", "9.jpeg", 
               "12.jpeg", "13.jpeg", "14.jpeg", "15.jpeg", 
               "16.jpeg", "18.jpeg", "20.jpeg", 
-              "21.jpeg", "23.jpeg", "24.jpeg", 
+              "21$Boys Domitory.jpeg", "23.jpeg", "24.jpeg", 
               "IMG_20260401_184319_761$University hostel.jpg", "IMG_20260401_184701_943$Girls Dormitory.jpg", 
               "IMG_20260401_181848_193$School entrance gate (As you exist).jpg", "IMG_20260401_184018_232.jpg",
-              "subjects offered.jpeg"
+              "3$ICT Lab.jpeg"
             ].map((img, idx) => {
-              const matchesFixedSquare = img === "subjects offered.jpeg";
+              const matchesFixedSquare = img === "3$ICT Lab.jpeg";
               const isLarge = idx % 7 === 0 && !matchesFixedSquare;
               const isTall = idx % 5 === 0 && !isLarge && !matchesFixedSquare;
               const isWide = idx % 6 === 0 && !isLarge && !isTall && !matchesFixedSquare;
