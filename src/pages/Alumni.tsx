@@ -5,12 +5,13 @@ import { useState, useCallback, useEffect } from 'react';
 import { getSpotlight, SpotlightAlumnus } from '../lib/spotlight';
 import { Carousel } from '../components/Carousel';
 import { SEO } from '../components/SEO';
+import { parseImageCaption } from '../utils/imageUtils';
 
 
 const CARDS_PER_PAGE = 3;
 
 const galleryImages = [
-  "VACO-15.jpg", "VACO-9.jpg", "VACO-10.jpg", "vaco -99.jpeg", "VACO-12.jpg", "VACO-13.jpg", 
+  "VACO-15.jpg", "VACO-9.jpg", "VACO-10.jpg", "vaco -99$Class of 1999.jpeg", "VACO-12.jpg", "VACO-13.jpg", 
   "VACO-17.jpg", "VACO-14.jpg", "VACO-20.jpg", "VACO-24.jpg",
   "VACO-4.png", "VACO-5.jpg", "VACO-6.jpg", "VACO-7.jpg",
   "FCocDmcWUA4QFd2.jpg"
@@ -306,13 +307,18 @@ export default function Alumni() {
                   <div 
                     key={idx} 
                     onClick={() => setLightbox({ images: leagueImages, index: idx, prefix: '/league2/' })}
-                    className="shrink-0 w-40 h-28 md:w-56 md:h-40 rounded-2xl overflow-hidden shadow-sm border-2 border-white snap-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+                    className="shrink-0 w-40 h-28 md:w-56 md:h-40 rounded-2xl overflow-hidden shadow-sm border-2 border-white snap-center hover:scale-105 transition-transform duration-300 cursor-pointer relative"
                   >
                     <img 
                       src={`/league2/${img}`} 
-                      alt={`League event ${idx + 1}`} 
+                      alt={parseImageCaption(img) || `League event ${idx + 1}`} 
                       className="w-full h-full object-cover"
                     />
+                    {parseImageCaption(img) && (
+                      <div className="absolute bottom-0 left-0 right-0 bg-[#001a40] text-white py-1 px-2 text-[8px] md:text-[10px] font-bold text-center z-10">
+                        {parseImageCaption(img)}
+                      </div>
+                    )}
                   </div>
                   ))}
               </div>
@@ -409,12 +415,18 @@ export default function Alumni() {
               >
                 <img
                   src={`/alumni gallery/${image}`}
-                  alt={`Alumni memory ${idx + 1}`}
+                  alt={parseImageCaption(image) || `Alumni memory ${idx + 1}`}
                   className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
                   referrerPolicy="no-referrer"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                
+                {parseImageCaption(image) && (
+                  <div className="absolute bottom-0 left-0 right-0 bg-[#001a40] text-white py-1.5 px-3 text-[10px] sm:text-xs font-bold text-center z-10 border-t border-white/10">
+                    {parseImageCaption(image)}
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>
@@ -433,14 +445,19 @@ export default function Alumni() {
                     <div 
                       key={idx}
                       onClick={() => setLightbox({ images: slider1Images, index: idx % slider1Images.length, prefix: '/slider1 alumni/' })}
-                      className="w-56 h-56 md:w-72 md:h-72 rounded-3xl overflow-hidden shadow-lg border-4 border-white shrink-0 cursor-pointer transition-transform hover:scale-105"
+                      className="w-56 h-56 md:w-72 md:h-72 rounded-3xl overflow-hidden shadow-lg border-4 border-white shrink-0 cursor-pointer transition-transform hover:scale-105 relative"
                     >
                       <img 
                         src={`/slider1 alumni/${image}`} 
-                        alt={`Slider 1 image ${image}`} 
+                        alt={parseImageCaption(image) || `Slider 1 image ${image}`} 
                         className="w-full h-full object-cover object-top"
                         loading="lazy"
                       />
+                      {parseImageCaption(image) && (
+                        <div className="absolute bottom-0 left-0 right-0 bg-[#001a40] text-white py-2 px-3 text-xs font-bold text-center z-10">
+                          {parseImageCaption(image)}
+                        </div>
+                      )}
                     </div>
                   ))}
                 </motion.div>
@@ -461,14 +478,19 @@ export default function Alumni() {
                     <div 
                       key={idx}
                       onClick={() => setLightbox({ images: slider2Images, index: idx % slider2Images.length, prefix: '/slider2 allumni/' })}
-                      className="w-56 h-56 md:w-72 md:h-72 rounded-3xl overflow-hidden shadow-lg border-4 border-white shrink-0 cursor-pointer transition-transform hover:scale-105"
+                      className="w-56 h-56 md:w-72 md:h-72 rounded-3xl overflow-hidden shadow-lg border-4 border-white shrink-0 cursor-pointer transition-transform hover:scale-105 relative"
                     >
                       <img 
                         src={`/slider2 allumni/${image}`} 
-                        alt={`Slider 2 image ${image}`} 
+                        alt={parseImageCaption(image) || `Slider 2 image ${image}`} 
                         className="w-full h-full object-cover object-top"
                         loading="lazy"
                       />
+                      {parseImageCaption(image) && (
+                        <div className="absolute bottom-0 left-0 right-0 bg-[#001a40] text-white py-2 px-3 text-xs font-bold text-center z-10">
+                          {parseImageCaption(image)}
+                        </div>
+                      )}
                     </div>
                   ))}
                 </motion.div>
@@ -529,9 +551,16 @@ export default function Alumni() {
               >
                 <img 
                   src={`${lightbox.prefix}${lightbox.images[lightbox.index]}`} 
-                  alt="Full preview" 
+                  alt={parseImageCaption(lightbox.images[lightbox.index]) || "Full preview"} 
                   className="max-w-full max-h-full object-contain rounded-xl shadow-2xl pointer-events-auto"
                 />
+                
+                {/* Subtitle in Lightbox */}
+                {parseImageCaption(lightbox.images[lightbox.index]) && (
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-[#001a40] text-white py-2 px-6 rounded-full text-sm font-bold shadow-xl border border-white/20 pointer-events-auto">
+                    {parseImageCaption(lightbox.images[lightbox.index])}
+                  </div>
+                )}
               </motion.div>
 
               {/* Image Counter */}

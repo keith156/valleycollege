@@ -7,6 +7,7 @@ import { TextOutline } from '../components/ui/text-outline';
 import React, { useEffect, useState } from 'react';
 import { ZoomParallax } from '../components/ui/zoom-parallax';
 import { SEO } from '../components/SEO';
+import { parseImageCaption } from '../utils/imageUtils';
 
 interface CountUpProps {
   end: number;
@@ -62,7 +63,7 @@ export default function Home() {
   const parallaxImages = [
     { src: '/images/IMG_20260401_181411_242.jpg', alt: 'School building' },
     { src: '/images/1.jpeg', alt: 'Students in class' },
-    { src: '/images/3.jpeg', alt: 'Science lab' },
+    { src: '/images/3$ICT Lab.jpeg', alt: 'Science lab' },
     { src: '/images/IMG_20260401_183410_033.jpg', alt: 'Sports field' },
     { src: '/images/5.jpeg', alt: 'Library' },
     { src: '/images/IMG_20260401_181902_661.jpg', alt: 'Graduation' },
@@ -78,25 +79,25 @@ export default function Home() {
       year: "1997", 
       title: "Foundation", 
       desc: "This image features the statue of Mzee William Mukaira, the founder of Valley College Secondary School, whose vision and leadership led to the establishment of the school in 1997. The institution began with a pioneering cohort of just 48 A-Level students. His unwavering commitment to excellence, discipline, and quality education laid a strong foundation and continues to shape the values and success of Valley College today.",
-      img: "/images/growth milestones img/foundation.jpeg"
+      img: "/images/growth milestones img/foundation$Statue of Mzee William Mukaira.jpeg"
     },
     { 
       year: "2000", 
       title: "Expansion", 
       desc: "Following its establishment in 1997, Valley College Secondary School experienced significant expansion between 2000 and 2010, a period that defined its physical and academic growth. During this time, the institution invested in the construction of key infrastructure, including classroom blocks, science laboratories, administrative facilities, and student accommodation, to support its steadily increasing enrollment.",
-      img: "/images/growth milestones img/expansion.jpeg"
+      img: "/images/growth milestones img/expansion$ValleyCollege Classroom blocks.jpeg"
     },
     { 
       year: "2018", 
       title: "Partnership", 
       desc: "Valley College Secondary School and Valley University share a strong historical and strategic partnership under the leadership of the Mukaira Foundation. United by a common vision for excellence in education and located side by side, the two institutions complement each other by creating a seamless pathway from secondary to university education. This close relationship promotes mentorship, academic growth, innovation, and shared values of discipline, leadership, and service, strengthening opportunities for learners at every stage",
-      img: "/images/growth milestones img/partnership.jpeg"
+      img: "/images/growth milestones img/partnership$Valley University main building.jpeg"
     },
     { 
       year: "2026", 
       title: "Excellence", 
       desc: "Valley College Secondary School has consistently upheld a culture of excellence grounded in strong academic performance, discipline, and holistic student development. The school has distinguished itself through outstanding national examination results and effective teaching. Notably, in 2005, it emerged as the best-performing secondary school in Western Uganda, highlighting its commitment to quality education.",
-      img: "/images/growth milestones img/excellence.jpeg"
+      img: "/images/growth milestones img/excellence$VACO students.jpeg"
     }
   ];
 
@@ -384,13 +385,20 @@ export default function Home() {
                       <div className="rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white group relative">
                         <img 
                           src={milestone.img} 
-                          alt={milestone.title} 
+                          alt={parseImageCaption(milestone.img) || milestone.title} 
                           className="w-full h-80 md:h-[400px] object-cover group-hover:scale-110 transition-transform duration-700"
                           referrerPolicy="no-referrer"
                           loading="lazy"
                           decoding="async"
                         />
                         <div className="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors" />
+                        
+                        {/* Subtitle UI */}
+                        {parseImageCaption(milestone.img) && (
+                          <div className="absolute bottom-0 left-0 right-0 bg-[#001a40] text-white py-2 px-4 text-xs md:text-sm font-bold text-center z-10 border-t border-white/10">
+                            {parseImageCaption(milestone.img)}
+                          </div>
+                        )}
                       </div>
                     </motion.div>
                   </motion.div>

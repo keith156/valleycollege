@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useState, useCallback, useEffect } from 'react';
 import { Carousel } from '../components/Carousel';
 import { SEO } from '../components/SEO';
+import { parseImageCaption } from '../utils/imageUtils';
 
 const pioneerGroups = [
   ["Twebaze Paul", "Tumwesigye Adonia", "Muhangi James Mukaira", "Natukunda Jeninah", "Noowe Innocent Kariisa", "Forward Moses Luke", "Asiimwe David"],
@@ -43,91 +44,7 @@ const formerHeadTeachers = [
 
 
 
-const governanceData = [
-  {
-    title: "Mukaira Foundation",
-    desc: "Provides overall ownership and strategic direction of the school, ensuring its vision, values, and long-term sustainability are upheld.",
-    pillClass: "bg-[#1a2860] border-[#2d3e80]",
-    dotColor: "#2d3e80",
-    lineColor: "#27a648",
-    svg: (
-      <div className="w-16 h-16 mb-2 rounded-xl overflow-hidden border border-white/20">
-        <img src="/Mukaira Foundation.jpeg" alt="Mukaira Foundation" className="w-full h-full object-cover" />
-      </div>
-    )
-  },
-  {
-    title: "School Director",
-    desc: "Oversees the general management of the school, implements policies from the foundation, and ensures smooth coordination between governance and operations.",
-    pillClass: "bg-[#1e8a3c] border-[#27a648]",
-    dotColor: "#27a648",
-    lineColor: "#2580e0",
-    svg: (
-      <svg className="w-9 h-9 mb-1 fill-white" viewBox="0 0 40 40">
-        <circle cx="20" cy="12" r="7"/>
-        <path d="M6 34c0-7.7 6.3-14 14-14s14 6.3 14 14H6z"/>
-      </svg>
-    )
-  },
-  {
-    title: "Board of Governors",
-    desc: "Offers policy guidance, oversight, and accountability, ensuring the school maintains high standards in academics, discipline, and administration.",
-    pillClass: "bg-[#1a6ac7] border-[#2580e0]",
-    dotColor: "#2580e0",
-    lineColor: "#7050b8",
-    svg: (
-      <svg className="w-9 h-9 mb-1 fill-white" viewBox="0 0 40 40">
-        <circle cx="12" cy="13" r="5"/>
-        <circle cx="28" cy="13" r="5"/>
-        <circle cx="20" cy="11" r="6"/>
-        <path d="M2 32c0-5.5 4.5-10 10-10h1c1.2 0 2.3.2 3.4.6"/>
-        <path d="M38 32c0-5.5-4.5-10-10-10h-1a10 10 0 00-3.4.6"/>
-        <path d="M10 32c0-5.5 4.5-10 10-10s10 4.5 10 10H10z"/>
-      </svg>
-    )
-  },
-  {
-    title: "Head Teacher",
-    desc: "Leads the day-to-day academic and administrative functions of the school, supervising staff and ensuring effective teaching, learning, and student welfare.",
-    pillClass: "bg-[#5c3d9e] border-[#7050b8]",
-    dotColor: "#7050b8",
-    lineColor: "#f07020",
-    svg: (
-      <svg className="w-9 h-9 mb-1 fill-white" viewBox="0 0 40 40">
-        <rect x="5" y="8" width="14" height="20" rx="2"/>
-        <rect x="21" y="8" width="14" height="20" rx="2"/>
-        <path d="M5 28h30v3H5z"/>
-        <line x1="8" y1="13" x2="16" y2="13" stroke="#5c3d9e" strokeWidth="1.5"/>
-        <line x1="8" y1="17" x2="16" y2="17" stroke="#5c3d9e" strokeWidth="1.5"/>
-        <line x1="8" y1="21" x2="16" y2="21" stroke="#5c3d9e" strokeWidth="1.5"/>
-        <line x1="23" y1="13" x2="31" y2="13" stroke="#5c3d9e" strokeWidth="1.5"/>
-        <line x1="23" y1="17" x2="31" y2="17" stroke="#5c3d9e" strokeWidth="1.5"/>
-        <line x1="23" y1="21" x2="31" y2="21" stroke="#5c3d9e" strokeWidth="1.5"/>
-      </svg>
-    )
-  },
-  {
-    title: "Administrators",
-    desc: "Handle daily operational tasks including admissions, finance, records, and support services to ensure the efficient and smooth running of the school.",
-    pillClass: "bg-[#e06010] border-[#f07020]",
-    dotColor: "#f07020",
-    lineColor: "transparent",
-    svg: (
-      <svg className="w-9 h-9 mb-1 fill-white" viewBox="0 0 40 40">
-        <rect x="12" y="2" width="16" height="5" rx="2"/>
-        <rect x="8" y="5" width="24" height="33" rx="2"/>
-        <rect x="12" y="11" width="16" height="2.5" rx="1" fill="#e06010"/>
-        <rect x="12" y="16" width="16" height="2.5" rx="1" fill="#e06010"/>
-        <rect x="12" y="21" width="16" height="2.5" rx="1" fill="#e06010"/>
-        <rect x="12" y="26" width="10" height="2.5" rx="1" fill="#e06010"/>
-        <circle cx="11" cy="12.25" r="1.5" fill="white"/>
-        <circle cx="11" cy="17.25" r="1.5" fill="white"/>
-        <circle cx="11" cy="22.25" r="1.5" fill="white"/>
-        <circle cx="11" cy="27.25" r="1.5" fill="white"/>
-      </svg>
-    )
-  }
-];
+// Governance structure is now displayed as a single image below
 
 export default function About() {
   const [lightbox, setLightbox] = useState<{ index: number } | null>(null);
@@ -270,10 +187,15 @@ export default function About() {
                   <div className="absolute -inset-4 bg-primary/5 rounded-[2.5rem] blur-2xl group-hover:bg-primary/10 transition-colors" />
                   <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white h-full min-h-[300px]">
                     <img 
-                      src="/Founder_img.jpeg" 
-                      alt="Mzee William Mukaira" 
+                      src="/Founder_img$Mzee William Mukaira.jpeg" 
+                      alt={parseImageCaption("Founder_img$Mzee William Mukaira.jpeg") || "Mzee William Mukaira"} 
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
+                    {parseImageCaption("Founder_img$Mzee William Mukaira.jpeg") && (
+                      <div className="absolute bottom-0 left-0 right-0 bg-[#001a40] text-white py-1.5 px-3 text-[10px] md:text-xs font-bold text-center z-10 border-t border-white/10">
+                        {parseImageCaption("Founder_img$Mzee William Mukaira.jpeg")}
+                      </div>
+                    )}
                   </div>
                 </div>
               </motion.div>
@@ -419,87 +341,32 @@ export default function About() {
           </div>
 
 
-          <div className="grid grid-cols-[140px_1fr] sm:grid-cols-[200px_1fr] md:grid-cols-[310px_1fr] gap-x-4 md:gap-x-12 max-w-7xl mx-auto overflow-hidden px-4 md:px-8 py-6">
-            {governanceData.map((item, idx) => (
-              <div key={idx} className="contents">
-                {/* Left Column (Pill and vertical lines) */}
-                <motion.div 
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                  className="flex flex-col items-center w-full h-full relative z-0"
-                >
-                  {/* Vertical line stretching to the top if not first item */}
-                  {idx > 0 && (
-                    <div className="w-[2.5px] md:w-[4px] flex-1" style={{ backgroundColor: governanceData[idx - 1].lineColor }} />
-                  )}
-                  {/* Space for the top dot if this item has no line from above */}
-                  {idx === 0 && <div className="flex-1" />}
-
-                  {/* Pill Container with Attached Dots */}
-                  <div className="flex flex-col items-center shrink-0 w-full relative z-20">
-                    {/* Top Dot */}
-                    {idx > 0 && (
-                      <div 
-                        className="w-3 h-3 md:w-5 md:h-5 rounded-full border-[2.5px] md:border-[4px] border-solid bg-white shrink-0 z-30 -mb-[1.25px] md:-mb-[2px]" 
-                        style={{ borderColor: item.dotColor }} 
-                      />
-                    )}
-
-                    {/* The Pill */}
-                    <div className={`w-full rounded-[2rem] md:rounded-[3rem] flex flex-col items-center justify-center p-3 md:p-8 shadow-xl min-h-[70px] md:min-h-[110px] border-2 md:border-4 ${item.pillClass} group hover:scale-105 transition-transform duration-500 z-20 relative`}>
-                      <div className="group-hover:scale-110 transition-transform duration-500 scale-75 md:scale-100">
-                        {item.svg}
-                      </div>
-                      <div className="text-white text-[10px] sm:text-xs md:text-lg font-black tracking-widest text-center uppercase leading-tight mt-1">
-                        {item.title}
-                      </div>
-                    </div>
-
-                    {/* Bottom Dot */}
-                    {idx < governanceData.length - 1 && (
-                      <div 
-                        className="w-3 h-3 md:w-5 md:h-5 rounded-full border-[2.5px] md:border-[4px] border-solid bg-white shrink-0 z-30 -mt-[1.25px] md:-mt-[2px]" 
-                        style={{ borderColor: item.dotColor }} 
-                      />
-                    )}
-                  </div>
-
-                  {/* Vertical line stretching to the bottom if not last item */}
-                  {idx < governanceData.length - 1 && (
-                    <div className="w-[2.5px] md:w-[4px] flex-1" style={{ backgroundColor: item.lineColor }} />
-                  )}
-                  {idx === governanceData.length - 1 && <div className="flex-1" />}
-                </motion.div>
-
-                {/* Right Column (Description) */}
-                <motion.div 
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                  className="flex items-center text-[12px] sm:text-sm md:text-lg leading-relaxed text-gray-700 py-4"
-                >
-                  {item.desc}
-                </motion.div>
-
-                {/* Connector Space Between Rows (Just the line, providing vertical gap) */}
-                {idx < governanceData.length - 1 && (
-                  <div className="contents">
-                    <div className="flex justify-center w-full h-8 md:h-12 relative z-0">
-                      <div 
-                        className="w-[2.5px] md:w-[4px] h-full" 
-                        style={{ backgroundColor: item.lineColor }} 
-                      />
-                    </div>
-                    {/* Empty cell for the right column in the connector row */}
-                    <div></div>
-                  </div>
-                )}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-6xl mx-auto bg-white rounded-2xl md:rounded-[3rem] shadow-xl border-2 md:border-8 border-white relative group overflow-hidden"
+          >
+            <div className="overflow-x-auto pb-4 md:pb-0 hide-scrollbar">
+              <div className="min-w-[600px] md:min-w-0">
+                <img 
+                  src="/governance structure.jpeg" 
+                  alt="Valley College Governance Structure" 
+                  className="w-full h-auto object-contain group-hover:scale-[1.01] transition-transform duration-700"
+                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                />
               </div>
-            ))}
-          </div>
+            </div>
+            
+            {/* Mobile Hint */}
+            <div className="md:hidden text-center py-2 bg-gray-50 text-[10px] font-bold text-gray-400 uppercase tracking-widest border-t border-gray-100">
+              ← Scroll to view full structure →
+            </div>
+            
+            <div className="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors pointer-events-none" />
+          </motion.div>
         </section>
 
         {/* Facilities & Overview Bento Grid */}
@@ -579,13 +446,13 @@ export default function About() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 grid-flow-dense gap-4 sm:gap-6 auto-rows-[250px] md:auto-rows-[300px] max-w-[1600px] mx-auto">
             {[
-              "IMG_20260401_181411_242.jpg", 
+              "IMG_20260401_181411_242$School entrance gate (As you enter).jpg", 
               "2.jpeg", "4.jpeg", "6.jpeg", "8.jpeg", "9.jpeg", 
               "12.jpeg", "13.jpeg", "14.jpeg", "15.jpeg", 
               "16.jpeg", "18.jpeg", "20.jpeg", 
               "21.jpeg", "23.jpeg", "24.jpeg", 
-              "IMG_20260401_184319_761.jpg", "IMG_20260401_184701_943.jpg", 
-              "IMG_20260401_181848_193.jpg", "IMG_20260401_184018_232.jpg",
+              "IMG_20260401_184319_761$University hostel.jpg", "IMG_20260401_184701_943$Girls Dormitory.jpg", 
+              "IMG_20260401_181848_193$School entrance gate (As you exist).jpg", "IMG_20260401_184018_232.jpg",
               "subjects offered.jpeg"
             ].map((img, idx) => {
               const matchesFixedSquare = img === "subjects offered.jpeg";
@@ -609,13 +476,20 @@ export default function About() {
               >
                 <img 
                   src={`/images/${img}`} 
-                  alt={`Campus Life ${idx + 1}`}
+                  alt={parseImageCaption(img) || `Campus Life ${idx + 1}`}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   referrerPolicy="no-referrer"
                   loading="lazy"
                   decoding="async"
                 />
                 <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                
+                {/* Always Visible Subtitle */}
+                {parseImageCaption(img) && (
+                  <div className="absolute bottom-0 left-0 right-0 bg-[#001a40] text-white py-1.5 px-3 text-[10px] sm:text-xs font-bold text-center z-10 border-t border-white/10">
+                    {parseImageCaption(img)}
+                  </div>
+                )}
               </motion.div>
             );
           })}
@@ -682,6 +556,10 @@ export default function About() {
                     className="absolute inset-0 w-full h-full object-cover object-top"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                  
+                  {/* Subtitle overlay for images that have it (though head teachers use data objects) */}
+                  {/* However, the lightbox in About is for head teachers, who already have names. */}
+                  {/* Wait, is there a lightbox for the gallery too? Let me check. */}
                 </div>
 
                 {/* Info */}

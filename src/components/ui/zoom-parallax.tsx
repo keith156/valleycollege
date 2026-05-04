@@ -1,5 +1,6 @@
 import { useScroll, useTransform, motion } from 'motion/react';
 import { useRef } from 'react';
+import { parseImageCaption } from '../utils/imageUtils';
 
 interface Image {
 	src: string;
@@ -52,10 +53,15 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 							<div className="relative h-[25vh] w-[25vw]">
 								<img
 									src={src || '/placeholder.svg'}
-									alt={alt || `Parallax image ${index + 1}`}
+									alt={alt || parseImageCaption(src) || `Parallax image ${index + 1}`}
 									className="h-full w-full object-cover rounded-2xl shadow-2xl"
                                     referrerPolicy="no-referrer"
 								/>
+								{parseImageCaption(src) && (
+									<div className="absolute bottom-0 left-0 right-0 bg-[#001a40] text-white py-1 px-2 text-[8px] md:text-[10px] font-bold text-center z-10 rounded-b-2xl">
+										{parseImageCaption(src)}
+									</div>
+								)}
 							</div>
 						</motion.div>
 					);
