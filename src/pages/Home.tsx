@@ -37,12 +37,12 @@ export default function Home() {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
 
   const heroImages = [
-    "/heroimages/vaco_students_1.png",
-    "/heroimages/vaco_students_2.png",
-    "/heroimages/vaco_students_3.png",
-    "/heroimages/2.png",
-    "/heroimages/4.png",
-    "/heroimages/expansion.jpeg"
+    "/heroimages/vaco_students_1.webp",
+    "/heroimages/vaco_students_2.webp",
+    "/heroimages/vaco_students_3.webp",
+    "/heroimages/2.webp",
+    "/heroimages/4.webp",
+    "/heroimages/expansion.webp"
   ];
 
   const slideVariants = {
@@ -61,17 +61,17 @@ export default function Home() {
 
 
   const parallaxImages = [
-    { src: '/images/IMG_20260401_181411_242$School entrance gate (As you enter).jpg', alt: 'School building' },
-    { src: '/images/2$S.6 2025 Class.jpeg', alt: 'Students in class' },
-    { src: '/images/3$ICT Lab.jpeg', alt: 'Science lab' },
-    { src: '/images/8$S.2 & S.3 Class, Leisure time.jpeg', alt: 'Sports field' },
-    { src: '/images/18$S.4 class 2024, after briefing.jpeg', alt: 'Library' },
-    { src: '/images/24$S.4 class 2016.jpeg', alt: 'Graduation' },
-    { src: '/images/IMG_20260401_184319_761$University hostel.jpg', alt: 'Campus grounds' },
+    { src: '/images/IMG_20260401_181411_242$School entrance gate (As you enter).webp', alt: 'School building' },
+    { src: '/images/2$S.6 2025 Class.webp', alt: 'Students in class' },
+    { src: '/images/3$ICT Lab.webp', alt: 'Science lab' },
+    { src: '/images/8$S.2 & S.3 Class, Leisure time.webp', alt: 'Sports field' },
+    { src: '/images/18$S.4 class 2024, after briefing.webp', alt: 'Library' },
+    { src: '/images/24$S.4 class 2016.webp', alt: 'Graduation' },
+    { src: '/images/IMG_20260401_184319_761$University hostel.webp', alt: 'Campus grounds' },
     { src: '/images/6$Writer`s Club.jpeg', alt: 'Art class' },
-    { src: '/images/12$Deputy and some prefects.jpeg', alt: 'Computer lab' },
-    { src: '/images/21$Boys Domitory.jpeg', alt: 'Cafeteria' },
-    { src: '/images/23$Prefects receiving parents on visitation day.jpeg', alt: 'School event' },
+    { src: '/images/12$Deputy and some prefects.webp', alt: 'Computer lab' },
+    { src: '/images/21$Boys Domitory.webp', alt: 'Cafeteria' },
+    { src: '/images/23$Prefects receiving parents on visitation day.webp', alt: 'School event' },
   ];
 
   const milestones = [
@@ -79,25 +79,25 @@ export default function Home() {
       year: "1997", 
       title: "Foundation", 
       desc: "This image features the statue of Mzee William Mukaira, the founder of Valley College Secondary School, whose vision and leadership led to the establishment of the school in 1997. The institution began with a pioneering cohort of just 48 A-Level students. His unwavering commitment to excellence, discipline, and quality education laid a strong foundation and continues to shape the values and success of Valley College today.",
-      img: "/images/growth milestones img/foundation$Statue of Mzee William Mukaira.jpeg"
+      img: "/images/growth milestones img/foundation$Statue of Mzee William Mukaira.webp"
     },
     { 
       year: "2000", 
       title: "Expansion", 
       desc: "Following its establishment in 1997, Valley College Secondary School experienced significant expansion between 2000 and 2010, a period that defined its physical and academic growth. During this time, the institution invested in the construction of key infrastructure, including classroom blocks, science laboratories, administrative facilities, and student accommodation, to support its steadily increasing enrollment.",
-      img: "/images/growth milestones img/expansion$ValleyCollege Classroom blocks.jpeg"
+      img: "/images/growth milestones img/expansion$ValleyCollege Classroom blocks.webp"
     },
     { 
       year: "2018", 
       title: "Partnership", 
       desc: "Valley College Secondary School and Valley University share a strong historical and strategic partnership under the leadership of the Mukaira Foundation. United by a common vision for excellence in education and located side by side, the two institutions complement each other by creating a seamless pathway from secondary to university education. This close relationship promotes mentorship, academic growth, innovation, and shared values of discipline, leadership, and service, strengthening opportunities for learners at every stage",
-      img: "/images/growth milestones img/partnership$Valley University main building.jpeg"
+      img: "/images/growth milestones img/partnership$Valley University main building.webp"
     },
     { 
       year: "2026", 
       title: "Excellence", 
       desc: "Valley College Secondary School has consistently upheld a culture of excellence grounded in strong academic performance, discipline, and holistic student development. The school has distinguished itself through outstanding national examination results and effective teaching. Notably, in 2005, it emerged as the best-performing secondary school in Western Uganda, highlighting its commitment to quality education.",
-      img: "/images/growth milestones img/excellence$ValleyCollege  students.jpeg"
+      img: "/images/growth milestones img/excellence$ValleyCollege  students.webp"
     }
   ];
 
@@ -223,7 +223,7 @@ export default function Home() {
             >
               <div className="relative rounded-3xl overflow-hidden shadow-2xl w-full lg:mr-auto lg:ml-0 h-[400px] md:h-[500px] lg:h-full min-h-[400px]">
                 <img
-                  src="/headteacher.jpeg"
+                  src="/headteacher.webp"
                   alt="Ms. Kabeizi Doreen - Head Teacher"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -231,7 +231,7 @@ export default function Home() {
                   decoding="async"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    target.src = "/images/1.jpeg"; // Fallback image just in case
+                    target.src = "/images/1.webp"; // Fallback image just in case
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -277,9 +277,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 sm:px-0">
             {[
-              { end: 29, label: "Years of Excellence", icon: TrophyIcon, img: "/Years_of_excellence.jpeg", altText: "Valley College 29 years of educational excellence in Bushenyi Uganda" },
-              { end: 18, label: "Subjects Offered", icon: BookOpenIcon, img: "/images/subjects offered$ ICT laboratory.jpeg", altText: "18 subjects offered at Valley College including Sciences, Humanities and Vocational" },
-              { end: 650, label: "Number of Students", icon: UsersIcon, img: "/images/10.jpeg", altText: "650 students enrolled at Valley College Secondary School Bushenyi" }
+              { end: 29, label: "Years of Excellence", icon: TrophyIcon, img: "/Years_of_excellence.webp", altText: "Valley College 29 years of educational excellence in Bushenyi Uganda" },
+              { end: 18, label: "Subjects Offered", icon: BookOpenIcon, img: "/images/subjects offered$ ICT laboratory.webp", altText: "18 subjects offered at Valley College including Sciences, Humanities and Vocational" },
+              { end: 650, label: "Number of Students", icon: UsersIcon, img: "/images/10.webp", altText: "650 students enrolled at Valley College Secondary School Bushenyi" }
             ].map((stat, idx) => (
               <motion.div 
                 key={idx}

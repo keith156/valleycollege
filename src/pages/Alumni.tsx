@@ -107,7 +107,7 @@ export default function Alumni() {
         <div className="absolute inset-0">
           <div className="w-full h-full bg-gray-900" />
           <img
-            src="/alumni gallery/VACO-11.jpg"
+            src="/alumni gallery/VACO-11.webp"
             alt="Alumni at Valley College"
             className="absolute inset-0 w-full h-full object-cover opacity-80"
             referrerPolicy="no-referrer"
@@ -144,13 +144,13 @@ export default function Alumni() {
               <a href="https://chat.whatsapp.com/E54b48dGuZKLZj1FoShlVz?mode=gi_t" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-6 py-4 rounded-full font-bold transition-all hover:scale-105 shadow-lg hover:shadow-green-500/30 w-fit">
                 <MessageCircle size={24} /> Join the Official WhatsApp Group
               </a>
-              <img src="/group_icon.jpeg" alt="Valley College Alumni WhatsApp Group" className="w-20 h-20 md:w-24 md:h-24 rounded-full shadow-lg border-[3px] border-green-500 object-cover hover:scale-105 transition-transform" />
+              <img src="/group_icon.webp" alt="Valley College Alumni WhatsApp Group" className="w-20 h-20 md:w-24 md:h-24 rounded-full shadow-lg border-[3px] border-green-500 object-cover hover:scale-105 transition-transform" />
             </div>
           </motion.div>
           
           <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="rounded-3xl overflow-hidden shadow-lg">
             <img 
-              src="/alumni gallery/VACO-15.jpg" 
+              src="/alumni gallery/VACO-15.webp" 
               alt="Alumni community" 
               className="w-full h-full object-cover object-top" 
               referrerPolicy="no-referrer" 
@@ -253,7 +253,7 @@ export default function Alumni() {
                 <div className="relative z-10">
                   <div className="flex items-center gap-6 mb-10">
                     <img 
-                      src="/alumni gallery/valleycollegeleaguelogo.png" 
+                      src="/alumni gallery/valleycollegeleaguelogo.webp" 
                       alt="VACL Logo" 
                       className="w-24 h-24 object-contain"
                     />
@@ -292,7 +292,7 @@ export default function Alumni() {
                   initial={{ scale: 1.1 }}
                   whileInView={{ scale: 1 }}
                   transition={{ duration: 1.5 }}
-                  src="/alumni gallery/poster.jpg" 
+                  src="/alumni gallery/poster.webp" 
                   alt="Alumni League Poster" 
                   className="absolute inset-0 w-full h-full object-cover"
                 />

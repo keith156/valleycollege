@@ -15,7 +15,7 @@ export function Footer() {
               title="Double click for Admin Access"
             >
               <img 
-                src="/logo.png" 
+                src="/logo.webp" 
                 alt="Valley College Logo" 
                 className="h-12 w-auto object-contain bg-white rounded-lg p-1"
               />

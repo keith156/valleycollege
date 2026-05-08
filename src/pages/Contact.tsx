@@ -66,7 +66,7 @@ export default function Contact() {
         <div className="absolute inset-0">
           <div className="w-full h-full bg-gray-900" />
           <img
-            src="/images/IMG_20260401_183107_670.jpg"
+            src="/images/IMG_20260401_183107_670.webp"
             alt="Contact Valley College"
             className="absolute inset-0 w-full h-full object-cover opacity-80"
             referrerPolicy="no-referrer"

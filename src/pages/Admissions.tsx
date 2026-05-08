@@ -20,7 +20,7 @@ export default function Admissions() {
         <div className="absolute inset-0">
           <div className="w-full h-full bg-gray-900" />
           <img
-            src="/images/IMG_20260401_183022_065.jpg"
+            src="/images/IMG_20260401_183022_065.webp"
             alt="Admissions at Valley College"
             className="absolute inset-0 w-full h-full object-cover opacity-80"
             referrerPolicy="no-referrer"

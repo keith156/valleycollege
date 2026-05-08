@@ -179,7 +179,7 @@ export default function Academics() {
         <div className="absolute inset-0">
           <div className="w-full h-full bg-gray-900" />
           <img
-            src="/images/IMG_20260401_182207_763.jpg"
+            src="/images/IMG_20260401_182207_763.webp"
             alt="Academics at Valley College"
             className="absolute inset-0 w-full h-full object-cover opacity-80"
             referrerPolicy="no-referrer"
@@ -417,7 +417,7 @@ export default function Academics() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="group relative overflow-hidden rounded-[2.5rem] shadow-lg aspect-[4/3]">
               <img 
-                src="/images/IMG_20260401_182741_919.jpg" 
+                src="/images/IMG_20260401_182741_919.webp" 
                 alt="Sports" 
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                 referrerPolicy="no-referrer" 
@@ -440,7 +440,7 @@ export default function Academics() {
 
             <div className="group relative overflow-hidden rounded-[2.5rem] shadow-lg aspect-[4/3]">
               <img 
-                src="/images/IMG_20260401_182933_170.jpg" 
+                src="/images/IMG_20260401_182933_170.webp" 
                 alt="Clubs" 
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                 referrerPolicy="no-referrer" 

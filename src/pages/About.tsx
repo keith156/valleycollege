@@ -20,25 +20,25 @@ const formerHeadTeachers = [
     name: "Mary Antoinette Kabesiime Babiiha",
     period: "1997 - 2005",
     title: "Headmistress (HM)",
-    image: "/former head teachers/[1997-2005]-Mary Antoinette Kabesiime Babiiha-HM-Valley College.jpeg"
+    image: "/former head teachers/[1997-2005]-Mary Antoinette Kabesiime Babiiha-HM-Valley College.webp"
   },
   {
     name: "Akoramaziima Miriam",
     period: "2006 - 2008",
     title: "Headmistress (HM)",
-    image: "/former head teachers/[2006-2008]-Akoramaziima Miriam-HM-Valley College.png"
+    image: "/former head teachers/[2006-2008]-Akoramaziima Miriam-HM-Valley College.webp"
   },
   {
     name: "Muhanguzi William",
     period: "2009 - 2015",
     title: "Head Teacher (HT)",
-    image: "/former head teachers/[2009-2015]-Muhanguzi William-HT-Valley College.png"
+    image: "/former head teachers/[2009-2015]-Muhanguzi William-HT-Valley College.webp"
   },
   {
     name: "Ninkwakuzire Miriam",
     period: "2016 - 2018",
     title: "Headmistress (HM)",
-    image: "/former head teachers/[2016-2018]-Ninkwakuzire Miriam-HM-Valley College.png"
+    image: "/former head teachers/[2016-2018]-Ninkwakuzire Miriam-HM-Valley College.webp"
   }
 ];
 
@@ -87,7 +87,7 @@ export default function About() {
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
             transition={{ duration: 10, ease: "easeOut" }}
-            src="/images/IMG_20260401_181902_661.jpg"
+            src="/images/IMG_20260401_181902_661.webp"
             alt="About Valley College"
             className="absolute inset-0 w-full h-full object-cover opacity-80"
             referrerPolicy="no-referrer"
@@ -187,13 +187,13 @@ export default function About() {
                   <div className="absolute -inset-4 bg-primary/5 rounded-[2.5rem] blur-2xl group-hover:bg-primary/10 transition-colors" />
                   <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white h-full min-h-[300px]">
                     <img 
-                      src="/Founder_img$Mzee William Mukaira.jpeg" 
-                      alt={parseImageCaption("Founder_img$Mzee William Mukaira.jpeg") || "Mzee William Mukaira"} 
+                      src="/Founder_img$Mzee William Mukaira.webp" 
+                      alt={parseImageCaption("Founder_img$Mzee William Mukaira.webp") || "Mzee William Mukaira"} 
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
-                    {parseImageCaption("Founder_img$Mzee William Mukaira.jpeg") && (
+                    {parseImageCaption("Founder_img$Mzee William Mukaira.webp") && (
                       <div className="absolute bottom-0 left-0 right-0 bg-[#001a40] text-white py-1.5 px-3 text-[10px] md:text-xs font-bold text-center z-10 border-t border-white/10">
-                        {parseImageCaption("Founder_img$Mzee William Mukaira.jpeg")}
+                        {parseImageCaption("Founder_img$Mzee William Mukaira.webp")}
                       </div>
                     )}
                   </div>
@@ -352,7 +352,7 @@ export default function About() {
             <div className="overflow-x-auto pb-4 md:pb-0 hide-scrollbar">
               <div className="min-w-[600px] md:min-w-0">
                 <img 
-                  src="/governance structure.jpeg" 
+                  src="/governance structure.webp" 
                   alt="Valley College Governance Structure" 
                   className="w-full h-auto object-contain group-hover:scale-[1.01] transition-transform duration-700"
                   referrerPolicy="no-referrer"

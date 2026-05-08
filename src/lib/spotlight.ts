@@ -19,7 +19,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '1997-1999',
     profession: 'Research Fellow',
     workStation: 'ACODE',
-    imageUrl: '/spotlight2/[1997-1999]_Twebaze Paul-Research Fellow _ ACODE.png',
+    imageUrl: '/spotlight2/[1997-1999]_Twebaze Paul-Research Fellow _ ACODE.webp',
   },
   {
     id: '2',
@@ -27,7 +27,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '1998-2000',
     profession: 'DDAA',
     workStation: 'Kampala International University',
-    imageUrl: '/spotlight2/[1998-2000]_Dr.Atukwatse Judith_DDAA_Kampala International University.png',
+    imageUrl: '/spotlight2/[1998-2000]_Dr.Atukwatse Judith_DDAA_Kampala International University.webp',
   },
   {
     id: '3',
@@ -35,7 +35,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '1999-2001',
     profession: 'US',
     workStation: 'Mbarara University',
-    imageUrl: '/spotlight2/[1999-2001]_Kwatampoora Kansiime Vicent _US_Mbarara University.png',
+    imageUrl: '/spotlight2/[1999-2001]_Kwatampoora Kansiime Vicent _US_Mbarara University.webp',
   },
   {
     id: '4',
@@ -43,7 +43,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2000-2001',
     profession: 'Mechanical Engineer',
     workStation: 'MoM&E',
-    imageUrl: '/spotlight2/[2000-2001]-Mugumya Winston-Mechanical Engineer -MoM&E.png',
+    imageUrl: '/spotlight2/[2000-2001]-Mugumya Winston-Mechanical Engineer -MoM&E.webp',
   },
   {
     id: '5',
@@ -51,7 +51,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2003 - 2008',
     profession: 'Electrical Engineer',
     workStation: 'ATC',
-    imageUrl: '/spotlight2/[2003 - 2008]_Justus Rukundo_Electrical Engineer_ATC.jpeg',
+    imageUrl: '/spotlight2/[2003 - 2008]_Justus Rukundo_Electrical Engineer_ATC.webp',
   },
   {
     id: '6',
@@ -59,7 +59,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2004 - 2005',
     profession: 'Medical Laboratory Technologist',
     workStation: 'Uganda Virus Research Institute Entebbe',
-    imageUrl: '/spotlight2/[2004 - 2005]_ATUHAIRE PHIONAH_Medical Laboratory technologist_Uganda Virus Research institute Entebbe.png',
+    imageUrl: '/spotlight2/[2004 - 2005]_ATUHAIRE PHIONAH_Medical Laboratory technologist_Uganda Virus Research institute Entebbe.webp',
   },
   {
     id: '7',
@@ -67,7 +67,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2004-2005',
     profession: 'Medical Doctor',
     workStation: 'KCCA',
-    imageUrl: '/spotlight2/[2004-2005]-DR. Ndyabakira Alex - Medical Doctor - KCCA.png',
+    imageUrl: '/spotlight2/[2004-2005]-DR. Ndyabakira Alex - Medical Doctor - KCCA.webp',
   },
   {
     id: '8',
@@ -75,7 +75,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2004-2005',
     profession: 'Lawyer',
     workStation: 'State Attorney, Office of Director of Public Prosecutions',
-    imageUrl: '/spotlight2/[2004-2005]_Arinaitwe Robert_Lawyer_State Attorney, Office of Director of Public Prosecutions.jpeg',
+    imageUrl: '/spotlight2/[2004-2005]_Arinaitwe Robert_Lawyer_State Attorney, Office of Director of Public Prosecutions.webp',
   },
   {
     id: '9',
@@ -83,7 +83,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2004-2005',
     profession: 'Lawyer-UN',
     workStation: 'United Nations',
-    imageUrl: '/spotlight2/[2004-2005]_Counsel Pearl Atukunda_Lawyer-UN_United Nations.png',
+    imageUrl: '/spotlight2/[2004-2005]_Counsel Pearl Atukunda_Lawyer-UN_United Nations.webp',
   },
   {
     id: '10',
@@ -91,7 +91,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2004-2005',
     profession: 'Engineer - Head of Engineering & Production',
     workStation: 'Engineering Development and Innovation Centre (EDiC), Namanve',
-    imageUrl: '/spotlight2/[2004-2005]_Eng. Moses Agaba (CEng)_Engineer - Head of Engineering & Production_Engineering Development and Innovation Centre (EDiC), Kampala Industrial & Business Park - Namanve.JPG',
+    imageUrl: '/spotlight2/[2004-2005]_Eng. Moses Agaba (CEng)_Engineer - Head of Engineering & Production_Engineering Development and Innovation Centre (EDiC), Kampala Industrial & Business Park - Namanve.webp',
   },
   {
     id: '11',
@@ -99,7 +99,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2004-2005',
     profession: 'Accountant',
     workStation: 'URA',
-    imageUrl: '/spotlight2/[2004-2005]_Kansiime Ibrahim_Accountant_URA.png',
+    imageUrl: '/spotlight2/[2004-2005]_Kansiime Ibrahim_Accountant_URA.webp',
   },
   {
     id: '12',
@@ -107,7 +107,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2004-2007, 2008',
     profession: 'Teacher [AI Evaluator]',
     workStation: 'Sama',
-    imageUrl: '/spotlight2/[2004-2007, 2008]_Birungi Sandra_Teacher [AI Evaluator]_Sama.png',
+    imageUrl: '/spotlight2/[2004-2007, 2008]_Birungi Sandra_Teacher [AI Evaluator]_Sama.webp',
   },
   {
     id: '13',
@@ -115,7 +115,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2004-2007',
     profession: 'W-MP',
     workStation: 'Rakai District',
-    imageUrl: '/spotlight2/[2004-2007]_Hon.Kyinyamatama Juliet_W-MP_Rakai District.png',
+    imageUrl: '/spotlight2/[2004-2007]_Hon.Kyinyamatama Juliet_W-MP_Rakai District.webp',
   },
   {
     id: '14',
@@ -123,7 +123,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2006-2007',
     profession: 'Mechanical Engineer',
     workStation: 'Ministry of Works & Transport',
-    imageUrl: '/spotlight2/[2006-2007]_Davis Tukamushaba_Mechanical Engineer_Ministry of Works & Transport.png',
+    imageUrl: '/spotlight2/[2006-2007]_Davis Tukamushaba_Mechanical Engineer_Ministry of Works & Transport.webp',
   },
   {
     id: '15',
@@ -131,7 +131,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2006-2007',
     profession: 'Financial Advisor-Administrator',
     workStation: 'Old Mutual Insurance',
-    imageUrl: '/spotlight2/[2006-2007]_Heather Lambert_Financial Advisor-Administrator_Old mutual insurance.png',
+    imageUrl: '/spotlight2/[2006-2007]_Heather Lambert_Financial Advisor-Administrator_Old mutual insurance.webp',
   },
   {
     id: '16',
@@ -139,7 +139,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2006-2007',
     profession: 'Branch Manager - African Trade Winds Ltd',
     workStation: 'Bundibugyo',
-    imageUrl: '/spotlight2/[2006-2007]_Luka Layman_Branch Manager- African Trade Winds Ltd_Bundibugyo.png',
+    imageUrl: '/spotlight2/[2006-2007]_Luka Layman_Branch Manager- African Trade Winds Ltd_Bundibugyo.webp',
   },
   {
     id: '17',
@@ -147,7 +147,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2006-2007',
     profession: 'Engineer',
     workStation: 'Kampala',
-    imageUrl: '/spotlight2/[2006-2007]_Ndyamwesiga stephen_Engineer_Kampala.png',
+    imageUrl: '/spotlight2/[2006-2007]_Ndyamwesiga stephen_Engineer_Kampala.webp',
   },
   {
     id: '18',
@@ -155,7 +155,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2006-2007',
     profession: 'Consultant Sales Engineer',
     workStation: 'Epiroc Eastern Africa Limited',
-    imageUrl: '/spotlight2/[2006-2007]_Nuwahumuza Mark_Consultant Sales Engineer_Epiroc Eastern Africa Limited.png',
+    imageUrl: '/spotlight2/[2006-2007]_Nuwahumuza Mark_Consultant Sales Engineer_Epiroc Eastern Africa Limited.webp',
   },
   {
     id: '19',
@@ -163,7 +163,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2006-2007',
     profession: 'Engineer + Business Man',
     workStation: 'Uplink Builders Limited',
-    imageUrl: '/spotlight2/[2006-2007]_Taremwa Elias_Engineer+Business Man_Uplink Builders Limited.png',
+    imageUrl: '/spotlight2/[2006-2007]_Taremwa Elias_Engineer+Business Man_Uplink Builders Limited.webp',
   },
   {
     id: '20',
@@ -171,7 +171,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2007-2008',
     profession: 'Environmentalist',
     workStation: 'Geotropic Consults Ltd',
-    imageUrl: '/spotlight2/[2007-2008]_Barbra Atuhereza_Geotropic Consults Ltd_Eviromentalist.jpeg',
+    imageUrl: '/spotlight2/[2007-2008]_Barbra Atuhereza_Geotropic Consults Ltd_Eviromentalist.webp',
   },
   {
     id: '21',
@@ -179,7 +179,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2007-2008',
     profession: 'Medical Doctor',
     workStation: 'Mbarara Regional Referral Hospital',
-    imageUrl: '/spotlight2/[2007-2008]_Kananura Keneth_Medical doctor_Mbarara Regional Referral Hospital.png',
+    imageUrl: '/spotlight2/[2007-2008]_Kananura Keneth_Medical doctor_Mbarara Regional Referral Hospital.webp',
   },
   {
     id: '22',
@@ -187,7 +187,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2008-2009',
     profession: 'Clinical (Imaging) Applications Specialist',
     workStation: 'Siemens Healthineers-Uganda',
-    imageUrl: '/spotlight2/[2008-2009]_Brian Mutungi_Clinical(Imaging) Applications Specialist_Siemens Healthineers-Uganda.png',
+    imageUrl: '/spotlight2/[2008-2009]_Brian Mutungi_Clinical(Imaging) Applications Specialist_Siemens Healthineers-Uganda.webp',
   },
   {
     id: '23',
@@ -195,7 +195,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2010 - 2011',
     profession: 'Business Consultant',
     workStation: 'Airtel Uganda Ltd',
-    imageUrl: '/spotlight2/[2010 - 2011]_Ezra Mugume_Business Consultant_Airtel Uganda Ltd.png',
+    imageUrl: '/spotlight2/[2010 - 2011]_Ezra Mugume_Business Consultant_Airtel Uganda Ltd.webp',
   },
   {
     id: '24',
@@ -203,7 +203,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '2013-2016',
     profession: 'Lawyer',
     workStation: 'D. Kagarura Advocates and Solicitors, Kampala Road',
-    imageUrl: '/spotlight2/[2013-2016]_Kamusiime Anatori_Lawyer_D. Kagarura Advocates and Solicitors, Kampala road.png',
+    imageUrl: '/spotlight2/[2013-2016]_Kamusiime Anatori_Lawyer_D. Kagarura Advocates and Solicitors, Kampala road.webp',
   },
   {
     id: '25',
@@ -211,7 +211,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '1998-2000',
     profession: 'Architect + Urban Planner',
     workStation: 'Valley University',
-    imageUrl: '/spotlight2/[1998-2000]_Michael Mukaira A_Architect+Urban Planner_Valley University.jpeg',
+    imageUrl: '/spotlight2/[1998-2000]_Michael Mukaira A_Architect+Urban Planner_Valley University.webp',
   },
   {
     id: '26',
@@ -219,7 +219,7 @@ const spotlightData: SpotlightAlumnus[] = [
     period: '1999-2000',
     profession: 'Headteacher',
     workStation: 'Valley College',
-    imageUrl: '/spotlight2/[1999-2000]_Kabezi Doreen_Headteacher_Valley College.jpeg',
+    imageUrl: '/spotlight2/[1999-2000]_Kabezi Doreen_Headteacher_Valley College.webp',
   },
 ];
 
