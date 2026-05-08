@@ -61,17 +61,17 @@ export default function Home() {
 
 
   const parallaxImages = [
-    { src: '/images/IMG_20260401_181411_242.jpg', alt: 'School building' },
-    { src: '/images/1.jpeg', alt: 'Students in class' },
+    { src: '/images/IMG_20260401_181411_242$School entrance gate (As you enter).jpg', alt: 'School building' },
+    { src: '/images/2$S.6 2025 Class.jpeg', alt: 'Students in class' },
     { src: '/images/3$ICT Lab.jpeg', alt: 'Science lab' },
-    { src: '/images/IMG_20260401_183410_033.jpg', alt: 'Sports field' },
-    { src: '/images/5.jpeg', alt: 'Library' },
-    { src: '/images/IMG_20260401_181902_661.jpg', alt: 'Graduation' },
-    { src: '/images/7.jpeg', alt: 'Campus grounds' },
-    { src: '/images/IMG_20260401_183339_106.jpg', alt: 'Art class' },
-    { src: '/images/IMG_20260401_184335_095.jpg', alt: 'Computer lab' },
-    { src: '/images/10.jpeg', alt: 'Cafeteria' },
-    { src: '/images/11.jpeg', alt: 'School event' },
+    { src: '/images/8$S.2 & S.3 Class, Leisure time.jpeg', alt: 'Sports field' },
+    { src: '/images/18$S.4 class 2024, after briefing.jpeg', alt: 'Library' },
+    { src: '/images/24$S.4 class 2016.jpeg', alt: 'Graduation' },
+    { src: '/images/IMG_20260401_184319_761$University hostel.jpg', alt: 'Campus grounds' },
+    { src: '/images/6$Writer`s Club.jpeg', alt: 'Art class' },
+    { src: '/images/12$Deputy and some prefects.jpeg', alt: 'Computer lab' },
+    { src: '/images/21$Boys Domitory.jpeg', alt: 'Cafeteria' },
+    { src: '/images/23$Prefects receiving parents on visitation day.jpeg', alt: 'School event' },
   ];
 
   const milestones = [
@@ -278,7 +278,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 sm:px-0">
             {[
               { end: 29, label: "Years of Excellence", icon: TrophyIcon, img: "/Years_of_excellence.jpeg", altText: "Valley College 29 years of educational excellence in Bushenyi Uganda" },
-              { end: 18, label: "Subjects Offered", icon: BookOpenIcon, img: "/images/subjects offered.jpeg", altText: "18 subjects offered at Valley College including Sciences, Humanities and Vocational" },
+              { end: 18, label: "Subjects Offered", icon: BookOpenIcon, img: "/images/subjects offered$ ICT laboratory.jpeg", altText: "18 subjects offered at Valley College including Sciences, Humanities and Vocational" },
               { end: 650, label: "Number of Students", icon: UsersIcon, img: "/images/10.jpeg", altText: "650 students enrolled at Valley College Secondary School Bushenyi" }
             ].map((stat, idx) => (
               <motion.div 

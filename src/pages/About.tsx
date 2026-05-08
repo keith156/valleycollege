@@ -448,12 +448,12 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 grid-flow-dense gap-4 sm:gap-6 auto-rows-[250px] md:auto-rows-[300px] max-w-[1600px] mx-auto">
             {[
               "IMG_20260401_181411_242$School entrance gate (As you enter).jpg", 
-              "2.jpeg", "4.jpeg", "6.jpeg", "8.jpeg", "9.jpeg", 
-              "12.jpeg", "13.jpeg", "14.jpeg", "15.jpeg", 
-              "16.jpeg", "18.jpeg", "20.jpeg", 
-              "21$Boys Domitory.jpeg", "23.jpeg", "24.jpeg", 
+              "2$S.6 2025 Class.jpeg", "4$S.4 2026 Class.jpeg", "6$Writer`s Club.jpeg", "8$S.2 & S.3 Class, Leisure time.jpeg", "9$Counselling Session.jpeg", 
+              "12$Deputy and some prefects.jpeg", "13$S.4 CLASS (Girls) 2025.jpeg", "14$S.4 CLASS (Girls) 2025.jpeg", "15$20$S.4 Class (boys) 2025.jpeg", 
+              "16$20$S.4 Class (boys) 2025.jpeg", "18$S.4 class 2024, after briefing.jpeg", "20$S.4 Class (boys) 2025.jpeg", 
+              "21$Boys Domitory.jpeg", "23$Prefects receiving parents on visitation day.jpeg", "24$S.4 class 2016.jpeg", 
               "IMG_20260401_184319_761$University hostel.jpg", "IMG_20260401_184701_943$Girls Dormitory.jpg", 
-              "IMG_20260401_181848_193$School entrance gate (As you exist).jpg", "IMG_20260401_184018_232.jpg",
+              "IMG_20260401_181848_193$School entrance gate (As you exist).jpg", "IMG_20260401_184018_232$Classroom.jpg",
               "3$ICT Lab.jpeg"
             ].map((img, idx) => {
               const matchesFixedSquare = img === "3$ICT Lab.jpeg";

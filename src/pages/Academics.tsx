@@ -6,7 +6,8 @@ import { getEvents, SchoolEvent } from '../lib/events';
 import { SEO } from '../components/SEO';
 
 export default function Academics() {
-  const [expandedYear, setExpandedYear] = useState<string | null>(null);
+  const [expandedUCE, setExpandedUCE] = useState<string | null>(null);
+  const [expandedUACE, setExpandedUACE] = useState<string | null>(null);
   const [wallOfFameData, setWallOfFameData] = useState<WallOfFameYear[]>([]);
   const [termEvents, setTermEvents] = useState<SchoolEvent[]>([]);
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
@@ -19,10 +20,14 @@ export default function Academics() {
           getEvents()
         ]);
         
+        console.log("Wall of Fame Data:", wofData);
         setWallOfFameData(wofData);
-        if (wofData.length > 0) {
-          setExpandedYear(wofData[0].year);
-        }
+        
+        const firstUCE = wofData.find(d => d.category === 'UCE');
+        if (firstUCE) setExpandedUCE(firstUCE.year);
+        
+        const firstUACE = wofData.find(d => d.category === 'UACE');
+        if (firstUACE) setExpandedUACE(firstUACE.year);
         
         setTermEvents(events);
         if (events.length > 0) {
@@ -34,6 +39,78 @@ export default function Academics() {
     };
     fetchData();
   }, []);
+
+  const uceData = wallOfFameData.filter(d => d.category === 'UCE');
+  const uaceData = wallOfFameData.filter(d => d.category === 'UACE');
+
+  console.log("UCE Filtered:", uceData);
+  console.log("UACE Filtered:", uaceData);
+
+  const renderWofSection = (data: WallOfFameYear[], category: string, expandedId: string | null, setExpandedId: (id: string | null) => void) => {
+    if (data.length === 0) return null;
+    
+    return (
+      <div className="mb-20 max-w-4xl mx-auto w-full px-4">
+        <div className="flex flex-col items-center text-center mb-10">
+          <div className="inline-flex items-center justify-center gap-3 bg-green-50 text-green-800 px-6 py-2 rounded-full mb-4 border border-green-100">
+            <Star size={20} className="fill-green-600 text-green-600" />
+            <h2 className="text-2xl md:text-3xl font-bold">{category} Wall of Fame</h2>
+            <Star size={20} className="fill-green-600 text-green-600" />
+          </div>
+        </div>
+        
+        <div className="flex flex-col gap-4">
+          {data.map((yearData, idx) => {
+            const isExpanded = expandedId === yearData.year;
+            return (
+              <motion.div 
+                key={`${yearData.category}-${yearData.year}`}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.05 }}
+                className={`bg-white rounded-2xl shadow-sm border border-gray-100 relative transition-all duration-300 ${isExpanded ? 'ring-2 ring-primary border-transparent' : 'hover:border-primary/30'} flex flex-col overflow-hidden`}
+              >
+                <button 
+                  onClick={() => setExpandedId(isExpanded ? null : yearData.year)}
+                  className={`w-full flex items-center justify-between p-6 transition-all hover:bg-blue-900 bg-primary`}
+                >
+                  <div className="flex items-center gap-4 text-left">
+                    <Medal size={28} className="text-yellow-400 shrink-0" />
+                    <span className="text-xl font-bold text-white tracking-tight">{yearData.category} CLASS OF {yearData.year}</span>
+                  </div>
+                  <ChevronDown size={24} className={`transition-transform duration-300 shrink-0 ${isExpanded ? 'rotate-180 text-white' : 'text-white/70'}`} />
+                </button>
+                
+                <AnimatePresence>
+                  {isExpanded && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="px-6 pb-6 pt-4 flex flex-col border-t border-gray-100 bg-gray-50/30">
+                        {yearData.students.map((student, sIdx) => (
+                          <div key={sIdx} className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-center py-4 border-b border-gray-100 last:border-0 hover:bg-white px-3 rounded-xl transition-all gap-2 mb-1 shadow-sm sm:shadow-none bg-white sm:bg-transparent">
+                            <span className="font-bold text-gray-800 text-lg">{student.name}</span>
+                            <div className="flex items-center gap-3">
+                              <span className="text-gray-500 font-semibold text-sm bg-gray-100 px-3 py-1 rounded-lg uppercase tracking-wider">{student.combo}</span>
+                              <span className="text-primary font-black bg-blue-50 px-4 py-1.5 rounded-full border border-blue-100 text-base shadow-sm whitespace-nowrap">{student.pts}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
 
   const selectedEvent = termEvents.find(e => e.id === selectedEventId);
 
@@ -208,67 +285,24 @@ export default function Academics() {
           </motion.div>
         </div>
 
-        {/* UCE Wall of Fame */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20 max-w-4xl mx-auto w-full">
-          <div className="flex flex-col items-center text-center mb-10">
-            <div className="inline-flex items-center justify-center gap-3 bg-green-100 text-green-800 px-6 py-2 rounded-full mb-4">
-              <Star size={20} className="fill-green-600 text-green-600" />
-              <h2 id="fame" className="text-2xl md:text-3xl font-bold">Wall of Fame</h2>
-              <Star size={20} className="fill-green-600 text-green-600" />
+        {/* Combined Wall of Fame Heading */}
+        <div className="flex flex-col items-center text-center mb-12">
+           <div className="inline-flex items-center justify-center gap-3 bg-blue-100 text-primary px-8 py-3 rounded-full mb-6">
+              <Trophy size={32} className="text-yellow-500" />
+              <h2 id="fame" className="text-3xl md:text-4xl lg:text-5xl font-black">Wall of Fame</h2>
+              <Trophy size={32} className="text-yellow-500" />
             </div>
-            <p className="text-gray-600 text-base lg:text-lg max-w-4xl">Celebrating our top performing students in national examinations over the years.</p>
-          </div>
-          
-          <div className="flex flex-col gap-4">
-            {wallOfFameData.map((yearData, idx) => {
-              const isExpanded = expandedYear === yearData.year;
-              return (
-                <motion.div 
-                  key={yearData.year}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.05 }}
-                  className={`bg-white rounded-2xl shadow-sm border border-gray-100 relative transition-all duration-300 ${isExpanded ? 'ring-2 ring-primary border-transparent' : 'hover:border-primary/30'} flex flex-col`}
-                >
-                  <button 
-                    onClick={() => setExpandedYear(isExpanded ? null : yearData.year)}
-                    className={`w-full flex items-center justify-between p-6 transition-all hover:bg-blue-900 bg-primary ${isExpanded ? 'rounded-t-2xl' : 'rounded-2xl'}`}
-                  >
-                    <div className="flex items-center gap-4">
-                      <Medal size={28} className="text-yellow-400" />
-                      <span className="text-xl font-bold text-white">UCE {yearData.year}</span>
-                    </div>
-                    <ChevronDown size={24} className={`transition-transform duration-300 ${isExpanded ? 'rotate-180 text-white' : 'text-white/70'}`} />
-                  </button>
-                  
-                  <AnimatePresence>
-                    {isExpanded && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <div className="px-6 pb-6 pt-2 flex flex-col border-t border-gray-100/50">
-                          {yearData.students.map((student, sIdx) => (
-                            <div key={sIdx} className="w-full flex justify-between items-center py-3 border-b border-gray-50 last:border-0 hover:bg-gray-50/50 px-2 rounded-lg transition-colors">
-                              <span className="font-semibold text-gray-800 text-base md:text-lg">{student.name}</span>
-                              <div className="flex items-center text-sm md:text-base">
-                                <span className="text-gray-500 font-medium mr-3">{student.combo}</span>
-                                <span className="text-primary font-bold bg-blue-50 px-3 py-1 rounded-full">{student.pts}</span>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
+            <p className="text-gray-600 text-lg lg:text-xl max-w-4xl mx-auto">
+              Celebrating excellence in both O-Level (UCE) and A-Level (UACE) national examinations.
+            </p>
+        </div>
+
+        {/* UCE Section */}
+        {renderWofSection(uceData, 'UCE', expandedUCE, setExpandedUCE)}
+
+        {/* UACE Section */}
+        {renderWofSection(uaceData, 'UACE', expandedUACE, setExpandedUACE)}
+
 
         {/* Departments & Subjects */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
