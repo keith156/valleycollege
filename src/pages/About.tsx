@@ -491,13 +491,13 @@ export default function About() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.03 }}
-                  className="flex items-center justify-between px-6 py-4 hover:bg-blue-50 transition-all duration-300 group cursor-default"
+                  className="flex items-center justify-between px-4 sm:px-6 py-4 hover:bg-blue-50 transition-all duration-300 group cursor-default"
                 >
                   <div className="flex items-center gap-3 group-hover:translate-x-1 transition-transform">
-                    <span className="text-xs font-bold text-gray-400 w-6">{idx + 1}.</span>
-                    <span className="font-bold text-gray-900 group-hover:text-primary transition-colors">{member.title}. {member.name}</span>
+                    <span className="text-xs font-bold text-gray-400 w-6 shrink-0">{idx + 1}.</span>
+                    <span className="font-bold text-gray-900 group-hover:text-primary transition-colors text-xs sm:text-base">{member.title}. {member.name}</span>
                   </div>
-                  <span className="text-xs font-bold text-primary bg-blue-50 px-3 py-1 rounded-full group-hover:bg-primary group-hover:text-white transition-all">{member.position}</span>
+                  <span className="text-[10px] sm:text-xs font-bold text-primary bg-blue-50 px-2 sm:px-3 py-1 rounded-full group-hover:bg-primary group-hover:text-white transition-all shrink-0 ml-2">{member.position}</span>
                 </motion.div>
               ))}
             </div>
@@ -535,13 +535,13 @@ export default function About() {
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: (idx % 20) * 0.02 }}
-                  className="flex items-center justify-between px-5 py-3 border-b border-gray-50 hover:bg-blue-50 transition-all duration-300 group cursor-default"
+                  className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-50 hover:bg-blue-50 transition-all duration-300 group cursor-default"
                 >
                   <div className="flex items-center gap-2 group-hover:translate-x-1 transition-transform">
-                    <span className="text-xs font-bold text-gray-400 w-6">{idx + 1}.</span>
-                    <span className="font-semibold text-gray-900 text-sm group-hover:text-primary transition-colors">{teacher.name}</span>
+                    <span className="text-xs font-bold text-gray-400 w-6 shrink-0">{idx + 1}.</span>
+                    <span className="font-semibold text-gray-900 text-[10px] sm:text-sm group-hover:text-primary transition-colors">{teacher.name}</span>
                   </div>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full transition-all group-hover:scale-110 ${
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full transition-all group-hover:scale-110 shrink-0 ml-2 ${
                     teacher.subjects === 'TEACHER ASSISTANT' ? 'bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white' : 'bg-emerald-50 text-emerald-700 group-hover:bg-emerald-600 group-hover:text-white'
                   }`}>{teacher.subjects}</span>
                 </motion.div>
@@ -589,10 +589,10 @@ export default function About() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.03 }}
-                  className="flex items-center justify-between px-6 py-3 hover:bg-blue-50 transition-all duration-300 group cursor-default"
+                  className="flex items-center justify-between px-4 sm:px-6 py-3 hover:bg-blue-50 transition-all duration-300 group cursor-default"
                 >
-                  <span className="font-bold text-gray-900 text-sm group-hover:text-primary group-hover:translate-x-1 transition-all">{prefect.name}</span>
-                  <span className="text-xs font-bold text-primary bg-blue-50 px-3 py-1 rounded-full group-hover:bg-primary group-hover:text-white transition-all">{prefect.position}</span>
+                  <span className="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary group-hover:translate-x-1 transition-all">{prefect.name}</span>
+                  <span className="text-[10px] sm:text-xs font-bold text-primary bg-blue-50 px-2 sm:px-3 py-1 rounded-full group-hover:bg-primary group-hover:text-white transition-all shrink-0 ml-2">{prefect.position}</span>
                 </motion.div>
               ))}
             </div>
@@ -644,10 +644,10 @@ export default function About() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.05 }}
-                  className="flex items-center justify-between px-6 py-3 hover:bg-blue-50 transition-all duration-300 group cursor-default"
+                  className="flex items-center justify-between px-4 sm:px-6 py-3 hover:bg-blue-50 transition-all duration-300 group cursor-default"
                 >
-                  <span className="font-bold text-gray-900 text-sm group-hover:text-primary group-hover:translate-x-1 transition-all">{member.name}</span>
-                  <span className="text-xs font-bold text-primary bg-blue-50 px-3 py-1 rounded-full group-hover:bg-primary group-hover:text-white transition-all">{member.position}</span>
+                  <span className="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary group-hover:translate-x-1 transition-all">{member.name}</span>
+                  <span className="text-[10px] sm:text-xs font-bold text-primary bg-blue-50 px-2 sm:px-3 py-1 rounded-full group-hover:bg-primary group-hover:text-white transition-all shrink-0 ml-2">{member.position}</span>
                 </motion.div>
               ))}
             </div>
@@ -664,10 +664,10 @@ export default function About() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.03 }}
-                  className="flex items-center justify-between px-6 py-3 hover:bg-blue-50 transition-all duration-300 group cursor-default"
+                  className="flex items-center justify-between px-4 sm:px-6 py-3 hover:bg-blue-50 transition-all duration-300 group cursor-default"
                 >
-                  <span className="font-bold text-gray-900 text-sm group-hover:text-primary group-hover:translate-x-1 transition-all">{councillor.name}</span>
-                  <span className="text-xs font-bold text-gray-600 bg-gray-100 px-3 py-1 rounded-full group-hover:bg-gray-800 group-hover:text-white transition-all">{councillor.classGroup}</span>
+                  <span className="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary group-hover:translate-x-1 transition-all">{councillor.name}</span>
+                  <span className="text-[10px] sm:text-xs font-bold text-gray-600 bg-gray-100 px-2 sm:px-3 py-1 rounded-full group-hover:bg-gray-800 group-hover:text-white transition-all shrink-0 ml-2">{councillor.classGroup}</span>
                 </motion.div>
               ))}
             </div>
