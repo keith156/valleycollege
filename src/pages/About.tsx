@@ -582,8 +582,18 @@ export default function About() {
                   <img src="/about/Prefects Body[2025-26].jpeg" alt="Prefects Body" className="w-full h-full object-cover" />
                 </div>
                 <div className="bg-primary py-2 text-center">
-                  <span className="text-white text-xs font-bold uppercase tracking-wider">Prefects Body [2024-25]</span>
+                  <span className="text-white text-xs font-bold uppercase tracking-wider">Prefects Body [2025-26]</span>
                 </div>
+              </div>
+
+              {/* Added descriptive text for balance */}
+              <div className="bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
+                <h4 className="text-primary font-bold mb-3 flex items-center gap-2">
+                  <ShieldCheck size={18} /> Student Leadership & Discipline
+                </h4>
+                <p className="text-sm text-gray-600 leading-relaxed italic">
+                  The Prefectorial Body is a cornerstone of student leadership and discipline at Valley College. Composed of dedicated individuals selected for their integrity and commitment, this body serves as a vital bridge between the administration and the student community, fostering a culture of excellence and mutual respect across the campus.
+                </p>
               </div>
             </div>
 
@@ -639,6 +649,16 @@ export default function About() {
                 <div className="bg-primary py-2 text-center">
                   <span className="text-white text-xs font-bold uppercase tracking-wider">Council Body [2025-26]</span>
                 </div>
+              </div>
+
+              {/* Added descriptive text for balance */}
+              <div className="bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
+                <h4 className="text-primary font-bold mb-3 flex items-center gap-2">
+                  <Users size={18} /> Representation & Advocacy
+                </h4>
+                <p className="text-sm text-gray-600 leading-relaxed italic">
+                  The Student Council serves as the primary voice for student representation. Through a structured system of executive members and class councillors, the council ensures that every student's perspective is heard. They collaborate with school leadership to enhance student welfare and organize impactful campus initiatives.
+                </p>
               </div>
             </div>
 
