@@ -171,8 +171,7 @@ export default function About() {
         path="/about"
       />
       {/* Hero Section */}
-
-      <div className="relative bg-primary text-white py-20 lg:py-24 overflow-hidden">
+      <div id="top" className="relative bg-primary text-white py-20 lg:py-24 overflow-hidden scroll-mt-20">
         <div className="absolute inset-0">
           <div className="w-full h-full bg-gray-900" />
           <motion.img
@@ -463,7 +462,7 @@ export default function About() {
         </section>
 
         {/* PTS EXECUTIVE MEMBERS 2026 */}
-        <section className="mb-16 mt-12">
+        <section id="pts" className="mb-16 mt-12 scroll-mt-32">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -505,7 +504,7 @@ export default function About() {
         </section>
 
         {/* VALLEY COLLEGE TEACHING STAFF 2026 */}
-        <section className="mb-16">
+        <section id="staff" className="mb-16 scroll-mt-32">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -551,7 +550,7 @@ export default function About() {
         </section>
 
         {/* PREFECTORIAL BODY 2026 */}
-        <section className="mb-16">
+        <section id="prefects" className="mb-16 scroll-mt-32">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -600,7 +599,7 @@ export default function About() {
         </section>
 
         {/* COUNCIL BODY 2026 */}
-        <section className="mb-16">
+        <section id="council" className="mb-16 scroll-mt-32">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -7,7 +7,18 @@ import { motion, AnimatePresence } from 'motion/react';
 
 const NAV_LINKS = [
   { name: 'HOME', path: '/' },
-  { name: 'ABOUT', path: '/about' },
+  { 
+    name: 'ABOUT', 
+    path: '/about',
+    subLinks: [
+      { name: 'About Us', path: '/about#top' },
+      { name: 'Governance Structure', path: '/about#governance' },
+      { name: 'PTS Executive', path: '/about#pts' },
+      { name: 'Teaching Staff', path: '/about#staff' },
+      { name: 'Prefectorial Body', path: '/about#prefects' },
+      { name: 'Council Body', path: '/about#council' },
+    ]
+  },
   { 
     name: 'ACADEMICS', 
     path: '/academics',
