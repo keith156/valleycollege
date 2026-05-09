@@ -43,8 +43,100 @@ const formerHeadTeachers = [
 ];
 
 
+const ptsExecutiveMembers = [
+  { name: "Atamba Charles", title: "MR", position: "CHAIRPERSON" },
+  { name: "Ninsiima Christine", title: "MS", position: "VICE CHAIRPERSON" },
+  { name: "Kabeizi Doreen", title: "MS", position: "SECRETARY/HEADTEACHER" },
+  { name: "Abaho Simon", title: "MR", position: "TREASURER" },
+  { name: "Muhwezi Nathan", title: "MR", position: "PARENT'S REPRESENTATIVE (MALES)" },
+  { name: "Nyangooma Dorothy", title: "MS", position: "PARENT'S REPRESENTATIVE (FEMALES)" },
+  { name: "Baryoho Deziderio", title: "MR", position: "TEACHERS REPRESENTATIVE" },
+  { name: "Kabagambe Owen", title: "MR", position: "HEADBOY" },
+  { name: "Arinanye Tracy", title: "MS", position: "HEADGIRL" },
+];
 
-// Governance structure is now displayed as a single image below
+const teachingStaff = [
+  { name: "Kabeizi Doreen", subjects: "ECON/GEO" },
+  { name: "Kiggundu Bonny", subjects: "ENG/LIT" },
+  { name: "Asiimwe Jonath", subjects: "ECON/GEO" },
+  { name: "Ssempebwa Lauben", subjects: "AGRICULTURE" },
+  { name: "Tukamushaba Joventa", subjects: "ENG/LIT" },
+  { name: "Nabaasa Lovance", subjects: "ICT" },
+  { name: "Baryaho Deziderio", subjects: "HIST/CRE" },
+  { name: "Abaho Dan", subjects: "PHY/MTC" },
+  { name: "Nuwahereza James", subjects: "PHY/MTC" },
+  { name: "Tukamuheebwa Benson", subjects: "PHY/MTC" },
+  { name: "Onekalith Stephen", subjects: "CHEM/BIO" },
+  { name: "Kwikiriza Owen", subjects: "ECON/GEO" },
+  { name: "Atwiine Benard", subjects: "FINEART" },
+  { name: "Mugume Obed", subjects: "ENT/ECON" },
+  { name: "Muhereza Dan", subjects: "HIST/CRE" },
+  { name: "Tibesigwa Anthony", subjects: "KISW/RR" },
+  { name: "Obumwe Immaculate", subjects: "ENG/LIT" },
+  { name: "Mukwaya Ronald", subjects: "MTC/CHEM" },
+  { name: "Nanziri Shakira", subjects: "MTC/GEO" },
+  { name: "Munono Edison", subjects: "ENT/ICT" },
+  { name: "Natamba Cleophas", subjects: "KISW/RR" },
+  { name: "Kamugisha Christopher", subjects: "PHY/MTC" },
+  { name: "Nyesiga Joas", subjects: "CHEM/BIO" },
+  { name: "Musinguzi Patrick", subjects: "HIST/CRE" },
+  { name: "Ainomugisha Peter", subjects: "CHEM/BIO" },
+  { name: "Ahimbisibwe Gerald Peter", subjects: "CHEM/BIO" },
+  { name: "Kiiza Dennis", subjects: "KISW/RR" },
+  { name: "Barigye Patrick Kyasebo", subjects: "GEO/CRE" },
+  { name: "Kanyope Emmanuel", subjects: "BIOL" },
+  { name: "Tumusiime Kelly", subjects: "FINEART" },
+  { name: "Musinguzi Joshua", subjects: "ENT" },
+  { name: "Rubagumya Francis", subjects: "HIST/CRE" },
+  { name: "Tusingwire Jothams", subjects: "ENG/LIT" },
+  { name: "Atwikukye Alex", subjects: "HIST/CRE" },
+  { name: "Nimwesiga Peter", subjects: "CHEM/BIO" },
+  { name: "Natwijuka Daphine", subjects: "TEACHER ASSISTANT" },
+  { name: "Asiimwe Lucky", subjects: "TEACHER ASSISTANT" },
+];
+
+const prefectorialBody = [
+  { position: "HEAD PREFECT", name: "KABAGAMBE OWEN" },
+  { position: "ASST. H/PREFECT", name: "KIKOMA DAN" },
+  { position: "HEAD GIRL", name: "ARINANYE TRACY" },
+  { position: "ASST. H/GIRL", name: "ATUHEREZA DOR CAREEN" },
+  { position: "FOOD PREFECT", name: "ABAHO DANIEL" },
+  { position: "ASST. FOOD PREFECT", name: "LUCKY BRIAN WAKAME" },
+  { position: "SPORTS PREFECT", name: "AHABWE DRIGAN" },
+  { position: "HEALTH PREFECT (B)", name: "AKANSASIRA EDMAS" },
+  { position: "ASST. H/PREFECT (B)", name: "MASEREKA ANDREW" },
+  { position: "HEALTH PREFECT (G)", name: "NIMWESIGA JILL" },
+  { position: "ASST. H/PREFECT (G)", name: "KOMUHANGI ALLEN" },
+  { position: "ENTERTAINMENT PREFECT", name: "GUMISIRIZA KEVIN" },
+  { position: "ASST. E/PREFECT", name: "GUMOSHABE TRAVOR" },
+  { position: "LIBRARY & INFORMATION", name: "ASHEMEZA SUZAN" },
+  { position: "ASST. LIBRARY & INFORMATION", name: "AMUTUHAIRE SHEILAH" },
+  { position: "TIMEKEEPER", name: "KWIKYIRIZA FRANK" },
+  { position: "PATRON", name: "ASIIMWE JONATH" },
+];
+
+const councilBody = [
+  { position: "CHAIRPERSON", name: "MBABAZIZE JOSHUA" },
+  { position: "VICE CHAIRPERSON", name: "AYESIGAMUKAMA SHELLINE" },
+  { position: "SPEAKER", name: "MAZIIMA PRETTY COMFORT" },
+  { position: "LEGAL ADVISOR", name: "MBUSA JOSTUS" },
+  { position: "O'LEVEL REPRESENTATIVE", name: "OKWANKUNDA SARAH" },
+];
+
+const councillors = [
+  { classGroup: "S.6 SCIENCE", name: "KUSIIMA ARNOLD" },
+  { classGroup: "S.6 ARTS", name: "MUKONYEZI DATHAN" },
+  { classGroup: "S.5", name: "KATAHWIRE ELIOT" },
+  { classGroup: "S.4 A", name: "KIN JERIN" },
+  { classGroup: "S.4 B", name: "OKWANKUNDA SARAH" },
+  { classGroup: "S.4 B", name: "MBUNDIYE GERALD" },
+  { classGroup: "S.3", name: "ATWIJUKIRE PROSPER" },
+  { classGroup: "S.2A", name: "MUGISHA IVAN SAMUEL" },
+  { classGroup: "S.2A", name: "ATUKWATSE MAKLINE" },
+  { classGroup: "S.2B", name: "ANKUNDA DARIOUS" },
+  { classGroup: "S.2B", name: "BIIRA BRITAH" },
+  { classGroup: "S.1", name: "AMPUMUZA LINET" },
+];
 
 export default function About() {
   const [lightbox, setLightbox] = useState<{ index: number } | null>(null);
@@ -369,6 +461,221 @@ export default function About() {
             <div className="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors pointer-events-none" />
           </motion.div>
         </section>
+
+        {/* PTS EXECUTIVE MEMBERS 2026 */}
+        <section className="mb-16 mt-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-2xl md:text-4xl font-black text-gray-900 mb-2">PTS Executive Members 2026</h2>
+            <div className="h-1 w-16 bg-primary mx-auto rounded-full" />
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden"
+          >
+            <div className="bg-primary px-6 py-4">
+              <h3 className="font-bold text-lg text-white">Executive Committee</h3>
+            </div>
+            <div className="divide-y divide-gray-100">
+              {ptsExecutiveMembers.map((member, idx) => (
+                <motion.div 
+                  key={idx} 
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.03 }}
+                  className="flex items-center justify-between px-6 py-4 hover:bg-blue-50 transition-all duration-300 group cursor-default"
+                >
+                  <div className="flex items-center gap-3 group-hover:translate-x-1 transition-transform">
+                    <span className="text-xs font-bold text-gray-400 w-6">{idx + 1}.</span>
+                    <span className="font-bold text-gray-900 group-hover:text-primary transition-colors">{member.title}. {member.name}</span>
+                  </div>
+                  <span className="text-xs font-bold text-primary bg-blue-50 px-3 py-1 rounded-full group-hover:bg-primary group-hover:text-white transition-all">{member.position}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </section>
+
+        {/* VALLEY COLLEGE TEACHING STAFF 2026 */}
+        <section className="mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-2xl md:text-4xl font-black text-gray-900 mb-2">Valley College Teaching Staff 2026</h2>
+            <div className="h-1 w-16 bg-primary mx-auto rounded-full mb-3" />
+            <p className="text-gray-500">{teachingStaff.length} dedicated educators</p>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-5xl mx-auto bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden"
+          >
+            <div className="bg-primary px-6 py-4 flex items-center justify-between">
+              <h3 className="font-bold text-lg text-white">Staff Directory</h3>
+              <span className="text-blue-100 text-xs font-bold">{teachingStaff.length} Members</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 divide-y sm:divide-y-0">
+              {teachingStaff.map((teacher, idx) => (
+                <motion.div 
+                  key={idx} 
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: (idx % 20) * 0.02 }}
+                  className="flex items-center justify-between px-5 py-3 border-b border-gray-50 hover:bg-blue-50 transition-all duration-300 group cursor-default"
+                >
+                  <div className="flex items-center gap-2 group-hover:translate-x-1 transition-transform">
+                    <span className="text-xs font-bold text-gray-400 w-6">{idx + 1}.</span>
+                    <span className="font-semibold text-gray-900 text-sm group-hover:text-primary transition-colors">{teacher.name}</span>
+                  </div>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full transition-all group-hover:scale-110 ${
+                    teacher.subjects === 'TEACHER ASSISTANT' ? 'bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white' : 'bg-emerald-50 text-emerald-700 group-hover:bg-emerald-600 group-hover:text-white'
+                  }`}>{teacher.subjects}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </section>
+
+        {/* PREFECTORIAL BODY 2026 */}
+        <section className="mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-2xl md:text-4xl font-black text-gray-900 mb-2">Valley College Prefectorial Body 2026</h2>
+            <div className="h-1 w-16 bg-primary mx-auto rounded-full" />
+          </motion.div>
+
+          {/* Group Photo */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto mb-8 rounded-2xl overflow-hidden shadow-md"
+          >
+            <img src="/prefects body.jpeg" alt="Valley College Prefectorial Body 2026" className="w-full h-auto object-cover" loading="lazy" />
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden"
+          >
+            <div className="bg-primary px-6 py-4">
+              <h3 className="font-bold text-lg text-white">Prefects List</h3>
+            </div>
+            <div className="divide-y divide-gray-100">
+              {prefectorialBody.map((prefect, idx) => (
+                <motion.div 
+                  key={idx} 
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.03 }}
+                  className="flex items-center justify-between px-6 py-3 hover:bg-blue-50 transition-all duration-300 group cursor-default"
+                >
+                  <span className="font-bold text-gray-900 text-sm group-hover:text-primary group-hover:translate-x-1 transition-all">{prefect.name}</span>
+                  <span className="text-xs font-bold text-primary bg-blue-50 px-3 py-1 rounded-full group-hover:bg-primary group-hover:text-white transition-all">{prefect.position}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </section>
+
+        {/* COUNCIL BODY 2026 */}
+        <section className="mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-2xl md:text-4xl font-black text-gray-900 mb-2">Valley College Council Body 2026</h2>
+            <div className="h-1 w-16 bg-primary mx-auto rounded-full" />
+          </motion.div>
+
+          {/* Group Photo */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto mb-8 rounded-2xl overflow-hidden shadow-md"
+          >
+            <img src="/council body.jpeg" alt="Valley College Council Body 2026" className="w-full h-auto object-cover" loading="lazy" />
+          </motion.div>
+
+          {/* Unified Council Card */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden"
+          >
+            <div className="bg-primary px-6 py-4">
+              <h3 className="font-bold text-lg text-white">Council Members</h3>
+            </div>
+            
+            {/* Executive Sub-section */}
+            <div className="bg-gray-50/50 px-6 py-2 border-b border-gray-100">
+              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Executive Members</span>
+            </div>
+            <div className="divide-y divide-gray-100">
+              {councilBody.map((member, idx) => (
+                <motion.div 
+                  key={idx} 
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.05 }}
+                  className="flex items-center justify-between px-6 py-3 hover:bg-blue-50 transition-all duration-300 group cursor-default"
+                >
+                  <span className="font-bold text-gray-900 text-sm group-hover:text-primary group-hover:translate-x-1 transition-all">{member.name}</span>
+                  <span className="text-xs font-bold text-primary bg-blue-50 px-3 py-1 rounded-full group-hover:bg-primary group-hover:text-white transition-all">{member.position}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Councillors Sub-section */}
+            <div className="bg-gray-50/50 px-6 py-2 border-y border-gray-100">
+              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Class Councillors</span>
+            </div>
+            <div className="divide-y divide-gray-100">
+              {councillors.map((councillor, idx) => (
+                <motion.div 
+                  key={idx} 
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.03 }}
+                  className="flex items-center justify-between px-6 py-3 hover:bg-blue-50 transition-all duration-300 group cursor-default"
+                >
+                  <span className="font-bold text-gray-900 text-sm group-hover:text-primary group-hover:translate-x-1 transition-all">{councillor.name}</span>
+                  <span className="text-xs font-bold text-gray-600 bg-gray-100 px-3 py-1 rounded-full group-hover:bg-gray-800 group-hover:text-white transition-all">{councillor.classGroup}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </section>
+
+
+
 
         {/* Facilities & Overview Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
