@@ -555,30 +555,70 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-8"
+            className="text-center mb-12"
           >
             <h2 className="text-2xl md:text-4xl font-black text-gray-900 mb-2">Valley College Prefectorial Body 2026</h2>
             <div className="h-1 w-16 bg-primary mx-auto rounded-full" />
           </motion.div>
+
+          {/* Top Leaders Grid */}
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            {/* Head Boy */}
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 group"
+            >
+              <div className="h-80 md:h-[400px] relative overflow-hidden">
+                <img src="/about/Head Boy[2025-26].jpeg" alt="Head Boy" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 text-white">
+                  <span className="text-[10px] font-black tracking-widest uppercase bg-white/20 backdrop-blur-md px-3 py-1 rounded-full mb-2 inline-block">Head Boy</span>
+                  <h3 className="text-2xl font-black">KABAGAMBE OWEN</h3>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Head Girl */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 group"
+            >
+              <div className="h-80 md:h-[400px] relative overflow-hidden">
+                <img src="/about/Head Girl[2025-26] .jpeg" alt="Head Girl" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 text-white">
+                  <span className="text-[10px] font-black tracking-widest uppercase bg-white/20 backdrop-blur-md px-3 py-1 rounded-full mb-2 inline-block">Head Girl</span>
+                  <h3 className="text-2xl font-black">ARINANYE TRACY</h3>
+                </div>
+              </div>
+            </motion.div>
+          </div>
 
           {/* Group Photo */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="max-w-4xl mx-auto mb-8 rounded-2xl overflow-hidden shadow-md"
+            className="max-w-4xl mx-auto mb-12 rounded-3xl overflow-hidden shadow-xl border-4 border-white"
           >
-            <img src="/prefects body.jpeg" alt="Valley College Prefectorial Body 2026" className="w-full h-auto object-cover" loading="lazy" />
+            <div className="bg-primary/5 p-2">
+              <img src="/about/Prefects Body[2025-26].jpeg" alt="Valley College Prefectorial Body 2026" className="w-full h-auto object-cover rounded-2xl" loading="lazy" />
+            </div>
           </motion.div>
 
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-4xl mx-auto bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden"
+            className="max-w-4xl mx-auto bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden"
           >
-            <div className="bg-primary px-6 py-4">
-              <h3 className="font-bold text-lg text-white">Prefects List</h3>
+            <div className="bg-primary px-6 py-4 flex items-center justify-between">
+              <h3 className="font-bold text-lg text-white">Prefectorial Directory</h3>
+              <span className="text-blue-100 text-[10px] font-black uppercase tracking-widest">Full Cabinet</span>
             </div>
             <div className="divide-y divide-gray-100">
               {prefectorialBody.map((prefect, idx) => (
@@ -590,7 +630,7 @@ export default function About() {
                   transition={{ delay: idx * 0.03 }}
                   className="flex items-center justify-between px-4 sm:px-6 py-3 hover:bg-blue-50 transition-all duration-300 group cursor-default"
                 >
-                  <span className="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary group-hover:translate-x-1 transition-all">{prefect.name}</span>
+                  <span className="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary group-hover:translate-x-1 transition-all uppercase tracking-tight">{prefect.name}</span>
                   <span className="text-[10px] sm:text-xs font-bold text-primary bg-blue-50 px-2 sm:px-3 py-1 rounded-full group-hover:bg-primary group-hover:text-white transition-all shrink-0 ml-2">{prefect.position}</span>
                 </motion.div>
               ))}
@@ -615,9 +655,11 @@ export default function About() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="max-w-4xl mx-auto mb-8 rounded-2xl overflow-hidden shadow-md"
+            className="max-w-4xl mx-auto mb-12 rounded-3xl overflow-hidden shadow-xl border-4 border-white"
           >
-            <img src="/council body.jpeg" alt="Valley College Council Body 2026" className="w-full h-auto object-cover" loading="lazy" />
+            <div className="bg-primary/5 p-2">
+              <img src="/about/Council Body[2025-2026].jpeg" alt="Valley College Council Body 2026" className="w-full h-auto object-cover rounded-2xl" loading="lazy" />
+            </div>
           </motion.div>
 
           {/* Unified Council Card */}
@@ -625,14 +667,14 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-4xl mx-auto bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden"
+            className="max-w-4xl mx-auto bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden"
           >
             <div className="bg-primary px-6 py-4">
-              <h3 className="font-bold text-lg text-white">Council Members</h3>
+              <h3 className="font-bold text-lg text-white">Council Directory</h3>
             </div>
             
             {/* Executive Sub-section */}
-            <div className="bg-gray-50/50 px-6 py-2 border-b border-gray-100">
+            <div className="bg-gray-50 px-6 py-2 border-b border-gray-100">
               <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Executive Members</span>
             </div>
             <div className="divide-y divide-gray-100">
@@ -645,14 +687,14 @@ export default function About() {
                   transition={{ delay: idx * 0.05 }}
                   className="flex items-center justify-between px-4 sm:px-6 py-3 hover:bg-blue-50 transition-all duration-300 group cursor-default"
                 >
-                  <span className="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary group-hover:translate-x-1 transition-all">{member.name}</span>
+                  <span className="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary group-hover:translate-x-1 transition-all uppercase tracking-tight">{member.name}</span>
                   <span className="text-[10px] sm:text-xs font-bold text-primary bg-blue-50 px-2 sm:px-3 py-1 rounded-full group-hover:bg-primary group-hover:text-white transition-all shrink-0 ml-2">{member.position}</span>
                 </motion.div>
               ))}
             </div>
 
             {/* Councillors Sub-section */}
-            <div className="bg-gray-50/50 px-6 py-2 border-y border-gray-100">
+            <div className="bg-gray-50 px-6 py-2 border-y border-gray-100">
               <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Class Councillors</span>
             </div>
             <div className="divide-y divide-gray-100">
@@ -665,7 +707,7 @@ export default function About() {
                   transition={{ delay: idx * 0.03 }}
                   className="flex items-center justify-between px-4 sm:px-6 py-3 hover:bg-blue-50 transition-all duration-300 group cursor-default"
                 >
-                  <span className="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary group-hover:translate-x-1 transition-all">{councillor.name}</span>
+                  <span className="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary group-hover:translate-x-1 transition-all uppercase tracking-tight">{councillor.name}</span>
                   <span className="text-[10px] sm:text-xs font-bold text-gray-600 bg-gray-100 px-2 sm:px-3 py-1 rounded-full group-hover:bg-gray-800 group-hover:text-white transition-all shrink-0 ml-2">{councillor.classGroup}</span>
                 </motion.div>
               ))}
