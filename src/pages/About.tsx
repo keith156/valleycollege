@@ -203,7 +203,7 @@ export default function About() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-20 w-full">
+      <div id="vision" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-20 w-full scroll-mt-32">
         
         {/* Bento Grid: Vision, Mission, Values */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
@@ -265,7 +265,7 @@ export default function About() {
         </div>
 
         {/* Founder Section */}
-        <section className="mb-24 py-16 bg-white rounded-[3rem] shadow-xl border border-gray-100 overflow-hidden">
+        <section id="history" className="mb-24 py-16 bg-white rounded-[3rem] shadow-xl border border-gray-100 overflow-hidden scroll-mt-32">
           <div className="max-w-6xl mx-auto px-6 md:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
               <motion.div 
@@ -731,7 +731,7 @@ export default function About() {
         </div>
 
       {/* Campus Life Section (Full Width) */}
-      <div className="w-full bg-white pb-12">
+      <div id="campus" className="w-full bg-white pb-12 scroll-mt-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-12 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
