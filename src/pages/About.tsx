@@ -550,169 +550,131 @@ export default function About() {
         </section>
 
         {/* PREFECTORIAL BODY 2026 */}
-        <section id="prefects" className="mb-16 scroll-mt-32">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-2xl md:text-4xl font-black text-gray-900 mb-2">Valley College Prefectorial Body 2026</h2>
-            <div className="h-1 w-16 bg-primary mx-auto rounded-full" />
-          </motion.div>
-
-          {/* Top Leaders Grid */}
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            {/* Head Boy */}
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 group"
-            >
-              <div className="h-80 md:h-[400px] relative overflow-hidden">
-                <img src="/about/Head Boy[2025-26].jpeg" alt="Head Boy" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
-                <div className="absolute bottom-6 left-6 text-white">
-                  <span className="text-[10px] font-black tracking-widest uppercase bg-white/20 backdrop-blur-md px-3 py-1 rounded-full mb-2 inline-block">Head Boy</span>
-                  <h3 className="text-2xl font-black">KABAGAMBE OWEN</h3>
+        <section id="prefects" className="mb-24 scroll-mt-32">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            
+            {/* Left Side: Image Gallery */}
+            <div className="flex flex-col gap-6">
+              <div className="grid grid-cols-2 gap-6">
+                {/* Head Boy */}
+                <div className="flex flex-col shadow-lg">
+                  <div className="aspect-square overflow-hidden bg-gray-100">
+                    <img src="/about/Head Boy[2025-26].jpeg" alt="Head Boy" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="bg-primary py-2 text-center">
+                    <span className="text-white text-xs font-bold uppercase tracking-wider">Head Boy [2025-26]</span>
+                  </div>
+                </div>
+                {/* Head Girl */}
+                <div className="flex flex-col shadow-lg">
+                  <div className="aspect-square overflow-hidden bg-gray-100">
+                    <img src="/about/Head Girl[2025-26] .jpeg" alt="Head Girl" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="bg-primary py-2 text-center">
+                    <span className="text-white text-xs font-bold uppercase tracking-wider">Head Girl [2025-26]</span>
+                  </div>
                 </div>
               </div>
-            </motion.div>
 
-            {/* Head Girl */}
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 group"
-            >
-              <div className="h-80 md:h-[400px] relative overflow-hidden">
-                <img src="/about/Head Girl[2025-26] .jpeg" alt="Head Girl" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
-                <div className="absolute bottom-6 left-6 text-white">
-                  <span className="text-[10px] font-black tracking-widest uppercase bg-white/20 backdrop-blur-md px-3 py-1 rounded-full mb-2 inline-block">Head Girl</span>
-                  <h3 className="text-2xl font-black">ARINANYE TRACY</h3>
+              {/* Prefects Body */}
+              <div className="flex flex-col shadow-xl">
+                <div className="aspect-video overflow-hidden bg-gray-100">
+                  <img src="/about/Prefects Body[2025-26].jpeg" alt="Prefects Body" className="w-full h-full object-cover" />
+                </div>
+                <div className="bg-primary py-2 text-center">
+                  <span className="text-white text-xs font-bold uppercase tracking-wider">Prefects Body [2024-25]</span>
                 </div>
               </div>
-            </motion.div>
+            </div>
+
+            {/* Right Side: List */}
+            <div className="bg-white border border-gray-200 shadow-xl overflow-hidden rounded-xl">
+              <div className="bg-primary px-6 py-4">
+                <h3 className="text-white font-bold text-lg">Prefects List</h3>
+              </div>
+              <div className="divide-y divide-gray-100">
+                {prefectorialBody.map((prefect, idx) => (
+                  <div key={idx} className="flex items-center justify-between px-6 py-3 hover:bg-blue-50/50 transition-colors">
+                    <span className="font-bold text-gray-800 text-xs sm:text-sm uppercase tracking-tight">{prefect.name}</span>
+                    <span className="text-[10px] font-bold text-primary bg-blue-50 px-3 py-1 rounded-full border border-blue-100">{prefect.position}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-
-          {/* Group Photo */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto mb-12 rounded-3xl overflow-hidden shadow-xl border-4 border-white"
-          >
-            <div className="bg-primary/5 p-2">
-              <img src="/about/Prefects Body[2025-26].jpeg" alt="Valley College Prefectorial Body 2026" className="w-full h-auto object-cover rounded-2xl" loading="lazy" />
-            </div>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden"
-          >
-            <div className="bg-primary px-6 py-4 flex items-center justify-between">
-              <h3 className="font-bold text-lg text-white">Prefectorial Directory</h3>
-              <span className="text-blue-100 text-[10px] font-black uppercase tracking-widest">Full Cabinet</span>
-            </div>
-            <div className="divide-y divide-gray-100">
-              {prefectorialBody.map((prefect, idx) => (
-                <motion.div 
-                  key={idx} 
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.03 }}
-                  className="flex items-center justify-between px-4 sm:px-6 py-3 hover:bg-blue-50 transition-all duration-300 group cursor-default"
-                >
-                  <span className="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary group-hover:translate-x-1 transition-all uppercase tracking-tight">{prefect.name}</span>
-                  <span className="text-[10px] sm:text-xs font-bold text-primary bg-blue-50 px-2 sm:px-3 py-1 rounded-full group-hover:bg-primary group-hover:text-white transition-all shrink-0 ml-2">{prefect.position}</span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
         </section>
 
         {/* COUNCIL BODY 2026 */}
-        <section id="council" className="mb-16 scroll-mt-32">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-8"
-          >
-            <h2 className="text-2xl md:text-4xl font-black text-gray-900 mb-2">Valley College Council Body 2026</h2>
-            <div className="h-1 w-16 bg-primary mx-auto rounded-full" />
-          </motion.div>
-
-          {/* Group Photo */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto mb-12 rounded-3xl overflow-hidden shadow-xl border-4 border-white"
-          >
-            <div className="bg-primary/5 p-2">
-              <img src="/about/Council Body[2025-2026].jpeg" alt="Valley College Council Body 2026" className="w-full h-auto object-cover rounded-2xl" loading="lazy" />
-            </div>
-          </motion.div>
-
-          {/* Unified Council Card */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden"
-          >
-            <div className="bg-primary px-6 py-4">
-              <h3 className="font-bold text-lg text-white">Council Directory</h3>
-            </div>
+        <section id="council" className="mb-24 scroll-mt-32">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             
-            {/* Executive Sub-section */}
-            <div className="bg-gray-50 px-6 py-2 border-b border-gray-100">
-              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Executive Members</span>
-            </div>
-            <div className="divide-y divide-gray-100">
-              {councilBody.map((member, idx) => (
-                <motion.div 
-                  key={idx} 
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.05 }}
-                  className="flex items-center justify-between px-4 sm:px-6 py-3 hover:bg-blue-50 transition-all duration-300 group cursor-default"
-                >
-                  <span className="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary group-hover:translate-x-1 transition-all uppercase tracking-tight">{member.name}</span>
-                  <span className="text-[10px] sm:text-xs font-bold text-primary bg-blue-50 px-2 sm:px-3 py-1 rounded-full group-hover:bg-primary group-hover:text-white transition-all shrink-0 ml-2">{member.position}</span>
-                </motion.div>
-              ))}
+            {/* Left Side: Image Gallery */}
+            <div className="flex flex-col gap-6">
+              <div className="grid grid-cols-2 gap-6">
+                {/* CP SCH Council */}
+                <div className="flex flex-col shadow-lg">
+                  <div className="aspect-square overflow-hidden bg-gray-100">
+                    <img src="/about/CP SCH. Council[2024-25] .jpeg" alt="CP Council" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="bg-primary py-2 text-center">
+                    <span className="text-white text-xs font-bold uppercase tracking-wider">CP SCH. Council [2024-25]</span>
+                  </div>
+                </div>
+                {/* Council Body 2025 */}
+                <div className="flex flex-col shadow-lg">
+                  <div className="aspect-square overflow-hidden bg-gray-100">
+                    <img src="/about/CouncilBody[2025].jpeg" alt="Council Body 2025" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="bg-primary py-2 text-center">
+                    <span className="text-white text-xs font-bold uppercase tracking-wider">Council Body [2025]</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Council Body 25-26 */}
+              <div className="flex flex-col shadow-xl">
+                <div className="aspect-video overflow-hidden bg-gray-100">
+                  <img src="/about/Council Body[2025-2026].jpeg" alt="Council Body 25-26" className="w-full h-full object-cover" />
+                </div>
+                <div className="bg-primary py-2 text-center">
+                  <span className="text-white text-xs font-bold uppercase tracking-wider">Council Body [2025-26]</span>
+                </div>
+              </div>
             </div>
 
-            {/* Councillors Sub-section */}
-            <div className="bg-gray-50 px-6 py-2 border-y border-gray-100">
-              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Class Councillors</span>
+            {/* Right Side: List */}
+            <div className="bg-white border border-gray-200 shadow-xl overflow-hidden rounded-xl">
+              <div className="bg-primary px-6 py-4">
+                <h3 className="text-white font-bold text-lg">Council Members</h3>
+              </div>
+              
+              {/* Executive */}
+              <div className="bg-gray-50 px-6 py-2 border-b border-gray-100">
+                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Executive Members</span>
+              </div>
+              <div className="divide-y divide-gray-100">
+                {councilBody.map((member, idx) => (
+                  <div key={idx} className="flex items-center justify-between px-6 py-3 hover:bg-blue-50/50 transition-colors">
+                    <span className="font-bold text-gray-800 text-xs sm:text-sm uppercase tracking-tight">{member.name}</span>
+                    <span className="text-[10px] font-bold text-primary bg-blue-50 px-3 py-1 rounded-full border border-blue-100">{member.position}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Councillors */}
+              <div className="bg-gray-50 px-6 py-2 border-y border-gray-100">
+                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Class Councillors</span>
+              </div>
+              <div className="divide-y divide-gray-100">
+                {councillors.map((councillor, idx) => (
+                  <div key={idx} className="flex items-center justify-between px-6 py-3 hover:bg-blue-50/50 transition-colors">
+                    <span className="font-bold text-gray-800 text-xs sm:text-sm uppercase tracking-tight">{councillor.name}</span>
+                    <span className="text-[10px] font-bold text-gray-600 bg-gray-100 px-3 py-1 rounded-full border border-gray-200">{councillor.classGroup}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="divide-y divide-gray-100">
-              {councillors.map((councillor, idx) => (
-                <motion.div 
-                  key={idx} 
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.03 }}
-                  className="flex items-center justify-between px-4 sm:px-6 py-3 hover:bg-blue-50 transition-all duration-300 group cursor-default"
-                >
-                  <span className="font-bold text-gray-900 text-xs sm:text-sm group-hover:text-primary group-hover:translate-x-1 transition-all uppercase tracking-tight">{councillor.name}</span>
-                  <span className="text-[10px] sm:text-xs font-bold text-gray-600 bg-gray-100 px-2 sm:px-3 py-1 rounded-full group-hover:bg-gray-800 group-hover:text-white transition-all shrink-0 ml-2">{councillor.classGroup}</span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+          </div>
         </section>
 
 
