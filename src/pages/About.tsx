@@ -551,7 +551,7 @@ export default function About() {
 
         {/* PREFECTORIAL BODY 2026 */}
         <section id="prefects" className="mb-24 scroll-mt-32">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
             
             {/* Left Side: Image Gallery */}
             <div className="flex flex-col gap-6">
@@ -587,9 +587,9 @@ export default function About() {
               </div>
 
               {/* Added descriptive text for balance */}
-              <div className="bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
+              <div className="bg-blue-50/50 p-8 rounded-2xl border border-blue-100 flex-1 flex flex-col justify-center">
                 <h4 className="text-primary font-bold mb-3 flex items-center gap-2">
-                  <ShieldCheck size={18} /> Student Leadership & Discipline
+                  <ShieldCheck size={20} /> Student Leadership & Discipline
                 </h4>
                 <p className="text-sm text-gray-600 leading-relaxed italic">
                   The Prefectorial Body is a cornerstone of student leadership and discipline at Valley College. Composed of dedicated individuals selected for their integrity and commitment, this body serves as a vital bridge between the administration and the student community, fostering a culture of excellence and mutual respect across the campus.
@@ -598,7 +598,7 @@ export default function About() {
             </div>
 
             {/* Right Side: List */}
-            <div className="bg-white border border-gray-200 shadow-xl overflow-hidden rounded-xl">
+            <div className="bg-white border border-gray-200 shadow-xl overflow-hidden rounded-xl flex flex-col">
               <div className="bg-primary px-6 py-4">
                 <h3 className="text-white font-bold text-lg">Prefects List</h3>
               </div>
@@ -616,7 +616,7 @@ export default function About() {
 
         {/* COUNCIL BODY 2026 */}
         <section id="council" className="mb-24 scroll-mt-32">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
             
             {/* Left Side: Image Gallery */}
             <div className="flex flex-col gap-6">
@@ -652,9 +652,9 @@ export default function About() {
               </div>
 
               {/* Added descriptive text for balance */}
-              <div className="bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
+              <div className="bg-blue-50/50 p-8 rounded-2xl border border-blue-100 flex-1 flex flex-col justify-center">
                 <h4 className="text-primary font-bold mb-3 flex items-center gap-2">
-                  <Users size={18} /> Representation & Advocacy
+                  <Users size={20} /> Representation & Advocacy
                 </h4>
                 <p className="text-sm text-gray-600 leading-relaxed italic">
                   The Student Council serves as the primary voice for student representation. Through a structured system of executive members and class councillors, the council ensures that every student's perspective is heard. They collaborate with school leadership to enhance student welfare and organize impactful campus initiatives.
@@ -663,7 +663,7 @@ export default function About() {
             </div>
 
             {/* Right Side: List */}
-            <div className="bg-white border border-gray-200 shadow-xl overflow-hidden rounded-xl">
+            <div className="bg-white border border-gray-200 shadow-xl overflow-hidden rounded-xl flex flex-col">
               <div className="bg-primary px-6 py-4">
                 <h3 className="text-white font-bold text-lg">Council Members</h3>
               </div>

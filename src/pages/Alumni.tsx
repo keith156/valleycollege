@@ -253,7 +253,7 @@ export default function Alumni() {
                 <div className="relative z-10">
                   <div className="flex items-center gap-6 mb-10">
                     <img 
-                      src="/alumni gallery/valleycollegeleaguelogo.webp" 
+                      src="/alumni gallery/valleycollegeleaguelogo.png" 
                       alt="VACL Logo" 
                       className="w-24 h-24 object-contain"
                     />

@@ -464,7 +464,7 @@ export default function Home() {
             <h2 className="text-4xl font-bold mb-12 text-center">What Our Community Says</h2>
 
             <div className="-mx-4 sm:-mx-8">
-              <Carousel autoPlayInterval={5000}>
+              <Carousel autoPlayInterval={0} continuousScroll={true}>
                 {[
                   { quote: "Valley College provided me with the academic rigor and discipline I needed to succeed at university and beyond.", author: "Sarah M.", role: "Alumni, Class of 2022" },
                   { quote: "The shared facilities with the university give our children an incredible advantage and exposure early on.", author: "David K.", role: "Parent" },

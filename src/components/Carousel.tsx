@@ -28,7 +28,7 @@ export function Carousel({ children, autoPlayInterval = 5000, continuousScroll =
           if (scrollLeft + clientWidth >= scrollWidth - 1) {
             scrollRef.current.scrollLeft = 0;
           } else {
-            scrollRef.current.scrollLeft += 0.5; // Smooth slow scroll
+            scrollRef.current.scrollLeft += 1.2; // Increased speed for visibility
           }
         }
         animationId = requestAnimationFrame(step);
@@ -38,11 +38,14 @@ export function Carousel({ children, autoPlayInterval = 5000, continuousScroll =
     } else if (autoPlayInterval) {
       const interval = setInterval(() => {
         if (scrollRef.current && !isHoveredRef.current) {
-          const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+          const { scrollLeft, scrollWidth, clientWidth, children } = scrollRef.current;
+          // Find the width of the first visible child to scroll by one item
+          const itemWidth = (children[0] as HTMLElement)?.offsetWidth + 24 || clientWidth; // 24 is gap-6
+          
           if (scrollLeft + clientWidth >= scrollWidth - 10) {
             scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
           } else {
-            scrollRef.current.scrollBy({ left: clientWidth, behavior: 'smooth' });
+            scrollRef.current.scrollBy({ left: itemWidth, behavior: 'smooth' });
           }
         }
       }, autoPlayInterval);
