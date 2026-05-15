@@ -280,7 +280,7 @@ export default function Home() {
             {[
               { end: 29, label: "Years of Excellence", icon: TrophyIcon, img: "/Years_of_excellence.webp", altText: "Valley College 29 years of educational excellence in Bushenyi Uganda" },
               { end: 18, label: "Subjects Offered", icon: BookOpenIcon, img: "/images/subjects offered$ ICT laboratory.webp", altText: "18 subjects offered at Valley College including Sciences, Humanities and Vocational" },
-              { end: 650, label: "Number of Students", icon: UsersIcon, img: "/images/10.webp", altText: "650 students enrolled at Valley College Secondary School Bushenyi" }
+              { end: 500, label: "Number of Students", icon: UsersIcon, img: "/images/10.webp", altText: "500+ students enrolled at Valley College Secondary School Bushenyi" }
             ].map((stat, idx) => (
               <motion.div 
                 key={idx}
