@@ -36,7 +36,43 @@ const slider2Images = [
   "A21.jpg", "A22.jpg", "A23.jpg", "A24.jpg", "A25.jpg", "A26.jpeg"
 ];
 
-const PROJECT_GOAL = 250_000_000; // UGX 250 Million (Phase I goal)
+const PROJECT_GOAL = 250_000_000; // UGX 250 Million (whole project goal)
+
+function ProjectDescription() {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className="mb-8">
+      <p className="text-gray-600 leading-relaxed mb-3">
+        The project will be implemented in <strong>three phases</strong>:
+      </p>
+      {expanded && (
+        <div className="text-gray-600 leading-relaxed space-y-4 text-sm">
+          <div>
+            <p className="font-bold text-gray-800 mb-1">Phase I – Administrative Wing</p>
+            <p>This phase will include the Headteacher's office, Deputy Headteachers' offices, Accounts office, Reception and records office, Staff room and boardroom, Storage facilities, Reception/waiting area, and Washrooms and circulation spaces.</p>
+          </div>
+          <div>
+            <p className="font-bold text-gray-800 mb-1">Phase II – ICT & Digital Learning Centre</p>
+            <p>This phase will establish a modern computer laboratory, ICT equipment and server room, Internet and networking infrastructure, and digital learning support facilities.</p>
+          </div>
+          <div>
+            <p className="font-bold text-gray-800 mb-1">Phase III – Library & Resource Centre</p>
+            <p>This phase will provide a main library hall, reading and discussion spaces, research and reference section, and e-learning and study areas.</p>
+          </div>
+          <p className="italic text-gray-500 border-l-4 border-primary pl-3">
+            We call upon all alumni, friends, and well-wishers to join hands in supporting this transformational legacy project for future generations of Valley College students.
+          </p>
+        </div>
+      )}
+      <button
+        onClick={() => setExpanded(e => !e)}
+        className="mt-3 text-sm font-bold text-primary hover:text-blue-800 underline underline-offset-2 transition-colors"
+      >
+        {expanded ? 'Show less ↑' : 'Read all ↓'}
+      </button>
+    </div>
+  );
+}
 
 export default function Alumni() {
   const [lightbox, setLightbox] = useState<{ images: string[], index: number, prefix: string } | null>(null);
@@ -352,7 +388,7 @@ export default function Alumni() {
             <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">Alumni Giveback Project</h2>
             <p className="text-lg text-gray-500 max-w-3xl leading-relaxed">
               Valley College Secondary School invites all Old Boys and Old Girls to support the construction of a modern
-              <span className="font-bold text-gray-700"> 3-Level Administration Block</span> aimed at improving administration, digital learning, and academic research facilities.
+              <span className="font-bold text-gray-700"> 3-Level Administration Block</span> aimed at improving administration, digital learning, and academic research facilities within the school.
             </p>
           </div>
 
@@ -384,9 +420,7 @@ export default function Alumni() {
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50/60 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
               <div className="relative z-10">
-                <p className="text-gray-600 leading-relaxed mb-8">
-                  The project will be implemented in <strong>three phases</strong>, transforming Valley College into a hub of modern learning and administration. We call upon all alumni, friends, and well-wishers to join hands in supporting this transformational legacy project for future generations.
-                </p>
+                <ProjectDescription />
 
                 {/* Progress Bar */}
                 <div className="bg-gray-50 p-6 rounded-2xl border border-gray-200 mb-6">
@@ -400,7 +434,7 @@ export default function Alumni() {
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Phase I Goal</p>
+                      <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Project Goal</p>
                       <p className="text-lg font-bold text-gray-400">UGX 250M</p>
                     </div>
                   </div>
@@ -446,8 +480,7 @@ export default function Alumni() {
                   <span className="text-xs font-black uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full">Phase I</span>
                   <Building2 size={24} className="opacity-80" />
                 </div>
-                <h3 className="text-xl font-black mb-1">Administrative Wing</h3>
-                <p className="text-blue-200 text-sm font-bold">Est. Cost: UGX 250 Million</p>
+                <h3 className="text-xl font-black">Administrative Wing</h3>
               </div>
               <div className="p-6">
                 <ul className="space-y-2">
@@ -468,8 +501,7 @@ export default function Alumni() {
                   <span className="text-xs font-black uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full">Phase II</span>
                   <Laptop size={24} className="opacity-80" />
                 </div>
-                <h3 className="text-xl font-black mb-1">ICT & Digital Learning Centre</h3>
-                <p className="text-blue-100 text-sm font-bold">Digital Infrastructure</p>
+                <h3 className="text-xl font-black">ICT & Digital Learning Centre</h3>
               </div>
               <div className="p-6">
                 <ul className="space-y-2">
@@ -490,8 +522,7 @@ export default function Alumni() {
                   <span className="text-xs font-black uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full">Phase III</span>
                   <BookOpen size={24} className="opacity-80" />
                 </div>
-                <h3 className="text-xl font-black mb-1">Library & Resource Centre</h3>
-                <p className="text-emerald-100 text-sm font-bold">Knowledge & Research Hub</p>
+                <h3 className="text-xl font-black">Library & Resource Centre</h3>
               </div>
               <div className="p-6">
                 <ul className="space-y-2">
