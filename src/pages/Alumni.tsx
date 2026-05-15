@@ -1,8 +1,9 @@
-import { Users, GraduationCap, HeartHandshake, MessageCircle, ExternalLink, Image as ImageIcon, Trophy, X, ChevronLeft, ChevronRight, Briefcase, MapPin, Calendar } from 'lucide-react';
+import { Users, GraduationCap, HeartHandshake, MessageCircle, ExternalLink, Image as ImageIcon, Trophy, X, ChevronLeft, ChevronRight, Briefcase, MapPin, Calendar, Building2, Laptop, BookOpen, Heart } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useState, useCallback, useEffect } from 'react';
 
 import { getSpotlight, SpotlightAlumnus } from '../lib/spotlight';
+import { getContributors, Contributor } from '../lib/contributors';
 import { Carousel } from '../components/Carousel';
 import { SEO } from '../components/SEO';
 import { parseImageCaption } from '../utils/imageUtils';
@@ -35,19 +36,30 @@ const slider2Images = [
   "A21.jpg", "A22.jpg", "A23.jpg", "A24.jpg", "A25.jpg", "A26.jpeg"
 ];
 
+const PROJECT_GOAL = 250_000_000; // UGX 250 Million (Phase I goal)
+
 export default function Alumni() {
   const [lightbox, setLightbox] = useState<{ images: string[], index: number, prefix: string } | null>(null);
   const [spotlightLB, setSpotlightLB] = useState<{ index: number } | null>(null);
   const [alumni, setAlumni] = useState<SpotlightAlumnus[]>([]);
+  const [contributors, setContributors] = useState<Contributor[]>([]);
+  const [showContributors, setShowContributors] = useState(false);
+
+  const totalRaised = contributors.reduce((sum, c) => sum + c.amount, 0);
+  const progressPercent = Math.min(Math.round((totalRaised / PROJECT_GOAL) * 100), 100);
 
   useEffect(() => {
     const fetchAlumni = async () => {
       const data = await getSpotlight();
-      // Sort by period descending (most recent first)
       const sorted = [...data].sort((a, b) => b.period.localeCompare(a.period));
       setAlumni(sorted);
     };
+    const fetchContributors = async () => {
+      const data = await getContributors();
+      setContributors(data);
+    };
     fetchAlumni();
+    fetchContributors();
   }, []);
 
   const gridImages = galleryImages.slice(0, 7);
@@ -326,62 +338,256 @@ export default function Alumni() {
           </motion.div>
         </section>
 
-        {/* Funding Project - Centered & Prominent */}
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-7xl mx-auto mb-16">
+        {/* Alumni Giveback Project - 3-Level Admin Block */}
+        <motion.div id="giveback" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16">
 
-          <div className="bg-white p-10 lg:p-16 rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden">
-            {/* Decorative Background Elements */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3 pointer-events-none" />
-            
-            <div className="relative z-10">
-              <div className="flex flex-col items-center text-center mb-10">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 text-primary mb-6 shadow-sm border border-blue-100">
-                  <HeartHandshake size={32} />
-                </div>
-                <h2 id="giveback" className="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">Alumni Giveback Project</h2>
-                <p className="text-lg lg:text-xl text-gray-600 max-w-4xl leading-relaxed">
-                  We are currently raising funds for the construction of a new state-of-the-art ICT laboratory. Join hands with fellow alumni to make this a reality and empower the next generation!
-                </p>
-              </div>
-              
-              <div className="bg-gray-50 p-8 lg:p-10 rounded-3xl border border-gray-200 mb-10 shadow-inner">
-                <div className="flex flex-col sm:flex-row justify-between items-center sm:items-end mb-6 gap-4">
-                  <div className="text-center sm:text-left">
-                    <p className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-2">Raised so far</p>
-                    <p className="text-4xl lg:text-5xl font-black text-primary tracking-tight">UGX 1.2M</p>
-                  </div>
-                  <div className="text-center sm:text-right">
-                    <p className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-2">Goal</p>
-                    <p className="text-2xl lg:text-3xl font-bold text-gray-400">UGX 2.0M</p>
-                  </div>
-                </div>
-                
-                {/* Progress Bar */}
-                <div className="w-full h-6 bg-gray-200 rounded-full overflow-hidden mb-4 shadow-inner">
-                  <motion.div 
-                    initial={{ width: 0 }} 
-                    whileInView={{ width: '60%' }} 
-                    transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
-                    className="h-full bg-gradient-to-r from-blue-400 via-primary to-blue-600 rounded-full relative"
-                  >
-                    <div className="absolute top-0 right-0 bottom-0 left-0 bg-[linear-gradient(45deg,rgba(255,255,255,0.15)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.15)_50%,rgba(255,255,255,0.15)_75%,transparent_75%,transparent)] bg-[length:1.5rem_1.5rem] animate-[shimmer_1s_linear_infinite]" />
-                  </motion.div>
-                </div>
-                <p className="text-center text-base font-bold text-primary">60% Funded</p>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-2xl mx-auto">
-                <a href="https://wa.me/256702171521" target="_blank" rel="noopener noreferrer" className="flex-1 bg-primary text-white py-4 px-8 rounded-2xl font-bold text-lg hover:bg-blue-900 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center">
-                  Contribute Now
-                </a>
-                <a href="https://wa.me/256702171521" target="_blank" rel="noopener noreferrer" className="flex-1 bg-white text-primary border-2 border-gray-200 py-4 px-8 rounded-2xl font-bold text-lg hover:border-primary hover:bg-blue-50 transition-all flex items-center justify-center gap-2">
-                  View Contributors <ExternalLink size={20} />
-                </a>
-              </div>
+          {/* Header */}
+          <div className="flex flex-col items-center text-center mb-12">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-blue-50 text-primary mb-4 shadow-sm border border-blue-100">
+              <HeartHandshake size={30} />
             </div>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary font-bold text-sm mb-4">
+              Legacy Project
+            </div>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">Alumni Giveback Project</h2>
+            <p className="text-lg text-gray-500 max-w-3xl leading-relaxed">
+              Valley College Secondary School invites all Old Boys and Old Girls to support the construction of a modern
+              <span className="font-bold text-gray-700"> 3-Level Administration Block</span> aimed at improving administration, digital learning, and academic research facilities.
+            </p>
+          </div>
+
+          {/* Hero: Image + Intro */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+            {/* Architectural Image */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+              className="relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white min-h-[320px] lg:min-h-[420px]"
+            >
+              <img
+                src="/vaco admin block.jpeg"
+                alt="Proposed 3-Level Administration Block - Valley College"
+                className="absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-bold px-4 py-2 rounded-full">
+                  <Building2 size={16} /> Proposed 3-Level Administration Block
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Progress & CTA */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+              className="flex flex-col justify-center bg-white rounded-[2rem] shadow-xl border border-gray-100 p-8 lg:p-10 relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50/60 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+              <div className="relative z-10">
+                <p className="text-gray-600 leading-relaxed mb-8">
+                  The project will be implemented in <strong>three phases</strong>, transforming Valley College into a hub of modern learning and administration. We call upon all alumni, friends, and well-wishers to join hands in supporting this transformational legacy project for future generations.
+                </p>
+
+                {/* Progress Bar */}
+                <div className="bg-gray-50 p-6 rounded-2xl border border-gray-200 mb-6">
+                  <div className="flex justify-between items-end mb-3">
+                    <div>
+                      <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Raised so far</p>
+                      <p className="text-2xl font-black text-primary">
+                        UGX {totalRaised >= 1_000_000
+                          ? `${(totalRaised / 1_000_000).toFixed(1)}M`
+                          : totalRaised.toLocaleString()}
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Phase I Goal</p>
+                      <p className="text-lg font-bold text-gray-400">UGX 250M</p>
+                    </div>
+                  </div>
+                  <div className="w-full h-5 bg-gray-200 rounded-full overflow-hidden mb-2 shadow-inner">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${progressPercent}%` }}
+                      transition={{ duration: 1.5, ease: 'easeOut', delay: 0.2 }}
+                      className="h-full bg-gradient-to-r from-blue-400 via-primary to-blue-700 rounded-full relative"
+                    >
+                      <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(255,255,255,0.15)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.15)_50%,rgba(255,255,255,0.15)_75%,transparent_75%,transparent)] bg-[length:1.5rem_1.5rem]" />
+                    </motion.div>
+                  </div>
+                  <p className="text-center text-sm font-bold text-primary">{progressPercent}% Funded</p>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a
+                    href="https://wa.me/256702171521"
+                    target="_blank" rel="noopener noreferrer"
+                    className="flex-1 bg-primary text-white py-3.5 px-6 rounded-2xl font-bold hover:bg-blue-900 transition-all shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 flex items-center justify-center gap-2"
+                  >
+                    <Heart size={18} /> Contribute Now
+                  </a>
+                  <button
+                    onClick={() => setShowContributors(true)}
+                    className="flex-1 bg-white text-primary border-2 border-gray-200 py-3.5 px-6 rounded-2xl font-bold hover:border-primary hover:bg-blue-50 transition-all flex items-center justify-center gap-2"
+                  >
+                    <Users size={18} /> View Contributors
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Three Phases */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Phase I */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0 }} className="bg-white rounded-[1.5rem] shadow-lg border border-gray-100 overflow-hidden group hover:shadow-xl transition-shadow">
+              <div className="bg-gradient-to-br from-primary to-blue-800 p-6 text-white">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-black uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full">Phase I</span>
+                  <Building2 size={24} className="opacity-80" />
+                </div>
+                <h3 className="text-xl font-black mb-1">Administrative Wing</h3>
+                <p className="text-blue-200 text-sm font-bold">Est. Cost: UGX 250 Million</p>
+              </div>
+              <div className="p-6">
+                <ul className="space-y-2">
+                  {['Headteacher\'s office', 'Deputy Headteachers\' offices', 'Accounts office', 'Reception & records office', 'Staff room and boardroom', 'Storage facilities', 'Reception/waiting area', 'Washrooms & circulation spaces'].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+
+            {/* Phase II */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-white rounded-[1.5rem] shadow-lg border border-gray-100 overflow-hidden group hover:shadow-xl transition-shadow">
+              <div className="bg-gradient-to-br from-blue-500 to-cyan-600 p-6 text-white">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-black uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full">Phase II</span>
+                  <Laptop size={24} className="opacity-80" />
+                </div>
+                <h3 className="text-xl font-black mb-1">ICT & Digital Learning Centre</h3>
+                <p className="text-blue-100 text-sm font-bold">Digital Infrastructure</p>
+              </div>
+              <div className="p-6">
+                <ul className="space-y-2">
+                  {['Modern computer laboratory', 'ICT equipment and server room', 'Internet and networking infrastructure', 'Digital learning support facilities'].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+
+            {/* Phase III */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="bg-white rounded-[1.5rem] shadow-lg border border-gray-100 overflow-hidden group hover:shadow-xl transition-shadow">
+              <div className="bg-gradient-to-br from-emerald-600 to-teal-700 p-6 text-white">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-black uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full">Phase III</span>
+                  <BookOpen size={24} className="opacity-80" />
+                </div>
+                <h3 className="text-xl font-black mb-1">Library & Resource Centre</h3>
+                <p className="text-emerald-100 text-sm font-bold">Knowledge & Research Hub</p>
+              </div>
+              <div className="p-6">
+                <ul className="space-y-2">
+                  {['Main library hall', 'Reading and discussion spaces', 'Research and reference section', 'E-learning and study areas'].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
+
+        {/* Contributors Modal */}
+        <AnimatePresence>
+          {showContributors && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-md flex items-center justify-center p-4"
+            >
+              <div className="absolute inset-0 cursor-zoom-out" onClick={() => setShowContributors(false)} />
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                className="relative bg-white rounded-3xl shadow-2xl max-w-lg w-full max-h-[85vh] flex flex-col z-10 overflow-hidden"
+              >
+                {/* Modal Header */}
+                <div className="bg-gradient-to-r from-primary to-blue-700 p-6 text-white">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-xl font-black">Our Contributors</h3>
+                      <p className="text-blue-200 text-sm mt-0.5">{contributors.length} supporter{contributors.length !== 1 ? 's' : ''} · UGX {totalRaised >= 1_000_000 ? `${(totalRaised / 1_000_000).toFixed(1)}M` : totalRaised.toLocaleString()} raised</p>
+                    </div>
+                    <button onClick={() => setShowContributors(false)} className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors">
+                      <X size={20} />
+                    </button>
+                  </div>
+                  {/* Mini Progress Bar */}
+                  <div className="mt-4 w-full h-2 bg-white/20 rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${progressPercent}%` }}
+                      transition={{ duration: 1, delay: 0.3 }}
+                      className="h-full bg-white rounded-full"
+                    />
+                  </div>
+                  <p className="text-right text-xs text-blue-200 mt-1 font-bold">{progressPercent}% of UGX 250M goal</p>
+                </div>
+
+                {/* Contributors List */}
+                <div className="overflow-y-auto flex-1">
+                  {contributors.length > 0 ? (
+                    <div className="divide-y divide-gray-100">
+                      {contributors.map((c, idx) => (
+                        <div key={c.id} className="flex items-center gap-4 p-4 hover:bg-gray-50 transition-colors">
+                          <div className="w-10 h-10 rounded-full bg-blue-50 text-primary flex items-center justify-center font-black text-sm shrink-0">
+                            {idx + 1}
+                          </div>
+                          <div className="flex-1">
+                            <p className="font-bold text-gray-900">{c.name}</p>
+                            {c.date && <p className="text-xs text-gray-400">{c.date}</p>}
+                          </div>
+                          <div className="text-right">
+                            <p className="font-black text-primary text-sm">UGX {c.amount.toLocaleString()}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center p-12 text-center">
+                      <Heart size={40} className="text-gray-200 mb-3" />
+                      <p className="text-gray-500 font-medium">No contributors yet.</p>
+                      <p className="text-gray-400 text-sm mt-1">Be the first to support this project!</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Footer */}
+                <div className="p-4 border-t border-gray-100 bg-gray-50">
+                  <a
+                    href="https://wa.me/256702171521"
+                    target="_blank" rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center gap-2 bg-primary text-white py-3 rounded-2xl font-bold hover:bg-blue-900 transition-colors"
+                  >
+                    <Heart size={16} /> Join the Cause
+                  </a>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Alumni Gallery Section */}
         <motion.section 

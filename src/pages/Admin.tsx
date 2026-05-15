@@ -4,7 +4,8 @@ import { SchoolEvent, getEvents, saveEvent, deleteEvent } from '../lib/events';
 import { WallOfFameYear, getWallOfFame, saveWofYear, deleteWofYear, StudentRecord } from '../lib/wallOfFame';
 import { SpotlightAlumnus, getSpotlight, saveAlumnus, deleteAlumnus } from '../lib/spotlight';
 import { Review, getReviews, deleteReview } from '../lib/reviews';
-import { Trash2, Edit2, Plus, LogOut, Calendar, Award, X, Users, Loader2, Upload, Image as ImageIcon, Star, MessageSquare } from 'lucide-react';
+import { Contributor, getContributors, saveContributor, deleteContributor } from '../lib/contributors';
+import { Trash2, Edit2, Plus, LogOut, Calendar, Award, X, Users, Loader2, Upload, Image as ImageIcon, Star, MessageSquare, HeartHandshake } from 'lucide-react';
 
 const BASE_REVIEWS = 326;
 
@@ -12,7 +13,7 @@ export default function Admin() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [tab, setTab] = useState<'events' | 'wof' | 'spotlight' | 'reviews'>('events');
+  const [tab, setTab] = useState<'events' | 'wof' | 'spotlight' | 'reviews' | 'contributors'>('events');
   const [isLoading, setIsLoading] = useState(false);
   
   // Events State
@@ -35,6 +36,11 @@ export default function Admin() {
   // Reviews State
   const [reviews, setReviews] = useState<Review[]>([]);
 
+  // Contributors State
+  const [contributors, setContributors] = useState<Contributor[]>([]);
+  const [editingContributorId, setEditingContributorId] = useState<string | null>(null);
+  const [contributorForm, setContributorForm] = useState({ name: '', amount: '', date: '' });
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
@@ -47,16 +53,18 @@ export default function Admin() {
       if (isLoggedIn) {
         setIsLoading(true);
         try {
-          const [evs, wofData, spotData, revData] = await Promise.all([
+          const [evs, wofData, spotData, revData, contribData] = await Promise.all([
             getEvents(),
             getWallOfFame(),
             getSpotlight(),
-            getReviews()
+            getReviews(),
+            getContributors()
           ]);
           setEvents(evs);
           setWof(wofData);
           setSpotlight(spotData);
           setReviews(revData);
+          setContributors(contribData);
         } catch (err) {
           console.error("Error fetching data:", err);
         } finally {
@@ -284,6 +292,46 @@ export default function Admin() {
     }
   };
 
+  // --- CONTRIBUTORS CRUD ---
+  const handleSaveContributor = async (e: FormEvent) => {
+    e.preventDefault();
+    const amountNum = parseFloat(contributorForm.amount.replace(/,/g, ''));
+    if (!contributorForm.name || isNaN(amountNum)) {
+      alert('Please fill in name and a valid amount.');
+      return;
+    }
+    setIsLoading(true);
+    const id = editingContributorId || Date.now().toString();
+    const contributor: Contributor = { id, name: contributorForm.name, amount: amountNum, date: contributorForm.date };
+    try {
+      await saveContributor(contributor);
+      const updated = await getContributors();
+      setContributors(updated);
+      setContributorForm({ name: '', amount: '', date: '' });
+      setEditingContributorId(null);
+      alert(editingContributorId ? 'Contributor updated!' : 'Contributor added!');
+    } catch (err) {
+      alert('Failed to save contributor');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDeleteContributor = async (id: string) => {
+    if (window.confirm('Delete this contributor?')) {
+      setIsLoading(true);
+      try {
+        await deleteContributor(id);
+        const updated = await getContributors();
+        setContributors(updated);
+      } catch (err) {
+        alert('Failed to delete contributor');
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
   if (!isLoggedIn) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center bg-gray-50 px-4">
@@ -328,6 +376,9 @@ export default function Admin() {
           </button>
           <button onClick={() => setTab('reviews')} className={`flex items-center gap-2 pb-4 px-2 font-bold whitespace-nowrap transition-colors ${tab === 'reviews' ? 'text-primary border-b-2 border-primary' : 'text-gray-500 hover:text-gray-700'}`}>
             <Star size={20} /> Reviews ({reviews.length})
+          </button>
+          <button onClick={() => setTab('contributors')} className={`flex items-center gap-2 pb-4 px-2 font-bold whitespace-nowrap transition-colors ${tab === 'contributors' ? 'text-primary border-b-2 border-primary' : 'text-gray-500 hover:text-gray-700'}`}>
+            <HeartHandshake size={20} /> Contributors ({contributors.length})
           </button>
         </div>
 
@@ -568,6 +619,116 @@ export default function Admin() {
               </p>
             </motion.div>
           )}
+
+          {tab === 'contributors' && (() => {
+            const totalRaised = contributors.reduce((s, c) => s + c.amount, 0);
+            const goal = 250_000_000;
+            const pct = Math.min(Math.round((totalRaised / goal) * 100), 100);
+            return (
+              <motion.div key="contributors" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
+                {/* Summary Card */}
+                <div className="bg-gradient-to-r from-primary to-blue-700 rounded-3xl p-6 mb-6 text-white">
+                  <div className="flex justify-between items-end mb-3">
+                    <div>
+                      <p className="text-xs font-bold text-blue-200 uppercase tracking-widest mb-1">Total Raised</p>
+                      <p className="text-3xl font-black">UGX {totalRaised >= 1_000_000 ? `${(totalRaised / 1_000_000).toFixed(1)}M` : totalRaised.toLocaleString()}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-xs font-bold text-blue-200 uppercase tracking-widest mb-1">Phase I Goal</p>
+                      <p className="text-xl font-bold text-blue-200">UGX 250M</p>
+                    </div>
+                  </div>
+                  <div className="w-full h-3 bg-white/20 rounded-full overflow-hidden mb-1">
+                    <div style={{ width: `${pct}%` }} className="h-full bg-white rounded-full transition-all duration-700" />
+                  </div>
+                  <p className="text-right text-xs text-blue-200 font-bold">{pct}% funded · {contributors.length} contributor{contributors.length !== 1 ? 's' : ''}</p>
+                </div>
+
+                {/* Add/Edit Form */}
+                <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 mb-8">
+                  <h2 className="text-xl font-bold text-gray-900 mb-6">{editingContributorId ? 'Edit Contributor' : 'Add New Contributor'}</h2>
+                  <form onSubmit={handleSaveContributor} className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                      <input
+                        type="text"
+                        value={contributorForm.name}
+                        onChange={(e) => setContributorForm({ ...contributorForm, name: e.target.value })}
+                        placeholder="e.g., John Mwesigwa"
+                        className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        required disabled={isLoading}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Amount (UGX)</label>
+                      <input
+                        type="number"
+                        value={contributorForm.amount}
+                        onChange={(e) => setContributorForm({ ...contributorForm, amount: e.target.value })}
+                        placeholder="e.g., 500000"
+                        className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        required disabled={isLoading} min="0"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Date (optional)</label>
+                      <input
+                        type="text"
+                        value={contributorForm.date}
+                        onChange={(e) => setContributorForm({ ...contributorForm, date: e.target.value })}
+                        placeholder="e.g., May 2026"
+                        className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        disabled={isLoading}
+                      />
+                    </div>
+                    <div className="md:col-span-3 flex gap-2 pt-1">
+                      <button type="submit" disabled={isLoading} className="flex items-center justify-center gap-2 bg-primary text-white py-2.5 px-6 rounded-xl font-bold hover:bg-primary/90 transition-colors disabled:opacity-50">
+                        {isLoading ? <Loader2 className="animate-spin" size={18} /> : (editingContributorId ? <Edit2 size={18} /> : <Plus size={18} />)}
+                        {editingContributorId ? 'Update' : 'Add'}
+                      </button>
+                      {editingContributorId && (
+                        <button type="button" onClick={() => { setEditingContributorId(null); setContributorForm({ name: '', amount: '', date: '' }); }} className="px-4 py-2.5 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-colors" disabled={isLoading}>Cancel</button>
+                      )}
+                    </div>
+                  </form>
+                </div>
+
+                {/* Contributors List */}
+                <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden relative">
+                  {isLoading && (
+                    <div className="absolute inset-0 bg-white/50 backdrop-blur-[1px] z-10 flex items-center justify-center">
+                      <Loader2 className="animate-spin text-primary" size={32} />
+                    </div>
+                  )}
+                  <div className="p-6 border-b border-gray-100 bg-gray-50">
+                    <h2 className="text-lg font-bold text-gray-900">Contributor List</h2>
+                  </div>
+                  <div className="divide-y divide-gray-100">
+                    {contributors.length > 0 ? contributors.map((c, idx) => (
+                      <div key={c.id} className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-gray-50 transition-colors">
+                        <div className="flex items-center gap-4">
+                          <div className="w-9 h-9 rounded-full bg-blue-50 text-primary flex items-center justify-center font-black text-sm shrink-0">{idx + 1}</div>
+                          <div>
+                            <h3 className="font-bold text-gray-900">{c.name}</h3>
+                            {c.date && <p className="text-xs text-gray-400">{c.date}</p>}
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-4">
+                          <p className="font-black text-primary">UGX {c.amount.toLocaleString()}</p>
+                          <div className="flex gap-1">
+                            <button onClick={() => { setEditingContributorId(c.id); setContributorForm({ name: c.name, amount: String(c.amount), date: c.date || '' }); }} className="p-2 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-lg transition-colors"><Edit2 size={16} /></button>
+                            <button onClick={() => handleDeleteContributor(c.id)} className="p-2 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"><Trash2 size={16} /></button>
+                          </div>
+                        </div>
+                      </div>
+                    )) : (
+                      <div className="p-12 text-center text-gray-400 italic">No contributors added yet.</div>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })()}
         </AnimatePresence>
       </div>
     </div>
