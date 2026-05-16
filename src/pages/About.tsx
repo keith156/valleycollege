@@ -797,8 +797,8 @@ export default function About() {
             {[
               "IMG_20260401_181411_242$School entrance gate (As you enter).webp", 
               "2$S.6 2025 Class.webp", "4$S.4 2026 Class.webp", "6$Writer`s Club.webp", "8$S.2 & S.3 Class, Leisure time.webp", "9$Counselling Session.webp", 
-              "12$Deputy and some prefects.webp", "13$S.4 CLASS (Girls) 2025.webp", "14$S.4 CLASS (Girls) 2025.webp", "15$20$S.4 Class (boys) 2025.webp", 
-              "16$20$S.4 Class (boys) 2025.webp", "18$S.4 class 2024, after briefing.webp", "20$S.4 Class (boys) 2025.webp", 
+              "12$Deputy and some prefects.webp", "13$S.4 CLASS (Girls) 2025.webp", "14$S.4 CLASS (Girls) 2025.webp", "temp_15$20$S.4 Class (boys) 2025.webp", 
+              "temp_16$20$S.4 Class (boys) 2025.webp", "temp_18$S.4 class 2024, after briefing.webp", "temp_20$S.4 Class (boys) 2025.webp", 
               "21$Boys Domitory.webp", "23$Prefects receiving parents on visitation day.webp", "24$S.4 class 2016.webp", 
               "IMG_20260401_184319_761$University hostel.webp", "IMG_20260401_184701_943$Girls Dormitory.webp", 
               "IMG_20260401_181848_193$School entrance gate (As you exist).webp", "IMG_20260401_184018_232$Classroom.webp",
