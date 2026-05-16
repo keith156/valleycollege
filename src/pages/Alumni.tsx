@@ -12,8 +12,8 @@ import { parseImageCaption } from '../utils/imageUtils';
 const CARDS_PER_PAGE = 3;
 
 const galleryImages = [
-  "VACO-15.webp", "VACO-9.webp", "VACO-10.webp", "vaco -99$Class of 1999.webp", "VACO-12.webp", "VACO-13.webp", 
-  "VACO-17.webp", "VACO-14.webp", "VACO-20.webp", "VACO-24.webp",
+  "VACO-15$Valley College Alumni League.webp", "VACO-9$Old students leading Class Discussion.webp", "VACO-10$Valley College Alumni League.webp", "vaco -99$Class of 1999.webp", "VACO-12$Valley College Alumni League.webp", "VACO-13$Valley College Alumni League.webp", 
+  "VACO-17$Alumni Diner.webp", "VACO-14.webp", "VACO-20.webp", "VACO-24.webp",
   "VACO-4.webp", "VACO-5.webp", "VACO-6.webp", "VACO-7.webp",
   "FCocDmcWUA4QFd2.webp"
 ];
@@ -198,7 +198,7 @@ export default function Alumni() {
           
           <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="rounded-3xl overflow-hidden shadow-lg">
             <img 
-              src="/alumni gallery/VACO-15.webp" 
+              src="/alumni gallery/VACO-15$Valley College Alumni League.webp" 
               alt="Alumni community" 
               className="w-full h-full object-cover object-top" 
               referrerPolicy="no-referrer" 

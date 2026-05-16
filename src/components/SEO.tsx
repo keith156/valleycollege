@@ -11,7 +11,7 @@ interface SEOProps {
 }
 
 const BASE_URL = 'https://valleycollege.sc.ug';
-const DEFAULT_IMAGE = `${BASE_URL}/logo.webp`;
+const DEFAULT_IMAGE = `${BASE_URL}/logo (2).png`;
 const SITE_NAME = 'Valley College Secondary School Bushenyi';
 
 export function SEO({ title, description, keywords, path = '', image, type = 'website', noindex = false }: SEOProps) {

@@ -15,7 +15,7 @@ export function Footer() {
               title="Double click for Admin Access"
             >
               <img 
-                src="/logo.webp" 
+                src="/logo (2).png" 
                 alt="Valley College Logo" 
                 className="h-14 w-auto object-contain bg-white rounded-xl p-1.5 shadow-sm"
               />
@@ -93,7 +93,7 @@ export function Footer() {
           </div>
           <p>&copy; {new Date().getFullYear()} Valley College Secondary School Bushenyi. All rights reserved.</p>
           <p className="mt-2 text-blue-300/60 font-medium text-[10px] uppercase tracking-[0.2em]">
-            Made with <span className="text-red-500 animate-pulse">❤️</span> by{' '}
+            Designed and Developed by{' '}
             <a 
               href="https://wa.me/256787618537" 
               target="_blank" 
