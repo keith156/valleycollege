@@ -22,6 +22,8 @@ export function RateWidget() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [reviewCount, setReviewCount] = useState(BASE_REVIEWS);
+  const [isNearFooter, setIsNearFooter] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const fetchCount = async () => {
@@ -34,10 +36,31 @@ export function RateWidget() {
     };
     fetchCount();
 
+    const handleScroll = () => {
+      const scrollHeight = document.documentElement.scrollHeight;
+      const scrollPos = window.innerHeight + window.scrollY;
+      const distanceToBottom = scrollHeight - scrollPos;
+      
+      // If we're near the bottom (within the footer area), shift up
+      setIsNearFooter(distanceToBottom < 300);
+    };
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initial check
+    
     const handleOpen = () => setIsOpen(true);
     window.addEventListener('open-rate-widget', handleOpen);
     
-    return () => window.removeEventListener('open-rate-widget', handleOpen);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('open-rate-widget', handleOpen);
+    };
   }, []);
 
   const handleSubmit = async (e: FormEvent) => {
@@ -77,7 +100,12 @@ export function RateWidget() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end">
+    <div 
+      className={cn(
+        "fixed transition-all duration-500 z-[9999] flex flex-col items-end",
+        isMobile && isNearFooter ? "bottom-32 right-4" : "bottom-6 right-6"
+      )}
+    >
       <AnimatePresence>
         {!isOpen && (
           <motion.button

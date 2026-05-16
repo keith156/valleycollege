@@ -55,44 +55,37 @@ const ptsExecutiveMembers = [
   { name: "Arinanye Tracy", title: "MS", position: "HEADGIRL" },
 ];
 
-const teachingStaff = [
-  { name: "Kabeizi Doreen", subjects: "ECON/GEO" },
-  { name: "Kiggundu Bonny", subjects: "ENG/LIT" },
-  { name: "Asiimwe Jonath", subjects: "ECON/GEO" },
-  { name: "Ssempebwa Lauben", subjects: "AGRICULTURE" },
-  { name: "Tukamushaba Joventa", subjects: "ENG/LIT" },
-  { name: "Nabaasa Lovance", subjects: "ICT" },
-  { name: "Baryaho Deziderio", subjects: "HIST/CRE" },
-  { name: "Abaho Dan", subjects: "PHY/MTC" },
-  { name: "Nuwahereza James", subjects: "PHY/MTC" },
-  { name: "Tukamuheebwa Benson", subjects: "PHY/MTC" },
-  { name: "Onekalith Stephen", subjects: "CHEM/BIO" },
-  { name: "Kwikiriza Owen", subjects: "ECON/GEO" },
-  { name: "Atwiine Benard", subjects: "FINEART" },
-  { name: "Mugume Obed", subjects: "ENT/ECON" },
-  { name: "Muhereza Dan", subjects: "HIST/CRE" },
-  { name: "Tibesigwa Anthony", subjects: "KISW/RR" },
-  { name: "Obumwe Immaculate", subjects: "ENG/LIT" },
-  { name: "Mukwaya Ronald", subjects: "MTC/CHEM" },
-  { name: "Nanziri Shakira", subjects: "MTC/GEO" },
-  { name: "Munono Edison", subjects: "ENT/ICT" },
-  { name: "Natamba Cleophas", subjects: "KISW/RR" },
-  { name: "Kamugisha Christopher", subjects: "PHY/MTC" },
-  { name: "Nyesiga Joas", subjects: "CHEM/BIO" },
-  { name: "Musinguzi Patrick", subjects: "HIST/CRE" },
-  { name: "Ainomugisha Peter", subjects: "CHEM/BIO" },
-  { name: "Ahimbisibwe Gerald Peter", subjects: "CHEM/BIO" },
-  { name: "Kiiza Dennis", subjects: "KISW/RR" },
-  { name: "Barigye Patrick Kyasebo", subjects: "GEO/CRE" },
-  { name: "Kanyope Emmanuel", subjects: "BIOL" },
-  { name: "Tumusiime Kelly", subjects: "FINEART" },
-  { name: "Musinguzi Joshua", subjects: "ENT" },
-  { name: "Rubagumya Francis", subjects: "HIST/CRE" },
-  { name: "Tusingwire Jothams", subjects: "ENG/LIT" },
-  { name: "Atwikukye Alex", subjects: "HIST/CRE" },
-  { name: "Nimwesiga Peter", subjects: "CHEM/BIO" },
-  { name: "Natwijuka Daphine", subjects: "TEACHER ASSISTANT" },
-  { name: "Asiimwe Lucky", subjects: "TEACHER ASSISTANT" },
+const adminStaff = [
+  {
+    name: "Kiggundu Bonny",
+    position: "Deputy Headteacher – Academics",
+    image: "/Deputy Headteacher - Academics[Kiggundu Bonny].jpeg",
+    description: [
+      "Oversees all academic programs and curriculum implementation",
+      "Monitors students’ academic performance and examinations",
+      "Supervises teachers to ensure quality teaching and learning"
+    ]
+  },
+  {
+    name: "Mr. Asiimwe Jonath",
+    position: "Deputy Headteacher – Discipline",
+    image: "/Deputy Headteacher - Descipline[Mr. Asiimwe Jonath].jpeg",
+    description: [
+      "Maintains student discipline and proper conduct in school",
+      "Handles disciplinary matters and student guidance",
+      "Promotes a safe, respectful, and orderly school environment"
+    ]
+  },
+  {
+    name: "Ssempebwa Lauben",
+    position: "Director of Studies (DOS)",
+    image: "/Director of Studies[Ssempebwa Lauben].jpeg",
+    description: [
+      "Coordinates teaching schedules and classroom instruction",
+      "Supervises lesson planning, assessments, and academic records",
+      "Monitors teacher performance and supports academic improvement"
+    ]
+  }
 ];
 
 const prefectorialBody = [
@@ -509,44 +502,52 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-8"
+            className="text-center mb-12"
           >
-            <h2 className="text-2xl md:text-4xl font-black text-gray-900 mb-2">Valley College Teaching Staff 2026</h2>
-            <div className="h-1 w-16 bg-primary mx-auto rounded-full mb-3" />
-            <p className="text-gray-500">{teachingStaff.length} dedicated educators</p>
+            <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4">Key Administrative Staff</h2>
+            <div className="h-2 w-24 bg-primary mx-auto rounded-full" />
           </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-5xl mx-auto bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden"
-          >
-            <div className="bg-primary px-6 py-4 flex items-center justify-between">
-              <h3 className="font-bold text-lg text-white">Staff Directory</h3>
-              <span className="text-blue-100 text-xs font-bold">{teachingStaff.length} Members</span>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 divide-y sm:divide-y-0">
-              {teachingStaff.map((teacher, idx) => (
-                <motion.div 
-                  key={idx} 
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {adminStaff.map((admin, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: (idx % 20) * 0.02 }}
-                  className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-50 hover:bg-blue-50 transition-all duration-300 group cursor-default"
+                  transition={{ delay: idx * 0.1 }}
+                  className="bg-white rounded-[2rem] shadow-xl border border-gray-100 overflow-hidden flex flex-col group"
                 >
-                  <div className="flex items-center gap-2 group-hover:translate-x-1 transition-transform">
-                    <span className="text-xs font-bold text-gray-400 w-6 shrink-0">{idx + 1}.</span>
-                    <span className="font-semibold text-gray-900 text-[10px] sm:text-sm group-hover:text-primary transition-colors">{teacher.name}</span>
+                  {/* Image Container */}
+                  <div className="aspect-[4/5] relative overflow-hidden bg-gray-100">
+                    <img
+                      src={admin.image}
+                      alt={admin.name}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-xl font-bold text-white mb-0.5">{admin.name}</h3>
+                      <p className="text-blue-300 text-xs font-bold uppercase tracking-wider">{admin.position}</p>
+                    </div>
                   </div>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full transition-all group-hover:scale-110 shrink-0 ml-2 ${
-                    teacher.subjects === 'TEACHER ASSISTANT' ? 'bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white' : 'bg-emerald-50 text-emerald-700 group-hover:bg-emerald-600 group-hover:text-white'
-                  }`}>{teacher.subjects}</span>
+
+                  {/* Content */}
+                  <div className="p-6 flex-1 flex flex-col">
+                    <ul className="space-y-3">
+                      {admin.description.map((item, i) => (
+                        <li key={i} className="flex gap-3 text-sm text-gray-600 leading-relaxed">
+                          <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </motion.div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </section>
 
         {/* PREFECTORIAL BODY 2026 */}

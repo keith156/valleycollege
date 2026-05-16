@@ -480,7 +480,7 @@ export default function Alumni() {
                   <span className="text-xs font-black uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full">Phase I</span>
                   <Building2 size={24} className="opacity-80" />
                 </div>
-                <h3 className="text-xl font-black">Administrative Wing</h3>
+                <h3 className="text-xl font-black text-white">Administrative Wing</h3>
               </div>
               <div className="p-6">
                 <ul className="space-y-2">
@@ -501,7 +501,7 @@ export default function Alumni() {
                   <span className="text-xs font-black uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full">Phase II</span>
                   <Laptop size={24} className="opacity-80" />
                 </div>
-                <h3 className="text-xl font-black">ICT & Digital Learning Centre</h3>
+                <h3 className="text-xl font-black text-white">ICT & Digital Learning Centre</h3>
               </div>
               <div className="p-6">
                 <ul className="space-y-2">
@@ -522,7 +522,7 @@ export default function Alumni() {
                   <span className="text-xs font-black uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full">Phase III</span>
                   <BookOpen size={24} className="opacity-80" />
                 </div>
-                <h3 className="text-xl font-black">Library & Resource Centre</h3>
+                <h3 className="text-xl font-black text-white">Library & Resource Centre</h3>
               </div>
               <div className="p-6">
                 <ul className="space-y-2">
@@ -558,7 +558,7 @@ export default function Alumni() {
                 <div className="bg-gradient-to-r from-primary to-blue-700 p-6 text-white">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-xl font-black">Our Contributors</h3>
+                      <h3 className="text-xl font-black text-white">Our Contributors</h3>
                       <p className="text-blue-200 text-sm mt-0.5">{contributors.length} supporter{contributors.length !== 1 ? 's' : ''} · UGX {totalRaised >= 1_000_000 ? `${(totalRaised / 1_000_000).toFixed(1)}M` : totalRaised.toLocaleString()} raised</p>
                     </div>
                     <button onClick={() => setShowContributors(false)} className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors">

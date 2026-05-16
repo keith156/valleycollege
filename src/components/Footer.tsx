@@ -17,7 +17,7 @@ export function Footer() {
               <img 
                 src="/logo.png" 
                 alt="Valley College Logo" 
-                className="h-12 w-auto object-contain"
+                className="h-14 w-auto object-contain bg-white rounded-xl p-1.5 shadow-sm"
               />
               <span className="font-bold text-xl tracking-tight pointer-events-none">
                 Valley College
@@ -92,6 +92,17 @@ export function Footer() {
             </a>
           </div>
           <p>&copy; {new Date().getFullYear()} Valley College Secondary School Bushenyi. All rights reserved.</p>
+          <p className="mt-2 text-blue-300/60 font-medium text-[10px] uppercase tracking-[0.2em]">
+            Made with <span className="text-red-500 animate-pulse">❤️</span> by{' '}
+            <a 
+              href="https://wa.me/256787618537" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="font-bold text-blue-200 hover:text-white transition-all underline underline-offset-4 decoration-white/20 hover:decoration-white"
+            >
+              KEITH
+            </a>
+          </p>
           <div className="flex justify-center gap-6">
             <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>

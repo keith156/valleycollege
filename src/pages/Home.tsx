@@ -39,6 +39,7 @@ export default function Home() {
   const heroImages = [
     "/heroimages/vaco_students_1.webp",
     "/heroimages/vaco_students_2.webp",
+    "/heroimages/ariel.jpeg",
     "/heroimages/vaco_students_3.webp",
     "/heroimages/2.webp",
     "/heroimages/4.webp",
@@ -224,7 +225,7 @@ export default function Home() {
             >
               <div className="relative rounded-3xl overflow-hidden shadow-2xl w-full lg:mr-auto lg:ml-0 h-[400px] md:h-[500px] lg:h-full min-h-[400px]">
                 <img
-                  src="/headteacher.webp"
+                  src="/headteacher_homepage.jpeg"
                   alt="Ms. Kabeizi Doreen - Head Teacher"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
