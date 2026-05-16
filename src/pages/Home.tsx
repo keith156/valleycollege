@@ -43,8 +43,7 @@ export default function Home() {
     "/heroimages/vaco_students_3.webp",
     "/heroimages/2.webp",
     "/heroimages/4.webp",
-    "/heroimages/expansion.webp",
-    "/heroimages/WhatsApp Image 2026-05-09 at 8.11.15 AM.jpeg"
+    "/heroimages/expansion.webp"
   ];
 
   const slideVariants = {
