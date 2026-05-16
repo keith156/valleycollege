@@ -258,7 +258,7 @@ export default function Admissions() {
             {/* Image Side */}
             <div className="relative min-h-[400px] lg:h-auto bg-[#001a40] flex items-center justify-center p-4 md:p-8">
               <img 
-                src="/admissions.jpeg?v=2" 
+                src="/admissions.webp?v=2" 
                 alt="Admission Requirements" 
                 className="w-full h-full max-h-[800px] object-contain drop-shadow-2xl rounded-2xl"
                 referrerPolicy="no-referrer"

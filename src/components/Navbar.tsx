@@ -117,7 +117,7 @@ export function Navbar() {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3 lg:gap-4 xl:gap-6 group shrink-0">
               <img 
-                src="/logo.png" 
+                src="/logo.webp" 
                 alt="Valley College Logo" 
                 className="h-14 lg:h-16 xl:h-20 w-auto object-contain group-hover:scale-105 transition-transform"
               />
