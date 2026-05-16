@@ -85,6 +85,16 @@ const adminStaff = [
       "Supervises lesson planning, assessments, and academic records",
       "Monitors teacher performance and supports academic improvement"
     ]
+  },
+  {
+    name: "Ms. Nabasa Annet",
+    position: "School Bursar",
+    image: "/School Bursur[Ms. Nabasa Annet].jpeg",
+    description: [
+      "Manages school finances, budgeting, and fee collection",
+      "Prepares financial reports and maintains proper accounting records",
+      "Oversees expenditure, procurement, and accountability of school funds"
+    ]
   }
 ];
 
@@ -376,8 +386,8 @@ export default function About() {
             </div>
             
             {/* Gradient Fades for seamless edges */}
-            <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 left-0 w-8 md:w-16 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-8 md:w-16 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
           </div>
         </section>
 
@@ -507,45 +517,52 @@ export default function About() {
             <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4">Key Administrative Staff</h2>
             <div className="h-2 w-24 bg-primary mx-auto rounded-full" />
           </motion.div>
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {adminStaff.map((admin, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="bg-white rounded-[2rem] shadow-xl border border-gray-100 overflow-hidden flex flex-col group"
+          <div className="max-w-7xl mx-auto">
+            <div className="relative overflow-hidden py-4">
+              <div className="flex whitespace-nowrap overflow-hidden">
+                <motion.div 
+                  animate={{ x: ["0%", "-50%"] }}
+                  transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+                  className="flex gap-8 px-4"
                 >
-                  {/* Image Container */}
-                  <div className="aspect-[4/5] relative overflow-hidden bg-gray-100">
-                    <img
-                      src={admin.image}
-                      alt={admin.name}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-xl font-bold text-white mb-0.5">{admin.name}</h3>
-                      <p className="text-blue-300 text-xs font-bold uppercase tracking-wider">{admin.position}</p>
-                    </div>
-                  </div>
+                  {[...adminStaff, ...adminStaff].map((admin, idx) => (
+                    <div
+                      key={idx}
+                      className="shrink-0 w-[300px] md:w-[350px] bg-white rounded-[2rem] shadow-xl border border-gray-100 overflow-hidden flex flex-col group whitespace-normal"
+                    >
+                      {/* Image Container */}
+                      <div className="aspect-[4/5] relative overflow-hidden bg-gray-100 shrink-0">
+                        <img
+                          src={admin.image}
+                          alt={admin.name}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                        <div className="absolute bottom-4 left-4 right-4">
+                          <h3 className="text-xl font-bold text-white mb-0.5">{admin.name}</h3>
+                          <p className="text-blue-300 text-xs font-bold uppercase tracking-wider">{admin.position}</p>
+                        </div>
+                      </div>
 
-                  {/* Content */}
-                  <div className="p-6 flex-1 flex flex-col">
-                    <ul className="space-y-3">
-                      {admin.description.map((item, i) => (
-                        <li key={i} className="flex gap-3 text-sm text-gray-600 leading-relaxed">
-                          <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                      {/* Content */}
+                      <div className="p-6 flex-1 flex flex-col bg-white">
+                        <ul className="space-y-3">
+                          {admin.description.map((item, i) => (
+                            <li key={i} className="flex gap-3 text-sm text-gray-600 leading-relaxed">
+                              <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ))}
                 </motion.div>
-              ))}
+              </div>
+              
+              {/* Gradient Fades */}
+              <div className="absolute inset-y-0 left-0 w-8 md:w-16 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
+              <div className="absolute inset-y-0 right-0 w-8 md:w-16 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
             </div>
           </div>
         </section>
@@ -707,9 +724,9 @@ export default function About() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-blue-50 p-8 rounded-[2rem] shadow-lg border border-blue-100">
             <MapPin className="text-primary mb-6" size={40} />
             <h3 className="text-2xl font-bold mb-4">Location & Ownership</h3>
-            <p className="text-lg text-gray-700 mb-6 leading-relaxed">Located in the serene and academic-friendly environment of <strong className="text-primary">Bushenyi District</strong>, our campus provides the perfect atmosphere for focused learning.</p>
+            <p className="text-lg text-gray-700 mb-6 leading-relaxed">Located in the serene and academic-friendly environment of <strong className="text-primary">Block 2, Plot 131, Nyaruzinga Road, Bushenyi District</strong>, our campus provides the perfect atmosphere for focused learning.</p>
             <ul className="space-y-3 text-gray-700 mb-6">
-              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-primary rounded-full" /> Bushenyi Municipality, Western Uganda</li>
+              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-primary rounded-full" /> Block 2, Plot 131, Nyaruzinga Road, Bushenyi Municipality, Western Uganda</li>
               <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-primary rounded-full" /> Easy access via Mbarara-Kasese Highway</li>
               <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-primary rounded-full" /> Proudly owned by Mukaira Foundation Ltd</li>
             </ul>
@@ -778,16 +795,16 @@ export default function About() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 grid-flow-dense gap-4 sm:gap-6 auto-rows-[250px] md:auto-rows-[300px] max-w-[1600px] mx-auto">
             {[
-              "IMG_20260401_181411_242$School entrance gate (As you enter).jpg", 
-              "2$S.6 2025 Class.jpeg", "4$S.4 2026 Class.jpeg", "6$Writer`s Club.jpeg", "8$S.2 & S.3 Class, Leisure time.jpeg", "9$Counselling Session.jpeg", 
-              "12$Deputy and some prefects.jpeg", "13$S.4 CLASS (Girls) 2025.jpeg", "14$S.4 CLASS (Girls) 2025.jpeg", "15$20$S.4 Class (boys) 2025.jpeg", 
-              "16$20$S.4 Class (boys) 2025.jpeg", "18$S.4 class 2024, after briefing.jpeg", "20$S.4 Class (boys) 2025.jpeg", 
-              "21$Boys Domitory.jpeg", "23$Prefects receiving parents on visitation day.jpeg", "24$S.4 class 2016.jpeg", 
-              "IMG_20260401_184319_761$University hostel.jpg", "IMG_20260401_184701_943$Girls Dormitory.jpg", 
-              "IMG_20260401_181848_193$School entrance gate (As you exist).jpg", "IMG_20260401_184018_232$Classroom.jpg",
-              "3$ICT Lab.jpeg"
+              "IMG_20260401_181411_242$School entrance gate (As you enter).webp", 
+              "2$S.6 2025 Class.webp", "4$S.4 2026 Class.webp", "6$Writer`s Club.webp", "8$S.2 & S.3 Class, Leisure time.webp", "9$Counselling Session.webp", 
+              "12$Deputy and some prefects.webp", "13$S.4 CLASS (Girls) 2025.webp", "14$S.4 CLASS (Girls) 2025.webp", "15$20$S.4 Class (boys) 2025.webp", 
+              "16$20$S.4 Class (boys) 2025.webp", "18$S.4 class 2024, after briefing.webp", "20$S.4 Class (boys) 2025.webp", 
+              "21$Boys Domitory.webp", "23$Prefects receiving parents on visitation day.webp", "24$S.4 class 2016.webp", 
+              "IMG_20260401_184319_761$University hostel.webp", "IMG_20260401_184701_943$Girls Dormitory.webp", 
+              "IMG_20260401_181848_193$School entrance gate (As you exist).webp", "IMG_20260401_184018_232$Classroom.webp",
+              "3$ICT Lab.webp"
             ].map((img, idx) => {
-              const matchesFixedSquare = img === "3$ICT Lab.jpeg";
+              const matchesFixedSquare = img === "3$ICT Lab.webp";
               const isLarge = idx % 7 === 0 && !matchesFixedSquare;
               const isTall = idx % 5 === 0 && !isLarge && !matchesFixedSquare;
               const isWide = idx % 6 === 0 && !isLarge && !isTall && !matchesFixedSquare;

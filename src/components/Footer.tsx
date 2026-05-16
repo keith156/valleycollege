@@ -43,7 +43,7 @@ export function Footer() {
             <ul className="space-y-5 text-sm text-blue-200">
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="shrink-0 text-blue-400" />
-                <span>Bushenyi Municipality,<br />Bushenyi District, Uganda</span>
+                <span>Block 2, Plot 131, Nyaruzinga Road, Bushenyi Municipality,<br />Bushenyi District, Uganda</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={18} className="shrink-0 text-blue-400" />
@@ -51,7 +51,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={18} className="shrink-0 text-blue-400" />
-                <span className="text-[12px] font-medium">info@valleycollege.edu.ug</span>
+                <span className="text-[12px] font-medium">info@valleycollege.sc.ug</span>
               </li>
             </ul>
           </div>

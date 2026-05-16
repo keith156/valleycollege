@@ -69,7 +69,7 @@ export default function Home() {
     { src: '/images/18$S.4 class 2024, after briefing.webp', alt: 'Library' },
     { src: '/images/24$S.4 class 2016.webp', alt: 'Graduation' },
     { src: '/images/IMG_20260401_184319_761$University hostel.webp', alt: 'Campus grounds' },
-    { src: '/images/6$Writer`s Club.jpeg', alt: 'Art class' },
+    { src: '/images/6$Writer`s Club.webp', alt: 'Art class' },
     { src: '/images/12$Deputy and some prefects.webp', alt: 'Computer lab' },
     { src: '/images/21$Boys Domitory.webp', alt: 'Cafeteria' },
     { src: '/images/23$Prefects receiving parents on visitation day.webp', alt: 'School event' },

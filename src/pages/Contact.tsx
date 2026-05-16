@@ -57,7 +57,7 @@ export default function Contact() {
     <div className="flex flex-col bg-gray-50">
       <SEO 
         title="Contact Us - Location & Phone"
-        description="Get in touch with Valley College Secondary School, Bushenyi Municipality, Western Uganda. Call +256 782 679 985, email info@valleycollege.edu.ug, or send us a message. Visit our campus on the Mbarara-Kasese Highway."
+        description="Get in touch with Valley College Secondary School, Bushenyi Municipality, Western Uganda. Call +256 782 679 985, email info@valleycollege.sc.ug, or send us a message. Visit our campus on the Mbarara-Kasese Highway."
         keywords="Contact Valley College, Valley College phone number, Valley College Bushenyi location, school address Bushenyi, Valley College email, directions Valley College, Bushenyi Municipality school"
         path="/contact"
       />
@@ -105,6 +105,7 @@ export default function Contact() {
                 </div>
                 <h3 className="font-bold text-gray-900 mb-2 text-base lg:text-lg">Our Location</h3>
                 <p className="text-gray-600">
+                  Block 2, Plot 131, Nyaruzinga Road,<br />
                   Bushenyi District,<br />
                   Western Uganda
                 </p>
@@ -127,7 +128,7 @@ export default function Contact() {
                 </div>
                 <h3 className="font-bold text-gray-900 mb-2 text-base lg:text-lg">Email Address</h3>
                 <p className="text-gray-600 break-words">
-                  info@valleycollege.edu.ug
+                  info@valleycollege.sc.ug
                 </p>
               </div>
 

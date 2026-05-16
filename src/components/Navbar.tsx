@@ -15,7 +15,7 @@ const NAV_LINKS = [
       { name: 'School History', path: '/about#history' },
       { name: 'Governance Structure', path: '/about#governance' },
       { name: 'PTS Executive', path: '/about#pts' },
-      { name: 'Teaching Staff', path: '/about#staff' },
+      { name: 'Administrative Staff', path: '/about#staff' },
       { name: 'Prefectorial Body', path: '/about#prefects' },
       { name: 'Council Body', path: '/about#council' },
       { name: 'Campus Life', path: '/about#campus' },

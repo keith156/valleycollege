@@ -12,28 +12,28 @@ import { parseImageCaption } from '../utils/imageUtils';
 const CARDS_PER_PAGE = 3;
 
 const galleryImages = [
-  "VACO-15.jpg", "VACO-9.jpg", "VACO-10.jpg", "vaco -99$Class of 1999.jpeg", "VACO-12.jpg", "VACO-13.jpg", 
-  "VACO-17.jpg", "VACO-14.jpg", "VACO-20.jpg", "VACO-24.jpg",
-  "VACO-4.png", "VACO-5.jpg", "VACO-6.jpg", "VACO-7.jpg",
-  "FCocDmcWUA4QFd2.jpg"
+  "VACO-15.webp", "VACO-9.webp", "VACO-10.webp", "vaco -99$Class of 1999.webp", "VACO-12.webp", "VACO-13.webp", 
+  "VACO-17.webp", "VACO-14.webp", "VACO-20.webp", "VACO-24.webp",
+  "VACO-4.webp", "VACO-5.webp", "VACO-6.webp", "VACO-7.webp",
+  "FCocDmcWUA4QFd2.webp"
 ];
 
 const leagueImages = [
-  "vaco_league_1.png", "vaco_league_2.png", "vaco_league_3.png", "vaco_league_4.png", 
-  "vaco_league_5.png", "vaco_league_6.png", "vaco_league_7.png", "vaco_league_8.png", 
-  "vaco_league_9.png", "vaco_league_10.png", "vaco_league_11.png"
+  "vaco_league_1.webp", "vaco_league_2.webp", "vaco_league_3.webp", "vaco_league_4.webp", 
+  "vaco_league_5.webp", "vaco_league_6.webp", "vaco_league_7.webp", "vaco_league_8.webp", 
+  "vaco_league_9.webp", "vaco_league_10.webp", "vaco_league_11.webp"
 ];
 
 const slider1Images = [
-  "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "8.jpg", "9.jpg", "10.jpg",
-  "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg",
-  "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg", "FCocfTQWQAMUN01.jpg", "VACO-19.jpg", "VACO-23.jpg"
+  "1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "8.webp", "9.webp", "10.webp",
+  "11.webp", "12.webp", "13.webp", "14.webp", "15.webp", "16.webp", "17.webp", "18.webp", "19.webp",
+  "20.webp", "21.webp", "22.webp", "23.webp", "24.webp", "FCocfTQWQAMUN01.webp", "VACO-19.webp", "VACO-23.webp"
 ];
 
 const slider2Images = [
-  "A1.jpg", "A2.jpg", "A3.jpg", "A4.jpg", "A5.jpg", "A6.jpg", "A7.jpg", "A8.jpg", "A9.jpg", "A10.jpg",
-  "A11.jpg", "A12.jpg", "A13.jpg", "A14.jpg", "A15.jpg", "A16.jpg", "A17.jpg", "A18.jpg", "A19.jpg", "A20.jpg",
-  "A21.jpg", "A22.jpg", "A23.jpg", "A24.jpg", "A25.jpg", "A26.jpeg"
+  "A1.webp", "A2.webp", "A3.webp", "A4.webp", "A5.webp", "A6.webp", "A7.webp", "A8.webp", "A9.webp", "A10.webp",
+  "A11.webp", "A12.webp", "A13.webp", "A14.webp", "A15.webp", "A16.webp", "A17.webp", "A18.webp", "A19.webp", "A20.webp",
+  "A21.webp", "A22.webp", "A23.webp", "A24.webp", "A25.webp", "A26.webp"
 ];
 
 const PROJECT_GOAL = 250_000_000; // UGX 250 Million (whole project goal)
@@ -699,8 +699,8 @@ export default function Alumni() {
                   ))}
                 </motion.div>
               </div>
-              <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10" />
-              <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10" />
+              <div className="absolute inset-y-0 left-0 w-8 md:w-16 bg-gradient-to-r from-gray-50 to-transparent z-10" />
+              <div className="absolute inset-y-0 right-0 w-8 md:w-16 bg-gradient-to-l from-gray-50 to-transparent z-10" />
             </div>
 
             {/* Slider 2: Left to Right */}
@@ -732,8 +732,8 @@ export default function Alumni() {
                   ))}
                 </motion.div>
               </div>
-              <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10" />
-              <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10" />
+              <div className="absolute inset-y-0 left-0 w-8 md:w-16 bg-gradient-to-r from-gray-50 to-transparent z-10" />
+              <div className="absolute inset-y-0 right-0 w-8 md:w-16 bg-gradient-to-l from-gray-50 to-transparent z-10" />
             </div>
           </div>
         </motion.section>
