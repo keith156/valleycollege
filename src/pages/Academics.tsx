@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BookOpen, GraduationCap, Laptop, Activity, Trophy, Beaker, Users, Star, Medal, ChevronDown, Clock, Scissors, Sparkles, Flame } from 'lucide-react';
+import { BookOpen, GraduationCap, Laptop, Activity, Trophy, Beaker, Users, Star, Medal, ChevronDown, Clock, Scissors, Sparkles, Flame, Atom, Landmark, Languages, Briefcase, Layers } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { getWallOfFame, WallOfFameYear } from '../lib/wallOfFame';
 import { getEvents, SchoolEvent } from '../lib/events';
@@ -322,10 +322,10 @@ export default function Academics() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                  { category: "Sciences", icon: Beaker, subjects: ["Physics", "Chemistry", "Biology", "Mathematics", "Agriculture"] },
-                  { category: "Humanities", icon: BookOpen, subjects: ["Geography", "History", "CRE"] },
-                  { category: "Languages", icon: Users, subjects: ["English Language", "Literature", "Kiswahili", "Runyankore", "Rukiga"] },
-                  { category: "Vocational", icon: Laptop, subjects: ["Computer Studies", "Entrepreneurship", "Fine Art"] }
+                  { category: "Sciences", icon: Atom, subjects: ["Physics", "Chemistry", "Biology", "Mathematics", "Agriculture"] },
+                  { category: "Humanities", icon: Landmark, subjects: ["Geography", "History", "CRE"] },
+                  { category: "Languages", icon: Languages, subjects: ["English Language", "Literature", "Kiswahili", "Runyankore", "Rukiga"] },
+                  { category: "Vocational", icon: Briefcase, subjects: ["Computer Studies", "Entrepreneurship", "Fine Art"] }
                 ].map((group, idx) => (
                   <div key={idx} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                     <div className="flex items-center gap-3 mb-4 border-b border-gray-100 pb-3">
@@ -360,7 +360,7 @@ export default function Academics() {
                 <div className="bg-primary text-white p-8 rounded-3xl shadow-lg relative overflow-hidden group hover:-translate-y-1 transition-transform">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-bl-full -z-10 group-hover:scale-110 transition-transform duration-500" />
                   <div className="w-14 h-14 bg-white/20 text-white rounded-2xl flex items-center justify-center mb-6 backdrop-blur-sm">
-                    <Beaker size={28} />
+                    <Atom size={28} />
                   </div>
                   <h4 className="text-2xl font-bold text-white mb-6">Sciences</h4>
                   <div className="space-y-3">
@@ -375,7 +375,7 @@ export default function Academics() {
                 {/* Arts & Humanities */}
                 <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-lg hover:bg-primary hover:border-primary transition-all group hover:-translate-y-1">
                   <div className="w-14 h-14 bg-blue-50 text-primary rounded-2xl flex items-center justify-center mb-6 group-hover:bg-white/20 group-hover:text-white transition-colors">
-                    <BookOpen size={28} />
+                    <Landmark size={28} />
                   </div>
                   <h4 className="text-2xl font-bold text-gray-900 mb-6 group-hover:text-white transition-colors">Arts & Humanities</h4>
                   <div className="space-y-3">
@@ -390,7 +390,7 @@ export default function Academics() {
                 {/* Subsidiaries */}
                 <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-lg hover:bg-primary hover:border-primary transition-all group hover:-translate-y-1">
                   <div className="w-14 h-14 bg-blue-50 text-primary rounded-2xl flex items-center justify-center mb-6 group-hover:bg-white/20 group-hover:text-white transition-colors">
-                    <Laptop size={28} />
+                    <Layers size={28} />
                   </div>
                   <h4 className="text-2xl font-bold text-gray-900 mb-6 group-hover:text-white transition-colors">Subsidiaries</h4>
                   <div className="space-y-3">
