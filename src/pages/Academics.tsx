@@ -322,15 +322,15 @@ export default function Academics() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                  { category: "Sciences", icon: Atom, subjects: ["Physics", "Chemistry", "Biology", "Mathematics", "Agriculture"] },
-                  { category: "Humanities", icon: Landmark, subjects: ["Geography", "History", "CRE"] },
-                  { category: "Languages", icon: Languages, subjects: ["English Language", "Literature", "Kiswahili", "Runyankore", "Rukiga"] },
-                  { category: "Vocational", icon: Briefcase, subjects: ["Computer Studies", "Entrepreneurship", "Fine Art"] }
+                  { category: "Sciences", iconSrc: "/images/icons/sciences.png", subjects: ["Physics", "Chemistry", "Biology", "Mathematics", "Agriculture"] },
+                  { category: "Humanities", iconSrc: "/images/icons/humanities.png", subjects: ["Geography", "History", "CRE"] },
+                  { category: "Languages", iconSrc: "/images/icons/languages.png", subjects: ["English Language", "Literature", "Kiswahili", "Runyankore", "Rukiga"] },
+                  { category: "Vocational", iconSrc: "/images/icons/vocational.png", subjects: ["Computer Studies", "Entrepreneurship", "Fine Art"] }
                 ].map((group, idx) => (
                   <div key={idx} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                     <div className="flex items-center gap-3 mb-4 border-b border-gray-100 pb-3">
-                      <div className="w-10 h-10 bg-blue-50 text-primary rounded-xl flex items-center justify-center">
-                        <group.icon size={20} />
+                      <div className="w-28 h-28 flex items-center justify-center bg-gray-50/50 rounded-2xl overflow-hidden p-2 border border-gray-50 shrink-0">
+                        <img src={group.iconSrc} alt={`${group.category} icon`} className="w-full h-full object-contain" />
                       </div>
                       <h4 className="font-bold text-gray-900 text-lg">{group.category}</h4>
                     </div>
