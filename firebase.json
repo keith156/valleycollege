@@ -8,7 +8,35 @@
     ],
     "rewrites": [
       {
-        "source": "**",
+        "source": "/about/**",
+        "destination": "/about/index.html"
+      },
+      {
+        "source": "/academics/**",
+        "destination": "/academics/index.html"
+      },
+      {
+        "source": "/admissions/**",
+        "destination": "/admissions/index.html"
+      },
+      {
+        "source": "/alumni/**",
+        "destination": "/alumni/index.html"
+      },
+      {
+        "source": "/contact/**",
+        "destination": "/contact/index.html"
+      },
+      {
+        "source": "/terms/**",
+        "destination": "/terms/index.html"
+      },
+      {
+        "source": "/privacy/**",
+        "destination": "/privacy/index.html"
+      },
+      {
+        "source": "/**",
         "destination": "/index.html"
       }
     ],

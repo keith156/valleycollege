@@ -120,11 +120,11 @@ async function prerender() {
       // Navigate and wait for network to be idle
       await page.goto(`http://localhost:${PORT}${route}`, {
         waitUntil: 'networkidle0',
-        timeout: 30000,
+        timeout: 60000,
       });
       
       // Wait for React to finish rendering
-      await page.waitForSelector('#root > *', { timeout: 10000 });
+      await page.waitForSelector('#root > *', { timeout: 20000 });
       await new Promise(r => setTimeout(r, 2000));
       
       // Get the full rendered HTML

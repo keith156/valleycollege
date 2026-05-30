@@ -7,10 +7,10 @@ import { parseImageCaption } from '../utils/imageUtils';
 
 const pioneerGroups = [
   ["Twebaze Paul", "Tumwesigye Adonia", "Muhangi James Mukaira", "Natukunda Jeninah", "Noowe Innocent Kariisa", "Forward Moses Luke", "Asiimwe David"],
-  ["Arinda Ezra", "Kamukama Abel Abangira", "Nabanzi Siyana", "Katungwensi Anatoli Ignis", "Ntamuuhira Godwin", "Owatuhaire Ham", "Turinawe Julius"],
+  ["Arinda Ezra", "Kamukama Abel Abangira", "nakabazi siyana", "Katungwensi Anatoli Ignis", "Ntamuuhira Godwin", "Owatuhaire Ham", "Turinawe Julius"],
   ["Tihairwe T. Mugooma", "Akatwijuka Richard", "Twesigye Nicholas", "Bwogi James Barya", "Kaganzi Collins Kaganzi", "Kansiime Rose", "Ayebare John Bosco"],
   ["Byonanebye Ketrah", "Arinda Clare Katagata", "Atwijukire Rona", "Mbabazi Chrispher", "Busingye Susan", "Katagata Patrick", "Kyabagye Justus"],
-  ["Twinomujuni Tendeo", "Tusiime Doreen", "Nalanga Winnie", "Rutakirwa Naboth", "Mwesigwa Apollo", "Agaba Gloria", "Arikiriza Alice"],
+  ["Twinomujuni Thadius", "Tusiime Doreen", "Nalanga Winnie", "Rutakirwa Naboth", "Mwesigwa Apollo", "Agaba Gloria", "Arikiriza Alice"],
   ["Kamugasha Apollo", "Mugabi Richard Twijukye", "Mpamizo Andrew", "Mbatekateka Vicent", "Tukundane Rosebell", "Kyarikunda Genisgy Mpora", "Namara Peace"],
   ["Namirembe Winnie", "Musinguzi Wilson Katson", "Natukunda Merian", "Atusimire Shallon", "Akugizibwe David", "Natukunda Betty", "Tutarimwebwa Ovia"]
 ];
